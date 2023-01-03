@@ -1,5 +1,5 @@
 import React from 'react';
-import { AiOutlineClose, AiOutlineMenu, AiOutlineMail } from 'react-icons/ai';
+import { AiOutlineMail } from 'react-icons/ai';
 import { FaLinkedinIn, FaGithub } from 'react-icons/fa';
 
 const MainPage = () => {
@@ -20,22 +20,26 @@ const MainPage = () => {
             applications with a team of people.
           </p>
           <div className='flex items-center justify-between max-w-[330px] m-auto py-4'>
-            <div
+            <a
+              href='https://www.linkedin.com/in/michael-kleyman/'
+              target='_blank'
               className='rounded-full shadow-lg shadow-gray-400
               p-5
               cursor-pointer
               hover:scale-110 ease-in duration-300'
             >
               <FaLinkedinIn size={20} />
-            </div>
-            <div
+            </a>
+            <a
+              href='https://github.com/MichaelKleyman'
+              target='_blank'
               className='rounded-full shadow-lg shadow-gray-400
               p-5
               cursor-pointer
               hover:scale-110 ease-in duration-300'
             >
               <FaGithub size={20} />
-            </div>
+            </a>
             <div
               className='rounded-full shadow-lg shadow-gray-400
               p-5

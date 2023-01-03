@@ -1,30 +1,38 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import cryptoSearchImg from '../public/projects/cryptocoinsearch.jpeg';
-import { FaReact, FaTools, FaBootstrap } from 'react-icons/fa';
+import fsaTravelImg from '../public/projects/FSAtravel.jpeg';
+import { FaReact, FaNode, FaStripe } from 'react-icons/fa';
 import { MdApi } from 'react-icons/md';
-import { SiMaterialui, SiJavascript } from 'react-icons/Si';
-import { BiBarChartSquare } from 'react-icons/bi';
-import { IoLogoPwa } from 'react-icons/io5';
+import {
+  SiJavascript,
+  SiExpress,
+  SiRedux,
+  SiSequelize,
+  SiJsonwebtokens,
+} from 'react-icons/Si';
 
-const cryptosearch = () => {
+const fsatravel = () => {
+  const demoLoading = () => {
+    window.alert('Demo will be uploaded soon!');
+  };
+
   return (
     <div className='w-full'>
       <div className='w-screen h-[30vh] lg:h-[40vh] relative'>
-        <div className='absolute top-0 left-0 w-full h-[30vh] lg:h-[40vh] bg-black/30 z-10' />
+        <div className='absolute top-0 left-0 w-full h-[30vh] lg:h-[40vh] bg-black/50 z-10' />
         <Image
           className='absolute z-1'
           layout='fill'
           objectFit='cover'
           //objectFit maintains the aspect ratio, so it all fits together nicely.
-          src={cryptoSearchImg}
+          src={fsaTravelImg}
           alt='image'
         />
         <div className='absolute top-[70%] left-[50%] right-[50%] max-w-[1240px] w-full translate-x-[-50%] translate-y-[-50%] text-white z-10'>
-          <h2 className='py-2 tracking-widest'>Crypto Coin Search</h2>
+          <h2 className='py-2 tracking-widest'>FSA Travel Booking</h2>
           <h3 className='tracking-widest uppercase text-sm md:text-lg'>
-            ReactJS / Bootstrap / Zustand state management
+            ReactJS / Redux / PostgreSQL / Express
           </h3>
         </div>
       </div>
@@ -43,11 +51,13 @@ const cryptosearch = () => {
             pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
             culpa qui officia deserunt mollit anim id est laborum.
           </p>
-          <a href='https://youtu.be/QaxDCXzGmZU' target='_blank'>
-            <button className='px-8 py-2 mt-4 mr-8'>Demo</button>
+          <a href='/' target='_blank'>
+            <button className='px-8 py-2 mt-4 mr-8' onClick={demoLoading}>
+              Demo
+            </button>
           </a>
           <a
-            href='https://github.com/MichaelKleyman/Crypto-coin-search-/tree/main/stackathon'
+            href='https://github.com/FSA-Travel-Agency/FSA-TRAVEL'
             target='_blank'
           >
             <button className='px-8 py-2 mt-4'>Code</button>
@@ -58,7 +68,7 @@ const cryptosearch = () => {
             <p className='text-center font-bold pb-2'>Technologies</p>
             <div className='grid grid-cols-3 md:grid-cols-1'>
               <p className='flex items-center py-2'>
-                <IoLogoPwa color='blue' className='pr-1' /> PWA
+                <SiExpress color='blue' className='pr-1' /> ExpressJS
               </p>
               <p className='flex items-center py-2'>
                 <SiJavascript color='blue' className='pr-1' /> Javascript
@@ -67,29 +77,32 @@ const cryptosearch = () => {
                 <FaReact color='blue' className='pr-1' /> React
               </p>
               <p className='flex items-center py-2'>
-                <MdApi color='blue' className='pr-1' /> Coin Gecko API
+                <MdApi color='blue' className='pr-1' /> Travel API
               </p>
               <p className='flex items-center py-2'>
-                <FaTools color='blue' className='pr-1' /> Zustand SM
+                <SiRedux color='blue' className='pr-1' /> Redux
               </p>
               <p className='flex items-center py-2'>
-                <FaBootstrap color='blue' className='pr-1' /> Bootstrap
+                <SiSequelize color='blue' className='pr-1' /> Sequelize
               </p>
               <p className='flex items-center py-2'>
-                <SiMaterialui color='blue' className='pr-1' /> Material UI
+                <FaNode color='blue' className='pr-1' size={30} /> NodeJS
               </p>
               <p className='flex items-center py-2'>
-                <BiBarChartSquare color='blue' className='pr-1' /> Recharts
+                <FaStripe color='blue' className='pr-1' size={30} /> Stripe
+              </p>
+              <p className='flex items-center py-2'>
+                <SiJsonwebtokens color='blue' className='pr-1' /> JWT
               </p>
             </div>
           </div>
         </div>
         <Link href='/#projects'>
-          <p className='underline cursor-pointer'>Go back</p>
+          <p className='underline cursor-pointer pb-5'>Go back</p>
         </Link>
       </div>
     </div>
   );
 };
 
-export default cryptosearch;
+export default fsatravel;

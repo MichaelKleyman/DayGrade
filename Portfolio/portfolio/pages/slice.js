@@ -1,30 +1,36 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import cryptoSearchImg from '../public/projects/cryptocoinsearch.jpeg';
-import { FaReact, FaTools, FaBootstrap } from 'react-icons/fa';
-import { MdApi } from 'react-icons/md';
-import { SiMaterialui, SiJavascript } from 'react-icons/Si';
-import { BiBarChartSquare } from 'react-icons/bi';
-import { IoLogoPwa } from 'react-icons/io5';
+import sliceImg from '../public/projects/Slice.jpeg';
+import {
+  SiJavascript,
+  SiReact,
+  SiNextdotjs,
+  SiRedux,
+  SiFirebase,
+  SiTailwindcss,
+  SiMaterialui,
+  SiChartdotjs,
+  SiFigma,
+} from 'react-icons/Si';
 
-const cryptosearch = () => {
+const slice = () => {
   return (
     <div className='w-full'>
       <div className='w-screen h-[30vh] lg:h-[40vh] relative'>
-        <div className='absolute top-0 left-0 w-full h-[30vh] lg:h-[40vh] bg-black/30 z-10' />
+        <div className='absolute top-0 left-0 w-full h-[30vh] lg:h-[40vh] bg-black/70 z-10' />
         <Image
           className='absolute z-1'
           layout='fill'
           objectFit='cover'
           //objectFit maintains the aspect ratio, so it all fits together nicely.
-          src={cryptoSearchImg}
+          src={sliceImg}
           alt='image'
         />
         <div className='absolute top-[70%] left-[50%] right-[50%] max-w-[1240px] w-full translate-x-[-50%] translate-y-[-50%] text-white z-10'>
-          <h2 className='py-2 tracking-widest'>Crypto Coin Search</h2>
+          <h2 className='py-2 tracking-widest'>Slice Task Management</h2>
           <h3 className='tracking-widest uppercase text-sm md:text-lg'>
-            ReactJS / Bootstrap / Zustand state management
+            NextJS / Firebase / Tailwind / Redux
           </h3>
         </div>
       </div>
@@ -43,11 +49,11 @@ const cryptosearch = () => {
             pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
             culpa qui officia deserunt mollit anim id est laborum.
           </p>
-          <a href='https://youtu.be/QaxDCXzGmZU' target='_blank'>
+          <a href='https://youtu.be/GRtXewbt4jQ' target='_blank'>
             <button className='px-8 py-2 mt-4 mr-8'>Demo</button>
           </a>
           <a
-            href='https://github.com/MichaelKleyman/Crypto-coin-search-/tree/main/stackathon'
+            href='https://github.com/2209-Capstone-Team-B/Slice'
             target='_blank'
           >
             <button className='px-8 py-2 mt-4'>Code</button>
@@ -58,38 +64,41 @@ const cryptosearch = () => {
             <p className='text-center font-bold pb-2'>Technologies</p>
             <div className='grid grid-cols-3 md:grid-cols-1'>
               <p className='flex items-center py-2'>
-                <IoLogoPwa color='blue' className='pr-1' /> PWA
-              </p>
-              <p className='flex items-center py-2'>
                 <SiJavascript color='blue' className='pr-1' /> Javascript
               </p>
               <p className='flex items-center py-2'>
-                <FaReact color='blue' className='pr-1' /> React
+                <SiNextdotjs color='blue' className='pr-1' /> NextJS
               </p>
               <p className='flex items-center py-2'>
-                <MdApi color='blue' className='pr-1' /> Coin Gecko API
+                <SiFirebase color='blue' className='pr-1' /> Firebase
               </p>
               <p className='flex items-center py-2'>
-                <FaTools color='blue' className='pr-1' /> Zustand SM
+                <SiRedux color='blue' className='pr-1' /> Redux
               </p>
               <p className='flex items-center py-2'>
-                <FaBootstrap color='blue' className='pr-1' /> Bootstrap
+                <SiTailwindcss color='blue' className='pr-1' /> TailwindCSS
               </p>
               <p className='flex items-center py-2'>
                 <SiMaterialui color='blue' className='pr-1' /> Material UI
               </p>
               <p className='flex items-center py-2'>
-                <BiBarChartSquare color='blue' className='pr-1' /> Recharts
+                <SiReact color='blue' className='pr-1' /> React Drag N Drop
+              </p>
+              <p className='flex items-center py-2'>
+                <SiChartdotjs color='blue' className='pr-1' /> ChartJS
+              </p>
+              <p className='flex items-center py-2'>
+                <SiFigma color='blue' className='pr-1' /> Figma
               </p>
             </div>
           </div>
         </div>
         <Link href='/#projects'>
-          <p className='underline cursor-pointer'>Go back</p>
+          <p className='underline cursor-pointer pb-5'>Go back</p>
         </Link>
       </div>
     </div>
   );
 };
 
-export default cryptosearch;
+export default slice;

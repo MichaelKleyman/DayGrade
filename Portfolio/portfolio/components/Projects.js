@@ -14,13 +14,13 @@ const Projects = () => {
       project: 'FSAtravel',
       name: 'FSA Travel Agency',
       tech: 'ReactJS',
-      url: '/cryptosearch',
+      url: '/fsatravel',
     },
     {
       project: 'Slice',
       name: 'Slice Task Management',
       tech: 'NextJS',
-      url: '/cryptosearch',
+      url: '/slice',
     },
   ];
 

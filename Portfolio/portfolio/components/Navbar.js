@@ -3,14 +3,32 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { AiOutlineClose, AiOutlineMenu, AiOutlineMail } from 'react-icons/ai';
 import { FaLinkedinIn, FaGithub } from 'react-icons/fa';
+import { useRouter } from 'next/router';
 
 const Navbar = () => {
   const [showNav, setShowNav] = useState(false);
   const [shadow, setShadow] = useState(false);
+  const [navBg, setNavBg] = useState('#FAF9F6');
+  const [linkColor, setLinkColor] = useState('#1f2937');
+  const router = useRouter();
 
   const openNav = () => {
     setShowNav(!showNav);
   };
+
+  useEffect(() => {
+    if (
+      router.asPath === '/cryptosearch' ||
+      router.asPath === '/fsatravel' ||
+      router.asPath === '/slice'
+    ) {
+      setNavBg('transparent');
+      setLinkColor('#FAF9F6');
+    } else {
+      setNavBg('#FAF9F6');
+      setLinkColor('#1f2937');
+    }
+  }, [router]);
 
   useEffect(() => {
     const handleShadow = () => {
@@ -25,6 +43,7 @@ const Navbar = () => {
 
   return (
     <div
+      style={{ backgroundColor: `${navBg}` }}
       className={
         shadow
           ? 'fixed w-full h-20 shadow-xl z-[100]'
@@ -42,7 +61,7 @@ const Navbar = () => {
           />
         </Link>
         <div>
-          <ul className='hidden md:flex'>
+          <ul style={{ color: `${linkColor}` }} className='hidden md:flex'>
             <Link href='/'>
               <li className='ml-10 text-sm uppercase duration-200 hover:scale-110'>
                 Home
@@ -65,7 +84,7 @@ const Navbar = () => {
             </Link>
             <Link href='/#contact'>
               <li className='ml-10 text-sm uppercase duration-200 hover:scale-110'>
-                Contacts
+                Contact
               </li>
             </Link>
           </ul>
@@ -131,7 +150,7 @@ const Navbar = () => {
               </Link>
               <Link href='/#contact'>
                 <li onClick={() => setShowNav(false)} className='py-4 text-sm'>
-                  Contacts
+                  Contact
                 </li>
               </Link>
             </ul>
@@ -140,12 +159,20 @@ const Navbar = () => {
                 Lets Connect
               </p>
               <div className='flex items-center justify-between my-4 w-full '>
-                <div className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-110 ease-in duration-300'>
+                <a
+                  href='https://www.linkedin.com/in/michael-kleyman/'
+                  target='_blank'
+                  className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-110 ease-in duration-300'
+                >
                   <FaLinkedinIn size={30} />
-                </div>
-                <div className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-110 ease-in duration-300'>
+                </a>
+                <a
+                  href='https://github.com/MichaelKleyman'
+                  target='_blank'
+                  className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-110 ease-in duration-300'
+                >
                   <FaGithub size={30} />
-                </div>
+                </a>
                 <div className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-110 ease-in duration-300'>
                   <AiOutlineMail size={30} />
                 </div>
