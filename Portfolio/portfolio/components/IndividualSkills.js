@@ -13,12 +13,17 @@ const IndividualSkills = () => {
     'tailwind',
     'redux',
     'postgres',
+    'sequelize',
+    'node',
   ];
 
   return (
     <>
-      {skills.map((skill) => (
-        <div className='p-6 shadow-xl rounded-xl hover:scale-110 ease-in duration-300'>
+      {skills.map((skill, i) => (
+        <div
+          key={i}
+          className='p-6 shadow-xl rounded-xl hover:scale-110 ease-in duration-300'
+        >
           <div className='grid grid-cols-2 gap-4 justify-center items-center'>
             <div className='m-auto'>
               <Image

@@ -2,7 +2,7 @@ import React from 'react';
 
 const About = () => {
   return (
-    <div className='w-full md:h-screen flex items-center py-16'>
+    <div id='about' className='w-full md:h-screen flex items-center py-16'>
       <div className='p-8 max-w-[1240px] m-auto md:grid grid-cols-3 gap-8'>
         <div className='col-span-2'>
           <p className='uppercase text-xl tracking-widest text-blue-600'>
@@ -33,9 +33,9 @@ const About = () => {
             Check out some of my projects
           </p>
         </div>
-        <div className='w-full h-auto m-auto p-4 rounded-2xl shadow-lg shadow-gray-400 flex items-center justify-center ease-in duration-300 hover:scale-110'> 
+        <div className='w-full h-auto m-auto p-4 rounded-2xl shadow-lg shadow-gray-400 flex items-center justify-center ease-in duration-300 hover:scale-110'>
           <img
-            src='https://media.licdn.com/dms/image/D4E03AQHlvFy3WidZJA/profile-displayphoto-shrink_400_400/0/1663697694760?e=1677110400&v=beta&t=I_GbJ982DEAps319hKmvMk-ERFQWc_g3lo2-drRXuqA'
+            src='https://media.licdn.com/dms/image/D4E03AQHm1e4eXLfiKA/profile-displayphoto-shrink_400_400/0/1672656661360?e=1678320000&v=beta&t=82KidYMT4TKH9f2FEAFoqbPCd0xLRQfkJlFtuezhPcM'
             alt='profile'
             className='rounded-xl'
           />
