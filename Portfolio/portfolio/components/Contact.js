@@ -3,6 +3,8 @@ import { FaLinkedinIn, FaGithub } from 'react-icons/fa';
 import { AiOutlineMail } from 'react-icons/ai';
 import { BsChevronDoubleUp } from 'react-icons/bs';
 import Link from 'next/link';
+import { sendContactForm } from '../lib/api';
+import Alert from '@mui/material/Alert';
 
 const Contact = () => {
   const [info, setInfo] = useState({
@@ -12,21 +14,31 @@ const Contact = () => {
     subject: '',
     message: '',
   });
+  const [myError, setError] = useState(false);
+  const [sent, setSent] = useState(false);
 
   const handleChange = (e) => {
     setInfo({ ...info, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(info);
-    setInfo({
-      name: '',
-      number: '',
-      email: '',
-      subject: '',
-      message: '',
-    });
+    try {
+      await sendContactForm(info);
+      setSent(true);
+      setTimeout(() => {
+        setSent(false);
+      }, 2000);
+      setInfo({
+        name: '',
+        number: '',
+        email: '',
+        subject: '',
+        message: '',
+      });
+    } catch (error) {
+      setError(true);
+    }
   };
 
   return (
@@ -92,6 +104,9 @@ const Contact = () => {
               <form>
                 <div className='grid md:grid-cols-2 gap-4 w-full py-2'>
                   <div className='flex flex-col'>
+                    {myError && (
+                      <Alert severity='error'>Do Not Leave Fields Empty</Alert>
+                    )}
                     <label className='uppercase py-2 text-sm'>
                       <span className='text-red-600 text-lg'>*</span> Name:
                     </label>
@@ -106,7 +121,7 @@ const Contact = () => {
                   </div>
                   <div className='flex flex-col'>
                     <label className='uppercase py-2 text-sm'>
-                      <span className='text-red-600 text-lg'>*</span>Phone
+                      <span className='text-red-600 text-lg'>*</span> Phone
                       number:
                     </label>
                     <input
@@ -154,19 +169,28 @@ const Contact = () => {
                     onChange={handleChange}
                   />
                 </div>
-                <button
-                  disabled={
-                    !info.name ||
-                    !info.number ||
-                    !info.email ||
-                    !info.subject ||
-                    !info.message
-                  }
-                  onClick={handleSubmit}
-                  className='w-full p-4 text-gray-100 mt-3 ease-in duration-300 hover:scale-110'
-                >
-                  Send Message
-                </button>
+                {sent ? (
+                  <Alert
+                    severity='success'
+                    className='shadow-xl shadow-gray-400 bg-gradient-to-r from-[#709dff] to-[#5651e5] rounded-xl flex justify-center items-center'
+                  >
+                    <p className='uppercase text-white'>Message sent</p>
+                  </Alert>
+                ) : (
+                  <button
+                    disabled={
+                      !info.name ||
+                      !info.number ||
+                      !info.email ||
+                      !info.subject ||
+                      !info.message
+                    }
+                    onClick={handleSubmit}
+                    className='w-full p-4 text-gray-100 mt-3 ease-in duration-300 hover:scale-110'
+                  >
+                    Send Message
+                  </button>
+                )}
               </form>
             </div>
           </div>

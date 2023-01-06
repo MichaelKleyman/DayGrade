@@ -11,6 +11,7 @@ const Navbar = () => {
   const [navBg, setNavBg] = useState('#FAF9F6');
   const [linkColor, setLinkColor] = useState('#1f2937');
   const router = useRouter();
+  const myLogo = '<Mike />';
 
   const openNav = () => {
     setShowNav(!showNav);
@@ -52,13 +53,14 @@ const Navbar = () => {
     >
       <div className='flex justify-between items-center w-full h-full px-2 2xl:px-16'>
         <Link href='/'>
-          <Image
+          {/* <Image
             src='/../public/images/Logo.png'
             alt='logo'
             width='105'
             height='50'
             className='pb-9'
-          />
+          /> */}
+          <h1 className='text-blue-600'>{myLogo}</h1>
         </Link>
         <div>
           <ul style={{ color: `${linkColor}` }} className='hidden md:flex'>
