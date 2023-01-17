@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { FaLinkedinIn, FaGithub } from 'react-icons/fa';
 import { AiOutlineMail } from 'react-icons/ai';
 import { BsChevronDoubleUp } from 'react-icons/bs';
-import Link from 'next/link';
 import { sendContactForm } from '../lib/api';
 import Alert from '@mui/material/Alert';
+import { Link } from 'react-scroll/modules';
 
 const Contact = () => {
   const [info, setInfo] = useState({
@@ -86,13 +86,17 @@ const Contact = () => {
                   >
                     <FaGithub size={30} />
                   </a>
-                  <a
-                    href=''
-                    target='_blank'
+                  <Link
+                    to='contact'
+                    activeClass='active'
+                    spy={true}
+                    smooth={true}
+                    offset={50}
+                    duration={500}
                     className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-110 ease-in duration-300'
                   >
                     <AiOutlineMail size={30} />
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -172,7 +176,7 @@ const Contact = () => {
                 {sent ? (
                   <Alert
                     severity='success'
-                    className='shadow-xl shadow-gray-400 bg-gradient-to-r from-[#709dff] to-[#5651e5] rounded-xl flex justify-center items-center'
+                    className='shadow-xl shadow-gray-400 bg-gradient-to-r from-[#90EE90] to-[#00A300] rounded-xl flex justify-center items-center'
                   >
                     <p className='uppercase text-white'>Message sent</p>
                   </Alert>
@@ -197,7 +201,14 @@ const Contact = () => {
         </div>
 
         <div className='flex justify-center py-12'>
-          <Link href='/'>
+          <Link
+            to='home'
+            activeClass='active'
+            spy={true}
+            smooth={true}
+            offset={50}
+            duration={500}
+          >
             <div className='rounded-full shadow-lg shadow-gray-400 p-4 cursor-pointer hover:scale-110 ease-in duration-300'>
               <BsChevronDoubleUp className='text-blue-600' size={25} />
             </div>

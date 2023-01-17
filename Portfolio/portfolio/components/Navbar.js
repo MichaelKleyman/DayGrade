@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { AiOutlineClose, AiOutlineMenu, AiOutlineMail } from 'react-icons/ai';
 import { FaLinkedinIn, FaGithub } from 'react-icons/fa';
 import { useRouter } from 'next/router';
+import { Link } from 'react-scroll/modules';
 
 const Navbar = () => {
   const [showNav, setShowNav] = useState(false);
@@ -11,7 +11,6 @@ const Navbar = () => {
   const [navBg, setNavBg] = useState('#FAF9F6');
   const [linkColor, setLinkColor] = useState('#1f2937');
   const router = useRouter();
-  const myLogo = '<Mike />';
 
   const openNav = () => {
     setShowNav(!showNav);
@@ -52,39 +51,80 @@ const Navbar = () => {
       }
     >
       <div className='flex justify-between items-center w-full h-full px-2 2xl:px-16'>
-        <Link href='/'>
-          {/* <Image
+        <Link
+          to='home'
+          activeClass='active'
+          spy={true}
+          smooth={true}
+          offset={50}
+          duration={500}
+        >
+          <Image
             src='/../public/images/Logo.png'
             alt='logo'
             width='105'
             height='50'
-            className='pb-9'
-          /> */}
-          <h1 className='text-blue-600'>{myLogo}</h1>
+            className='pt-2'
+          />
         </Link>
         <div>
           <ul style={{ color: `${linkColor}` }} className='hidden md:flex'>
-            <Link href='/'>
+            <Link
+              to='home'
+              activeClass='active'
+              spy={true}
+              smooth={true}
+              offset={50}
+              duration={500}
+            >
               <li className='ml-10 text-sm uppercase duration-200 hover:scale-110'>
                 Home
               </li>
             </Link>
-            <Link href='/#about'>
+            <Link
+              to='about'
+              activeClass='active'
+              spy={true}
+              smooth={true}
+              offset={50}
+              duration={500}
+            >
               <li className='ml-10 text-sm uppercase duration-200 hover:scale-110'>
                 About
               </li>
             </Link>
-            <Link href='/#skills'>
+            <Link
+              to='skills'
+              activeClass='active'
+              spy={true}
+              smooth={true}
+              offset={50}
+              duration={500}
+            >
               <li className='ml-10 text-sm uppercase duration-200 hover:scale-110'>
                 Skills
               </li>
             </Link>
-            <Link href='/#projects'>
+            <Link
+              to='projects'
+              activeClass='active'
+              spy={true}
+              smooth={true}
+              offset={50}
+              duration={500}
+            >
               <li className='ml-10 text-sm uppercase duration-200 hover:scale-110'>
                 Projects
               </li>
             </Link>
-            <Link href='/#contact'>
+            <Link
+              to='contact'
+              activeClass='active'
+              spy={true}
+              smooth={true}
+              offset={50}
+              duration={500}
+            >
               <li className='ml-10 text-sm uppercase duration-200 hover:scale-110'>
                 Contact
               </li>
@@ -110,7 +150,14 @@ const Navbar = () => {
           }
         >
           <div className='flex items-center justify-between'>
-            <Link href='/'>
+            <Link
+              to='home'
+              activeClass='active'
+              spy={true}
+              smooth={true}
+              offset={50}
+              duration={500}
+            >
               <Image
                 src='/../public/images/Logo.png'
                 alt='logo'
@@ -130,27 +177,62 @@ const Navbar = () => {
           </div>
           <div className='py-4 flex flex-col'>
             <ul className='uppercase'>
-              <Link href='/'>
+              <Link
+                to='home'
+                activeClass='active'
+                spy={true}
+                smooth={true}
+                offset={50}
+                duration={500}
+              >
                 <li onClick={() => setShowNav(false)} className='py-4 text-sm'>
                   Home
                 </li>
               </Link>
-              <Link href='/#about'>
+              <Link
+                to='about'
+                activeClass='active'
+                spy={true}
+                smooth={true}
+                offset={50}
+                duration={500}
+              >
                 <li onClick={() => setShowNav(false)} className='py-4 text-sm'>
                   About
                 </li>
               </Link>
-              <Link href='/#skills'>
+              <Link
+                to='skills'
+                activeClass='active'
+                spy={true}
+                smooth={true}
+                offset={50}
+                duration={500}
+              >
                 <li onClick={() => setShowNav(false)} className='py-4 text-sm'>
                   Skills
                 </li>
               </Link>
-              <Link href='/#projects'>
+              <Link
+                to='projects'
+                activeClass='active'
+                spy={true}
+                smooth={true}
+                offset={50}
+                duration={500}
+              >
                 <li onClick={() => setShowNav(false)} className='py-4 text-sm'>
                   Projects
                 </li>
               </Link>
-              <Link href='/#contact'>
+              <Link
+                to='contact'
+                activeClass='active'
+                spy={true}
+                smooth={true}
+                offset={50}
+                duration={500}
+              >
                 <li onClick={() => setShowNav(false)} className='py-4 text-sm'>
                   Contact
                 </li>
@@ -175,9 +257,17 @@ const Navbar = () => {
                 >
                   <FaGithub size={30} />
                 </a>
-                <div className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-110 ease-in duration-300'>
+                <Link
+                  className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-110 ease-in duration-300'
+                  to='contact'
+                  activeClass='active'
+                  spy={true}
+                  smooth={true}
+                  offset={50}
+                  duration={500}
+                >
                   <AiOutlineMail size={30} />
-                </div>
+                </Link>
               </div>
             </div>
           </div>

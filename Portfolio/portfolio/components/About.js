@@ -8,7 +8,7 @@ const About = () => {
           <p className='uppercase text-xl tracking-widest text-blue-600'>
             About
           </p>
-          <h2 className='py-4'>Who I Am</h2>
+          <h2 className='py-4'>Who Am I</h2>
           <p className='py-2'>
             I originally come from a healthcare background with a Bachelors
             degree from CUNY Hunter College, pursuing a career in sports
@@ -29,9 +29,12 @@ const About = () => {
             frameworks and programming tools in order to apply them to complex
             projects.{' '}
           </p>
-          <p className='py-2 underline cursor-pointer'>
+          <a
+            href='/#projects'
+            className='py-2 underline cursor-pointer hover:text-blue-600 italic'
+          >
             Check out some of my projects
-          </p>
+          </a>
         </div>
         <div className='w-full h-auto m-auto p-4 rounded-2xl shadow-lg shadow-gray-400 flex items-center justify-center ease-in duration-300 hover:scale-110'>
           <img

@@ -6,7 +6,7 @@ const Projects = () => {
   const projectList = [
     {
       project: 'cryptocoinsearch',
-      name: 'Crypto Coin Search',
+      name: 'Cryptogram',
       tech: 'ReactJS',
       url: '/cryptosearch',
     },

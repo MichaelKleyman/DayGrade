@@ -22,7 +22,7 @@ const cryptosearch = () => {
           alt='image'
         />
         <div className='absolute top-[70%] left-[50%] right-[50%] max-w-[1240px] w-full translate-x-[-50%] translate-y-[-50%] text-white z-10'>
-          <h2 className='py-2 tracking-widest'>Crypto Coin Search</h2>
+          <h2 className='py-2 tracking-widest'>Cryptogram</h2>
           <h3 className='tracking-widest uppercase text-sm md:text-lg'>
             ReactJS / Bootstrap / Zustand state management
           </h3>
@@ -35,13 +35,8 @@ const cryptosearch = () => {
           </p>
           <h2 className='pb-4'>Overview</h2>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
+            Cryptogram is a simple cryptocurrency search app, where you can see
+            the details of any crypto currency that is on the market today. Using a precise API from coin gecko, Crpyotgram is able to fetch realtime market data for any coin such as trending coins, the current price of those coins, as well as their market cap rank, 24h highs and lows, their circulating supply, and more. Cryptogram also allows users to search for coins to find information, and provides a line chart to display the coin prices for the last 7 days. Cryptogram is a Progressive Web Application available on desktop and mobile devices like Android and IOS. 
           </p>
           <a href='https://youtu.be/QaxDCXzGmZU' target='_blank'>
             <button className='px-8 py-2 mt-4 mr-8'>Demo</button>
@@ -50,7 +45,10 @@ const cryptosearch = () => {
             href='https://github.com/MichaelKleyman/Crypto-coin-search-/tree/main/stackathon'
             target='_blank'
           >
-            <button className='px-8 py-2 mt-4'>Code</button>
+            <button className='px-8 py-2 mt-4 mr-8'>Code</button>
+          </a>
+          <a href='https://cryptocoinsearch.netlify.app/' target='_blank'>
+            <button className='px-8 py-2 mt-4'>Website</button>
           </a>
         </div>
         <div className='col-span-4 md:col-span-1 shadow-xl shadow-gray-400 rounded-xl p-4'>
@@ -85,7 +83,9 @@ const cryptosearch = () => {
           </div>
         </div>
         <Link href='/#projects'>
-          <p className='underline cursor-pointer'>Go back</p>
+          <p className='underline cursor-pointer hover:text-blue-600'>
+            Go back
+          </p>
         </Link>
       </div>
     </div>

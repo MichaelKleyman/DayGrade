@@ -41,13 +41,17 @@ const slice = () => {
           </p>
           <h2 className='pb-4'>Overview</h2>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
+            Slice is a social task-management platform for creating ecosystems,
+            or organizations, of varying sizes that organize tasks, favors,
+            chores, etc. Within these ecosystems, users are given credit in the
+            application for completing something that needs to get done, which
+            promotes transparency and accountability for who does what. Slice
+            favors user interaction and experience, providing many forms of
+            engagement to keep members of an ecosystem in tune with completion
+            of tasks. Its also personalized to each user due to the individual
+            dashboard each user has on their own account, logging completed and
+            incomplete tasks as well as a notification system and an invite-only
+            system for ecosystems.
           </p>
           <a href='https://youtu.be/GRtXewbt4jQ' target='_blank'>
             <button className='px-8 py-2 mt-4 mr-8'>Demo</button>
@@ -56,7 +60,10 @@ const slice = () => {
             href='https://github.com/2209-Capstone-Team-B/Slice'
             target='_blank'
           >
-            <button className='px-8 py-2 mt-4'>Code</button>
+            <button className='px-8 py-2 mt-4 mr-8'>Code</button>
+          </a>
+          <a href='https://slice-task.vercel.app/' target='_blank'>
+            <button className='px-8 py-2 mt-4'>Website</button>
           </a>
         </div>
         <div className='col-span-4 md:col-span-1 shadow-xl shadow-gray-400 rounded-xl p-4'>
@@ -94,7 +101,9 @@ const slice = () => {
           </div>
         </div>
         <Link href='/#projects'>
-          <p className='underline cursor-pointer pb-5'>Go back</p>
+          <p className='underline cursor-pointer pb-5 hover:text-blue-600'>
+            Go back
+          </p>
         </Link>
       </div>
     </div>

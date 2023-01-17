@@ -1,6 +1,7 @@
 import React from 'react';
 import { AiOutlineMail } from 'react-icons/ai';
 import { FaLinkedinIn, FaGithub } from 'react-icons/fa';
+import { Link } from 'react-scroll/modules';
 
 const MainPage = () => {
   return (
@@ -40,14 +41,20 @@ const MainPage = () => {
             >
               <FaGithub size={20} />
             </a>
-            <div
+            <Link
               className='rounded-full shadow-lg shadow-gray-400
               p-5
               cursor-pointer
               hover:scale-110 ease-in duration-300'
+              to='contact'
+              activeClass='active'
+              spy={true}
+              smooth={true}
+              offset={50}
+              duration={500}
             >
               <AiOutlineMail size={20} />
-            </div>
+            </Link>
           </div>
         </div>
       </div>

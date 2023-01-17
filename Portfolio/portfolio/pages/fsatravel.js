@@ -43,13 +43,17 @@ const fsatravel = () => {
           </p>
           <h2 className='pb-4'>Overview</h2>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
+            FSA Travel is a flight booking application, where users can browse
+            the prices of one-way flights to any airport within the United
+            States, as well as add flights to their cart and purchase them as
+            long as they are a logged in user. This application is an e-commerce
+            based site, with proper authentication, cart functionality,
+            stripe/checkout functionality, admin functionality, pagination, and
+            prioritizes the user experience. With the help of a third-party API
+            and an airport data CSV file, users can search for any airport in
+            the U.S. by city name or the airports IATA code, which then provides
+            the list of available flights, allowing users to add flights to cart
+            and go ahead to checkout.
           </p>
           <a href='/' target='_blank'>
             <button className='px-8 py-2 mt-4 mr-8' onClick={demoLoading}>
@@ -60,7 +64,10 @@ const fsatravel = () => {
             href='https://github.com/FSA-Travel-Agency/FSA-TRAVEL'
             target='_blank'
           >
-            <button className='px-8 py-2 mt-4'>Code</button>
+            <button className='px-8 py-2 mt-4 mr-8'>Code</button>
+          </a>
+          <a href='https://fsatravel.onrender.com/home' target='_blank'>
+            <button className='px-8 py-2 mt-4'>Website</button>
           </a>
         </div>
         <div className='col-span-4 md:col-span-1 shadow-xl shadow-gray-400 rounded-xl p-4'>
@@ -98,7 +105,9 @@ const fsatravel = () => {
           </div>
         </div>
         <Link href='/#projects'>
-          <p className='underline cursor-pointer pb-5'>Go back</p>
+          <p className='underline cursor-pointer hover:text-blue-600 pb-5'>
+            Go back
+          </p>
         </Link>
       </div>
     </div>
