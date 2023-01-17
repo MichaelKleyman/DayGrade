@@ -36,18 +36,35 @@ const cryptosearch = () => {
           <h2 className='pb-4'>Overview</h2>
           <p>
             Cryptogram is a simple cryptocurrency search app, where you can see
-            the details of any crypto currency that is on the market today. Using a precise API from coin gecko, Crpyotgram is able to fetch realtime market data for any coin such as trending coins, the current price of those coins, as well as their market cap rank, 24h highs and lows, their circulating supply, and more. Cryptogram also allows users to search for coins to find information, and provides a line chart to display the coin prices for the last 7 days. Cryptogram is a Progressive Web Application available on desktop and mobile devices like Android and IOS. 
+            the details of any crypto currency that is on the market today.
+            Using a precise API from coin gecko, Crpyotgram is able to fetch
+            realtime market data for any coin such as trending coins, the
+            current price of those coins, as well as their market cap rank, 24h
+            highs and lows, their circulating supply, and more. Cryptogram also
+            allows users to search for coins to find information, and provides a
+            line chart to display the coin prices for the last 7 days.
+            Cryptogram is a Progressive Web Application available on desktop and
+            mobile devices like Android and IOS.
           </p>
-          <a href='https://youtu.be/QaxDCXzGmZU' target='_blank'>
+          <a
+            href='https://youtu.be/QaxDCXzGmZU'
+            target='_blank'
+            rel='noreferrer'
+          >
             <button className='px-8 py-2 mt-4 mr-8'>Demo</button>
           </a>
           <a
             href='https://github.com/MichaelKleyman/Crypto-coin-search-/tree/main/stackathon'
             target='_blank'
+            rel='noreferrer'
           >
             <button className='px-8 py-2 mt-4 mr-8'>Code</button>
           </a>
-          <a href='https://cryptocoinsearch.netlify.app/' target='_blank'>
+          <a
+            href='https://cryptocoinsearch.netlify.app/'
+            target='_blank'
+            rel='noreferrer'
+          >
             <button className='px-8 py-2 mt-4'>Website</button>
           </a>
         </div>

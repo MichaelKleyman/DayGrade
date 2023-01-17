@@ -55,7 +55,7 @@ const fsatravel = () => {
             the list of available flights, allowing users to add flights to cart
             and go ahead to checkout.
           </p>
-          <a href='/' target='_blank'>
+          <a href='/' target='_blank' rel='noreferrer'>
             <button className='px-8 py-2 mt-4 mr-8' onClick={demoLoading}>
               Demo
             </button>
@@ -63,10 +63,15 @@ const fsatravel = () => {
           <a
             href='https://github.com/FSA-Travel-Agency/FSA-TRAVEL'
             target='_blank'
+            rel='noreferrer'
           >
             <button className='px-8 py-2 mt-4 mr-8'>Code</button>
           </a>
-          <a href='https://fsatravel.onrender.com/home' target='_blank'>
+          <a
+            href='https://fsatravel.onrender.com/home'
+            target='_blank'
+            rel='noreferrer'
+          >
             <button className='px-8 py-2 mt-4'>Website</button>
           </a>
         </div>

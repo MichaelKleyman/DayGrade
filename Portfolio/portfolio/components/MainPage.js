@@ -14,7 +14,7 @@ const MainPage = () => {
           </h1>
           <h1 className='py-2'>A Fullstack Software Engineer</h1>
           <p className='py-4 text-gray-600 max-w-[70%] m-auto'>
-            I'm a Fullstack software engineer with experience in creating
+            I&apos;m a Fullstack software engineer with experience in creating
             responsive web applications, while using my frontend and backend
             programming knowledge to ensure an optimal user experience. I enjoy
             the process of designing, developing, and maintaining web
@@ -24,6 +24,7 @@ const MainPage = () => {
             <a
               href='https://www.linkedin.com/in/michael-kleyman/'
               target='_blank'
+              rel='noreferrer'
               className='rounded-full shadow-lg shadow-gray-400
               p-5
               cursor-pointer
@@ -34,6 +35,7 @@ const MainPage = () => {
             <a
               href='https://github.com/MichaelKleyman'
               target='_blank'
+              rel='noreferrer'
               className='rounded-full shadow-lg shadow-gray-400
               p-5
               cursor-pointer

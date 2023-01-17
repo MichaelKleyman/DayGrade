@@ -5,6 +5,7 @@ import { BsChevronDoubleUp } from 'react-icons/bs';
 import { sendContactForm } from '../lib/api';
 import Alert from '@mui/material/Alert';
 import { Link } from 'react-scroll/modules';
+import Image from 'next/image';
 
 const Contact = () => {
   const [info, setInfo] = useState({
@@ -53,9 +54,11 @@ const Contact = () => {
           <div className='col-span-3 lg:col-span-2 w-full h-full shadow-xl shadow-gray-400 rounded-xl p-4'>
             <div className='lg:p-4 h-full'>
               <div>
-                <img
+                <Image
                   className='rounded-xl hover:scale-110 ease in duration-300'
-                  src='https://images.unsplash.com/photo-1515378960530-7c0da6231fb1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80'
+                  src='/../public/images/Contact.png'
+                  width='640'
+                  height='65'
                   alt='/'
                 />
               </div>
@@ -75,6 +78,7 @@ const Contact = () => {
                   <a
                     href='https://www.linkedin.com/in/michael-kleyman/'
                     target='_blank'
+                    rel='noreferrer'
                     className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-110 ease-in duration-300'
                   >
                     <FaLinkedinIn size={30} />
@@ -82,6 +86,7 @@ const Contact = () => {
                   <a
                     href='https://github.com/MichaelKleyman'
                     target='_blank'
+                    rel='noreferrer'
                     className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-110 ease-in duration-300'
                   >
                     <FaGithub size={30} />

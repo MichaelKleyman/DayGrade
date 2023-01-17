@@ -53,16 +53,25 @@ const slice = () => {
             incomplete tasks as well as a notification system and an invite-only
             system for ecosystems.
           </p>
-          <a href='https://youtu.be/GRtXewbt4jQ' target='_blank'>
+          <a
+            href='https://youtu.be/GRtXewbt4jQ'
+            target='_blank'
+            rel='noreferrer'
+          >
             <button className='px-8 py-2 mt-4 mr-8'>Demo</button>
           </a>
           <a
             href='https://github.com/2209-Capstone-Team-B/Slice'
             target='_blank'
+            rel='noreferrer'
           >
             <button className='px-8 py-2 mt-4 mr-8'>Code</button>
           </a>
-          <a href='https://slice-task.vercel.app/' target='_blank'>
+          <a
+            href='https://slice-task.vercel.app/'
+            target='_blank'
+            rel='noreferrer'
+          >
             <button className='px-8 py-2 mt-4'>Website</button>
           </a>
         </div>

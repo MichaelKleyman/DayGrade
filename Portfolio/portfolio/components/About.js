@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-scroll/modules';
+import Image from 'next/image';
 
 const About = () => {
   return (
@@ -29,17 +31,24 @@ const About = () => {
             frameworks and programming tools in order to apply them to complex
             projects.{' '}
           </p>
-          <a
-            href='/#projects'
+          <Link
+            to='projects'
+            activeClass='active'
+            spy={true}
+            smooth={true}
+            offset={50}
+            duration={500}
             className='py-2 underline cursor-pointer hover:text-blue-600 italic'
           >
             Check out some of my projects
-          </a>
+          </Link>
         </div>
         <div className='w-full h-auto m-auto p-4 rounded-2xl shadow-lg shadow-gray-400 flex items-center justify-center ease-in duration-300 hover:scale-110'>
-          <img
-            src='https://media.licdn.com/dms/image/D4E03AQHm1e4eXLfiKA/profile-displayphoto-shrink_400_400/0/1672656661360?e=1678320000&v=beta&t=82KidYMT4TKH9f2FEAFoqbPCd0xLRQfkJlFtuezhPcM'
+          <Image
+            src='/../public/images/Profilepic.png'
             alt='profile'
+            width='387'
+            height='65'
             className='rounded-xl'
           />
         </div>
