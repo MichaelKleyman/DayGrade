@@ -10,7 +10,7 @@ import {
   SiRedux,
   SiSequelize,
   SiJsonwebtokens,
-} from 'react-icons/Si';
+} from 'react-icons/si';
 
 const fsatravel = () => {
   const demoLoading = () => {

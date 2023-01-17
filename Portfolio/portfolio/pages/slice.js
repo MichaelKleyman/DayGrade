@@ -12,7 +12,7 @@ import {
   SiMaterialui,
   SiChartdotjs,
   SiFigma,
-} from 'react-icons/Si';
+} from 'react-icons/si';
 
 const slice = () => {
   return (

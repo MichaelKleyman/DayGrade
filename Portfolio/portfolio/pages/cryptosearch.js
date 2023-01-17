@@ -4,7 +4,7 @@ import Link from 'next/link';
 import cryptoSearchImg from '../public/projects/cryptocoinsearch.jpeg';
 import { FaReact, FaTools, FaBootstrap } from 'react-icons/fa';
 import { MdApi } from 'react-icons/md';
-import { SiMaterialui, SiJavascript } from 'react-icons/Si';
+import { SiMaterialui, SiJavascript } from 'react-icons/si';
 import { BiBarChartSquare } from 'react-icons/bi';
 import { IoLogoPwa } from 'react-icons/io5';
 
