@@ -129,6 +129,7 @@ const Navbar = () => {
                 Contact
               </li>
             </Link>
+            <li>Example</li>
           </ul>
           <div className='md:hidden' onClick={openNav}>
             <AiOutlineMenu size={35} />
