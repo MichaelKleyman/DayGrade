@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-scroll/modules';
 import Image from 'next/image';
+import Profileimg from '../public/images/Profilepic.png';
 
 const About = () => {
   return (
@@ -45,7 +46,7 @@ const About = () => {
         </div>
         <div className='w-full h-auto m-auto p-4 rounded-2xl shadow-lg shadow-gray-400 flex items-center justify-center ease-in duration-300 hover:scale-110'>
           <Image
-            src={'/../public/images/Profilepic.png'}
+            src={Profileimg}
             alt='profile'
             width='387'
             height='65'
