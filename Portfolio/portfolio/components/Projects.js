@@ -1,23 +1,26 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import Cryptosearchimg from '../public/projects/cryptocoinsearch.jpeg';
+import FSAtravelimg from '../public/projects/FSAtravel.jpeg';
+import Sliceimg from '../public/projects/Slice.jpeg';
 
 const Projects = () => {
   const projectList = [
     {
-      project: 'cryptocoinsearch',
+      project: Cryptosearchimg,
       name: 'Cryptogram',
       tech: 'ReactJS',
       url: '/cryptosearch',
     },
     {
-      project: 'FSAtravel',
+      project: FSAtravelimg,
       name: 'FSA Travel Agency',
       tech: 'ReactJS',
       url: '/fsatravel',
     },
     {
-      project: 'Slice',
+      project: Sliceimg,
       name: 'Slice Task Management',
       tech: 'NextJS',
       url: '/slice',
@@ -39,7 +42,7 @@ const Projects = () => {
             >
               <Image
                 className='rounded-xl group-hover:opacity-10'
-                src={`/../public/projects/${project.project}.jpeg`}
+                src={project.project}
                 alt='project'
                 width='697'
                 height='165'
