@@ -6,6 +6,7 @@ import { sendContactForm } from '../lib/api';
 import Alert from '@mui/material/Alert';
 import { Link } from 'react-scroll/modules';
 import Image from 'next/image';
+import Contactimg from '../public/images/Contact.png';
 
 const Contact = () => {
   const [info, setInfo] = useState({
@@ -56,7 +57,7 @@ const Contact = () => {
               <div>
                 <Image
                   className='rounded-xl hover:scale-110 ease in duration-300'
-                  src={'/../public/images/Contact.png'}
+                  src={Contactimg}
                   width='640'
                   height='65'
                   alt='/'
