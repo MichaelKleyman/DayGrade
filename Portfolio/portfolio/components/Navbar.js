@@ -60,7 +60,7 @@ const Navbar = () => {
           duration={500}
         >
           <Image
-            src='/../public/images/Logo.png'
+            src={'/../public/images/Logo.png'}
             alt='logo'
             width='105'
             height='50'
@@ -246,7 +246,7 @@ const Navbar = () => {
                 <a
                   href='https://www.linkedin.com/in/michael-kleyman/'
                   target='_blank'
-                  rel="noreferrer"
+                  rel='noreferrer'
                   className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-110 ease-in duration-300'
                 >
                   <FaLinkedinIn size={30} />
@@ -254,7 +254,7 @@ const Navbar = () => {
                 <a
                   href='https://github.com/MichaelKleyman'
                   target='_blank'
-                  rel="noreferrer"
+                  rel='noreferrer'
                   className='rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer hover:scale-110 ease-in duration-300'
                 >
                   <FaGithub size={30} />

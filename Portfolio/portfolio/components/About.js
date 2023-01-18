@@ -45,7 +45,7 @@ const About = () => {
         </div>
         <div className='w-full h-auto m-auto p-4 rounded-2xl shadow-lg shadow-gray-400 flex items-center justify-center ease-in duration-300 hover:scale-110'>
           <Image
-            src='/../public/images/Profilepic.png'
+            src={'/../public/images/Profilepic.png'}
             alt='profile'
             width='387'
             height='65'
