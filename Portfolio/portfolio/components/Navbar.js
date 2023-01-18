@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import Logoimg from '../public/images/Logo.png';
 import { AiOutlineClose, AiOutlineMenu, AiOutlineMail } from 'react-icons/ai';
 import { FaLinkedinIn, FaGithub } from 'react-icons/fa';
 import { useRouter } from 'next/router';
@@ -60,7 +61,7 @@ const Navbar = () => {
           duration={500}
         >
           <Image
-            src={'/../public/images/Logo.png'}
+            src={Logoimg}
             alt='logo'
             width='105'
             height='50'
@@ -129,7 +130,6 @@ const Navbar = () => {
                 Contact
               </li>
             </Link>
-            <li>Example</li>
           </ul>
           <div className='md:hidden' onClick={openNav}>
             <AiOutlineMenu size={35} />
@@ -159,12 +159,7 @@ const Navbar = () => {
               offset={50}
               duration={500}
             >
-              <Image
-                src='/../public/images/Logo.png'
-                alt='logo'
-                width='87'
-                height='65'
-              />
+              <Image src={Logoimg} alt='logo' width='87' height='65' />
             </Link>
             <div
               onClick={openNav}
