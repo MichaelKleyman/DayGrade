@@ -3,22 +3,24 @@ import { Link } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Backgroundpic from '../images/Authpic.png';
+import { useAuth } from '../context/Authcontext';
 
 const Login = () => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  // const [error, setError] = useState(null);
-  const [userNameError, setUsernameError] = useState(null);
+  const [emailError, setEmailError] = useState(null);
   const [passwordError, setPasswordError] = useState(null);
+  const [error, setError] = useState(null);
+  const [isLoggingIn, setLoggingIn] = useState(true);
 
-  const handleSubmit = (e) => {
+  const { login, signUp, currentUser } = useAuth();
+
+  console.log(currentUser);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // if (!username || !password) {
-    //   setError('Please enter username and password');
-    //   return;
-    // }
-    if (!username) {
-      setUsernameError('Please enter a valid username');
+    if (!email) {
+      setEmailError('Please enter a valid email');
       return;
     }
     if (!password) {
@@ -28,6 +30,13 @@ const Login = () => {
     if (password.length < 6) {
       setPasswordError('Minimum 6 character password required');
       return;
+    }
+    if (isLoggingIn) {
+      try {
+        await login(email, password);
+      } catch (error) {
+        setError('Incorrect email or password');
+      }
     }
   };
 
@@ -45,15 +54,15 @@ const Login = () => {
           <div className='flex flex-col py-4'>
             <TextField
               id='outlined-password-input'
-              label='Username'
-              type='username'
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              autoComplete='current-username'
+              label='Email'
+              type='email'
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              autoComplete='current-email'
             />
-            {userNameError && (
+            {emailError && (
               <div className='w-full text-rose-500 pb-3 flex items-center justify-center'>
-                {userNameError}
+                {emailError}
               </div>
             )}
           </div>
@@ -82,11 +91,11 @@ const Login = () => {
               Log In
             </Button>
           </div>
-          {/* {error && (
+          {error && (
             <div className='w-full text-rose-500 pb-3 flex items-center justify-center'>
-              {error}*
+              {error}
             </div>
-          )} */}
+          )}
         </form>
         <div className='flex justify-center p-4 text-sm text-gray-300'>
           <p>

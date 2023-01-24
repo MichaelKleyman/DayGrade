@@ -5,17 +5,17 @@ import { getFirestore } from 'firebase/firestore';
 // TODO: Replace the following with your app's Firebase project configuration
 //find configuration in firebase, settings, register the web app
 const firebaseConfig = {
-  apiKey: process.env.PUBLIC_APIKEY,
-  authDomain: process.env.PUBLIC_AUTHDOMAIN,
-  projectId: process.env.PUBLIC_PROJECTID,
-  storageBucket: process.env.PUBLIC_STORAGEBUCKET,
-  messagingSenderId: process.env.PUBLIC_MESSAGINGSENDERID,
-  appId: process.env.PUBLIC_APPID,
-  measurementId: process.env.PUBLIC_MEASUREMENTID,
+  apiKey: 'AIzaSyAOZM9us5Hmd567bEbAZXsaTtUvgQMDYvY',
+  authDomain: 'daygrade-e0823.firebaseapp.com',
+  projectId: 'daygrade-e0823',
+  storageBucket: 'daygrade-e0823.appspot.com',
+  messagingSenderId: '760778943147',
+  appId: '1:760778943147:web:700ddb8106e658d80f25ee',
+  measurementId: 'G-11N0CTQYPK',
 };
 
 const app = initializeApp(firebaseConfig);
 
 export const auth = getAuth(app);
-export const database = getFirestore(app);
+export const db = getFirestore(app);
 //allows us to access our database from these modules anywhere throughout the project.

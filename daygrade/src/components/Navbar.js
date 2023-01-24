@@ -1,8 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../context/Authcontext';
 // import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 
 const Navbar = () => {
+  const { currentUser } = useAuth();
+
   return (
     <div className='bg-white shadow-xl'>
       <div className='text-black flex justify-between items-center h-20 max-w-[1240px] mx-auto px-4 w-full'>
