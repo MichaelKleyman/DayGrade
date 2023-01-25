@@ -65,3 +65,5 @@ export function AuthProvider({ children }) {
   );
   //wrap this whole AuthContext as a wrapper for this application, so wrap it in the index.js file which holds the entire app.
 }
+
+
