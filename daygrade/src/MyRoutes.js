@@ -8,7 +8,7 @@ import Signup from './components/Signup';
 const MyRoutes = () => {
   return (
     <Routes>
-      <Route path='/' element={<Home />} />
+      <Route path='/home' element={<Home />} />
       <Route path='login' element={<Login />} />
       <Route path='welcome' element={<Welcome />} />
       <Route path='signup' element={<Signup />} />

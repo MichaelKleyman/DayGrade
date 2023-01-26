@@ -23,7 +23,7 @@ const SignupInfo = ({
   return (
     <div>
       <h2 className='text-3xl font-bold text-center py-4'>
-        {formTitles[page]}
+        Lets get to know you!
       </h2>
       <div className='flex flex-col py-4'>
         <TextField

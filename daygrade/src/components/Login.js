@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -13,9 +14,12 @@ const Login = () => {
   const [error, setError] = useState(null);
   const [isLoggingIn, setLoggingIn] = useState(true);
 
-  const { login, signUp, currentUser } = useAuth();
+  const { login, currentUser } = useAuth();
+  const navigate = useNavigate();
 
-  console.log(currentUser);
+  useEffect(() => {
+    if (currentUser) navigate('/home');
+  }, [currentUser, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

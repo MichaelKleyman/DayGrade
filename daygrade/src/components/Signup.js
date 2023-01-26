@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Backgroundpic from '../images/Authpic.png';
 import { collection, doc, setDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../firebase';
+import { useAuth } from '../context/Authcontext';
 import Goals from './Goals';
-import OtherInfo from './OtherInfo';
 import SetPassword from './SetPassword';
 import SignupInfo from './SignupInfo';
 
@@ -16,16 +17,47 @@ const Signup = () => {
   const [userName, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [age, setAge] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmedPassword, setConfirmedPassword] = useState('');
+  const [goals, setGoals] = useState({
+    goalsArr: [
+      { goal1: '', toggled: false },
+      { goal2: '', toggled: false },
+      { goal3: '', toggled: false },
+      { goal4: '', toggled: false },
+      { goal5: '', toggled: false },
+      { goal6: '', toggled: false },
+      { goal7: '', toggled: false },
+    ],
+  });
+
+  const [clicked, setClicked] = useState({
+    clicked1: false,
+    clicked2: false,
+    clicked3: false,
+    clicked4: false,
+    clicked5: false,
+    clicked6: false,
+    clicked7: false,
+  });
   const [firstNameError, setFirstNameError] = useState(null);
   const [lastNameError, setLastNameError] = useState(null);
   const [userNameError, setUserNameError] = useState(null);
   const [emailError, setEmailError] = useState(null);
   const [ageError, setAgeError] = useState(null);
+  const [passwordError, setPasswordError] = useState(null);
+  const [confirmedPasswordError, setConfirmedPasswordError] = useState(null);
+
+  const { signUp, currentUser } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (currentUser) navigate('/home');
+  }, [currentUser, navigate]);
 
   const formTitles = [
     'Lets get to know you!',
-    'Thanks {firstName}! Now tell me your goals. Select 4 that resonate most with you.',
-    'Third page',
+    'Thanks {firstName}! Now tell me your goals. Select any that resonate most with you.',
     'Time to set your password.',
   ];
 
@@ -40,6 +72,8 @@ const Signup = () => {
           userName,
           email,
           age,
+          goals: goals.goalsArr,
+          password,
           created: serverTimestamp(),
         },
         { merge: true }
@@ -89,11 +123,49 @@ const Signup = () => {
     }
   };
 
+  const handlePassword = () => {
+    if (!password) {
+      setPasswordError('Please enter a valid password.');
+    } else if (password) {
+      setPasswordError('');
+    }
+    if (!confirmedPassword) {
+      setConfirmedPasswordError('Please re-enter your password.');
+    } else if (confirmedPassword) {
+      setConfirmedPasswordError('');
+    }
+    if (password.length < 6) {
+      setPasswordError('Minimum 6 character password required.');
+    } else if (password.length >= 6) {
+      setPasswordError('');
+    }
+    if (confirmedPassword !== password) {
+      setConfirmedPasswordError('Passwords do not match.');
+    } else if (confirmedPassword === password) {
+      setConfirmedPasswordError('');
+    }
+  };
+
+  const handleSignIn = async () => {
+    try {
+      if (
+        password.length >= 6 &&
+        password &&
+        confirmedPassword &&
+        password === confirmedPassword
+      ) {
+        await signUp(email, password);
+        saveToDb();
+      }
+    } catch (e) {
+      setConfirmedPasswordError('Email already in use.');
+    }
+  };
+
   const pageDisplay = () => {
     if (page === 0) {
       return (
         <SignupInfo
-          formTitles={formTitles}
           page={page}
           firstNameError={firstNameError}
           lastNameError={lastNameError}
@@ -113,11 +185,28 @@ const Signup = () => {
         />
       );
     } else if (page === 1) {
-      return <Goals firstName={firstName} />;
-    } else if (page === 2) {
-      return <OtherInfo />;
+      return (
+        <Goals
+          firstName={firstName}
+          goals={goals}
+          setGoals={setGoals}
+          clicked={clicked}
+          setClicked={setClicked}
+        />
+      );
     } else {
-      return <SetPassword />;
+      return (
+        <SetPassword
+          passwordError={passwordError}
+          setPasswordError={setPasswordError}
+          confirmedPasswordError={confirmedPasswordError}
+          setConfirmedPasswordError={setConfirmedPasswordError}
+          password={password}
+          setPassword={setPassword}
+          confirmedPassword={confirmedPassword}
+          setConfirmedPassword={setConfirmedPassword}
+        />
+      );
     }
   };
 
@@ -165,14 +254,26 @@ const Signup = () => {
                   </Button>
                 </div>
               )}
-
-              <Button
-                variant='contained'
-                className='py-3 w-full'
-                onClick={handleNext}
-              >
-                {page === formTitles.length - 1 ? 'Sign In' : 'Next'}
-              </Button>
+              {page !== 2 ? (
+                <Button
+                  variant='contained'
+                  className='py-3 w-full'
+                  onClick={handleNext}
+                >
+                  Next
+                </Button>
+              ) : (
+                <Button
+                  variant='contained'
+                  className='py-3 w-full'
+                  onClick={async () => {
+                    handlePassword();
+                    await handleSignIn();
+                  }}
+                >
+                  Sign In
+                </Button>
+              )}
             </div>
           </div>
         </form>
@@ -182,37 +283,3 @@ const Signup = () => {
 };
 
 export default Signup;
-
-// {clickedNext && (
-//   <div>
-//     <h2 className='text-3xl font-bold text-center py-4'>
-//       Thanks {firstName}! Now tell me your goals.
-//     </h2>
-//     <p className='text-center pb-4'>
-//       Select 4 that resonate most with you.
-//     </p>
-//     <div className='grid grid-cols-1 gap-4'>
-//       <div className='p-3 border-2 border-gray-300 rounded-md flex items-center justify-center duration-300 hover:border-blue-600'>
-//         <button>Commit fully to a routine</button>
-//       </div>
-//       <div className='p-3 border-2 border-gray-300 rounded-md flex items-center justify-center duration-300 hover:border-blue-600'>
-//         <button>Develop consistency</button>
-//       </div>
-//       <div className='p-3 border-2 border-gray-300 rounded-md flex items-center justify-center duration-300 hover:border-blue-600'>
-//         <button>Get more disciplined</button>
-//       </div>
-//       <div className='p-3 border-2 border-gray-300 rounded-md flex items-center justify-center duration-300 hover:border-blue-600'>
-//         <button>Maintain discipline</button>
-//       </div>
-//       <div className='p-3 border-2 border-gray-300 rounded-md flex items-center justify-center duration-300 hover:border-blue-600'>
-//         <button>Create a new healthy habit</button>
-//       </div>
-//       <div className='p-3 border-2 border-gray-300 rounded-md flex items-center justify-center duration-300 hover:border-blue-600'>
-//         <button>Achieve a personal goal</button>
-//       </div>
-//       <div className='p-3 border-2 border-gray-300 rounded-md flex items-center justify-center duration-300 hover:border-blue-600'>
-//         <button>Force self accountability</button>
-//       </div>
-//     </div>
-//   </div>
-// )}
