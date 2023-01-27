@@ -1,6 +1,7 @@
 import React from 'react';
 import HomepageImg from '../images/Daygradepic.png';
 import { useAuth } from '../context/Authcontext';
+import UserDashboard from './UserDashboard';
 
 const Home = () => {
   const { currentUser } = useAuth();
@@ -34,7 +35,7 @@ const Home = () => {
           </div>
         </div>
       ) : (
-        <div>Welcome dude!</div>
+        <UserDashboard />
       )}
     </div>
   );

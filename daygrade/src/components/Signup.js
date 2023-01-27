@@ -1,11 +1,19 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Backgroundpic from '../images/Authpic.png';
-import { collection, doc, setDoc, serverTimestamp } from 'firebase/firestore';
+import {
+  collection,
+  doc,
+  setDoc,
+  serverTimestamp,
+  addDoc,
+} from 'firebase/firestore';
 import { db } from '../firebase';
 import { useAuth } from '../context/Authcontext';
+import { getAuth } from 'firebase/auth';
 import Goals from './Goals';
 import SetPassword from './SetPassword';
 import SignupInfo from './SignupInfo';
@@ -49,10 +57,11 @@ const Signup = () => {
   const [confirmedPasswordError, setConfirmedPasswordError] = useState(null);
 
   const { signUp, currentUser } = useAuth();
+  const myauth = getAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (currentUser) navigate('/home');
+    if (currentUser) navigate('/');
   }, [currentUser, navigate]);
 
   const formTitles = [
@@ -63,7 +72,7 @@ const Signup = () => {
 
   const saveToDb = async () => {
     const updateDb = async () => {
-      const newUser = doc(collection(db, 'Users'));
+      const newUser = doc(db, 'Users', currentUser.uid);
       await setDoc(
         newUser,
         {
@@ -78,6 +87,22 @@ const Signup = () => {
         },
         { merge: true }
       );
+
+      // const user = myauth.currentUser;
+      // await setDoc(
+      //   doc(db, 'Users', user.uid),
+      //   {
+      //     firstName,
+      //     lastName,
+      //     userName,
+      //     email,
+      //     age,
+      //     goals: goals.goalsArr,
+      //     password,
+      //     created: serverTimestamp(),
+      //   },
+      //   { merge: true }
+      // );
     };
     await updateDb().catch(console.error);
   };

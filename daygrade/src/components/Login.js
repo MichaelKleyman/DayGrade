@@ -18,7 +18,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (currentUser) navigate('/home');
+    if (currentUser) navigate('/');
   }, [currentUser, navigate]);
 
   const handleSubmit = async (e) => {

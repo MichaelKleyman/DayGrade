@@ -38,11 +38,11 @@ const SetPassword = ({
       <div className='flex flex-col py-4'>
         <TextField
           id='outlined-password-input'
-          label='Confirm password'
+          label='Verify password'
           type='password'
           value={confirmedPassword}
           onChange={(e) => setConfirmedPassword(e.target.value)}
-          autoComplete='current-confirmpassword'
+          autoComplete='current-verifiedpassword'
         />
         {confirmedPasswordError && (
           <div className='w-full text-rose-500 pb-3 flex items-center justify-center'>
