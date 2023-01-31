@@ -2,9 +2,19 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/Authcontext';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
+import Profile from './Profile';
+import Button from '@mui/material/Button';
+import { SlHome } from 'react-icons/sl';
 
 const Navbar = () => {
   const [openNav, setOpenNav] = useState(false);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
   const { currentUser, logout } = useAuth();
 
   const showNav = () => {
@@ -41,15 +51,21 @@ const Navbar = () => {
             <div>
               <ul className='hidden md:flex'>
                 <li className='ml-10 uppercase duration-200 hover:scale-110 cursor-pointer text-2sm'>
-                  Home
+                  {/* Home */}
+                  <Button
+                    style={{ color: 'black', fontSize: '1rem' }}
+                    id='fade-button'
+                    aria-controls={open ? 'fade-menu' : undefined}
+                    aria-haspopup='true'
+                    aria-expanded={open ? 'true' : undefined}
+                    onClick={handleClick}
+                  >
+                    <SlHome className='p-2' size={32} color={'blue'} />
+                    Home
+                  </Button>
                 </li>
                 <li className='ml-10 uppercase duration-200 hover:scale-110 cursor-pointer text-2sm'>
-                  Profile
-                </li>
-                <li className='ml-10 duration-200 hover:scale-110 cursor-pointer'>
-                  <button onClick={handleLogout} className='uppercase text-2sm'>
-                    Logout
-                  </button>
+                  <Profile logout={handleLogout} />
                 </li>
               </ul>
               <div className='md:hidden' onClick={showNav}>
@@ -74,7 +90,7 @@ const Navbar = () => {
                 <div className='flex'>
                   <Link
                     to='/home'
-                    className='font-[Montserrat] uppercase tracking-widest text-xl text-blue-600 py-3 w-full'
+                    className='font-[Montserrat] uppercase tracking-widest md:text-xl text-blue-600 py-3 w-full'
                   >
                     D a y g r a d e
                   </Link>
@@ -82,7 +98,7 @@ const Navbar = () => {
                     className='cursor-pointer rounded-full shadow-lg shadow-gray-400 p-3 pb-0'
                     onClick={showNav}
                   >
-                    <AiOutlineClose size={20} />
+                    <AiOutlineClose size={20} color='black' />
                   </div>
                 </div>
                 <div className='my-4 uppercase'>

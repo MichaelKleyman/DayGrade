@@ -18,4 +18,31 @@ const app = initializeApp(firebaseConfig);
 
 export const auth = getAuth(app);
 export const db = getFirestore(app);
+
 //allows us to access our database from these modules anywhere throughout the project.
+
+
+// export const createUserDocument = async (user, additionalData) => {
+//   if (!user) return;
+
+//   const userRef = doc(`Users/${user.uid}`);
+//   const snapshot = await userRef.get();
+
+//   if (!snapshot.exists()) {
+//     const { email } = user;
+//     const { firstName, lastName, userName, age, goals } = additionalData;
+
+//     try {
+//       userRef.setDoc({
+//         firstName,
+//         lastName,
+//         userName,
+//         age,
+//         goals,
+//         email,
+//       });
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   }
+// };

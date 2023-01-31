@@ -14,7 +14,6 @@ const _getUser = (user) => {
 
 //THUNKS
 export const fetchUser = (userId) => (dispatch) => {
-  console.log(userId);
   const subscriber = onSnapshot(doc(db, 'Users', userId), (docSnapshot) => {
     dispatch(_getUser({ ...docSnapshot.data(), id: docSnapshot.id }));
   });

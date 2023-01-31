@@ -55,9 +55,10 @@ const Signup = () => {
   const [ageError, setAgeError] = useState(null);
   const [passwordError, setPasswordError] = useState(null);
   const [confirmedPasswordError, setConfirmedPasswordError] = useState(null);
+  const [goalsError, setGoalsError] = useState(null);
 
   const { signUp, currentUser } = useAuth();
-  const myauth = getAuth();
+  const auth = getAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -72,9 +73,9 @@ const Signup = () => {
 
   const saveToDb = async () => {
     const updateDb = async () => {
-      const newUser = doc(db, 'Users', currentUser.uid);
+      const user = auth.currentUser;
       await setDoc(
-        newUser,
+        doc(db, 'Users', user.uid),
         {
           firstName,
           lastName,
@@ -87,24 +88,24 @@ const Signup = () => {
         },
         { merge: true }
       );
-
-      // const user = myauth.currentUser;
-      // await setDoc(
-      //   doc(db, 'Users', user.uid),
-      //   {
-      //     firstName,
-      //     lastName,
-      //     userName,
-      //     email,
-      //     age,
-      //     goals: goals.goalsArr,
-      //     password,
-      //     created: serverTimestamp(),
-      //   },
-      //   { merge: true }
-      // );
     };
     await updateDb().catch(console.error);
+  };
+
+  const handleSignIn = async () => {
+    try {
+      if (
+        password.length >= 6 &&
+        password &&
+        confirmedPassword &&
+        password === confirmedPassword
+      ) {
+        await signUp(email, password);
+        saveToDb();
+      }
+    } catch (e) {
+      setConfirmedPasswordError('Email already in use.');
+    }
   };
 
   const handleBack = () => {
@@ -171,20 +172,14 @@ const Signup = () => {
     }
   };
 
-  const handleSignIn = async () => {
-    try {
-      if (
-        password.length >= 6 &&
-        password &&
-        confirmedPassword &&
-        password === confirmedPassword
-      ) {
-        await signUp(email, password);
-        saveToDb();
+  const handleGoals = () => {
+    for (let i = 0; i < goals.goalsArr.length; i++) {
+      let curGoal = goals.goalsArr[i];
+      if (curGoal.toggled) {
+        return true;
       }
-    } catch (e) {
-      setConfirmedPasswordError('Email already in use.');
     }
+    setGoalsError('Choose at least one goal');
   };
 
   const pageDisplay = () => {
@@ -217,6 +212,7 @@ const Signup = () => {
           setGoals={setGoals}
           clicked={clicked}
           setClicked={setClicked}
+          goalsError={goalsError}
         />
       );
     } else {
@@ -283,7 +279,9 @@ const Signup = () => {
                 <Button
                   variant='contained'
                   className='py-3 w-full'
-                  onClick={handleNext}
+                  onClick={() => {
+                    page === 1 ? handleGoals() && handleNext() : handleNext();
+                  }}
                 >
                   Next
                 </Button>

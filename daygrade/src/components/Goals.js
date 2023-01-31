@@ -1,6 +1,13 @@
 import React from 'react';
 
-const Goals = ({ firstName, goals, setGoals, clicked, setClicked }) => {
+const Goals = ({
+  firstName,
+  goals,
+  setGoals,
+  clicked,
+  setClicked,
+  goalsError,
+}) => {
   function toggleGoal(goal, goalNum) {
     let arrayCopy = [...goals.goalsArr];
     for (let i = 0; i < arrayCopy.length; i++) {
@@ -25,7 +32,7 @@ const Goals = ({ firstName, goals, setGoals, clicked, setClicked }) => {
       <h2 className='text-3xl font-bold text-center py-4'>
         Thanks {firstName}! Now tell me your goals.
       </h2>
-      <p className='text-center pb-4'>
+      <p className='text-center pb-4 text-gray-400'>
         Select any that resonate most with you.
       </p>
       <div className='grid grid-cols-1 gap-4'>
@@ -155,15 +162,12 @@ const Goals = ({ firstName, goals, setGoals, clicked, setClicked }) => {
         >
           <button>Force self accountability</button>
         </div>
+        {goalsError && (
+          <div className='w-full text-rose-500 flex items-center justify-center'>
+            {goalsError}
+          </div>
+        )}
       </div>
-      {/* <button
-        onClick={(e) => {
-          e.preventDefault();
-          console.log(goals);
-        }}
-      >
-        Click me
-      </button> */}
     </div>
   );
 };

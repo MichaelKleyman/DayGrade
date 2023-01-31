@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, useRef } from 'react';
-import { auth, db } from '../firebase';
+import { auth, db, createUserDocument } from '../firebase';
 //these functions are imported from firebase authentication
 import {
   signInWithEmailAndPassword,
@@ -27,9 +27,8 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const userInfo = useRef();
 
-  function signUp(email, password) {
-    createUserWithEmailAndPassword(auth, email, password);
-    return;
+  async function signUp(email, password) {
+    return createUserWithEmailAndPassword(auth, email, password);
   }
 
   function login(email, password) {
@@ -65,5 +64,3 @@ export function AuthProvider({ children }) {
   );
   //wrap this whole AuthContext as a wrapper for this application, so wrap it in the index.js file which holds the entire app.
 }
-
-
