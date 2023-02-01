@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { fetchUser } from '../store';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../firebase';
@@ -22,6 +23,7 @@ const UserDashboard = () => {
   const [open, setOpen] = useState(false);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const userObject = useSelector((state) => state.loggedInUser);
 
@@ -83,7 +85,10 @@ const UserDashboard = () => {
             </h1>
           </div>
           <div className='flex justify-end'>
-            <button className='h-9 px-4 m-1 border bg-blue-600 text-white rounded-full uppercase text-sm tracking-widest w-[60%] duration-200 hover:scale-110 ease-in'>
+            <button
+              onClick={() => navigate('/checkin')}
+              className='h-9 px-4 m-1 border bg-blue-600 text-white rounded-full uppercase text-sm tracking-widest w-[60%] duration-200 hover:scale-110 ease-in'
+            >
               Start
             </button>
           </div>
