@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useEffect, useState } from 'react';
-import { useAuth } from '../context/Authcontext';
 import { fetchUser } from '../store';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../firebase';
@@ -11,13 +10,16 @@ import {
   FcApproval,
   FcTimeline,
   FcComboChart,
+  FcAdvance,
 } from 'react-icons/fc';
+import { AiOutlineLine, AiOutlineSmallDash } from 'react-icons/ai';
 import BarChart from './BarChart';
+import EditGoals from './EditGoals';
 
 const UserDashboard = () => {
-  const { currentUser } = useAuth();
   const [user, loading] = useAuthState(auth);
   const [date, setDate] = useState('');
+  const [open, setOpen] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -30,6 +32,14 @@ const UserDashboard = () => {
       unsubscribeUser();
     };
   }, [date, user, dispatch]);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const arr = userObject.goals || [];
   const newGoals = arr
@@ -54,6 +64,15 @@ const UserDashboard = () => {
             <FcTimeline className='p-2' size={38} />
             My Mood History
           </h1>
+          <div className='grid grid-cols-3 mt-10 text-center text-blue-400 relative bottom-0'>
+            <h1>{date}</h1>
+            <h1 className='text-2xl grid grid-cols-3 gap-4'>
+              <AiOutlineSmallDash />
+              🤩
+              <AiOutlineSmallDash />
+            </h1>
+            <h1>Score: 10</h1>
+          </div>
         </div>
         <div className='p-6 shadow-xl rounded-xl bg-white grid grid-cols-2 h-[100%] md:h-[80%] lg:h-[90%]'>
           <div className='w-[90%]'>
@@ -68,7 +87,20 @@ const UserDashboard = () => {
               Start
             </button>
           </div>
+
+          <div className='grid grid-cols-3 gap-4 justify-center items-center text-blue-400'>
+            <div className='w-screen'>
+              <p>Last check in</p>
+            </div>
+            <div className='w-screen ml-6'>
+              <FcAdvance className='p-2 mx-2' size={38} />
+            </div>
+            <div className='w-screen ml-4'>
+              <p>2 days ago</p>
+            </div>
+          </div>
         </div>
+
         <div className='p-6 shadow-xl rounded-xl bg-white h-[100%] md:h-[80%] lg:h-[90%]'>
           <div className='grid grid-cols-2'>
             <h1 className='font-extrabold md:text-xl flex items-center'>
@@ -76,12 +108,20 @@ const UserDashboard = () => {
               My Goals
             </h1>
             <div className='flex justify-end'>
-              <button className='h-9 px-4 m-1 border bg-blue-600 text-white rounded-full uppercase text-sm tracking-widest w-[60%] duration-200 hover:scale-110 ease-in'>
+              <button
+                onClick={handleClickOpen}
+                className='h-9 px-4 m-1 border bg-blue-600 text-white rounded-full uppercase text-sm tracking-widest w-[60%] duration-200 hover:scale-110 ease-in'
+              >
                 Edit
               </button>
+              <EditGoals
+                handleClose={handleClose}
+                open={open}
+                userGoals={arr}
+              />
             </div>
           </div>
-          <div className='grid grid-cols-2'>
+          <div className='grid grid-cols-2 text-blue-400'>
             <ul>
               {arrayFirstHalf.map((goal) => (
                 <li key={goal} className='py-auto flex items-center'>
@@ -113,15 +153,18 @@ const UserDashboard = () => {
             </div>
           </div>
         </div>
-        <div className='bg-white shadow-xl rounded-lg'>
+        <div className='bg-white shadow-xl rounded-lg h-full md:h-full lg:h-full'>
+          <h1 className='font-bold md:text-xl flex items-center p-3'>
+            Activity
+          </h1>
+          {/* <div>-</div>
           <div>-</div>
           <div>-</div>
           <div>-</div>
           <div>-</div>
           <div>-</div>
           <div>-</div>
-          <div>-</div>
-          <div>-</div>
+          <div>-</div> */}
         </div>
       </div>
     </div>

@@ -3,35 +3,29 @@ import { db } from '../firebase';
 import { query, collection, where } from 'firebase/firestore';
 
 //ACTIONS
-const FETCH_GOALS = 'FETCH_GOALS';
+const EDIT_GOALS = 'EDIT_GOALS';
 
 //ACTION CREATORS
-const _fetchGoals = (goals) => {
+export const _editGoals = (goals) => {
   return {
-    type: FETCH_GOALS,
+    type: EDIT_GOALS,
     goals,
   };
 };
 
 //THUNKS
-export const fetchUserGoals = (email) => (dispatch) => {
-  const goals = query(collection(db, 'Users'), where('email', '==', email));
-  const subscriber = onSnapshot(goals, (querySnapshot) => {
-    const userGoals = querySnapshot.docs.map((goal) => ({
-      ...goal.data(),
-    }));
-    dispatch(_fetchGoals(userGoals));
-  });
-  return subscriber;
-};
 
 //REDUCER
 const initialState = [];
 
 export default function userGoals(state = initialState, action) {
   switch (action.type) {
-    case FETCH_GOALS:
-      return action.goals;
+    case EDIT_GOALS:
+      return state.map((user) => {
+        if (user.id === action.user.id) {
+          return { ...user, ...action.goals };
+        } else return user;
+      });
     default:
       return state;
   }

@@ -29,13 +29,13 @@ const Signup = () => {
   const [confirmedPassword, setConfirmedPassword] = useState('');
   const [goals, setGoals] = useState({
     goalsArr: [
-      { goal1: '', toggled: false },
-      { goal2: '', toggled: false },
-      { goal3: '', toggled: false },
-      { goal4: '', toggled: false },
-      { goal5: '', toggled: false },
-      { goal6: '', toggled: false },
-      { goal7: '', toggled: false },
+      { goal1: 'Commit fully to a routine', toggled: false },
+      { goal2: 'Develop consistency', toggled: false },
+      { goal3: 'Get more disciplined', toggled: false },
+      { goal4: 'Maintain discipline', toggled: false },
+      { goal5: 'Create a new healthy habit', toggled: false },
+      { goal6: 'Achieve a personal goal', toggled: false },
+      { goal7: 'Force self accountability', toggled: false },
     ],
   });
 

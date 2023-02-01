@@ -15,16 +15,15 @@ const Goals = ({
         if (key === goalNum) {
           if (arrayCopy[i].toggled) {
             arrayCopy[i].toggled = false;
-            arrayCopy[i][key] = '';
-            setGoals({ ...goals, goalsArr: arrayCopy });
+            // arrayCopy[i][key] = goal;
           } else {
             arrayCopy[i].toggled = true;
-            arrayCopy[i][key] = goal;
-            setGoals({ ...goals, goalsArr: arrayCopy });
+            // arrayCopy[i][key] = goal;
           }
         }
       }
     }
+    setGoals({ goalsArr: arrayCopy });
   }
 
   return (
