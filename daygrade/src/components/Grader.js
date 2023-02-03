@@ -80,7 +80,6 @@ const Grader = ({ date, usersLog }) => {
           />
           <div className='flex justify-end pr-4 pt-2'>
             <div>
-              {' '}
               {error ? (
                 <div className='text-red-500 text-sm mr-7'>
                   Please complete all fields*
