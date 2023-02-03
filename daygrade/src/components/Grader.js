@@ -21,7 +21,6 @@ const Grader = ({ date, usersLog }) => {
   const [error, setError] = useState(null);
   const [user, loading] = useAuthState(auth);
   const dispatch = useDispatch();
-  console.log(user);
 
   const handleTime = (newValue) => {
     setTime(newValue);
