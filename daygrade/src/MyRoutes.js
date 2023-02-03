@@ -5,6 +5,7 @@ import Login from './components/Login';
 import Welcome from './components/Welcome';
 import Signup from './components/Signup';
 import Checkin from './components/Checkin';
+import Temp from './components/TempCalendar';
 
 const MyRoutes = () => {
   return (
@@ -13,7 +14,8 @@ const MyRoutes = () => {
       <Route path='login' element={<Login />} />
       <Route path='welcome' element={<Welcome />} />
       <Route path='signup' element={<Signup />} />
-      <Route path='checkin' element={<Checkin />} />
+      <Route path='checkin' element={<Temp />} />
+      {/* <Route path='temp' element={<Temp />} /> */}
     </Routes>
   );
 };

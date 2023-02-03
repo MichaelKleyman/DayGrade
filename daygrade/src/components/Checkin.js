@@ -5,40 +5,66 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
 import { PickersDay } from '@mui/x-date-pickers/PickersDay';
 import Badge from '@mui/material/Badge';
+import { Button } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import SendIcon from '@mui/icons-material/Send';
+import { useNavigate } from 'react-router-dom';
+import { styled } from '@mui/material/styles';
 
 const Checkin = () => {
   const [value, setValue] = useState(new Date());
   const [highlightedDays, setHighlightedDays] = useState([1, 2, 16]);
 
-  return (
-    <div>
-      <div className='m-5 rounded-xl shadow-lg shadow-gray-500'>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <StaticDatePicker
-            orientation='portrait'
-            openTo='day'
-            value={value}
-            onChange={(newValue) => {
-              setValue(newValue);
-            }}
-            renderInput={(params) => <TextField {...params} />}
-            renderDay={(day, _value, DayComponentProps) => {
-              const isSelected =
-                !DayComponentProps.outsideCurrentMonth &&
-                highlightedDays.indexOf(day.date()) >= 0;
+  const navigate = useNavigate();
 
-              return (
-                <Badge
-                  key={day.toString()}
-                  overlap='circular'
-                  badgeContent={isSelected ? '🌚' : undefined}
-                >
-                  <PickersDay {...DayComponentProps} />
-                </Badge>
-              );
-            }}
-          />
-        </LocalizationProvider>
+  return (
+    <div className='w-full'>
+      <div className='grid md:grid-cols-2 gap-8 mx-auto py-2 px-4 m-6'>
+        <div>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <StaticDatePicker
+              orientation='portrait'
+              openTo='day'
+              value={value}
+              disableFuture
+              onChange={(newValue) => {
+                setValue(newValue);
+              }}
+              renderInput={(params) => <TextField {...params} />}
+              renderDay={(day, _value, DayComponentProps) => {
+                const isSelected =
+                  !DayComponentProps.outsideCurrentMonth &&
+                  highlightedDays.indexOf(day.date()) >= 0;
+
+                return (
+                  <Badge
+                    key={day.toString()}
+                    overlap='circular'
+                    badgeContent={isSelected ? '🌚' : undefined}
+                  >
+                    <PickersDay {...DayComponentProps} />
+                  </Badge>
+                );
+              }}
+            />
+          </LocalizationProvider>
+          <div className='flex justify-between p-3'>
+            <Button
+              onClick={() => navigate('/')}
+              variant='outlined'
+              startIcon={<DeleteIcon />}
+            >
+              Cancel
+            </Button>
+            <Button variant='contained' endIcon={<SendIcon />}>
+              Check In
+            </Button>
+            <button onClick={() => navigate('/temp')} >go</button>
+          </div>
+        </div>
+        <div>
+          <h1>Stuff</h1>
+        </div>
       </div>
     </div>
   );

@@ -5,14 +5,17 @@ import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 import Profile from './Profile';
 import Button from '@mui/material/Button';
 import { SlHome } from 'react-icons/sl';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const [openNav, setOpenNav] = useState(false);
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const navigate = useNavigate();
   const open = Boolean(anchorEl);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
+    navigate('/');
   };
 
   const { currentUser, logout } = useAuth();
