@@ -8,12 +8,12 @@ import {
   doc,
   serverTimestamp,
   orderBy,
+  updateDoc,
 } from 'firebase/firestore';
 import { db } from '../firebase.js';
 
 //ACTIONS
 const GET_LOG = 'GET_LOG';
-const CREATE_LOG = 'CREATE_LOG';
 const DELETE_LOG = 'DELETE_LOG';
 
 //ACTION CREATORS
@@ -23,13 +23,6 @@ const _getLog = (log) => {
     log,
   };
 };
-
-// const _createLog = (log) => {
-//   return {
-//     type: CREATE_LOG,
-//     log,
-//   };
-// };
 
 //THUNKS
 export const fetchLog = (userId, date) => (dispatch) => {
@@ -61,6 +54,13 @@ export const createLog = (time, date, curLog, userId) => async (dispatch) => {
 
 export const deleteLog = (logId) => () => {
   deleteDoc(doc(db, 'Logger', logId));
+};
+
+export const editLog = (logId, editedLog) => async () => {
+  const docRef = doc(db, 'Logger', logId);
+  await updateDoc(docRef, {
+    log: editedLog,
+  });
 };
 
 //REDUCER

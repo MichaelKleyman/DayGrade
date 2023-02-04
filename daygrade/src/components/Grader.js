@@ -1,3 +1,4 @@
+/* eslint-disable no-lone-blocks */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,13 +15,23 @@ import { AiFillDelete } from 'react-icons/ai';
 import { createLog, deleteLog } from '../store';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../firebase';
+import EditLog from './EditLog';
 
 const Grader = ({ date, usersLog }) => {
+  const [open, setOpen] = useState(false);
   const [time, setTime] = useState(dayjs(new Date()));
   const [curLog, setLog] = useState('');
   const [error, setError] = useState(null);
   const [user, loading] = useAuthState(auth);
   const dispatch = useDispatch();
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const handleTime = (newValue) => {
     setTime(newValue);
@@ -50,6 +61,10 @@ const Grader = ({ date, usersLog }) => {
       setError('Please complete all fields');
     }
   };
+
+  const halfwayPoint = Math.ceil(usersLog.length / 2);
+  let arrayFirstHalf = usersLog.slice(0, halfwayPoint);
+  let arraySecondHalf = usersLog.slice(halfwayPoint, usersLog.length);
 
   return (
     <div className='w-full'>
@@ -99,16 +114,59 @@ const Grader = ({ date, usersLog }) => {
         </div>
       </div>
       <div>
-        <div>
+        <div className='grid grid-cols-2 gap-5'>
           {usersLog.map((usersLogInfo, i) => (
             <div
               key={i}
               className='bg-gradient-to-r from-cyan-200 to-blue-400 shadow-lg shadow-gray-400 rounded-xl'
             >
-              <h1 className='font-bold mx-4 my-4 py-4 flex justify-between'>
+              <h1 className='font-bold mx-4 my-3 py-4 flex justify-between'>
                 {usersLogInfo.log}
                 <div className='grid grid-cols-2 gap-2'>
                   <MdModeEditOutline
+                    onClick={handleClickOpen}
+                    size={25}
+                    className='duration-300 hover:scale-110 hover:text-white cursor-pointer'
+                  />
+                  <AiFillDelete
+                    onClick={() => handleDelete(usersLogInfo.id)}
+                    size={25}
+                    className='duration-300 hover:scale-110 hover:text-white cursor-pointer'
+                  />
+                </div>
+              </h1>
+              <h1 className='mx-4 py-2 text-sm text-gray-600'>
+                {usersLogInfo.Time}
+              </h1>
+              {open && (
+                <EditLog
+                  open={open}
+                  handleClose={handleClose}
+                  currentLog={usersLogInfo.log}
+                  logId={usersLogInfo.id}
+                />
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Grader;
+
+{
+  /* {usersLog.map((usersLogInfo, i) => (
+            <div
+              key={i}
+              className='bg-gradient-to-r from-cyan-200 to-blue-400 shadow-lg shadow-gray-400 rounded-xl'
+            >
+              <h1 className='font-bold mx-4 my-3 py-4 flex justify-between'>
+                {usersLogInfo.log}
+                <div className='grid grid-cols-2 gap-2'>
+                  <MdModeEditOutline
+                    onClick={handleClickOpen}
                     size={25}
                     className='duration-300 hover:scale-110 hover:text-white cursor-pointer'
                   />
@@ -123,11 +181,80 @@ const Grader = ({ date, usersLog }) => {
                 {usersLogInfo.Time}
               </h1>
             </div>
+          ))} */
+}
+
+{
+  /* {arrayFirstHalf.map((usersLogInfo, i) => (
+            <div
+              key={i}
+              className='bg-gradient-to-r from-cyan-200 to-blue-400 shadow-lg shadow-gray-400 rounded-xl'
+            >
+              <h1 className='font-bold mx-4 my-3 py-4 flex justify-between'>
+                {usersLogInfo.log}
+                <div className='grid grid-cols-2 gap-2'>
+                  <MdModeEditOutline
+                    onClick={handleClickOpen}
+                    size={25}
+                    className='duration-300 hover:scale-110 hover:text-white cursor-pointer'
+                  />
+                  <AiFillDelete
+                    onClick={() => handleDelete(usersLogInfo.id)}
+                    size={25}
+                    className='duration-300 hover:scale-110 hover:text-white cursor-pointer'
+                  />
+                </div>
+              </h1>
+              <h1 className='mx-4 py-2 text-sm text-gray-600'>
+                {usersLogInfo.Time}
+              </h1>
+              {open && (
+                <EditLog
+                  open={open}
+                  handleClose={handleClose}
+                  currentLog={usersLogInfo.log}
+                  logId={usersLogInfo.id}
+                />
+              )}
+            </div>
+          ))}
+          {arraySecondHalf.map((usersLogInfo, i) => (
+            <div
+              key={i}
+              className='bg-gradient-to-r from-cyan-200 to-blue-400 shadow-lg shadow-gray-400 rounded-xl'
+            >
+              <h1 className='font-bold mx-4 my-3 py-4 flex justify-between'>
+                {usersLogInfo.log}
+                <div className='grid grid-cols-2 gap-2'>
+                  <MdModeEditOutline
+                    onClick={handleClickOpen}
+                    size={25}
+                    className='duration-300 hover:scale-110 hover:text-white cursor-pointer'
+                  />
+                  <AiFillDelete
+                    onClick={() => handleDelete(usersLogInfo.id)}
+                    size={25}
+                    className='duration-300 hover:scale-110 hover:text-white cursor-pointer'
+                  />
+                </div>
+              </h1>
+              <h1 className='mx-4 py-2 text-sm text-gray-600'>
+                {usersLogInfo.Time}
+              </h1>
+              {open && (
+                <EditLog
+                  open={open}
+                  handleClose={handleClose}
+                  currentLog={usersLogInfo.log}
+                  logId={usersLogInfo.id}
+                />
+              )}
+            </div>
           ))}
         </div>
-      </div>
-    </div>
-  );
-};
-
-export default Grader;
+        {!usersLog.length && (
+          <div className='flex items-center justify-center uppercase tracking-widest shadow-lg shadow-gray-400 rounded-xl p-5'>
+            <h1>No Logs</h1>
+          </div>
+        )} */
+}

@@ -9,7 +9,6 @@ import { Button } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SendIcon from '@mui/icons-material/Send';
 import { useNavigate } from 'react-router-dom';
-import { styled } from '@mui/material/styles';
 
 const Checkin = () => {
   const [value, setValue] = useState(new Date());
@@ -59,7 +58,7 @@ const Checkin = () => {
             <Button variant='contained' endIcon={<SendIcon />}>
               Check In
             </Button>
-            <button onClick={() => navigate('/temp')} >go</button>
+            <button onClick={() => navigate('/temp')}>go</button>
           </div>
         </div>
         <div>
