@@ -69,9 +69,9 @@ const Grader = ({ date, usersLog }) => {
     }
   };
 
-  //   const halfwayPoint = Math.ceil(usersLog.length / 2);
-  //   let arrayFirstHalf = usersLog.slice(0, halfwayPoint);
-  //   let arraySecondHalf = usersLog.slice(halfwayPoint, usersLog.length);
+  const halfwayPoint = Math.ceil(usersLog.length / 2);
+  let arrayFirstHalf = usersLog.slice(0, halfwayPoint);
+  let arraySecondHalf = usersLog.slice(halfwayPoint, usersLog.length);
 
   return (
     <div className='w-full'>
@@ -117,8 +117,36 @@ const Grader = ({ date, usersLog }) => {
           </div>
         </div>
       </div>
-      <div>
-        {usersLog.map((usersLogInfo, i) => (
+      <div className='grid grid-cols-2 gap-4'>
+        {arrayFirstHalf.map((usersLogInfo, i) => (
+          <div
+            key={usersLogInfo.id}
+            className='bg-gradient-to-r from-cyan-200 to-blue-400 shadow-lg shadow-gray-400 rounded-xl'
+          >
+            <h1 className='font-bold mx-4 my-3 py-4 flex justify-between'>
+              {usersLogInfo.log}
+              <div className='grid grid-cols-2 gap-2'>
+                <EditLog
+                  usersLogInfo={usersLogInfo}
+                  open={open}
+                  handleClickOpen={handleClickOpen}
+                  handleClose={handleClose}
+                  handleIdCheck={handleIdCheck}
+                  id={id}
+                />
+                <AiFillDelete
+                  onClick={() => handleDelete(usersLogInfo.id)}
+                  size={25}
+                  className='duration-300 hover:scale-110 hover:text-white cursor-pointer'
+                />
+              </div>
+            </h1>
+            <h1 className='mx-4 py-2 text-sm text-gray-600'>
+              {usersLogInfo.Time}
+            </h1>
+          </div>
+        ))}
+        {arraySecondHalf.map((usersLogInfo, i) => (
           <div
             key={usersLogInfo.id}
             className='bg-gradient-to-r from-cyan-200 to-blue-400 shadow-lg shadow-gray-400 rounded-xl'
