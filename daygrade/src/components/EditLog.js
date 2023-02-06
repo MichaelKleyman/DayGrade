@@ -7,21 +7,37 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { editLog } from '../store';
 import { useDispatch } from 'react-redux';
+import { MdModeEditOutline } from 'react-icons/md';
+import { setDoc, doc, updateDoc } from 'firebase/firestore';
+import { db } from '../firebase';
 
-const EditLog = ({ open, handleClose, currentLog, logId }) => {
-  const [editedLog, setEditedLog] = useState(currentLog);
+const EditLog = ({ open, handleClose, usersLogInfo, handleClickOpen }) => {
+  const [editedLog, setEditedLog] = useState(usersLogInfo);
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
-    setEditedLog(e.target.value);
+    const fieldName = e.target.getAttribute('name');
+    const newUsersLogInfo = { ...editedLog };
+    newUsersLogInfo[fieldName] = e.target.value;
+    setEditedLog(newUsersLogInfo);
   };
 
-  const handleEdit = () => {
-    dispatch(editLog(logId, editedLog));
+  const handleEdit = async (logId, newLog) => {
+    // dispatch(editLog(usersLogInfo.id, editedLog));
+    const docRef = doc(db, 'Logger', logId);
+    await updateDoc(docRef, {
+      log: newLog,
+    });
+    // console.log(usersLogInfo);
   };
 
   return (
     <div>
+      <MdModeEditOutline
+        onClick={handleClickOpen}
+        size={25}
+        className='duration-300 hover:scale-110 hover:text-white cursor-pointer'
+      />
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Need to change up your log?</DialogTitle>
         <DialogContent>
@@ -36,7 +52,7 @@ const EditLog = ({ open, handleClose, currentLog, logId }) => {
             rows='5'
             cols='47'
             name='log'
-            // value={editedLog}
+            value={editedLog.log}
             onChange={handleChange}
           />
         </DialogContent>
@@ -45,18 +61,12 @@ const EditLog = ({ open, handleClose, currentLog, logId }) => {
           <Button
             onClick={() => {
               handleClose();
-              handleEdit();
+              handleEdit(usersLogInfo.id, editedLog.log);
+              //   console.log(usersLogInfo);
             }}
           >
             Submit
           </Button>
-          {/* <button
-            onClick={() => {
-              console.log(logId);
-            }}
-          >
-            Click me
-          </button> */}
         </DialogActions>
       </Dialog>
     </div>

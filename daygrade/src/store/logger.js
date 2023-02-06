@@ -9,6 +9,7 @@ import {
   serverTimestamp,
   orderBy,
   updateDoc,
+  setDoc,
 } from 'firebase/firestore';
 import { db } from '../firebase.js';
 
@@ -61,6 +62,7 @@ export const editLog = (logId, editedLog) => async () => {
   await updateDoc(docRef, {
     log: editedLog,
   });
+  //   setDoc(doc(db, 'Logger', logId), { log: editedLog }, { merge: true });
 };
 
 //REDUCER
