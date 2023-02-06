@@ -13,9 +13,9 @@ import { CiLogin } from 'react-icons/ci';
 import { createLog, deleteLog } from '../store';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../firebase';
-import EditLog from './EditLog';
 import { MdModeEditOutline } from 'react-icons/md';
 import { AiFillDelete } from 'react-icons/ai';
+import EditLog from './EditLog';
 
 const Grader = ({ date, usersLog }) => {
   const [open, setOpen] = useState(false);
@@ -23,8 +23,14 @@ const Grader = ({ date, usersLog }) => {
   const [curLog, setLog] = useState('');
   const [error, setError] = useState(null);
   const [user, loading] = useAuthState(auth);
+  const [id, setId] = useState(null);
 
   const dispatch = useDispatch();
+
+  const handleIdCheck = (e, logId) => {
+    e.preventDefault();
+    setId(logId);
+  };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -120,20 +126,13 @@ const Grader = ({ date, usersLog }) => {
             <h1 className='font-bold mx-4 my-3 py-4 flex justify-between'>
               {usersLogInfo.log}
               <div className='grid grid-cols-2 gap-2'>
-                {/* <button
-                onClick={() => {
-                  console.log('This is: ', usersLogInfo);
-                  //   setEditedLog(usersLogInfo.log)
-                  handleClickOpen();
-                }}
-              >
-                Click
-              </button> */}
                 <EditLog
+                  usersLogInfo={usersLogInfo}
                   open={open}
                   handleClickOpen={handleClickOpen}
                   handleClose={handleClose}
-                  usersLogInfo={usersLogInfo}
+                  handleIdCheck={handleIdCheck}
+                  id={id}
                 />
                 <AiFillDelete
                   onClick={() => handleDelete(usersLogInfo.id)}
