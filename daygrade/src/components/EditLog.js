@@ -1,74 +1,77 @@
 import React, { useState } from 'react';
+import { MdModeEditOutline } from 'react-icons/md';
+import { updateDoc, doc } from 'firebase/firestore';
+import { db } from '../firebase';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { editLog } from '../store';
-import { useDispatch } from 'react-redux';
-import { MdModeEditOutline } from 'react-icons/md';
-import { setDoc, doc, updateDoc } from 'firebase/firestore';
-import { db } from '../firebase';
 
-const EditLog = ({ open, handleClose, usersLogInfo, handleClickOpen }) => {
-  const [editedLog, setEditedLog] = useState(usersLogInfo);
-  const dispatch = useDispatch();
+const EditLog = ({
+  usersLogInfo,
+  open,
+  handleClickOpen,
+  handleClose,
+  handleIdCheck,
+  id,
+}) => {
+  const [editedLog, setEditedLog] = useState(usersLogInfo.log);
 
   const handleChange = (e) => {
-    const fieldName = e.target.getAttribute('name');
-    const newUsersLogInfo = { ...editedLog };
-    newUsersLogInfo[fieldName] = e.target.value;
-    setEditedLog(newUsersLogInfo);
+    setEditedLog(e.target.value);
   };
 
-  const handleEdit = async (logId, newLog) => {
-    // dispatch(editLog(usersLogInfo.id, editedLog));
+  const submitEdit = async (e, logId) => {
+    e.preventDefault();
     const docRef = doc(db, 'Logger', logId);
     await updateDoc(docRef, {
-      log: newLog,
+      log: editedLog,
     });
-    // console.log(usersLogInfo);
+    handleClose();
   };
 
   return (
     <div>
       <MdModeEditOutline
-        onClick={handleClickOpen}
+        onClick={(e) => {
+          console.log(usersLogInfo);
+          handleClickOpen();
+          handleIdCheck(e, usersLogInfo.id);
+        }}
         size={25}
         className='duration-300 hover:scale-110 hover:text-white cursor-pointer'
       />
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={open && id === usersLogInfo.id} onClose={handleClose}>
         <DialogTitle>Need to change up your log?</DialogTitle>
         <DialogContent>
           <DialogContentText className='p-3'>
             Enter your updated log and click submit when finished.
           </DialogContentText>
           <textarea
-            style={{ border: 'solid 1px blue' }}
             className='p-2 rounded-lg'
             autoFocus
             placeholder='What have you done...'
             rows='5'
             cols='47'
-            name='log'
-            value={editedLog.log}
+            value={editedLog}
             onChange={handleChange}
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button
-            onClick={() => {
-              handleClose();
-              handleEdit(usersLogInfo.id, editedLog.log);
-              //   console.log(usersLogInfo);
-            }}
-          >
+          <Button onClick={(e) => submitEdit(e, usersLogInfo.id)}>
             Submit
           </Button>
         </DialogActions>
       </Dialog>
+      {/* {open && id === usersLogInfo.id && (
+        <form onSubmit={(e) => submitEdit(e, usersLogInfo.id)}>
+          <input type='text' value={editedLog} onChange={handleChange} />
+          <button type='submit'>Submit</button>
+        </form>
+      )} */}
     </div>
   );
 };
