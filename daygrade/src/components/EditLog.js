@@ -16,6 +16,7 @@ const EditLog = ({
   handleClose,
   handleIdCheck,
   id,
+  handleCloseDots,
 }) => {
   const [editedLog, setEditedLog] = useState(usersLogInfo.log);
 
@@ -30,6 +31,7 @@ const EditLog = ({
       log: editedLog,
     });
     handleClose();
+    handleCloseDots();
   };
 
   return (
@@ -51,12 +53,14 @@ const EditLog = ({
           </DialogContentText>
           <textarea
             className='p-2 rounded-lg'
-            autoFocus
+            autoFocus={true}
             placeholder='What have you done...'
             rows='5'
             cols='47'
             value={editedLog}
             onChange={handleChange}
+            variant='outline'
+            style={{ border: '1px solid blue' }}
           />
         </DialogContent>
         <DialogActions>

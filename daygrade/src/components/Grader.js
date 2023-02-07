@@ -73,8 +73,6 @@ const Grader = ({ date, usersLog }) => {
     }
   };
 
-  const options = ['Triton', 'Umbriel'];
-
   const ITEM_HEIGHT = 48;
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -140,22 +138,53 @@ const Grader = ({ date, usersLog }) => {
             key={usersLogInfo.id}
             className='bg-gradient-to-r from-cyan-200 to-blue-400 shadow-lg shadow-gray-400 rounded-xl'
           >
-            <h1 className='font-bold mx-4 my-3 py-4 flex justify-between'>
+            <h1 className='font-bold mx-2 my-3 py-4 flex justify-between'>
               <p>{usersLogInfo.log}</p>
-              <div className='grid grid-cols-2 gap-2'>
-                <EditLog
-                  usersLogInfo={usersLogInfo}
-                  open={open}
-                  handleClickOpen={handleClickOpen}
-                  handleClose={handleClose}
-                  handleIdCheck={handleIdCheck}
-                  id={id}
-                />
-                <AiFillDelete
-                  onClick={() => handleDelete(usersLogInfo.id)}
-                  size={25}
-                  className='duration-300 hover:scale-110 hover:text-white cursor-pointer'
-                />
+              {/* <div className='grid grid-cols-2 gap-2'> */}
+              <div>
+                <IconButton
+                  aria-label='more'
+                  id='long-button'
+                  aria-controls={openDots ? 'long-menu' : undefined}
+                  aria-expanded={openDots ? 'true' : undefined}
+                  aria-haspopup='true'
+                  onClick={handleClick}
+                >
+                  <MoreVertIcon />
+                </IconButton>
+                <Menu
+                  id='long-menu'
+                  MenuListProps={{
+                    'aria-labelledby': 'long-button',
+                  }}
+                  anchorEl={anchorEl}
+                  open={openDots}
+                  onClose={handleCloseDots}
+                  PaperProps={{
+                    style: {
+                      maxHeight: ITEM_HEIGHT * 4.5,
+                      width: '20ch',
+                    },
+                  }}
+                >
+                  <MenuItem selected={usersLogInfo === 'Pyxis'}>
+                    <EditLog
+                      usersLogInfo={usersLogInfo}
+                      open={open}
+                      handleClickOpen={handleClickOpen}
+                      handleClose={handleClose}
+                      handleIdCheck={handleIdCheck}
+                      id={id}
+                    />
+                  </MenuItem>
+                  <MenuItem selected={usersLogInfo === 'Pyxis'}>
+                    <AiFillDelete
+                      onClick={() => handleDelete(usersLogInfo.id)}
+                      size={25}
+                      className='duration-300 hover:scale-110 hover:text-white cursor-pointer'
+                    />
+                  </MenuItem>
+                </Menu>
               </div>
             </h1>
             <h1 className='mx-4 py-2 text-sm text-gray-600'>
@@ -170,20 +199,54 @@ const Grader = ({ date, usersLog }) => {
           >
             <h1 className='font-bold mx-4 my-3 py-4 flex justify-between '>
               <p>{usersLogInfo.log}</p>
-              <div className='grid grid-cols-2 gap-2'>
-                <EditLog
-                  usersLogInfo={usersLogInfo}
-                  open={open}
-                  handleClickOpen={handleClickOpen}
-                  handleClose={handleClose}
-                  handleIdCheck={handleIdCheck}
-                  id={id}
-                />
-                <AiFillDelete
-                  onClick={() => handleDelete(usersLogInfo.id)}
-                  size={25}
-                  className='duration-300 hover:scale-110 hover:text-white cursor-pointer'
-                />
+              <div>
+                <IconButton
+                  aria-label='more'
+                  id='long-button'
+                  aria-controls={openDots ? 'long-menu' : undefined}
+                  aria-expanded={openDots ? 'true' : undefined}
+                  aria-haspopup='true'
+                  onClick={handleClick}
+                >
+                  <MoreVertIcon />
+                </IconButton>
+                <Menu
+                  id='long-menu'
+                  MenuListProps={{
+                    'aria-labelledby': 'long-button',
+                  }}
+                  anchorEl={anchorEl}
+                  open={openDots}
+                  onClose={handleCloseDots}
+                  PaperProps={{
+                    style: {
+                      maxHeight: ITEM_HEIGHT * 4.5,
+                      width: '20ch',
+                    },
+                  }}
+                >
+                  <MenuItem selected={usersLogInfo === 'Pyxis'}>
+                    <EditLog
+                      usersLogInfo={usersLogInfo}
+                      open={open}
+                      handleClickOpen={handleClickOpen}
+                      handleClose={handleClose}
+                      handleIdCheck={handleIdCheck}
+                      id={id}
+                      handleCloseDots={handleCloseDots}
+                    />
+                  </MenuItem>
+                  <MenuItem selected={usersLogInfo === 'Pyxis'}>
+                    <AiFillDelete
+                      onClick={() => {
+                        handleDelete(usersLogInfo.id);
+                        handleCloseDots()
+                      }}
+                      size={25}
+                      className='duration-300 hover:scale-110 hover:text-white cursor-pointer'
+                    />
+                  </MenuItem>
+                </Menu>
               </div>
             </h1>
             <h1 className='mx-4 py-2 text-sm text-gray-600'>
