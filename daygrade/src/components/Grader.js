@@ -13,9 +13,13 @@ import { CiLogin } from 'react-icons/ci';
 import { createLog, deleteLog } from '../store';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../firebase';
-import { MdModeEditOutline } from 'react-icons/md';
 import { AiFillDelete } from 'react-icons/ai';
 import EditLog from './EditLog';
+
+import IconButton from '@mui/material/IconButton';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 const Grader = ({ date, usersLog }) => {
   const [open, setOpen] = useState(false);
@@ -67,6 +71,19 @@ const Grader = ({ date, usersLog }) => {
     } else {
       setError('Please complete all fields*');
     }
+  };
+
+  const options = ['Triton', 'Umbriel'];
+
+  const ITEM_HEIGHT = 48;
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const openDots = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleCloseDots = () => {
+    setAnchorEl(null);
   };
 
   const halfwayPoint = Math.ceil(usersLog.length / 2);
@@ -124,7 +141,7 @@ const Grader = ({ date, usersLog }) => {
             className='bg-gradient-to-r from-cyan-200 to-blue-400 shadow-lg shadow-gray-400 rounded-xl'
           >
             <h1 className='font-bold mx-4 my-3 py-4 flex justify-between'>
-              {usersLogInfo.log}
+              <p>{usersLogInfo.log}</p>
               <div className='grid grid-cols-2 gap-2'>
                 <EditLog
                   usersLogInfo={usersLogInfo}
@@ -151,8 +168,8 @@ const Grader = ({ date, usersLog }) => {
             key={usersLogInfo.id}
             className='bg-gradient-to-r from-cyan-200 to-blue-400 shadow-lg shadow-gray-400 rounded-xl'
           >
-            <h1 className='font-bold mx-4 my-3 py-4 flex justify-between'>
-              {usersLogInfo.log}
+            <h1 className='font-bold mx-4 my-3 py-4 flex justify-between '>
+              <p>{usersLogInfo.log}</p>
               <div className='grid grid-cols-2 gap-2'>
                 <EditLog
                   usersLogInfo={usersLogInfo}
@@ -175,39 +192,16 @@ const Grader = ({ date, usersLog }) => {
           </div>
         ))}
       </div>
+      {!usersLog.length && (
+        <div className='flex items-center justify-center uppercase tracking-widest shadow-lg shadow-gray-400 rounded-xl p-5'>
+          <h1>No Logs</h1>
+        </div>
+      )}
     </div>
   );
 };
 
 export default Grader;
-
-{
-  /* {usersLog.map((usersLogInfo, i) => (
-            <div
-              key={i}
-              className='bg-gradient-to-r from-cyan-200 to-blue-400 shadow-lg shadow-gray-400 rounded-xl'
-            >
-              <h1 className='font-bold mx-4 my-3 py-4 flex justify-between'>
-                {usersLogInfo.log}
-                <div className='grid grid-cols-2 gap-2'>
-                  <MdModeEditOutline
-                    onClick={handleClickOpen}
-                    size={25}
-                    className='duration-300 hover:scale-110 hover:text-white cursor-pointer'
-                  />
-                  <AiFillDelete
-                    onClick={() => handleDelete(usersLogInfo.id)}
-                    size={25}
-                    className='duration-300 hover:scale-110 hover:text-white cursor-pointer'
-                  />
-                </div>
-              </h1>
-              <h1 className='mx-4 py-2 text-sm text-gray-600'>
-                {usersLogInfo.Time}
-              </h1>
-            </div>
-          ))} */
-}
 
 {
   /* {arrayFirstHalf.map((usersLogInfo, i) => (
