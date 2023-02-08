@@ -65,7 +65,7 @@ const EditLog = ({
             value={editedLog}
             onChange={handleChange}
             variant='outline'
-            style={{ border: '1px solid blue' }}
+            style={{ border: '1px solid blue', padding: '10px' }}
           />
         </DialogContent>
         <DialogActions>

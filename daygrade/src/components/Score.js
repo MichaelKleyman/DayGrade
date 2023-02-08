@@ -2,7 +2,7 @@ import React from 'react';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 
-const Score = ({ scoreArr, handleChange, finalScore, error }) => {
+const Score = ({ scoreArr, handleScoreChange, finalScore, error }) => {
   return (
     <div className=''>
       <DialogContent>
@@ -17,7 +17,11 @@ const Score = ({ scoreArr, handleChange, finalScore, error }) => {
           <div
             key={scoreObj.score}
             onClick={() =>
-              handleChange(scoreObj.description, scoreObj.emoji, scoreObj.score)
+              handleScoreChange(
+                scoreObj.description,
+                scoreObj.emoji,
+                scoreObj.score
+              )
             }
             className={`w-32 h-24 rounded-lg ${
               !finalScore.clicked && 'shadow-lg shadow-gray-400'
