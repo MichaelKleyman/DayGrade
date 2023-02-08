@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../firebase';
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { CalendarPicker } from '@mui/x-date-pickers/CalendarPicker';
@@ -16,9 +16,12 @@ import { useNavigate } from 'react-router-dom';
 import { FcCalendar, FcAbout } from 'react-icons/fc';
 import Grader from './Grader';
 import { fetchLog } from '../store';
+import ScoreProcess from './ScoreProcess';
 
 export default function Temp() {
+  const [open, setOpen] = useState(false);
   const [date, setDate] = useState(dayjs());
+
   const navigate = useNavigate();
   const [user, loading] = useAuthState(auth);
   const dispatch = useDispatch();
@@ -28,6 +31,14 @@ export default function Temp() {
 
   const changeDate = (curDate) => {
     return dispatch(fetchLog(user?.uid, curDate));
+  };
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
   };
 
   useEffect(() => {
@@ -118,10 +129,15 @@ export default function Temp() {
             >
               Cancel
             </Button>
-            <Button variant='contained' endIcon={<SendIcon />}>
+            <Button
+              variant='contained'
+              onClick={handleClickOpen}
+              endIcon={<SendIcon />}
+            >
               Check In
             </Button>
           </div>
+          <ScoreProcess open={open} handleClose={handleClose} />
         </div>
         <div className='h-screen'>
           <Grader date={date} usersLog={usersLog} />

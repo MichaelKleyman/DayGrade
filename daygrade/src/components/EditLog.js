@@ -36,15 +36,20 @@ const EditLog = ({
 
   return (
     <div>
-      <MdModeEditOutline
+      <div
+        className='grid grid-cols-2'
         onClick={(e) => {
           console.log(usersLogInfo);
           handleClickOpen();
           handleIdCheck(e, usersLogInfo.id);
         }}
-        size={25}
-        className='duration-300 hover:scale-110 hover:text-white cursor-pointer'
-      />
+      >
+        <MdModeEditOutline
+          size={25}
+          className='duration-300 hover:scale-110 hover:text-white cursor-pointer'
+        />
+        <h1 className='pl-3'>Edit</h1>
+      </div>
       <Dialog open={open && id === usersLogInfo.id} onClose={handleClose}>
         <DialogTitle>Need to change up your log?</DialogTitle>
         <DialogContent>
@@ -64,8 +69,20 @@ const EditLog = ({
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={(e) => submitEdit(e, usersLogInfo.id)}>
+          <Button
+            onClick={() => {
+              handleClose();
+              handleCloseDots();
+            }}
+          >
+            Cancel
+          </Button>
+          <Button
+            onClick={(e) => {
+              submitEdit(e, usersLogInfo.id);
+              handleCloseDots();
+            }}
+          >
             Submit
           </Button>
         </DialogActions>

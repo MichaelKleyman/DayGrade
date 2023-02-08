@@ -132,7 +132,7 @@ const Grader = ({ date, usersLog }) => {
           </div>
         </div>
       </div>
-      <div className='grid grid-cols-2 gap-4'>
+      <div className='grid grid-cols-2 lg:grid-cols-2 sm:grid-cols-1 gap-4'>
         {arrayFirstHalf.map((usersLogInfo, i) => (
           <div
             key={usersLogInfo.id}
@@ -175,14 +175,23 @@ const Grader = ({ date, usersLog }) => {
                       handleClose={handleClose}
                       handleIdCheck={handleIdCheck}
                       id={id}
+                      handleCloseDots={handleCloseDots}
                     />
                   </MenuItem>
                   <MenuItem selected={usersLogInfo === 'Pyxis'}>
-                    <AiFillDelete
-                      onClick={() => handleDelete(usersLogInfo.id)}
-                      size={25}
-                      className='duration-300 hover:scale-110 hover:text-white cursor-pointer'
-                    />
+                    <div
+                      className='grid grid-cols-2'
+                      onClick={() => {
+                        handleDelete(usersLogInfo.id);
+                        handleCloseDots();
+                      }}
+                    >
+                      <AiFillDelete
+                        size={25}
+                        className='duration-300 hover:scale-110 hover:text-white cursor-pointer'
+                      />
+                      <p>Delete</p>
+                    </div>
                   </MenuItem>
                 </Menu>
               </div>
@@ -237,14 +246,19 @@ const Grader = ({ date, usersLog }) => {
                     />
                   </MenuItem>
                   <MenuItem selected={usersLogInfo === 'Pyxis'}>
-                    <AiFillDelete
+                    <div
+                      className='grid grid-cols-2'
                       onClick={() => {
                         handleDelete(usersLogInfo.id);
-                        handleCloseDots()
+                        handleCloseDots();
                       }}
-                      size={25}
-                      className='duration-300 hover:scale-110 hover:text-white cursor-pointer'
-                    />
+                    >
+                      <AiFillDelete
+                        size={25}
+                        className='duration-300 hover:scale-110 hover:text-white cursor-pointer'
+                      />
+                      <p>Delete</p>
+                    </div>
                   </MenuItem>
                 </Menu>
               </div>

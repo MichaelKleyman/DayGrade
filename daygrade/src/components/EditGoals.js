@@ -21,10 +21,14 @@ const EditGoals = ({ handleClose, open, userGoals }) => {
   console.log('>>>', user);
 
   const updateGoals = async () => {
-    const docRef = doc(db, 'Users', user.uid);
-    await updateDoc(docRef, {
-      goals: curGoals,
-    });
+    if (curGoals.length !== 0) {
+      const docRef = doc(db, 'Users', user.uid);
+      await updateDoc(docRef, {
+        goals: curGoals,
+      });
+    } else {
+      return;
+    }
   };
 
   function toggleGoal(goalNum) {
@@ -72,7 +76,7 @@ const EditGoals = ({ handleClose, open, userGoals }) => {
                   e.preventDefault();
                   toggleGoal(`goal${i + 1}`);
                 }}
-                className={`p-3 border-2 ${
+                className={`p-3 border-2 m-2 ${
                   goalObj.toggled === true
                     ? 'border-blue-600 font-bold text-blue-600'
                     : 'border-gray-300'
@@ -105,69 +109,3 @@ const EditGoals = ({ handleClose, open, userGoals }) => {
 
 export default EditGoals;
 
-// eslint-disable-next-line no-lone-blocks
-{
-  /* <div>
-  <p className='text-center pb-4 text-gray-400'>
-    Select any that resonate most with you.
-  </p>
-  <div className='grid grid-cols-1 gap-4'>
-    <div
-      onClick={(e) => {
-        e.preventDefault();
-      }}
-      className={`p-3 border-2 ${'border-gray-300'} rounded-md flex items-center justify-center duration-300 ${'hover:border-blue-300 font-normal'}`}
-    >
-      <button>Commit fully to a routine</button>
-    </div>
-    <div
-      onClick={(e) => {
-        e.preventDefault();
-      }}
-      className={`p-3 border-2 ${'border-gray-300'} rounded-md flex items-center justify-center duration-300 ${'hover:border-blue-300 font-normal'}`}
-    >
-      <button>Develop consistency</button>
-    </div>
-    <div
-      onClick={(e) => {
-        e.preventDefault();
-      }}
-      className={`p-3 border-2 ${'border-gray-300'} rounded-md flex items-center justify-center duration-300 ${'hover:border-blue-300 font-normal'}`}
-    >
-      <button>Get more disciplined</button>
-    </div>
-    <div
-      onClick={(e) => {
-        e.preventDefault();
-      }}
-      className={`p-3 border-2 ${'border-gray-300'} rounded-md flex items-center justify-center duration-300 ${'hover:border-blue-300 font-normal'}`}
-    >
-      <button>Maintain discipline</button>
-    </div>
-    <div
-      onClick={(e) => {
-        e.preventDefault();
-      }}
-      className={`p-3 border-2 ${'border-gray-300'} rounded-md flex items-center justify-center duration-300 ${'hover:border-blue-300 font-normal'}`}
-    >
-      <button>Create a new healthy habit</button>
-    </div>
-    <div
-      onClick={(e) => {
-        e.preventDefault();
-      }}
-      className={`p-3 border-2 ${'border-gray-300'} rounded-md flex items-center justify-center duration-300 ${'hover:border-blue-300 font-normal'}`}
-    >
-      <button>Achieve a personal goal</button>
-    </div>
-    <div
-      onClick={(e) => {
-        e.preventDefault();
-      }}
-      className={`p-3 border-2 ${'border-gray-300'} rounded-md flex items-center justify-center duration-300 ${'hover:border-blue-300 font-normal'}`}
-    >
-      <button>Force self accountability</button>
-    </div>
-  </div>
-</div>; */
-}

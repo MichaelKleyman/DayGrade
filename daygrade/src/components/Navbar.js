@@ -33,7 +33,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className='bg-white shadow-xl'>
+    <div className='bg-white shadow-xl w-screen'>
       <div className='text-black flex justify-between items-center h-20 max-w-[1240px] mx-auto px-4 w-full'>
         <Link
           to='/'
