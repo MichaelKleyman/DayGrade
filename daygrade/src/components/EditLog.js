@@ -18,7 +18,7 @@ const EditLog = ({
   id,
   handleCloseDots,
 }) => {
-  const [editedLog, setEditedLog] = useState(usersLogInfo.log);
+  const [editedLog, setEditedLog] = useState(usersLogInfo);
 
   const handleChange = (e) => {
     setEditedLog(e.target.value);
@@ -62,7 +62,7 @@ const EditLog = ({
             placeholder='What have you done...'
             rows='5'
             cols='47'
-            value={editedLog}
+            value={editedLog.log}
             onChange={handleChange}
             variant='outline'
             style={{ border: '1px solid blue', padding: '10px' }}

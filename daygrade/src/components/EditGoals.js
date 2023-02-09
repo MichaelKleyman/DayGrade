@@ -18,7 +18,6 @@ const Transition = forwardRef(function Transition(props, ref) {
 const EditGoals = ({ handleClose, open, userGoals }) => {
   const [user, loading] = useAuthState(auth);
   const [curGoals, setCurGoals] = useState([]);
-  console.log('>>>', user);
 
   const updateGoals = async () => {
     if (curGoals.length !== 0) {
@@ -108,4 +107,3 @@ const EditGoals = ({ handleClose, open, userGoals }) => {
 };
 
 export default EditGoals;
-
