@@ -167,7 +167,7 @@ const Grader = ({ date, usersLog }) => {
                     },
                   }}
                 >
-                  <MenuItem selected={usersLogInfo === 'Pyxis'}>
+                  <MenuItem>
                     <EditLog
                       usersLogInfo={usersLogInfo}
                       open={open}
@@ -178,7 +178,7 @@ const Grader = ({ date, usersLog }) => {
                       handleCloseDots={handleCloseDots}
                     />
                   </MenuItem>
-                  <MenuItem selected={usersLogInfo === 'Pyxis'}>
+                  <MenuItem>
                     <div
                       className='grid grid-cols-2'
                       onClick={() => {
@@ -234,7 +234,7 @@ const Grader = ({ date, usersLog }) => {
                     },
                   }}
                 >
-                  <MenuItem selected={usersLogInfo === 'Pyxis'}>
+                  <MenuItem>
                     <EditLog
                       usersLogInfo={usersLogInfo}
                       open={open}
@@ -245,7 +245,7 @@ const Grader = ({ date, usersLog }) => {
                       handleCloseDots={handleCloseDots}
                     />
                   </MenuItem>
-                  <MenuItem selected={usersLogInfo === 'Pyxis'}>
+                  <MenuItem>
                     <div
                       className='grid grid-cols-2'
                       onClick={() => {
