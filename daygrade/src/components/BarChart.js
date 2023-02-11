@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Bar } from 'react-chartjs-2';
 import { gradeData } from './data';
 import { Chart as ChartJS } from 'chart.js/auto';
+import { useSelector } from 'react-redux';
 
 const BarChart = () => {
   const [chartData, setData] = useState({

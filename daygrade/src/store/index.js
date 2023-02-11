@@ -3,12 +3,14 @@ import { configureStore } from '@reduxjs/toolkit';
 import loggedInUserReducer from './user';
 import userGoals from './goals';
 import logReducer from './logger';
+import scoreReducer from './dailyScore';
 
 const store = configureStore({
   reducer: {
     loggedInUser: loggedInUserReducer,
     userGoals,
     logReducer,
+    scoreReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

@@ -1,9 +1,66 @@
-import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
+import {
+  addDoc,
+  collection,
+  serverTimestamp,
+  query,
+  where,
+  onSnapshot,
+  deleteDoc,
+  doc,
+} from 'firebase/firestore';
 import { db } from '../firebase';
 
+//ACTIONS
+const GET_SCORE_INFO = 'GET_SCORE_INFO';
+const GET_ALL_SCORES = 'GET_ALL_SCORES';
+
+//ACTION CREATOR
+const _getScoreInfo = (info) => {
+  return {
+    type: GET_SCORE_INFO,
+    info,
+  };
+};
+
+const _getAllScores = (scores) => {
+  return {
+    type: GET_ALL_SCORES,
+    scores,
+  };
+};
+
 //THUNK
+export const fetchScoreInfo = (userId, date) => (dispatch) => {
+  const ref = query(
+    collection(db, 'FinalScore'),
+    where('userId', '==', userId),
+    where('date', '==', date)
+  );
+  const subscriber = onSnapshot(ref, async (querySnapshot) => {
+    const log = querySnapshot.docs.map((curScore) => ({
+      ...curScore.data(),
+      id: curScore.id,
+    }));
+    dispatch(_getScoreInfo(log));
+  });
+  return subscriber;
+};
+
+export const fetchAllScores = (scoreId) => (dispatch) => {
+  const ref = query(collection(db, 'FinalScore'), where('id', '==', scoreId));
+  const subscriber = onSnapshot(ref, async (querySnapshot) => {
+    const log = querySnapshot.docs.map((curScore) => ({
+      ...curScore.data(),
+      id: curScore.id,
+    }));
+    dispatch(_getScoreInfo(log));
+  });
+  return subscriber;
+};
+
 export const submitCheckIn =
-  (userId, score, description, emoji, reasons, finalNotes) => async () => {
+  (userId, score, description, emoji, reasons, finalNotes, date) =>
+  async () => {
     await addDoc(collection(db, 'FinalScore'), {
       userId,
       score,
@@ -12,8 +69,26 @@ export const submitCheckIn =
       reasons,
       finalNotes,
       createdAt: serverTimestamp(),
+      date,
     });
   };
 
-//REDUCER
+export const deleteCheckIn = (id) => () => {
+  deleteDoc(doc(db, 'FinalScore', id));
+};
 
+//REDUCER
+const initialState = {};
+
+export default function scoreReducer(state = initialState, action) {
+  switch (action.type) {
+    case GET_SCORE_INFO: {
+      return action.info;
+    }
+    case GET_ALL_SCORES: {
+      return action.scores
+    }
+    default:
+      return state;
+  }
+}

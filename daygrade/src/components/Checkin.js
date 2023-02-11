@@ -58,7 +58,6 @@ const Checkin = () => {
             <Button variant='contained' endIcon={<SendIcon />}>
               Check In
             </Button>
-            <button onClick={() => navigate('/temp')}>go</button>
           </div>
         </div>
         <div>

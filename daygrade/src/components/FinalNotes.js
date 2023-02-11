@@ -18,7 +18,7 @@ const FinalNotes = ({ reasons, finalScore, notes, handleNotes }) => {
       </div>
       <div>
         <h1 className='text-lg font-bold py-2'>Final Grade</h1>
-        <div className='p-2 rounded-xl shadow-lg shadow-gray-400 text-center w-[30%] grid grid-cols-3 gap-2 place-items-center'>
+        <div className='p-2 rounded-xl shadow-lg shadow-gray-400 text-center w-[40%] grid grid-cols-3 gap-8 place-items-center'>
           <div className='cursor-pointer'>{finalScore.emoji}</div>
           <div className='cursor-pointer'>{finalScore.id}</div>
           <div className='font-extrabold cursor-pointer'>

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -17,10 +18,13 @@ import { FcCalendar, FcAbout } from 'react-icons/fc';
 import Grader from './Grader';
 import { fetchLog } from '../store';
 import ScoreProcess from './ScoreProcess';
+import { fetchScoreInfo } from '../store/dailyScore';
+import PreviousGrade from './PreviousGrade';
 
 export default function Temp() {
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState(dayjs());
+  let todaysDate = new Date();
 
   const navigate = useNavigate();
   const [user, loading] = useAuthState(auth);
@@ -28,6 +32,8 @@ export default function Temp() {
   const tileSize = '70px';
 
   let usersLog = useSelector((state) => state.logReducer);
+  let usersScoreArr = useSelector((state) => state.scoreReducer);
+  let usersScoreObj = usersScoreArr[0];
 
   const changeDate = (curDate) => {
     return dispatch(fetchLog(user?.uid, curDate));
@@ -45,8 +51,12 @@ export default function Temp() {
     const unsubscribeLogger = dispatch(
       fetchLog(user.uid, date.format('dddd, MMMM D YYYY'))
     );
+    const unsubscribeScore = dispatch(
+      fetchScoreInfo(user.uid, date.format('dddd, MMMM D YYYY'))
+    );
     return () => {
       unsubscribeLogger();
+      unsubscribeScore();
     };
   }, [date]);
 
@@ -92,12 +102,16 @@ export default function Temp() {
 
   return (
     <div className='w-full'>
-      <div className='py-2 px-4 text-blue-500 tracking-wide'>
+      <div className='py-2 px-4 text-blue-500 tracking-wide flex justify-between'>
         <h1 className='flex items-center'>
           <FcAbout className='p-1' size={38} />
           Log throughout your day, and record the time. At the end of the day,
           click the check in button to submit your final grade for the day.
         </h1>
+        <PreviousGrade
+          usersScoreArr={usersScoreArr}
+          usersScoreObj={usersScoreObj}
+        />
       </div>
       <div className='grid md:grid-cols-2 gap-8 mx-auto py-2 px-4 m-6'>
         <div className='bg-white rounded-xl shadow-lg shadow-gray-400 h-full md:h-[70%]'>
@@ -130,6 +144,7 @@ export default function Temp() {
               Cancel
             </Button>
             <Button
+              disabled={usersScoreArr.length !== 0}
               variant='contained'
               onClick={handleClickOpen}
               endIcon={<SendIcon />}
@@ -137,7 +152,11 @@ export default function Temp() {
               Check In
             </Button>
           </div>
-          <ScoreProcess open={open} handleClose={handleClose} />
+          <ScoreProcess
+            open={open}
+            handleClose={handleClose}
+            date={date.format('dddd, MMMM D YYYY')}
+          />
         </div>
         <div className='h-screen'>
           <Grader date={date} usersLog={usersLog} />
