@@ -43,7 +43,7 @@ export const fetchLog = (userId, date) => (dispatch) => {
   return subscriber;
 };
 
-export const createLog = (time, date, curLog, userId) => async (dispatch) => {
+export const createLog = (time, date, curLog, userId) => async () => {
   await addDoc(collection(db, 'Logger'), {
     Time: time,
     Date: date,

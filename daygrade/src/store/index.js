@@ -20,3 +20,4 @@ export default store;
 export * from './user';
 export * from './goals';
 export * from './logger';
+export * from './dailyScore';

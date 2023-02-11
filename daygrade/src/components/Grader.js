@@ -16,11 +16,6 @@ import { auth } from '../firebase';
 import { AiFillDelete } from 'react-icons/ai';
 import EditLog from './EditLog';
 
-import IconButton from '@mui/material/IconButton';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-
 const Grader = ({ date, usersLog }) => {
   const [open, setOpen] = useState(false);
   const [time, setTime] = useState(dayjs(new Date()));
@@ -71,17 +66,6 @@ const Grader = ({ date, usersLog }) => {
     } else {
       setError('Please complete all fields*');
     }
-  };
-
-  const ITEM_HEIGHT = 48;
-
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const openDots = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleCloseDots = () => {
-    setAnchorEl(null);
   };
 
   const halfwayPoint = Math.ceil(usersLog.length / 2);
@@ -140,60 +124,27 @@ const Grader = ({ date, usersLog }) => {
           >
             <h1 className='font-bold mx-2 my-3 py-4 flex justify-between'>
               <p>{usersLogInfo.log}</p>
-              {/* <div className='grid grid-cols-2 gap-2'> */}
-              <div>
-                <IconButton
-                  aria-label='more'
-                  id='long-button'
-                  aria-controls={openDots ? 'long-menu' : undefined}
-                  aria-expanded={openDots ? 'true' : undefined}
-                  aria-haspopup='true'
-                  onClick={handleClick}
-                >
-                  <MoreVertIcon />
-                </IconButton>
-                <Menu
-                  id='long-menu'
-                  MenuListProps={{
-                    'aria-labelledby': 'long-button',
-                  }}
-                  anchorEl={anchorEl}
-                  open={openDots}
-                  onClose={handleCloseDots}
-                  PaperProps={{
-                    style: {
-                      maxHeight: ITEM_HEIGHT * 4.5,
-                      width: '20ch',
-                    },
+              <div className='p-2 m-1'>
+                <EditLog
+                  usersLogInfo={usersLogInfo}
+                  open={open}
+                  handleClickOpen={handleClickOpen}
+                  handleClose={handleClose}
+                  handleIdCheck={handleIdCheck}
+                  id={id}
+                />
+
+                <div
+                  className='grid grid-cols-2'
+                  onClick={() => {
+                    handleDelete(usersLogInfo.id);
                   }}
                 >
-                  <MenuItem selected={usersLogInfo === 'Pyxis'}>
-                    <EditLog
-                      usersLogInfo={usersLogInfo}
-                      open={open}
-                      handleClickOpen={handleClickOpen}
-                      handleClose={handleClose}
-                      handleIdCheck={handleIdCheck}
-                      id={id}
-                      handleCloseDots={handleCloseDots}
-                    />
-                  </MenuItem>
-                  <MenuItem selected={usersLogInfo === 'Pyxis'}>
-                    <div
-                      className='grid grid-cols-2'
-                      onClick={() => {
-                        handleDelete(usersLogInfo.id);
-                        handleCloseDots();
-                      }}
-                    >
-                      <AiFillDelete
-                        size={25}
-                        className='duration-300 hover:scale-110 hover:text-white cursor-pointer'
-                      />
-                      <p>Delete</p>
-                    </div>
-                  </MenuItem>
-                </Menu>
+                  <AiFillDelete
+                    size={25}
+                    className='duration-300 hover:scale-110 hover:text-white cursor-pointer'
+                  />
+                </div>
               </div>
             </h1>
             <h1 className='mx-4 py-2 text-sm text-gray-600'>
@@ -208,59 +159,27 @@ const Grader = ({ date, usersLog }) => {
           >
             <h1 className='font-bold mx-4 my-3 py-4 flex justify-between '>
               <p>{usersLogInfo.log}</p>
-              <div>
-                <IconButton
-                  aria-label='more'
-                  id='long-button'
-                  aria-controls={openDots ? 'long-menu' : undefined}
-                  aria-expanded={openDots ? 'true' : undefined}
-                  aria-haspopup='true'
-                  onClick={handleClick}
-                >
-                  <MoreVertIcon />
-                </IconButton>
-                <Menu
-                  id='long-menu'
-                  MenuListProps={{
-                    'aria-labelledby': 'long-button',
-                  }}
-                  anchorEl={anchorEl}
-                  open={openDots}
-                  onClose={handleCloseDots}
-                  PaperProps={{
-                    style: {
-                      maxHeight: ITEM_HEIGHT * 4.5,
-                      width: '20ch',
-                    },
+              <div className='p-2 m-1'>
+                <EditLog
+                  usersLogInfo={usersLogInfo}
+                  open={open}
+                  handleClickOpen={handleClickOpen}
+                  handleClose={handleClose}
+                  handleIdCheck={handleIdCheck}
+                  id={id}
+                />
+
+                <div
+                  className='grid grid-cols-2'
+                  onClick={() => {
+                    handleDelete(usersLogInfo.id);
                   }}
                 >
-                  <MenuItem selected={usersLogInfo === 'Pyxis'}>
-                    <EditLog
-                      usersLogInfo={usersLogInfo}
-                      open={open}
-                      handleClickOpen={handleClickOpen}
-                      handleClose={handleClose}
-                      handleIdCheck={handleIdCheck}
-                      id={id}
-                      handleCloseDots={handleCloseDots}
-                    />
-                  </MenuItem>
-                  <MenuItem selected={usersLogInfo === 'Pyxis'}>
-                    <div
-                      className='grid grid-cols-2'
-                      onClick={() => {
-                        handleDelete(usersLogInfo.id);
-                        handleCloseDots();
-                      }}
-                    >
-                      <AiFillDelete
-                        size={25}
-                        className='duration-300 hover:scale-110 hover:text-white cursor-pointer'
-                      />
-                      <p>Delete</p>
-                    </div>
-                  </MenuItem>
-                </Menu>
+                  <AiFillDelete
+                    size={25}
+                    className='duration-300 hover:scale-110 hover:text-white cursor-pointer'
+                  />
+                </div>
               </div>
             </h1>
             <h1 className='mx-4 py-2 text-sm text-gray-600'>
@@ -280,77 +199,70 @@ const Grader = ({ date, usersLog }) => {
 
 export default Grader;
 
-{
-  /* {arrayFirstHalf.map((usersLogInfo, i) => (
-            <div
-              key={i}
-              className='bg-gradient-to-r from-cyan-200 to-blue-400 shadow-lg shadow-gray-400 rounded-xl'
-            >
-              <h1 className='font-bold mx-4 my-3 py-4 flex justify-between'>
-                {usersLogInfo.log}
-                <div className='grid grid-cols-2 gap-2'>
-                  <MdModeEditOutline
-                    onClick={handleClickOpen}
-                    size={25}
-                    className='duration-300 hover:scale-110 hover:text-white cursor-pointer'
-                  />
-                  <AiFillDelete
-                    onClick={() => handleDelete(usersLogInfo.id)}
-                    size={25}
-                    className='duration-300 hover:scale-110 hover:text-white cursor-pointer'
-                  />
-                </div>
-              </h1>
-              <h1 className='mx-4 py-2 text-sm text-gray-600'>
-                {usersLogInfo.Time}
-              </h1>
-              {open && (
-                <EditLog
-                  open={open}
-                  handleClose={handleClose}
-                  currentLog={usersLogInfo.log}
-                  logId={usersLogInfo.id}
-                />
-              )}
-            </div>
-          ))}
-          {arraySecondHalf.map((usersLogInfo, i) => (
-            <div
-              key={i}
-              className='bg-gradient-to-r from-cyan-200 to-blue-400 shadow-lg shadow-gray-400 rounded-xl'
-            >
-              <h1 className='font-bold mx-4 my-3 py-4 flex justify-between'>
-                {usersLogInfo.log}
-                <div className='grid grid-cols-2 gap-2'>
-                  <MdModeEditOutline
-                    onClick={handleClickOpen}
-                    size={25}
-                    className='duration-300 hover:scale-110 hover:text-white cursor-pointer'
-                  />
-                  <AiFillDelete
-                    onClick={() => handleDelete(usersLogInfo.id)}
-                    size={25}
-                    className='duration-300 hover:scale-110 hover:text-white cursor-pointer'
-                  />
-                </div>
-              </h1>
-              <h1 className='mx-4 py-2 text-sm text-gray-600'>
-                {usersLogInfo.Time}
-              </h1>
-              {open && (
-                <EditLog
-                  open={open}
-                  handleClose={handleClose}
-                  currentLog={usersLogInfo.log}
-                  logId={usersLogInfo.id}
-                />
-              )}
-            </div>
-          ))}
-        </div>
-        {!usersLog.length && (
-          <div className='flex items-center justify-center uppercase tracking-widest shadow-lg shadow-gray-400 rounded-xl p-5'>
-            <h1>No Logs</h1>
-          </div>
-        )} */
-}
+// {usersLog.map((usersLogInfo, i) => (
+//   <div
+//     key={usersLogInfo.id}
+//     className='bg-gradient-to-r from-cyan-200 to-blue-400 shadow-lg shadow-gray-400 rounded-xl'
+//   >
+//     <h1 className='font-bold mx-4 my-3 py-4 flex justify-between '>
+//       <p>{usersLogInfo.log}</p>
+//       <div>
+//         <IconButton
+//           aria-label='more'
+//           id='long-button'
+//           aria-controls={openDots ? 'long-menu' : undefined}
+//           aria-expanded={openDots ? 'true' : undefined}
+//           aria-haspopup='true'
+//           onClick={handleClick}
+//         >
+//           <MoreVertIcon />
+//         </IconButton>
+//         <Menu
+//           id='long-menu'
+//           MenuListProps={{
+//             'aria-labelledby': 'long-button',
+//           }}
+//           anchorEl={anchorEl}
+//           open={openDots}
+//           onClose={handleCloseDots}
+//           PaperProps={{
+//             style: {
+//               maxHeight: ITEM_HEIGHT * 4.5,
+//               width: '20ch',
+//             },
+//           }}
+//         >
+//           <MenuItem>
+//             <EditLog
+//               usersLogInfo={usersLogInfo}
+//               open={open}
+//               handleClickOpen={handleClickOpen}
+//               handleClose={handleClose}
+//               handleIdCheck={handleIdCheck}
+//               id={id}
+//               handleCloseDots={handleCloseDots}
+//             />
+//           </MenuItem>
+//           <MenuItem>
+//             <div
+//               className='grid grid-cols-2'
+//               onClick={() => {
+//                 handleDelete(usersLogInfo.id);
+//                 handleCloseDots();
+//               }}
+//             >
+//               <AiFillDelete
+//                 size={25}
+//                 className='duration-300 hover:scale-110 hover:text-white cursor-pointer'
+//               />
+//               <p>Delete</p>
+//             </div>
+//           </MenuItem>
+//         </Menu>
+//       </div>
+//     </h1>
+//     <h1 className='mx-4 py-2 text-sm text-gray-600'>
+//       {usersLogInfo.Time}
+//     </h1>
+//   </div>
+// ))}

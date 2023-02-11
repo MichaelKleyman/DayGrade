@@ -1,6 +1,6 @@
 import React from 'react';
 
-const FinalNotes = ({ reasons, finalScore }) => {
+const FinalNotes = ({ reasons, finalScore, notes, handleNotes }) => {
   return (
     <div className='m-5 px-[1rem]'>
       <div>
@@ -38,6 +38,8 @@ const FinalNotes = ({ reasons, finalScore }) => {
             padding: '10px',
             borderRadius: '10px',
           }}
+          value={notes}
+          onChange={handleNotes}
         />
       </div>
     </div>

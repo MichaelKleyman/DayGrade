@@ -8,10 +8,11 @@ import { Button } from '@mui/material';
 import Score from './Score';
 import FinalNotes from './FinalNotes';
 import ScoreReason from './ScoreReason';
-import { addDoc, collection } from 'firebase/firestore';
-import { db } from '../firebase';
+import { submitCheckIn } from '../store';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../firebase';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 function PaperComponent(props) {
   return (
@@ -44,11 +45,14 @@ const ScoreProcess = ({ open, handleClose }) => {
     { reason: 'Traveling', id: 7, emoji: '🛩', clicked: false },
     { reason: 'Health', id: 8, emoji: '🩺', clicked: false },
     { reason: 'Sleep', id: 9, emoji: '💤', clicked: false },
-    { reason: 'Hobby', id: 10, emoji: '🗣', clicked: false },
+    { reason: 'Progress', id: 10, emoji: '📈', clicked: false },
     { reason: 'Learning', id: 11, emoji: '📓', clicked: false },
     { reason: 'Gym', id: 12, emoji: '🏋🏽', clicked: false },
   ]);
+  const [notes, setNotes] = useState('');
   const [user, loading] = useAuthState(auth);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleScoreChange = (description, emoji, score) => {
     setFinalScore({
@@ -59,16 +63,23 @@ const ScoreProcess = ({ open, handleClose }) => {
     });
   };
 
+  const handleNotes = (e) => {
+    setNotes(e.target.value);
+  };
+
   const submitFinalScore = async () => {
     try {
-      await addDoc(collection(db, 'finalScore'), {
-        userId: user.uid,
-        score: finalScore.score,
-        description: finalScore.description,
-        emoji: finalScore.emoji,
-        reasons,
-        finalNotes: '',
-      });
+      dispatch(
+        submitCheckIn(
+          user.uid,
+          finalScore.score,
+          finalScore.id,
+          finalScore.emoji,
+          reasons,
+          notes,
+          // date,
+        )
+      );
     } catch (e) {
       console.error('Error when submitting score: ', e);
     }
@@ -111,6 +122,8 @@ const ScoreProcess = ({ open, handleClose }) => {
         <FinalNotes
           reasons={reasons.filter((obj) => obj.clicked === true)}
           finalScore={finalScore}
+          notes={notes}
+          handleNotes={handleNotes}
         />
       );
     }
@@ -182,6 +195,8 @@ const ScoreProcess = ({ open, handleClose }) => {
             <Button
               onClick={() => {
                 submitFinalScore();
+                handleClose();
+                navigate('/');
               }}
             >
               Submit
