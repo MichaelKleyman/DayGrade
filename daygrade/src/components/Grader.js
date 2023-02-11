@@ -132,7 +132,7 @@ const Grader = ({ date, usersLog }) => {
           </div>
         </div>
       </div>
-      <div className='grid grid-cols-2 lg:grid-cols-2 sm:grid-cols-1 gap-4'>
+      {/* <div className='grid grid-cols-2 lg:grid-cols-2 sm:grid-cols-1 gap-4'>
         {arrayFirstHalf.map((usersLogInfo, i) => (
           <div
             key={usersLogInfo.id}
@@ -140,7 +140,6 @@ const Grader = ({ date, usersLog }) => {
           >
             <h1 className='font-bold mx-2 my-3 py-4 flex justify-between'>
               <p>{usersLogInfo.log}</p>
-              {/* <div className='grid grid-cols-2 gap-2'> */}
               <div>
                 <IconButton
                   aria-label='more'
@@ -202,6 +201,75 @@ const Grader = ({ date, usersLog }) => {
           </div>
         ))}
         {arraySecondHalf.map((usersLogInfo, i) => (
+          <div
+            key={usersLogInfo.id}
+            className='bg-gradient-to-r from-cyan-200 to-blue-400 shadow-lg shadow-gray-400 rounded-xl'
+          >
+            <h1 className='font-bold mx-4 my-3 py-4 flex justify-between '>
+              <p>{usersLogInfo.log}</p>
+              <div>
+                <IconButton
+                  aria-label='more'
+                  id='long-button'
+                  aria-controls={openDots ? 'long-menu' : undefined}
+                  aria-expanded={openDots ? 'true' : undefined}
+                  aria-haspopup='true'
+                  onClick={handleClick}
+                >
+                  <MoreVertIcon />
+                </IconButton>
+                <Menu
+                  id='long-menu'
+                  MenuListProps={{
+                    'aria-labelledby': 'long-button',
+                  }}
+                  anchorEl={anchorEl}
+                  open={openDots}
+                  onClose={handleCloseDots}
+                  PaperProps={{
+                    style: {
+                      maxHeight: ITEM_HEIGHT * 4.5,
+                      width: '20ch',
+                    },
+                  }}
+                >
+                  <MenuItem>
+                    <EditLog
+                      usersLogInfo={usersLogInfo}
+                      open={open}
+                      handleClickOpen={handleClickOpen}
+                      handleClose={handleClose}
+                      handleIdCheck={handleIdCheck}
+                      id={id}
+                      handleCloseDots={handleCloseDots}
+                    />
+                  </MenuItem>
+                  <MenuItem>
+                    <div
+                      className='grid grid-cols-2'
+                      onClick={() => {
+                        handleDelete(usersLogInfo.id);
+                        handleCloseDots();
+                      }}
+                    >
+                      <AiFillDelete
+                        size={25}
+                        className='duration-300 hover:scale-110 hover:text-white cursor-pointer'
+                      />
+                      <p>Delete</p>
+                    </div>
+                  </MenuItem>
+                </Menu>
+              </div>
+            </h1>
+            <h1 className='mx-4 py-2 text-sm text-gray-600'>
+              {usersLogInfo.Time}
+            </h1>
+          </div>
+        ))}
+      </div> */}
+      <div>
+        {usersLog.map((usersLogInfo, i) => (
           <div
             key={usersLogInfo.id}
             className='bg-gradient-to-r from-cyan-200 to-blue-400 shadow-lg shadow-gray-400 rounded-xl'
