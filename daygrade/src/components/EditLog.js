@@ -16,7 +16,6 @@ const EditLog = ({
   handleClose,
   handleIdCheck,
   id,
-  handleCloseDots,
 }) => {
   const [editedLog, setEditedLog] = useState(usersLogInfo.log);
 
@@ -31,7 +30,6 @@ const EditLog = ({
       log: editedLog,
     });
     handleClose();
-    handleCloseDots();
   };
 
   return (
@@ -48,7 +46,6 @@ const EditLog = ({
           size={25}
           className='duration-300 hover:scale-110 hover:text-white cursor-pointer'
         />
-        <h1 className='pl-3'>Edit</h1>
       </div>
       <Dialog open={open && id === usersLogInfo.id} onClose={handleClose}>
         <DialogTitle>Need to change up your log?</DialogTitle>
@@ -72,7 +69,6 @@ const EditLog = ({
           <Button
             onClick={() => {
               handleClose();
-              handleCloseDots();
             }}
           >
             Cancel
@@ -80,7 +76,6 @@ const EditLog = ({
           <Button
             onClick={(e) => {
               submitEdit(e, usersLogInfo.id);
-              handleCloseDots();
             }}
           >
             Submit
