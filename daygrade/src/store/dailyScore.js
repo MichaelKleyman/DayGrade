@@ -46,8 +46,11 @@ export const fetchScoreInfo = (userId, date) => (dispatch) => {
   return subscriber;
 };
 
-export const fetchAllScores = (scoreId) => (dispatch) => {
-  const ref = query(collection(db, 'FinalScore'), where('id', '==', scoreId));
+export const fetchAllScores = (userId) => (dispatch) => {
+  const ref = query(
+    collection(db, 'FinalScore'),
+    where('userId', '==', userId)
+  );
   const subscriber = onSnapshot(ref, async (querySnapshot) => {
     const log = querySnapshot.docs.map((curScore) => ({
       ...curScore.data(),
@@ -86,7 +89,7 @@ export default function scoreReducer(state = initialState, action) {
       return action.info;
     }
     case GET_ALL_SCORES: {
-      return action.scores
+      return action.scores;
     }
     default:
       return state;

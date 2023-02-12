@@ -16,6 +16,7 @@ import {
 import { AiOutlineLine, AiOutlineSmallDash } from 'react-icons/ai';
 import BarChart from './BarChart';
 import EditGoals from './EditGoals';
+import TempChart from './TempChart';
 
 const UserDashboard = () => {
   const [user, loading] = useAuthState(auth);
@@ -163,6 +164,7 @@ const UserDashboard = () => {
             </h1>
             <div className='p-6 sm:w-[90%] md:w-[80%]'>
               <BarChart />
+              {/* {<TempChart />} */}
             </div>
           </div>
         </div>
