@@ -13,10 +13,11 @@ import {
   FcComboChart,
   FcAdvance,
 } from 'react-icons/fc';
-import { AiOutlineLine, AiOutlineSmallDash } from 'react-icons/ai';
+import { AiOutlineSmallDash } from 'react-icons/ai';
 import BarChart from './BarChart';
 import EditGoals from './EditGoals';
 import TempChart from './TempChart';
+import LineChart from './LineChart';
 
 const UserDashboard = () => {
   const [user, loading] = useAuthState(auth);
@@ -163,8 +164,9 @@ const UserDashboard = () => {
               Grading Progress
             </h1>
             <div className='p-6 sm:w-[90%] md:w-[80%]'>
-              <BarChart />
+              {/* <BarChart /> */}
               {/* {<TempChart />} */}
+              <LineChart />
             </div>
           </div>
         </div>

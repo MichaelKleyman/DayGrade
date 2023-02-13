@@ -52,11 +52,11 @@ export const fetchAllScores = (userId) => (dispatch) => {
     where('userId', '==', userId)
   );
   const subscriber = onSnapshot(ref, async (querySnapshot) => {
-    const log = querySnapshot.docs.map((curScore) => ({
+    const scores = querySnapshot.docs.map((curScore) => ({
       ...curScore.data(),
       id: curScore.id,
     }));
-    dispatch(_getScoreInfo(log));
+    dispatch(_getAllScores(scores));
   });
   return subscriber;
 };
@@ -81,7 +81,7 @@ export const deleteCheckIn = (id) => () => {
 };
 
 //REDUCER
-const initialState = {};
+const initialState = [];
 
 export default function scoreReducer(state = initialState, action) {
   switch (action.type) {
