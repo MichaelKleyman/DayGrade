@@ -7,6 +7,7 @@ import {
   onSnapshot,
   deleteDoc,
   doc,
+  orderBy,
 } from 'firebase/firestore';
 import { db } from '../firebase';
 
@@ -49,7 +50,8 @@ export const fetchScoreInfo = (userId, date) => (dispatch) => {
 export const fetchAllScores = (userId) => (dispatch) => {
   const ref = query(
     collection(db, 'FinalScore'),
-    where('userId', '==', userId)
+    where('userId', '==', userId),
+    orderBy('createdAt')
   );
   const subscriber = onSnapshot(ref, async (querySnapshot) => {
     const scores = querySnapshot.docs.map((curScore) => ({

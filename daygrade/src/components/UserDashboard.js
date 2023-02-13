@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { fetchUser } from '../store';
+import { fetchUser, fetchAllScores } from '../store';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../firebase';
 import { useDispatch, useSelector } from 'react-redux';
@@ -28,12 +28,15 @@ const UserDashboard = () => {
   const navigate = useNavigate();
 
   const userObject = useSelector((state) => state.loggedInUser);
+  const usersScores = useSelector((state) => state.scoreReducer);
 
   useEffect(() => {
     setDate(new Date().toString().split(' ').splice(1, 3).join(' '));
     const unsubscribeUser = dispatch(fetchUser(user?.uid));
+    const unsubscribeUserScores = dispatch(fetchAllScores(user?.uid));
     return () => {
       unsubscribeUser();
+      unsubscribeUserScores();
     };
   }, [date, user, dispatch]);
 
@@ -56,6 +59,10 @@ const UserDashboard = () => {
   const halfwayPoint = Math.ceil(newGoals.length / 2);
   let arrayFirstHalf = newGoals.slice(0, halfwayPoint);
   let arraySecondHalf = newGoals.slice(halfwayPoint, newGoals.length);
+
+  const scoreArr = usersScores || [];
+  const lastScore = scoreArr[scoreArr.length - 1] || '';
+  // console.log('>>>', lastScore.date);
 
   return (
     <div className='w-full'>
@@ -111,7 +118,7 @@ const UserDashboard = () => {
               <FcAdvance className='p-2 mx-2' size={38} />
             </div>
             <div className='w-screen ml-4'>
-              <p>2 days ago</p>
+              <p>{lastScore.date}</p>
             </div>
           </div>
         </div>
@@ -163,7 +170,7 @@ const UserDashboard = () => {
               <FcComboChart className='p-2' size={39} />
               Grading Progress
             </h1>
-            <div className='p-6 sm:w-[90%] md:w-[80%]'>
+            <div className='p-6 sm:w-[90%] md:w-[100%]'>
               {/* <BarChart /> */}
               {/* {<TempChart />} */}
               <LineChart />

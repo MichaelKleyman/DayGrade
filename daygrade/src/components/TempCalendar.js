@@ -24,7 +24,6 @@ import PreviousGrade from './PreviousGrade';
 export default function Temp() {
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState(dayjs());
-  let todaysDate = new Date();
 
   const navigate = useNavigate();
   const [user, loading] = useAuthState(auth);
