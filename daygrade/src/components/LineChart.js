@@ -10,7 +10,7 @@ import {
   PointElement,
 } from 'chart.js';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchAllScores } from '../store';
+import { fetchAllScores, fetchSpecificScores } from '../store';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../firebase';
 import Button from '@mui/material/Button';
@@ -21,6 +21,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Paper from '@mui/material/Paper';
 import Draggable from 'react-draggable';
+import dayjs from 'dayjs';
 
 ChartJS.register(CategoryScale, LinearScale, LineElement, PointElement);
 
@@ -37,7 +38,10 @@ function PaperComponent(props) {
 
 const LineChart = () => {
   const [open, setOpen] = useState(false);
+  const [showAll, setShowAll] = useState(true);
   const [scoreObj, setScoreObj] = useState({});
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
   const [data, setData] = useState({
     labels: [
       'Monday',
@@ -103,6 +107,7 @@ const LineChart = () => {
   const [user, loading] = useAuthState(auth);
   const dispatch = useDispatch();
   const usersScores = useSelector((state) => state.scoreReducer);
+  const specificScores = useSelector((state) => state.specificScoreReducer);
 
   useEffect(() => {
     const unsubscribeScores = dispatch(fetchAllScores(user.uid));
@@ -112,7 +117,9 @@ const LineChart = () => {
   }, []);
 
   useEffect(() => {
-    const usersScoreArr = usersScores || [];
+    // const usersScoreArr = usersScores || [];
+    // const usersScoreArr = specificScores || [];
+    const usersScoreArr = showAll ? usersScores || [] : specificScores || [];
     const fetchData = () => {
       let dataSet = [];
       let labels = [];
@@ -135,10 +142,56 @@ const LineChart = () => {
       });
     };
     fetchData();
-  }, [usersScores]);
+  }, [specificScores, usersScores, showAll]);
+
+  const filterData = () => {
+    const startDate = dayjs(document.getElementById('startDate').value).format(
+      'dddd, MMMM D YYYY'
+    );
+    const endDate = dayjs(document.getElementById('endDate').value).format(
+      'dddd, MMMM D YYYY'
+    );
+    setShowAll(false);
+    const unsubscribeSpecificScores = dispatch(
+      fetchSpecificScores(startDate, endDate, user.uid)
+    );
+    return () => {
+      unsubscribeSpecificScores();
+    };
+  };
+  const handleStart = (e) => {
+    setStartDate(e.target.value);
+  };
+
+  const handleEnd = (e) => {
+    setEndDate(e.target.value);
+  };
+
+  const handleShowAll = () => {
+    setShowAll(true);
+  };
 
   return (
     <div className='w-[100%]'>
+      <Button onClick={handleShowAll}>Show all</Button>
+      <div className='flex justify-end'>
+        <input
+          onChange={handleStart}
+          type='date'
+          id='startDate'
+          value={startDate}
+          className='border border-black p-3'
+        />
+
+        <input
+          onChange={handleEnd}
+          type='date'
+          id='endDate'
+          value={endDate}
+          className='border border-black p-3'
+        />
+        <Button onClick={filterData}>Search</Button>
+      </div>
       <Line
         data={data}
         options={options}
