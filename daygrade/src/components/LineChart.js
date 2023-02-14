@@ -209,14 +209,6 @@ const LineChart = () => {
           </div>
         </div>
         <DialogActions>
-          {/* <Button
-            onClick={() => {
-              deleteScore(usersScoreObj.id);
-              handleClose();
-            }}
-          >
-            Grade again
-          </Button> */}
           <Button onClick={handleClose}>Close</Button>
         </DialogActions>
       </Dialog>

@@ -18,8 +18,11 @@ import BarChart from './BarChart';
 import EditGoals from './EditGoals';
 import TempChart from './TempChart';
 import LineChart from './LineChart';
+import dayjs from 'dayjs';
+import weekOfYear from 'dayjs/plugin/weekOfYear';
 
 const UserDashboard = () => {
+  dayjs.extend(weekOfYear);
   const [user, loading] = useAuthState(auth);
   const [date, setDate] = useState('');
   const [open, setOpen] = useState(false);
@@ -60,9 +63,16 @@ const UserDashboard = () => {
   let arrayFirstHalf = newGoals.slice(0, halfwayPoint);
   let arraySecondHalf = newGoals.slice(halfwayPoint, newGoals.length);
 
-  const scoreArr = usersScores || [];
-  const lastScore = scoreArr[scoreArr.length - 1] || '';
-  // console.log('>>>', lastScore.date);
+  const lastScore = usersScores[usersScores.length - 1] || '';
+  const curDate = new Date();
+  const lastCheckinDate = new Date(lastScore.date);
+  const Difference_In_Time = curDate.getTime() - lastCheckinDate.getTime();
+  const Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+
+  const getWeek = (num) => {
+    let newDate = dayjs().week(num);
+    console.log(newDate.$d);
+  };
 
   return (
     <div className='w-full'>
@@ -118,7 +128,17 @@ const UserDashboard = () => {
               <FcAdvance className='p-2 mx-2' size={38} />
             </div>
             <div className='w-screen ml-4'>
-              <p>{lastScore.date}</p>
+              <p>
+                {Math.floor(Difference_In_Days) >= 1 &&
+                  Math.floor(Difference_In_Days)}
+                {Math.floor(Difference_In_Days) > 1
+                  ? ' days ago'
+                  : `${
+                      Math.floor(Difference_In_Days) === 0
+                        ? ' Today'
+                        : ' day ago'
+                    }`}
+              </p>
             </div>
           </div>
         </div>
@@ -166,10 +186,20 @@ const UserDashboard = () => {
       <div className='grid grid-cols-1 lg:grid-cols-3 gap-8 p-6 items-center'>
         <div className='bg-white shadow-xl rounded-lg col-span-2'>
           <div>
-            <h1 className='font-bold md:text-xl flex items-center p-3'>
-              <FcComboChart className='p-2' size={39} />
-              Grading Progress
-            </h1>
+            <div className='flex justify-between'>
+              <h1 className='font-bold md:text-xl flex items-center p-3'>
+                <FcComboChart className='p-2' size={39} />
+                Grading Progress
+              </h1>
+              <input type='week' className='p-5' id='myDate' />
+              <button
+                onClick={() => {
+                  getWeek(document.getElementById('myDate').value.slice(6));
+                }}
+              >
+                click me
+              </button>
+            </div>
             <div className='p-6 sm:w-[90%] md:w-[100%]'>
               {/* <BarChart /> */}
               {/* {<TempChart />} */}
