@@ -22,6 +22,11 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Paper from '@mui/material/Paper';
 import Draggable from 'react-draggable';
 import dayjs from 'dayjs';
+import LineChartModal from './LineChartModal';
+import TextField from '@mui/material/TextField';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 ChartJS.register(CategoryScale, LinearScale, LineElement, PointElement);
 
@@ -144,13 +149,13 @@ const LineChart = () => {
     fetchData();
   }, [specificScores, usersScores, showAll]);
 
-  const filterData = () => {
-    const startDate = dayjs(document.getElementById('startDate').value).format(
-      'dddd, MMMM D YYYY'
-    );
-    const endDate = dayjs(document.getElementById('endDate').value).format(
-      'dddd, MMMM D YYYY'
-    );
+  const filterData = (startDate, endDate) => {
+    // const startDate = dayjs(document.getElementById('startDate').value).format(
+    //   'dddd, MMMM D YYYY'
+    // );
+    // const endDate = dayjs(document.getElementById('endDate').value).format(
+    //   'dddd, MMMM D YYYY'
+    // );
     setShowAll(false);
     const unsubscribeSpecificScores = dispatch(
       fetchSpecificScores(startDate, endDate, user.uid)
@@ -159,12 +164,14 @@ const LineChart = () => {
       unsubscribeSpecificScores();
     };
   };
-  const handleStart = (e) => {
-    setStartDate(e.target.value);
+  const handleStart = (newVal) => {
+    let d = dayjs(newVal.$d);
+    setStartDate(d.format('dddd, MMMM D YYYY'));
   };
 
-  const handleEnd = (e) => {
-    setEndDate(e.target.value);
+  const handleEnd = (newVal) => {
+    let d = dayjs(newVal.$d);
+    setEndDate(d.format('dddd, MMMM D YYYY'));
   };
 
   const handleShowAll = () => {
@@ -173,24 +180,31 @@ const LineChart = () => {
 
   return (
     <div className='w-[100%]'>
-      <Button onClick={handleShowAll}>Show all</Button>
-      <div className='flex justify-end'>
-        <input
-          onChange={handleStart}
-          type='date'
-          id='startDate'
-          value={startDate}
-          className='border border-black p-3'
-        />
-
-        <input
-          onChange={handleEnd}
-          type='date'
-          id='endDate'
-          value={endDate}
-          className='border border-black p-3'
-        />
-        <Button onClick={filterData}>Search</Button>
+      <div className='grid grid-cols-4 gap-4'>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DatePicker
+            id='startDate'
+            label='Start Date'
+            value={startDate}
+            onChange={(newDate) => {
+              handleStart(newDate);
+            }}
+            renderInput={(params) => <TextField {...params} />}
+          />
+        </LocalizationProvider>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DatePicker
+            id='endDate'
+            label='End Date'
+            value={endDate}
+            onChange={(newDate) => {
+              handleEnd(newDate);
+            }}
+            renderInput={(params) => <TextField {...params} />}
+          />
+        </LocalizationProvider>
+        <Button onClick={() => filterData(startDate, endDate)}>Search</Button>
+        <Button onClick={handleShowAll}>Show all</Button>
       </div>
       <Line
         data={data}
@@ -213,54 +227,7 @@ const LineChart = () => {
             that score, and apply it to today.
           </DialogContentText>
         </DialogContent>
-        <div className='m-5 px-[1rem]'>
-          <div>
-            <div>
-              <h1 className='text-lg font-bold'>Reasons</h1>
-              <div className='p-4 flex justify-between w-full overflow-x-scroll'>
-                {scoreObj.reasons &&
-                  scoreObj.reasons.map((obj) => {
-                    if (obj.clicked === true) {
-                      return (
-                        <span
-                          key={obj.id}
-                          className='rounded-xl shadow-lg shadow-gray-400 text-center w-56 p-3 cursor-pointer mx-3'
-                        >
-                          {obj.emoji} {obj.reason}
-                        </span>
-                      );
-                    }
-                  })}
-              </div>
-            </div>
-          </div>
-          <div>
-            <div>
-              <h1 className='text-lg font-bold py-2'>Final Grade</h1>
-              <div className='p-2 rounded-xl shadow-lg shadow-gray-400 text-center w-[40%] grid grid-cols-3 gap-8 place-items-center'>
-                <div className='cursor-pointer'>{scoreObj.emoji}</div>
-                <div className='cursor-pointer'>{scoreObj.description}</div>
-                <div className='font-extrabold cursor-pointer'>
-                  {scoreObj.score}
-                </div>
-              </div>
-            </div>
-            <div>
-              <h1 className='text-lg font-bold py-3'>Notes</h1>
-              <div>
-                {scoreObj.finalNotes ? (
-                  <p className='border border-blue-600 p-auto rounded-lg p-3'>
-                    {scoreObj.finalNotes}
-                  </p>
-                ) : (
-                  <p className='text-blue-600 uppercase tracking-widest text-center'>
-                    No notes found
-                  </p>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
+        <LineChartModal scoreObj={scoreObj} />
         <DialogActions>
           <Button onClick={handleClose}>Close</Button>
         </DialogActions>

@@ -52,7 +52,6 @@ export const fetchSpecificScores =
           return obj;
         }
       });
-    //   console.log(dates);
       dispatch(_getScores(dates));
     });
     return subscriber;
