@@ -21,23 +21,10 @@ const _getScores = (info) => {
 //THUNKS
 export const fetchSpecificScores =
   (startDate, endDate, userId) => async (dispatch) => {
-    // const ref = query(
-    //   collection(db, 'FinalScore'),
-    //   where('userId', '==', userId),
-    //   where('date', '>=', startDate),
-    //   where('date', '<=', endDate)
-    // );
-    // const subscriber = onSnapshot(ref, async (querySnapshot) => {
-    //   const scores = querySnapshot.docs.map((curScore) => ({
-    //     ...curScore.data(),
-    //     id: curScore.id,
-    //   }));
-    //   dispatch(_getScores(scores));
-    // });
-    // return subscriber;
     const ref = query(
       collection(db, 'FinalScore'),
-      where('userId', '==', userId)
+      where('userId', '==', userId),
+      orderBy('date')
     );
     const subscriber = onSnapshot(ref, async (querySnapshot) => {
       const log = querySnapshot.docs.map((curScore) => ({

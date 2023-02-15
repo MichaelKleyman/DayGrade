@@ -124,7 +124,16 @@ const LineChart = () => {
   useEffect(() => {
     // const usersScoreArr = usersScores || [];
     // const usersScoreArr = specificScores || [];
-    const usersScoreArr = showAll ? usersScores || [] : specificScores || [];
+    const theScores = usersScores.filter((obj) => {
+      let curDate = new Date().getTime();
+      let d = new Date();
+      let endDate = new Date(obj.date).getTime();
+      let daysAway = d.setDate(d.getDate() - 6);
+      if (endDate >= daysAway && endDate <= curDate) {
+        return obj;
+      }
+    });
+    const usersScoreArr = showAll ? theScores || [] : specificScores || [];
     const fetchData = () => {
       let dataSet = [];
       let labels = [];
@@ -178,6 +187,10 @@ const LineChart = () => {
     setShowAll(true);
   };
 
+  //   let tempStartDate = new Date(startDate);
+  //   let d = tempStartDate.setDate(tempStartDate.getDate() - 5);
+  //   console.log('>>>', d);
+
   return (
     <div className='w-[100%]'>
       <div className='grid grid-cols-4 gap-4'>
@@ -219,7 +232,8 @@ const LineChart = () => {
         aria-labelledby='draggable-dialog-title'
       >
         <DialogTitle style={{ cursor: 'move' }} id='draggable-dialog-title'>
-          Submitted grade for {scoreObj.date}
+          Submitted grade for{' '}
+          <span className='font-extrabold'>{scoreObj.date}</span>
         </DialogTitle>
         <DialogContent>
           <DialogContentText>

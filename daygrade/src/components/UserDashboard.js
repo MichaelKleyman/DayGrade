@@ -76,14 +76,12 @@ const UserDashboard = () => {
           <h1 className='font-extrabold md:text-xl flex items-center'>
             <FcTimeline className='p-2' size={38} />
             My Mood History
-            {/* <div className='flex justify-end'> */}
             <button
               onClick={() => navigate('/checkin')}
               className='font-normal h-9 ml-10 border bg-blue-600 text-white rounded-full uppercase text-sm tracking-widest w-[40%] duration-200 hover:scale-110 ease-in'
             >
               See history
             </button>
-            {/* </div> */}
           </h1>
           <div className='grid grid-cols-3 mt-10 text-center text-blue-400 relative bottom-0'>
             <h1>{date}</h1>
@@ -184,7 +182,7 @@ const UserDashboard = () => {
                 Grading Progress
               </h1>
             </div>
-            <div className='p-4 sm:w-[90%] md:w-[100%]'>
+            <div className='p-6 sm:w-[90%] md:w-[100%]'>
               {/* <BarChart /> */}
               {/* {<TempChart />} */}
               <LineChart />
