@@ -1,4 +1,4 @@
-import { doc, onSnapshot } from 'firebase/firestore';
+import { doc, onSnapshot, updateDoc } from 'firebase/firestore';
 import { db } from '../firebase';
 
 //ACTIONS
@@ -18,6 +18,18 @@ export const fetchUser = (userId) => (dispatch) => {
     dispatch(_getUser({ ...docSnapshot.data(), id: docSnapshot.id }));
   });
   return subscriber;
+};
+
+export const editUser = (userId, editedInfo) => async (dispatch) => {
+  const { firstName, lastName, email, age, userName } = editedInfo;
+  const docRef = doc(db, 'Users', userId);
+  await updateDoc(docRef, {
+    firstName,
+    lastName,
+    email,
+    age,
+    userName,
+  });
 };
 
 //REDUCER
