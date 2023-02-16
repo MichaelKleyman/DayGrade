@@ -18,6 +18,7 @@ import BarChart from './BarChart';
 import EditGoals from './EditGoals';
 import TempChart from './TempChart';
 import LineChart from './LineChart';
+import Search from './Search';
 
 const UserDashboard = () => {
   const [user, loading] = useAuthState(auth);
@@ -84,13 +85,14 @@ const UserDashboard = () => {
             </button>
           </h1>
           <div className='grid grid-cols-3 mt-10 text-center text-blue-400 relative bottom-0'>
-            <h1>{date}</h1>
+            {/* <h1>{date}</h1>
             <h1 className='text-2xl grid grid-cols-3 gap-4'>
               <AiOutlineSmallDash />
               🤩
               <AiOutlineSmallDash />
             </h1>
-            <h1>Score: 10</h1>
+            <h1>Score: 10</h1> */}
+            <Search />
           </div>
         </div>
         <div className='p-6 shadow-xl rounded-xl bg-white grid grid-cols-2 h-[100%] md:h-[80%] lg:h-[90%]'>
