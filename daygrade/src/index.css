@@ -7,20 +7,37 @@ body {
   background-color: #e6e6e3;
 }
 
-/* .css-hlj6pa-MuiDialogActions-root {
-  display: none !important;
+.ais-SearchBox-input {
+  max-width: none;
+  width: 50%;
+  padding: 15px;
+  margin: 2rem;
+  margin-left: 2rem;
+  border-radius: 10px;
+  font-size: large;
 }
 
-.css-1hbyad5-MuiTypography-root {
-  display: none !important;
+.ais-SearchBox-submitIcon {
+  display: none;
 }
 
-.css-z3au5x-MuiButtonBase-root-MuiIconButton-root-MuiPickersToolbar-penIconButton {
-  display: none !important;
+.ais-SearchBox-resetIcon {
+  display: none;
 }
 
-.css-xelq0e-MuiPickerStaticWrapper-content {
-  box-shadow: 3px 2px 10px 5px #888888;
-  padding: 1rem;
-  border-radius: 30px;
-} */
+#search-container {
+  text-align: center;
+}
+
+.ais-Hits-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-left: 3rem;
+}
+
+@media only screen and (max-width: 700px) {
+  .ais-Hits-list {
+    display: block;
+    margin-left: 3rem;
+  }
+}

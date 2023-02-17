@@ -125,7 +125,7 @@ export default function Profile({ logout }) {
         </MenuItem>
         <MenuItem onClick={logout}>
           <FiLogOut className='p-2' size={35} />
-          Logout
+          <span className='text-red-600'>Logout</span>
         </MenuItem>
       </StyledMenu>
     </div>

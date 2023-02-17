@@ -1,6 +1,11 @@
 import React from 'react';
 import algoliasearch from 'algoliasearch/lite';
-import { InstantSearch, SearchBox, Hits } from 'react-instantsearch-dom';
+import {
+  SearchBox,
+  InstantSearch,
+  Hits,
+  Highlight,
+} from 'react-instantsearch-dom';
 import Hit from './Hit';
 
 const searchClient = algoliasearch(
@@ -9,11 +14,23 @@ const searchClient = algoliasearch(
 );
 
 const Search = () => {
+  const TheHit = ({ hit }) => {
+    return <Hit hit={hit} />;
+  };
+
   return (
-    <InstantSearch searchClient={searchClient} indexName='Logger'>
-      <SearchBox />
-      <div className='grid grid-cols-2'>
-        {/* <Hits hitComponent={Hit} /> */}
+    <InstantSearch searchClient={searchClient} indexName={'Logger'}>
+      <div id='search-container'>
+        <SearchBox
+          searchAsYouType={true}
+          autoFocus
+          translations={{
+            placeholder: 'Search Logs',
+          }}
+        />
+      </div>
+      <div id='hits-container'>
+        <Hits hitComponent={TheHit} />
       </div>
     </InstantSearch>
   );

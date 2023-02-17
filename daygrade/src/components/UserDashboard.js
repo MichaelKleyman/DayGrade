@@ -78,22 +78,22 @@ const UserDashboard = () => {
             <FcTimeline className='p-2' size={38} />
             Search Logs
             <button
-              onClick={() => navigate('/checkin')}
+              onClick={() => navigate('search/logs')}
               className='font-normal h-9 ml-10 border bg-blue-600 text-white rounded-full uppercase text-sm tracking-widest w-[40%] duration-200 hover:scale-110 ease-in'
             >
               Search
             </button>
           </h1>
-          <div className='grid grid-cols-3 mt-10 text-center text-blue-400 relative bottom-0'>
-            {/* <h1>{date}</h1>
+          {/* <div className='grid grid-cols-3 mt-10 text-center text-blue-400 relative bottom-0'> */}
+          {/* <div>
+            <h1>{date}</h1>
             <h1 className='text-2xl grid grid-cols-3 gap-4'>
               <AiOutlineSmallDash />
               🤩
               <AiOutlineSmallDash />
             </h1>
-            <h1>Score: 10</h1> */}
-            <Search />
-          </div>
+            <h1>Score: 10</h1>
+          </div> */}
         </div>
         <div className='p-6 shadow-xl rounded-xl bg-white grid grid-cols-2 h-[100%] md:h-[80%] lg:h-[90%]'>
           <div className='w-[90%]'>
@@ -120,7 +120,7 @@ const UserDashboard = () => {
               <FcAdvance className='p-2 mx-2' size={38} />
             </div>
             <div className='w-screen ml-4'>
-              <p>
+              <div>
                 {usersScores.length !== 0 ? (
                   <div>
                     {Math.floor(Difference_In_Days) >= 1 &&
@@ -136,7 +136,7 @@ const UserDashboard = () => {
                 ) : (
                   'None yet'
                 )}
-              </p>
+              </div>
             </div>
           </div>
         </div>
