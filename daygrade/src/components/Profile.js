@@ -107,7 +107,7 @@ export default function Profile({ logout }) {
         <MenuItem
           onClick={() => {
             handleClose();
-            navigate('users/account');
+            navigate(`users/account/${user.uid}`);
           }}
         >
           <Avatar

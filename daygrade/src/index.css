@@ -41,3 +41,41 @@ body {
     margin-left: 3rem;
   }
 }
+
+.ais-Pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  box-shadow: none;
+  text-align: center;
+}
+
+.ais-Pagination-list {
+  display: flex;
+  padding: 1rem;
+}
+
+.ais-Pagination-item {
+  padding: 1rem;
+  cursor: pointer;
+  background-color: white;
+  box-shadow: gray;
+  border-radius: 10px;
+  width: 60px;
+  margin: 10px;
+}
+
+.ais-Pagination-item:hover {
+  background-color: blue;
+  color: white;
+}
+
+.ais-Pagination-item--nextPage,
+.ais-Pagination-item--lastPage,
+.ais-Pagination-item--firstPage,
+.ais-Pagination-item--previousPage {
+  border: none;
+  color: blue;
+  background-color: unset;
+}

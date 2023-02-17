@@ -9,19 +9,27 @@ import {
   serverTimestamp,
   orderBy,
   updateDoc,
-  setDoc,
+  getDocs,
 } from 'firebase/firestore';
 import { db } from '../firebase.js';
 
 //ACTIONS
 const GET_LOG = 'GET_LOG';
 const DELETE_LOG = 'DELETE_LOG';
+const SEARCH_LOGS = 'SEARCH_LOGS';
 
 //ACTION CREATORS
 const _getLog = (log) => {
   return {
     type: GET_LOG,
     log,
+  };
+};
+
+const _searchLogs = (logs) => {
+  return {
+    type: SEARCH_LOGS,
+    logs,
   };
 };
 
@@ -65,6 +73,36 @@ export const editLog = (logId, editedLog) => async () => {
   //   setDoc(doc(db, 'Logger', logId), { log: editedLog }, { merge: true });
 };
 
+export const searchLogs = (info) => async (dispatch) => {
+  // const ref = query(
+  //   collection(db, 'Logger'),
+  //   where('userId', '==', userId),
+  //   where('log', '==', searchInput)
+  // );
+  // const subscriber = onSnapshot(ref, (querySnapshot) => {
+  //   const log = querySnapshot.docs.map((curLog) => ({
+  //     ...curLog.data(),
+  //     id: curLog.id,
+  //   }));
+  //   dispatch(_searchLogs(log));
+  // });
+  // return subscriber;
+  console.log(info);
+  const q = query(
+    collection(db, 'Logger'),
+    where('userId', '==', info.id),
+    where('log', '==', info.input)
+  );
+
+  const querySnapshot = await getDocs(q);
+  let arr = [];
+  querySnapshot.forEach((doc) => {
+    // doc.data() is never undefined for query doc snapshots
+    arr.push(doc.data());
+  });
+  dispatch(_searchLogs(arr));
+};
+
 //REDUCER
 let initialState = [];
 
@@ -75,6 +113,9 @@ export default function logReducer(state = initialState, action) {
     }
     case DELETE_LOG: {
       return action.log;
+    }
+    case SEARCH_LOGS: {
+      return action.logs;
     }
     default:
       return state;

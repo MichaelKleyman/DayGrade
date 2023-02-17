@@ -8,6 +8,7 @@ import Checkin from './components/Checkin';
 import Temp from './components/TempCalendar';
 import UsersAccount from './components/UsersAccount';
 import Search from './components/Search';
+import NotFound from './components/NotFound';
 
 const MyRoutes = () => {
   return (
@@ -17,8 +18,9 @@ const MyRoutes = () => {
       <Route path='welcome' element={<Welcome />} />
       <Route path='signup' element={<Signup />} />
       <Route path='checkin' element={<Temp />} />
-      <Route path='users/account' element={<UsersAccount />} />
-      <Route path='search/logs' element={<Search />}/>
+      <Route path='users/account/:id' element={<UsersAccount />} />
+      <Route path='search/logs/:id' element={<Search />} />
+      <Route path='*' element={<NotFound />} />
       {/* <Route path='temp' element={<Temp />} /> */}
     </Routes>
   );

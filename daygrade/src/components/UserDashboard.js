@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { fetchUser, fetchAllScores } from '../store';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../firebase';
+import { useAuth } from '../context/Authcontext';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   FcTodoList,
@@ -22,6 +23,7 @@ import Search from './Search';
 
 const UserDashboard = () => {
   const [user, loading] = useAuthState(auth);
+  const { currentUser, logout } = useAuth();
   const [date, setDate] = useState('');
   const [open, setOpen] = useState(false);
 
@@ -78,7 +80,7 @@ const UserDashboard = () => {
             <FcTimeline className='p-2' size={38} />
             Search Logs
             <button
-              onClick={() => navigate('search/logs')}
+              onClick={() => navigate(`search/logs/${currentUser.uid}`)}
               className='font-normal h-9 ml-10 border bg-blue-600 text-white rounded-full uppercase text-sm tracking-widest w-[40%] duration-200 hover:scale-110 ease-in'
             >
               Search
