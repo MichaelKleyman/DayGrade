@@ -18,19 +18,13 @@ const Search = () => {
     setSearchInput(e.target.value);
   };
 
-  // useEffect(() => {
-  //   const unsubscribeSearch = dispatch(
-  //     searchLogs(currentUser.uid, searchInput)
-  //   );
-  //   return () => {
-  //     unsubscribeSearch();
-  //   };
-  // }, [searchInput]);
+  // const handleSearch = () => {
+  //   dispatch(searchLogs({ id: currentUser.uid, input: searchInput }));
+  // };
 
-  const handleSearch = () => {
+  useEffect(() => {
     dispatch(searchLogs({ id: currentUser.uid, input: searchInput }));
-    console.log(searchResults);
-  };
+  }, [searchInput]);
 
   return (
     <div className='w-full'>
@@ -56,14 +50,23 @@ const Search = () => {
           sx={{ margin: '10px' }}
           variant='contained'
           onClick={() => {
-            handleSearch(currentUser.uid, searchInput);
+            // handleSearch(currentUser.uid, searchInput);
+            console.log(searchInput);
           }}
         >
           Search
         </Button>
       </div>
-      <div>
-        <button onClick={() => console.log(searchResults)}>click me</button>
+      <div className='grid grid-cols-2'>
+        {searchResults.map((obj, index) => (
+          <div
+            key={index}
+            className='bg-white rounded-lg shadow-lg shadow-gray-500 p-4 m-5 '
+          >
+            <div>{obj.log}</div>
+            <div className='text-sm text-gray-500'>{obj.Date}</div>
+          </div>
+        ))}
       </div>
     </div>
   );

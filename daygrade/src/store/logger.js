@@ -74,33 +74,24 @@ export const editLog = (logId, editedLog) => async () => {
 };
 
 export const searchLogs = (info) => async (dispatch) => {
-  // const ref = query(
-  //   collection(db, 'Logger'),
-  //   where('userId', '==', userId),
-  //   where('log', '==', searchInput)
-  // );
-  // const subscriber = onSnapshot(ref, (querySnapshot) => {
-  //   const log = querySnapshot.docs.map((curLog) => ({
-  //     ...curLog.data(),
-  //     id: curLog.id,
-  //   }));
-  //   dispatch(_searchLogs(log));
-  // });
-  // return subscriber;
-  console.log(info);
-  const q = query(
+  const ref = query(
     collection(db, 'Logger'),
-    where('userId', '==', info.id),
-    where('log', '==', info.input)
+    where('userId', '==', info.id)
+    // where('log', '==', info.input)
   );
-
-  const querySnapshot = await getDocs(q);
-  let arr = [];
-  querySnapshot.forEach((doc) => {
-    // doc.data() is never undefined for query doc snapshots
-    arr.push(doc.data());
+  const subscriber = onSnapshot(ref, (querySnapshot) => {
+    const log = querySnapshot.docs.map((curLog) => ({
+      ...curLog.data(),
+      id: curLog.id,
+    }));
+    let arr = log.filter((obj) => {
+      if (obj.log.includes(info.input)) {
+        return log;
+      }
+    });
+    dispatch(_searchLogs(arr));
   });
-  dispatch(_searchLogs(arr));
+  return subscriber;
 };
 
 //REDUCER
