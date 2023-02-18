@@ -85,10 +85,13 @@ export const searchLogs = (info) => async (dispatch) => {
       id: curLog.id,
     }));
     let arr = log.filter((obj) => {
-      if (obj.log.includes(info.input)) {
+      if (obj.log.toLowerCase().includes(info.input)) {
         return log;
       }
     });
+    // if (info.input.length === 0) {
+    //   dispatch(_searchLogs(arr.slice(0, 8)));
+    // } else dispatch(_searchLogs(arr));
     dispatch(_searchLogs(arr));
   });
   return subscriber;

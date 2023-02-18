@@ -13,6 +13,7 @@ const store = configureStore({
     logReducer,
     scoreReducer,
     specificScoreReducer,
+  
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

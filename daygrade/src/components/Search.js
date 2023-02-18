@@ -5,10 +5,13 @@ import InputAdornment from '@mui/material/InputAdornment';
 import { useSelector, useDispatch } from 'react-redux';
 import { searchLogs } from '../store';
 import { Button } from '@mui/material';
+import { FcOk } from 'react-icons/fc';
 import { useAuth } from '../context/Authcontext';
 
 const Search = () => {
   const [searchInput, setSearchInput] = useState('');
+  const [curPage, setCurPage] = useState(1);
+  const [logsPerPage] = useState(8);
 
   const dispatch = useDispatch();
   const searchResults = useSelector((state) => state.logReducer);
@@ -25,6 +28,20 @@ const Search = () => {
   useEffect(() => {
     dispatch(searchLogs({ id: currentUser.uid, input: searchInput }));
   }, [searchInput]);
+
+  const indexOfLastLog = curPage * logsPerPage;
+  const indexOfFirstLog = indexOfLastLog - logsPerPage;
+  const currentLogs = searchResults.slice(indexOfFirstLog, indexOfLastLog);
+
+  const pageNumbers = [];
+  let totalLogs = searchResults.length;
+  for (let i = 1; i <= Math.ceil(totalLogs / logsPerPage); i++) {
+    pageNumbers.push(i);
+  }
+
+  const paginate = (pageNumber) => {
+    setCurPage(pageNumber);
+  };
 
   return (
     <div className='w-full'>
@@ -46,25 +63,52 @@ const Search = () => {
           sx={{ width: '50%' }}
           placeholder='Search Your Logs'
         />
-        <Button
+        <ul className='flex items-center justify-center mt-6'>
+          {pageNumbers.map((num) => (
+            <li
+              key={num}
+              onClick={() => paginate(num)}
+              className={`${
+                num === curPage ? 'bg-blue-600 text-white' : ''
+              } cursor-pointer border border-blue-500 rounded-lg ml-2 p-4 hover:bg-blue-600 hover:text-white hover:rounded-lg hover:shadow-gray-600 hover:scale-110 duration-300`}
+            >
+              <a href='!#'>{num}</a>
+            </li>
+          ))}
+        </ul>
+
+        {/* <Button
           sx={{ margin: '10px' }}
           variant='contained'
           onClick={() => {
-            // handleSearch(currentUser.uid, searchInput);
-            console.log(searchInput);
+            handleSearch(currentUser.uid, searchInput);
           }}
         >
           Search
-        </Button>
+        </Button> */}
       </div>
-      <div className='grid grid-cols-2'>
-        {searchResults.map((obj, index) => (
+      <div className='grid sm:grid-cols-1 md:grid-cols-2 md:p-8'>
+        {currentLogs.map((obj, index) => (
           <div
             key={index}
-            className='bg-white rounded-lg shadow-lg shadow-gray-500 p-4 m-5 '
+            className='bg-white rounded-lg shadow-lg shadow-gray-500 p-4 m-5'
           >
-            <div>{obj.log}</div>
-            <div className='text-sm text-gray-500'>{obj.Date}</div>
+            <div className='font-bold pb-4'>{obj.log}</div>
+            {/* <div className='text-sm text-gray-500'>{obj.Date}</div> */}
+            <div className='text-sm text-gray-500 pb-2 flex items-center '>
+              <FcOk size={35} className='p-2' />
+              {obj.Date}
+            </div>
+            <div className='flex justify-end'>
+              <Button
+                variant='contained'
+                color='success'
+                sx={{ padding: '3px', fontSize: '12px' }}
+                onClick={() => console.log(obj)}
+              >
+                View
+              </Button>
+            </div>
           </div>
         ))}
       </div>
