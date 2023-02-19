@@ -15,6 +15,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../firebase';
 import { AiFillDelete } from 'react-icons/ai';
 import EditLog from './EditLog';
+import { MdOutlineLocalDrink, MdLocalDrink } from 'react-icons/md';
 
 const Grader = ({ date, usersLog }) => {
   const [open, setOpen] = useState(false);
@@ -23,6 +24,14 @@ const Grader = ({ date, usersLog }) => {
   const [error, setError] = useState(null);
   const [user, loading] = useAuthState(auth);
   const [id, setId] = useState(null);
+  const [clicked, setClicked] = useState([
+    { drank: false },
+    { drank: false },
+    { drank: false },
+    { drank: false },
+    { drank: false },
+    { drank: false },
+  ]);
 
   const dispatch = useDispatch();
 
@@ -68,6 +77,18 @@ const Grader = ({ date, usersLog }) => {
     }
   };
 
+  const drankWater = (i) => {
+    let clickedCups = clicked.map((cup, index) => {
+      if (i === index) {
+        cup.drank = !cup.drank;
+        return cup;
+      } else {
+        return cup;
+      }
+    });
+    setClicked(clickedCups);
+  };
+
   const halfwayPoint = Math.ceil(usersLog.length / 2);
   let arrayFirstHalf = usersLog.slice(0, halfwayPoint);
   let arraySecondHalf = usersLog.slice(halfwayPoint, usersLog.length);
@@ -76,7 +97,7 @@ const Grader = ({ date, usersLog }) => {
     <div className='w-full'>
       <h1 className='text-lg font-bold'>{date.format('dddd, MMMM D YYYY')}</h1>
       <div className='grid grid-cols-2 gap-8'>
-        <div className='py-5 '>
+        <div className='py-5'>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <Stack spacing={3}>
               <TimePicker
@@ -87,6 +108,29 @@ const Grader = ({ date, usersLog }) => {
               />
             </Stack>
           </LocalizationProvider>
+          <div className='mt-11'>
+            <h1 className='uppercase tracking-widest pb-2 text-blue-500'>
+              water
+            </h1>
+            <div className='flex justify-between'>
+              {clicked.map((obj, i) => (
+                <div key={i} onClick={() => drankWater(i)}>
+                  {obj.drank ? (
+                    <MdLocalDrink
+                      color='blue'
+                      size={33}
+                      className='cursor-pointer duration-300 hover:scale-110'
+                    />
+                  ) : (
+                    <MdOutlineLocalDrink
+                      size={33}
+                      className='cursor-pointer duration-300 hover:scale-110'
+                    />
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
         <div className='py-5'>
           <textarea
@@ -116,11 +160,11 @@ const Grader = ({ date, usersLog }) => {
           </div>
         </div>
       </div>
-      <div className='grid grid-cols-2 lg:grid-cols-2 sm:grid-cols-1 gap-4'>
+      <div className='grid grid-cols-1 lg:grid-cols-2 sm:grid-cols-1 gap-4'>
         {arrayFirstHalf.map((usersLogInfo, i) => (
           <div
             key={usersLogInfo.id}
-            className='bg-gradient-to-r from-cyan-200 to-blue-400 shadow-lg shadow-gray-400 rounded-xl'
+            className='w-full bg-gradient-to-r from-cyan-200 to-blue-400 shadow-lg shadow-gray-400 rounded-xl'
           >
             <h1 className='font-bold mx-2 my-3 py-4 flex justify-between'>
               <p>{usersLogInfo.log}</p>
