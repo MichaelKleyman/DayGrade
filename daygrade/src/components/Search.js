@@ -15,6 +15,7 @@ const Search = () => {
 
   const dispatch = useDispatch();
   const searchResults = useSelector((state) => state.logReducer);
+  console.log('search results', searchResults);
   const { currentUser } = useAuth();
 
   const handleChange = (e) => {
@@ -76,16 +77,6 @@ const Search = () => {
             </li>
           ))}
         </ul>
-
-        {/* <Button
-          sx={{ margin: '10px' }}
-          variant='contained'
-          onClick={() => {
-            handleSearch(currentUser.uid, searchInput);
-          }}
-        >
-          Search
-        </Button> */}
       </div>
       <div className='grid sm:grid-cols-1 md:grid-cols-2 md:p-8'>
         {currentLogs.map((obj, index) => (

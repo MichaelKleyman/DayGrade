@@ -18,7 +18,7 @@ import { FcCalendar, FcAbout } from 'react-icons/fc';
 import Grader from './Grader';
 import { fetchLog } from '../store';
 import ScoreProcess from './ScoreProcess';
-import { fetchScoreInfo } from '../store/dailyScore';
+import { fetchScoreInfo } from '../store';
 import PreviousGrade from './PreviousGrade';
 
 export default function Temp() {
@@ -34,6 +34,21 @@ export default function Temp() {
   let usersScoreArr = useSelector((state) => state.scoreReducer);
   let usersScoreObj = usersScoreArr[0];
 
+  let arr = [
+    { drank: false },
+    { drank: false },
+    { drank: false },
+    { drank: false },
+    { drank: false },
+    { drank: false },
+  ];
+
+  // let watercount = usersScoreObj === undefined ? arr : usersScoreObj.waterCount;
+
+  // console.log(watercount);
+
+  const [waterCount, setWaterCount] = useState(arr);
+
   const changeDate = (curDate) => {
     return dispatch(fetchLog(user?.uid, curDate));
   };
@@ -45,6 +60,10 @@ export default function Temp() {
   const handleClose = () => {
     setOpen(false);
   };
+
+  // useEffect(() => {
+  //   setWaterCount(watercount);
+  // }, [watercount]);
 
   useEffect(() => {
     const unsubscribeLogger = dispatch(
@@ -155,10 +174,18 @@ export default function Temp() {
             open={open}
             handleClose={handleClose}
             date={date.format('dddd, MMMM D YYYY')}
+            waterCount={waterCount}
           />
         </div>
         <div className='h-screen'>
-          <Grader date={date} usersLog={usersLog} />
+          <Grader
+            date={date}
+            usersLog={usersLog}
+            setWaterCount={setWaterCount}
+            waterCount={waterCount}
+            usersScoreObj={usersScoreObj}
+            usersScoreArr={usersScoreArr}
+          />
         </div>
       </div>
     </div>

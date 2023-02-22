@@ -1,6 +1,6 @@
 /* eslint-disable no-lone-blocks */
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -16,22 +16,24 @@ import { auth } from '../firebase';
 import { AiFillDelete } from 'react-icons/ai';
 import EditLog from './EditLog';
 import { MdOutlineLocalDrink, MdLocalDrink } from 'react-icons/md';
+import { TbBottle } from 'react-icons/tb';
 
-const Grader = ({ date, usersLog }) => {
+const Grader = ({
+  date,
+  usersLog,
+  setWaterCount,
+  waterCount,
+  usersScoreObj,
+  usersScoreArr,
+}) => {
   const [open, setOpen] = useState(false);
   const [time, setTime] = useState(dayjs(new Date()));
   const [curLog, setLog] = useState('');
   const [error, setError] = useState(null);
   const [user, loading] = useAuthState(auth);
   const [id, setId] = useState(null);
-  const [clicked, setClicked] = useState([
-    { drank: false },
-    { drank: false },
-    { drank: false },
-    { drank: false },
-    { drank: false },
-    { drank: false },
-  ]);
+
+  const [type, setType] = useState('Cup');
 
   const dispatch = useDispatch();
 
@@ -46,6 +48,10 @@ const Grader = ({ date, usersLog }) => {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleType = (clickedType) => {
+    setType(clickedType);
   };
 
   const handleTime = (newValue) => {
@@ -77,16 +83,32 @@ const Grader = ({ date, usersLog }) => {
     }
   };
 
+  useEffect(() => {
+    setType('Cup');
+  }, [date]);
+
   const drankWater = (i) => {
-    let clickedCups = clicked.map((cup, index) => {
-      if (i === index) {
-        cup.drank = !cup.drank;
-        return cup;
-      } else {
-        return cup;
-      }
-    });
-    setClicked(clickedCups);
+    if (usersScoreArr.length) {
+      let clickedCups = usersScoreObj.waterCount.map((cup, index) => {
+        if (i === index) {
+          cup.drank = !cup.drank;
+          return cup;
+        } else {
+          return cup;
+        }
+      });
+      setWaterCount(clickedCups);
+    } else {
+      let clickedCups = waterCount.map((cup, index) => {
+        if (i === index) {
+          cup.drank = !cup.drank;
+          return cup;
+        } else {
+          return cup;
+        }
+      });
+      setWaterCount(clickedCups);
+    }
   };
 
   const halfwayPoint = Math.ceil(usersLog.length / 2);
@@ -108,27 +130,112 @@ const Grader = ({ date, usersLog }) => {
               />
             </Stack>
           </LocalizationProvider>
-          <div className='mt-11'>
-            <h1 className='uppercase tracking-widest pb-2 text-blue-500'>
+          <div className='mt-9'>
+            <h1 className='uppercase tracking-widest pb-2 text-blue-500 font-bold'>
               water
             </h1>
-            <div className='flex justify-between'>
-              {clicked.map((obj, i) => (
-                <div key={i} onClick={() => drankWater(i)}>
-                  {obj.drank ? (
-                    <MdLocalDrink
-                      color='blue'
-                      size={33}
-                      className='cursor-pointer duration-300 hover:scale-110'
-                    />
-                  ) : (
-                    <MdOutlineLocalDrink
-                      size={33}
-                      className='cursor-pointer duration-300 hover:scale-110'
-                    />
-                  )}
+            <h1 className='pb-3 text-sm'>
+              <span
+                onClick={() => handleType('Cup')}
+                className={`hover:text-blue-700 duration-300 hover:scale-110 cursor-pointer hover:font-bold ${
+                  type === 'Cup' ? 'text-blue-600 italic' : ''
+                }`}
+              >
+                Cup
+              </span>{' '}
+              or{' '}
+              <span
+                onClick={() => handleType('Bottle')}
+                className={`hover:text-blue-700 duration-300 hover:scale-110 cursor-pointer hover:font-bold ${
+                  type === 'Bottle' ? 'text-blue-600 italic' : ''
+                }`}
+              >
+                Bottle
+              </span>
+            </h1>
+            <div>
+              {/* {watercount.length &&
+                watercount.map((obj, i) => (
+                  <div key={i} onClick={() => drankWater(i)}>
+                    {obj.drank ? (
+                      <MdLocalDrink
+                        color='blue'
+                        size={33}
+                        className='cursor-pointer duration-300 hover:scale-110'
+                      />
+                    ) : (
+                      <MdOutlineLocalDrink
+                        size={33}
+                        className='cursor-pointer duration-300 hover:scale-110'
+                      />
+                    )}
+                  </div>
+                ))} */}
+              {usersScoreArr.length ? (
+                <div className='flex justify-between'>
+                  {usersScoreObj.waterCount.map((obj, i) => (
+                    <div key={i} onClick={() => drankWater(i)}>
+                      {obj.drank ? (
+                        type === 'Cup' ? (
+                          <MdLocalDrink
+                            color='blue'
+                            size={33}
+                            className='cursor-pointer duration-300 hover:scale-110'
+                          />
+                        ) : (
+                          <TbBottle
+                            color='blue'
+                            size={33}
+                            className='cursor-pointer duration-300 hover:scale-110'
+                          />
+                        )
+                      ) : type === 'Cup' ? (
+                        <MdOutlineLocalDrink
+                          size={33}
+                          className='cursor-pointer duration-300 hover:scale-110'
+                        />
+                      ) : (
+                        <TbBottle
+                          size={33}
+                          className='cursor-pointer duration-300 hover:scale-110'
+                        />
+                      )}
+                    </div>
+                  ))}
                 </div>
-              ))}
+              ) : (
+                <div className='flex justify-between'>
+                  {waterCount.map((obj, i) => (
+                    <div key={i} onClick={() => drankWater(i)}>
+                      {obj.drank ? (
+                        type === 'Cup' ? (
+                          <MdLocalDrink
+                            color='blue'
+                            size={33}
+                            className='cursor-pointer duration-300 hover:scale-110'
+                          />
+                        ) : (
+                          <TbBottle
+                            color='blue'
+                            size={33}
+                            className='cursor-pointer duration-300 hover:scale-110'
+                          />
+                        )
+                      ) : type === 'Cup' ? (
+                        <MdOutlineLocalDrink
+                          size={33}
+                          className='cursor-pointer duration-300 hover:scale-110'
+                        />
+                      ) : (
+                        <TbBottle
+                          size={33}
+                          className='cursor-pointer duration-300 hover:scale-110'
+                        />
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -242,71 +349,3 @@ const Grader = ({ date, usersLog }) => {
 };
 
 export default Grader;
-
-// {usersLog.map((usersLogInfo, i) => (
-//   <div
-//     key={usersLogInfo.id}
-//     className='bg-gradient-to-r from-cyan-200 to-blue-400 shadow-lg shadow-gray-400 rounded-xl'
-//   >
-//     <h1 className='font-bold mx-4 my-3 py-4 flex justify-between '>
-//       <p>{usersLogInfo.log}</p>
-//       <div>
-//         <IconButton
-//           aria-label='more'
-//           id='long-button'
-//           aria-controls={openDots ? 'long-menu' : undefined}
-//           aria-expanded={openDots ? 'true' : undefined}
-//           aria-haspopup='true'
-//           onClick={handleClick}
-//         >
-//           <MoreVertIcon />
-//         </IconButton>
-//         <Menu
-//           id='long-menu'
-//           MenuListProps={{
-//             'aria-labelledby': 'long-button',
-//           }}
-//           anchorEl={anchorEl}
-//           open={openDots}
-//           onClose={handleCloseDots}
-//           PaperProps={{
-//             style: {
-//               maxHeight: ITEM_HEIGHT * 4.5,
-//               width: '20ch',
-//             },
-//           }}
-//         >
-//           <MenuItem>
-//             <EditLog
-//               usersLogInfo={usersLogInfo}
-//               open={open}
-//               handleClickOpen={handleClickOpen}
-//               handleClose={handleClose}
-//               handleIdCheck={handleIdCheck}
-//               id={id}
-//               handleCloseDots={handleCloseDots}
-//             />
-//           </MenuItem>
-//           <MenuItem>
-//             <div
-//               className='grid grid-cols-2'
-//               onClick={() => {
-//                 handleDelete(usersLogInfo.id);
-//                 handleCloseDots();
-//               }}
-//             >
-//               <AiFillDelete
-//                 size={25}
-//                 className='duration-300 hover:scale-110 hover:text-white cursor-pointer'
-//               />
-//               <p>Delete</p>
-//             </div>
-//           </MenuItem>
-//         </Menu>
-//       </div>
-//     </h1>
-//     <h1 className='mx-4 py-2 text-sm text-gray-600'>
-//       {usersLogInfo.Time}
-//     </h1>
-//   </div>
-// ))}
