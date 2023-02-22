@@ -25,7 +25,7 @@ function PaperComponent(props) {
   );
 }
 
-const ScoreProcess = ({ open, handleClose, date }) => {
+const ScoreProcess = ({ open, handleClose, date, waterCount }) => {
   const [page, setPage] = useState(0);
   const [error, setError] = useState(null);
   const [reasonsError, setReasonsError] = useState(null);
@@ -77,7 +77,8 @@ const ScoreProcess = ({ open, handleClose, date }) => {
           finalScore.emoji,
           reasons,
           notes,
-          date
+          date,
+          waterCount
         )
       );
     } catch (e) {

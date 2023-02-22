@@ -42,6 +42,7 @@ export const fetchScoreInfo = (userId, date) => (dispatch) => {
       ...curScore.data(),
       id: curScore.id,
     }));
+    // console.log(log);
     dispatch(_getScoreInfo(log));
   });
   return subscriber;
@@ -64,7 +65,7 @@ export const fetchAllScores = (userId) => (dispatch) => {
 };
 
 export const submitCheckIn =
-  (userId, score, description, emoji, reasons, finalNotes, date) =>
+  (userId, score, description, emoji, reasons, finalNotes, date, waterCount) =>
   async () => {
     await addDoc(collection(db, 'FinalScore'), {
       userId,
@@ -73,6 +74,7 @@ export const submitCheckIn =
       emoji,
       reasons,
       finalNotes,
+      waterCount,
       createdAt: serverTimestamp(),
       date,
     });
