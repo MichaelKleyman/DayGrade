@@ -7,6 +7,7 @@ import { searchLogs } from '../store';
 import { Button } from '@mui/material';
 import { FcOk } from 'react-icons/fc';
 import { useAuth } from '../context/Authcontext';
+import Pagination from '@mui/material/Pagination';
 
 const Search = () => {
   const [searchInput, setSearchInput] = useState('');
@@ -15,16 +16,12 @@ const Search = () => {
 
   const dispatch = useDispatch();
   const searchResults = useSelector((state) => state.logReducer);
-  console.log('search results', searchResults);
+  // console.log('search results', searchResults);
   const { currentUser } = useAuth();
 
   const handleChange = (e) => {
     setSearchInput(e.target.value);
   };
-
-  // const handleSearch = () => {
-  //   dispatch(searchLogs({ id: currentUser.uid, input: searchInput }));
-  // };
 
   useEffect(() => {
     dispatch(searchLogs({ id: currentUser.uid, input: searchInput }));
@@ -34,11 +31,12 @@ const Search = () => {
   const indexOfFirstLog = indexOfLastLog - logsPerPage;
   const currentLogs = searchResults.slice(indexOfFirstLog, indexOfLastLog);
 
-  const pageNumbers = [];
+  let pageNumbers = [];
   let totalLogs = searchResults.length;
   for (let i = 1; i <= Math.ceil(totalLogs / logsPerPage); i++) {
     pageNumbers.push(i);
   }
+  pageNumbers = pageNumbers.slice(0, 8);
 
   const paginate = (pageNumber) => {
     setCurPage(pageNumber);

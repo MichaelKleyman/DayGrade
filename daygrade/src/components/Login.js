@@ -86,7 +86,7 @@ const Login = () => {
               </div>
             )}
           </div>
-          <div className='flex justify-center py-7'>
+          <div className='grid grid-cols-1 gap-5 pt-4'>
             <Button
               onClick={handleSubmit}
               variant='contained'
@@ -94,6 +94,9 @@ const Login = () => {
             >
               Log In
             </Button>
+            <Link to='/forgot-password' className='text-center text-sm text-blue-400 hover:underline cursor-pointer'>
+              Forgot Password?
+            </Link>
           </div>
           {error && (
             <div className='w-full text-rose-500 pb-3 flex items-center justify-center'>

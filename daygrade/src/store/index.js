@@ -5,7 +5,6 @@ import userGoals from './goals';
 import logReducer from './logger';
 import scoreReducer from './dailyScore';
 import specificScoreReducer from './chartDateFilter';
-import waterReducer from './water';
 
 const store = configureStore({
   reducer: {
@@ -14,7 +13,6 @@ const store = configureStore({
     logReducer,
     scoreReducer,
     specificScoreReducer,
-    waterReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -28,4 +26,3 @@ export * from './goals';
 export * from './logger';
 export * from './dailyScore';
 export * from './chartDateFilter';
-export * from './water';

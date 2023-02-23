@@ -25,6 +25,8 @@ const Grader = ({
   waterCount,
   usersScoreObj,
   usersScoreArr,
+  type,
+  setType,
 }) => {
   const [open, setOpen] = useState(false);
   const [time, setTime] = useState(dayjs(new Date()));
@@ -32,8 +34,6 @@ const Grader = ({
   const [error, setError] = useState(null);
   const [user, loading] = useAuthState(auth);
   const [id, setId] = useState(null);
-
-  const [type, setType] = useState('Cup');
 
   const dispatch = useDispatch();
 
@@ -83,9 +83,9 @@ const Grader = ({
     }
   };
 
-  useEffect(() => {
-    setType('Cup');
-  }, [date]);
+  // useEffect(() => {
+  //   setType('Cup');
+  // }, [date]);
 
   const drankWater = (i) => {
     if (usersScoreArr.length) {
@@ -154,23 +154,6 @@ const Grader = ({
               </span>
             </h1>
             <div>
-              {/* {watercount.length &&
-                watercount.map((obj, i) => (
-                  <div key={i} onClick={() => drankWater(i)}>
-                    {obj.drank ? (
-                      <MdLocalDrink
-                        color='blue'
-                        size={33}
-                        className='cursor-pointer duration-300 hover:scale-110'
-                      />
-                    ) : (
-                      <MdOutlineLocalDrink
-                        size={33}
-                        className='cursor-pointer duration-300 hover:scale-110'
-                      />
-                    )}
-                  </div>
-                ))} */}
               {usersScoreArr.length ? (
                 <div className='flex justify-between'>
                   {usersScoreObj.waterCount.map((obj, i) => (

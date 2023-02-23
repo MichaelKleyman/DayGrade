@@ -34,20 +34,15 @@ export default function Temp() {
   let usersScoreArr = useSelector((state) => state.scoreReducer);
   let usersScoreObj = usersScoreArr[0];
 
-  let arr = [
+  const [type, setType] = useState('Cup');
+  const [waterCount, setWaterCount] = useState([
     { drank: false },
     { drank: false },
     { drank: false },
     { drank: false },
     { drank: false },
     { drank: false },
-  ];
-
-  // let watercount = usersScoreObj === undefined ? arr : usersScoreObj.waterCount;
-
-  // console.log(watercount);
-
-  const [waterCount, setWaterCount] = useState(arr);
+  ]);
 
   const changeDate = (curDate) => {
     return dispatch(fetchLog(user?.uid, curDate));
@@ -60,10 +55,6 @@ export default function Temp() {
   const handleClose = () => {
     setOpen(false);
   };
-
-  // useEffect(() => {
-  //   setWaterCount(watercount);
-  // }, [watercount]);
 
   useEffect(() => {
     const unsubscribeLogger = dispatch(
@@ -185,6 +176,8 @@ export default function Temp() {
             waterCount={waterCount}
             usersScoreObj={usersScoreObj}
             usersScoreArr={usersScoreArr}
+            type={type}
+            setType={setType}
           />
         </div>
       </div>

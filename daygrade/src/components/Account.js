@@ -3,9 +3,11 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { editUser } from '../store';
 import { useDispatch } from 'react-redux';
+import { useAuth } from '../context/Authcontext';
 
 const Account = ({ userObject }) => {
   const { firstName, lastName, email, age, userName } = userObject;
+  const { currentUser, updateEmail } = useAuth();
   const dispatch = useDispatch();
 
   const [edit, setEdit] = useState(false);
@@ -17,10 +19,19 @@ const Account = ({ userObject }) => {
     userName,
   });
 
-  const handleSave = () => {
-    setEdit(false);
-    dispatch(editUser(userObject.id, accountInfo));
-    console.log(accountInfo);
+  const handleSave = async (e) => {
+    e.preventDefault();
+    try {
+      setEdit(false);
+      // if (accountInfo.email !== currentUser.email) {
+      //   await updateEmail(accountInfo.email);
+      //   dispatch(editUser(userObject.id, accountInfo));
+      // }
+      dispatch(editUser(userObject.id, accountInfo));
+      // console.log(accountInfo);
+    } catch (error) {
+      console.log('>>>', error);
+    }
   };
 
   const handleEdit = () => {
@@ -35,7 +46,9 @@ const Account = ({ userObject }) => {
     <div>
       <div className='grid sm:grid-cols-1 md:grid-cols-2 gap-6'>
         <div className='grid grid-cols-1 gap-3 md:gap-2 place-content-center'>
-          <label className='p-2 font-bold'>First Name:</label>
+          <label className={`p-2 font-bold ${edit ? 'text-blue-600' : ''}`}>
+            First Name:
+          </label>
           <TextField
             inputProps={{ readOnly: !edit }}
             required
@@ -46,7 +59,9 @@ const Account = ({ userObject }) => {
           />
         </div>
         <div className='grid grid-cols-1 gap-3 md:gap-2 place-content-center'>
-          <label className='p-2 font-bold'>Last Name:</label>
+          <label className={`p-2 font-bold ${edit ? 'text-blue-600' : ''}`}>
+            Last Name:
+          </label>
           <TextField
             inputProps={{ readOnly: !edit }}
             id='outlined-required'
@@ -58,7 +73,9 @@ const Account = ({ userObject }) => {
       </div>
       <div className='grid sm:grid-cols-1 md:grid-cols-2 gap-6'>
         <div className='grid grid-cols-1 gap-3 md:gap-2 place-content-center'>
-          <label className='p-2 font-bold'>Username:</label>
+          <label className={`p-2 font-bold ${edit ? 'text-blue-600' : ''}`}>
+            Username:
+          </label>
           <TextField
             inputProps={{ readOnly: !edit }}
             id='outlined-required'
@@ -68,7 +85,9 @@ const Account = ({ userObject }) => {
           />
         </div>
         <div className='grid grid-cols-1 gap-3 md:gap-2 place-content-center'>
-          <label className='p-2 font-bold'>Email:</label>
+          <label className={`p-2 font-bold ${edit ? 'text-blue-600' : ''}`}>
+            Email:
+          </label>
           <TextField
             inputProps={{ readOnly: !edit }}
             id='outlined-required'
@@ -80,7 +99,9 @@ const Account = ({ userObject }) => {
       </div>
       <div className='grid sm:grid-cols-1 md:grid-cols-2 gap-6'>
         <div className='grid grid-cols-1 gap-3 md:gap-2 place-content-center'>
-          <label className='p-2 font-bold'>Age:</label>
+          <label className={`p-2 font-bold ${edit ? 'text-blue-600' : ''}`}>
+            Age:
+          </label>
           <TextField
             inputProps={{ readOnly: !edit }}
             id='outlined-required'
@@ -92,8 +113,8 @@ const Account = ({ userObject }) => {
         <div className='flex justify-start items-end'>
           {edit ? (
             <Button
-              onClick={() => {
-                handleSave();
+              onClick={(e) => {
+                handleSave(e);
               }}
             >
               Save

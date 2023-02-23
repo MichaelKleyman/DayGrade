@@ -6,6 +6,7 @@ import {
   createUserWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
+  sendPasswordResetEmail,
 } from 'firebase/auth';
 //imported from firebase/firestore
 import { doc, getDoc } from 'firebase/firestore';
@@ -39,6 +40,27 @@ export function AuthProvider({ children }) {
     return signOut(auth);
   }
 
+  function resetPassword(email) {
+    return sendPasswordResetEmail(auth, email);
+  }
+
+  function updateEmail(email, password) {
+    const cred = auth.EmailAuthProvider.credential(currentUser.email, password);
+    currentUser.reauthenticateWithCredential(cred).then(() => {
+      currentUser.updateEmail(email).then(() => {
+        console.log('Email updated successfully')
+      }).catch((e) => {
+        console.log('Error updating email: ', e)
+      })
+    }).catch((e) => {
+      console.log('Error reauthenticating user: ', e)
+    })
+  }
+
+  // function updatePassword(password) {
+  //   return updatePassword(auth, password);
+  // }
+
   //can make functions to update password in this as well.
 
   useEffect(() => {
@@ -54,6 +76,9 @@ export function AuthProvider({ children }) {
     login,
     signUp,
     logout,
+    resetPassword,
+    updateEmail,
+    // updatePassword,
     userInfo,
   };
 

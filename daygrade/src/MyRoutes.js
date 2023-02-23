@@ -9,6 +9,7 @@ import Temp from './components/TempCalendar';
 import UsersAccount from './components/UsersAccount';
 import Search from './components/Search';
 import NotFound from './components/NotFound';
+import ForgotPassword from './components/ForgotPassword';
 
 const MyRoutes = () => {
   return (
@@ -21,6 +22,7 @@ const MyRoutes = () => {
       <Route path='users/account/:id' element={<UsersAccount />} />
       <Route path='search/logs/:id' element={<Search />} />
       <Route path='*' element={<NotFound />} />
+      <Route path='/forgot-password' element={<ForgotPassword />} />
       {/* <Route path='temp' element={<Temp />} /> */}
     </Routes>
   );
