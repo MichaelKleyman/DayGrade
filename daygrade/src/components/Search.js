@@ -76,7 +76,6 @@ const Search = () => {
 
   return (
     <div className='w-full'>
-      <button onClick={() => console.log(selectedScore[0])}>click</button>
       <div className='text-center mt-8'>
         <TextField
           id='outlined-search'
@@ -136,7 +135,7 @@ const Search = () => {
           </div>
         ))}
       </div>
-      {selectedScore.length && (
+      {selectedScore.length ? (
         <Dialog
           open={open}
           onClose={handleClose}
@@ -154,6 +153,22 @@ const Search = () => {
             </DialogContentText>
           </DialogContent>
           <LineChartModal scoreObj={selectedScore[0]} />
+          <DialogActions>
+            <Button onClick={handleClose}>Close</Button>
+          </DialogActions>
+        </Dialog>
+      ) : (
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          PaperComponent={PaperComponent}
+          aria-labelledby='draggable-dialog-title'
+        >
+          <DialogContent>
+            <DialogContentText sx={{ fontWeight: 'bold', color: 'black' }}>
+              No check in for this day
+            </DialogContentText>
+          </DialogContent>
           <DialogActions>
             <Button onClick={handleClose}>Close</Button>
           </DialogActions>
