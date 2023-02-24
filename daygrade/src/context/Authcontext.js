@@ -44,19 +44,6 @@ export function AuthProvider({ children }) {
     return sendPasswordResetEmail(auth, email);
   }
 
-  function updateEmail(email, password) {
-    const cred = auth.EmailAuthProvider.credential(currentUser.email, password);
-    currentUser.reauthenticateWithCredential(cred).then(() => {
-      currentUser.updateEmail(email).then(() => {
-        console.log('Email updated successfully')
-      }).catch((e) => {
-        console.log('Error updating email: ', e)
-      })
-    }).catch((e) => {
-      console.log('Error reauthenticating user: ', e)
-    })
-  }
-
   // function updatePassword(password) {
   //   return updatePassword(auth, password);
   // }
@@ -77,7 +64,6 @@ export function AuthProvider({ children }) {
     signUp,
     logout,
     resetPassword,
-    updateEmail,
     // updatePassword,
     userInfo,
   };

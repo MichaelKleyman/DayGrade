@@ -3,11 +3,9 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { editUser } from '../store';
 import { useDispatch } from 'react-redux';
-import { useAuth } from '../context/Authcontext';
 
 const Account = ({ userObject }) => {
   const { firstName, lastName, email, age, userName } = userObject;
-  const { currentUser, updateEmail } = useAuth();
   const dispatch = useDispatch();
 
   const [edit, setEdit] = useState(false);
@@ -23,10 +21,6 @@ const Account = ({ userObject }) => {
     e.preventDefault();
     try {
       setEdit(false);
-      // if (accountInfo.email !== currentUser.email) {
-      //   await updateEmail(accountInfo.email);
-      //   dispatch(editUser(userObject.id, accountInfo));
-      // }
       dispatch(editUser(userObject.id, accountInfo));
       // console.log(accountInfo);
     } catch (error) {
@@ -86,20 +80,6 @@ const Account = ({ userObject }) => {
         </div>
         <div className='grid grid-cols-1 gap-3 md:gap-2 place-content-center'>
           <label className={`p-2 font-bold ${edit ? 'text-blue-600' : ''}`}>
-            Email:
-          </label>
-          <TextField
-            inputProps={{ readOnly: !edit }}
-            id='outlined-required'
-            value={accountInfo.email}
-            onChange={handleChange}
-            name='email'
-          />
-        </div>
-      </div>
-      <div className='grid sm:grid-cols-1 md:grid-cols-2 gap-6'>
-        <div className='grid grid-cols-1 gap-3 md:gap-2 place-content-center'>
-          <label className={`p-2 font-bold ${edit ? 'text-blue-600' : ''}`}>
             Age:
           </label>
           <TextField
@@ -110,9 +90,12 @@ const Account = ({ userObject }) => {
             name='age'
           />
         </div>
-        <div className='flex justify-start items-end'>
+      </div>
+      <div className='grid sm:grid-cols-1 md:grid-cols-2 gap-6'>
+        <div className='flex justify-start items-end p-4'>
           {edit ? (
             <Button
+              sx={{ backgroundColor: 'blue', color: 'white' }}
               onClick={(e) => {
                 handleSave(e);
               }}
@@ -121,6 +104,7 @@ const Account = ({ userObject }) => {
             </Button>
           ) : (
             <Button
+              sx={{ backgroundColor: 'green', color: 'white' }}
               onClick={() => {
                 handleEdit();
               }}
