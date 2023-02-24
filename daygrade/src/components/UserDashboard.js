@@ -75,10 +75,12 @@ const UserDashboard = () => {
         {userObject.userName}'s Dashboard
       </div>
       <div className='grid lg:grid-cols-3 gap-8 p-6 items-center'>
-        <div className='p-6 shadow-xl rounded-xl bg-white h-[100%] md:h-[80%] lg:h-[90%]'>
-          <h1 className='font-extrabold md:text-xl flex items-center'>
-            <FcTimeline className='p-2' size={38} />
-            Search Logs
+        <div className='p-6 shadow-xl rounded-xl bg-white h-[100%] md:h-[80%] lg:h-[90%] grid grid-cols-1 gap-8'>
+          <h1 className='font-extrabold md:text-xl flex items-center justify-between'>
+            <div className='flex text-center'>
+              <FcTimeline className='p-2' size={38} />
+              Search Logs
+            </div>
             <button
               onClick={() => navigate(`search/logs/${currentUser.uid}`)}
               className='font-normal h-9 ml-10 border bg-blue-600 text-white rounded-full uppercase text-sm tracking-widest w-[40%] duration-200 hover:scale-110 ease-in'
@@ -86,16 +88,9 @@ const UserDashboard = () => {
               Search
             </button>
           </h1>
-          {/* <div className='grid grid-cols-3 mt-10 text-center text-blue-400 relative bottom-0'> */}
-          {/* <div>
-            <h1>{date}</h1>
-            <h1 className='text-2xl grid grid-cols-3 gap-4'>
-              <AiOutlineSmallDash />
-              🤩
-              <AiOutlineSmallDash />
-            </h1>
-            <h1>Score: 10</h1>
-          </div> */}
+          <h1 className='text-blue-400'>
+            Take a look at your previous logs by searching a key word.
+          </h1>
         </div>
         <div className='p-6 shadow-xl rounded-xl bg-white grid grid-cols-2 h-[100%] md:h-[80%] lg:h-[90%]'>
           <div className='w-[90%]'>
@@ -114,14 +109,14 @@ const UserDashboard = () => {
             </button>
           </div>
 
-          <div className='grid grid-cols-3 gap-4 justify-center items-center text-blue-400'>
-            <div className='w-screen'>
+          <div className='grid grid-cols-3 gap-4 place-items-center text-blue-400 w-[440px] md:w-[340px]'>
+            <div className='w-full'>
               <p>Last check in</p>
             </div>
-            <div className='w-screen ml-6'>
+            <div className='w-full ml-6'>
               <FcAdvance className='p-2 mx-2' size={38} />
             </div>
-            <div className='w-screen ml-4'>
+            <div className='w-full ml-4'>
               <div>
                 {usersScores.length !== 0 ? (
                   <div>

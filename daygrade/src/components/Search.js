@@ -7,17 +7,49 @@ import { searchLogs } from '../store';
 import { Button } from '@mui/material';
 import { FcOk } from 'react-icons/fc';
 import { useAuth } from '../context/Authcontext';
-import Pagination from '@mui/material/Pagination';
+import LineChartModal from './LineChartModal';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Paper from '@mui/material/Paper';
+import Draggable from 'react-draggable';
+import { fetchScoreInfo } from '../store';
+
+function PaperComponent(props) {
+  return (
+    <Draggable
+      handle='#draggable-dialog-title'
+      cancel={'[class*="MuiDialogContent-root"]'}
+    >
+      <Paper {...props} />
+    </Draggable>
+  );
+}
 
 const Search = () => {
   const [searchInput, setSearchInput] = useState('');
   const [curPage, setCurPage] = useState(1);
   const [logsPerPage] = useState(8);
+  const [open, setOpen] = useState(false);
 
   const dispatch = useDispatch();
   const searchResults = useSelector((state) => state.logReducer);
-  // console.log('search results', searchResults);
+  const selectedScore = useSelector((state) => state.scoreReducer);
+
   const { currentUser } = useAuth();
+  const [scoreObj, setScoreObj] = useState(null);
+
+  const handleClickOpen = (userId, date) => {
+    setOpen(true);
+    dispatch(fetchScoreInfo(userId, date));
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    setScoreObj({});
+  };
 
   const handleChange = (e) => {
     setSearchInput(e.target.value);
@@ -44,6 +76,7 @@ const Search = () => {
 
   return (
     <div className='w-full'>
+      <button onClick={() => console.log(selectedScore[0])}>click</button>
       <div className='text-center mt-8'>
         <TextField
           id='outlined-search'
@@ -93,7 +126,9 @@ const Search = () => {
                 variant='contained'
                 color='success'
                 sx={{ padding: '3px', fontSize: '12px' }}
-                onClick={() => console.log(obj)}
+                onClick={() => {
+                  handleClickOpen(obj.userId, obj.Date);
+                }}
               >
                 View
               </Button>
@@ -101,6 +136,29 @@ const Search = () => {
           </div>
         ))}
       </div>
+      {selectedScore.length && (
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          PaperComponent={PaperComponent}
+          aria-labelledby='draggable-dialog-title'
+        >
+          <DialogTitle style={{ cursor: 'move' }} id='draggable-dialog-title'>
+            Submitted grade for{' '}
+            <span className='font-extrabold'>{selectedScore[0].date}</span>
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              Look back and learn from previous grades. See why you gave
+              yourself that score, and apply it to today.
+            </DialogContentText>
+          </DialogContent>
+          <LineChartModal scoreObj={selectedScore[0]} />
+          <DialogActions>
+            <Button onClick={handleClose}>Close</Button>
+          </DialogActions>
+        </Dialog>
+      )}
     </div>
   );
 };

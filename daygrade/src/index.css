@@ -4,7 +4,8 @@
 
 body {
   /* background-color: #faf9f6; */
-  background-color: #e6e6e3;
+  /* background-color: #e6e6e3; */
+  background-image: url('https://images.unsplash.com/photo-1560780552-ba54683cb263?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80');
 }
 
 .ais-SearchBox-input {
