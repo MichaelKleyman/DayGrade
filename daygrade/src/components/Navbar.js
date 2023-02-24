@@ -34,7 +34,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className='bg-white shadow-xl w-full'>
+    <div className='shadow-xl w-full' id='navbar'>
       <div className='text-black flex justify-between items-center h-20 max-w-[1240px] mx-auto px-4 w-full'>
         <Link
           to='/'

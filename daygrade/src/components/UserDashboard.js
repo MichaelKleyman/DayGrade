@@ -71,7 +71,7 @@ const UserDashboard = () => {
 
   return (
     <div className='w-full'>
-      <div className='m-6 p-6 text-3xl font-bold tracking-widest'>
+      <div className='m-6 p-6 text-3xl font-bold tracking-widest' id='dashboard-greeting'>
         {userObject.userName}'s Dashboard
       </div>
       <div className='grid lg:grid-cols-3 gap-8 p-6 items-center'>

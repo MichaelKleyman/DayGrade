@@ -117,9 +117,11 @@ const Grader = ({
 
   return (
     <div className='w-full'>
-      <h1 className='text-lg font-bold'>{date.format('dddd, MMMM D YYYY')}</h1>
+      <h1 className='text-lg font-bold' id='date'>
+        {date.format('dddd, MMMM D YYYY')}
+      </h1>
       <div className='grid grid-cols-2 gap-8'>
-        <div className='py-5'>
+        <div className='py-5' id='time'>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <Stack spacing={3}>
               <TimePicker
@@ -324,7 +326,7 @@ const Grader = ({
       </div>
       {!usersLog.length && (
         <div className='flex items-center justify-center uppercase tracking-widest shadow-lg shadow-gray-400 rounded-xl p-5'>
-          <h1>No Logs</h1>
+          <h1 id='no-logs'>No Logs</h1>
         </div>
       )}
     </div>
