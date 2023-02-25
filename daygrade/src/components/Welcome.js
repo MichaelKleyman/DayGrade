@@ -5,7 +5,7 @@ import Backgroundpic from '../images/Authpic.png';
 
 const Welcome = () => {
   return (
-    <div className='grid grid-cols-1 h-screen w-full bg-black/80'>
+    <div className='grid grid-cols-1 h-screen w-full bg-black/80' id='welcome'>
       <img
         className='absolute w-full h-full object-cover mix-blend-overlay'
         src={Backgroundpic}

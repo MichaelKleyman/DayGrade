@@ -232,12 +232,12 @@ const Signup = () => {
   };
 
   return (
-    <div className='grid grid-cols-1 h-screen w-full bg-black/80'>
-      <img
+    <div className='grid grid-cols-1 h-screen w-full bg-black/80' id='signin'>
+      {/* <img
         className='absolute w-full h-full object-cover mix-blend-overlay'
         src={Backgroundpic}
         alt='background'
-      />
+      /> */}
       <div className='flex flex-col justify-center z-[2]'>
         <form className='max-w-[400px] w-full mx-auto bg-white rounded-xl shadow-xl p-5'>
           <div>
