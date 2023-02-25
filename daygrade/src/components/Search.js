@@ -103,7 +103,7 @@ const Search = () => {
                 num === curPage ? 'bg-blue-600 text-white' : ''
               } cursor-pointer border border-blue-500 rounded-lg ml-2 p-4 hover:bg-blue-600 hover:text-white hover:rounded-lg hover:shadow-gray-600 hover:scale-110 duration-300`}
             >
-              <a href='!#' id='num'>{num}</a>
+              <a href='!#'>{num}</a>
             </li>
           ))}
         </ul>

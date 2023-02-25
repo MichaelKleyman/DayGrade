@@ -8,6 +8,7 @@ import {
   getAuth,
 } from 'firebase/auth';
 import { FaCheck } from 'react-icons/fa';
+import { BsDot } from 'react-icons/bs';
 
 const Password = () => {
   const auth = getAuth();
@@ -63,6 +64,14 @@ const Password = () => {
   return (
     <div>
       <label className='p-2 font-bold'>Reset Password</label>
+      <div className='p-3'>
+        <h1 className='text-sm text-gray-500 flex items-center'>
+          <BsDot size={35} /> New password must by at least 6 characters long
+        </h1>
+        <h1 className='text-sm text-gray-500 flex items-center'>
+          <BsDot size={35} /> New password must not match old password
+        </h1>
+      </div>
       <div className='grid sm:grid-cols-1 md:grid-cols-1 gap-2 w-full md:w-[45%]'>
         <div className='grid grid-cols-1 gap-3 md:gap-0 place-content-center p-6'>
           <TextField
