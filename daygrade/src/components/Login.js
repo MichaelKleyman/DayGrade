@@ -45,7 +45,7 @@ const Login = () => {
   };
 
   return (
-    <div className='grid grid-cols-1 h-screen w-full bg-black/80'>
+    <div className='grid grid-cols-1 h-screen w-full bg-black/80' id='login'>
       <img
         className='absolute w-full h-full object-cover mix-blend-overlay'
         src={Backgroundpic}
@@ -94,7 +94,10 @@ const Login = () => {
             >
               Log In
             </Button>
-            <Link to='/forgot-password' className='text-center text-sm text-blue-400 hover:underline cursor-pointer'>
+            <Link
+              to='/forgot-password'
+              className='text-center text-sm text-blue-400 hover:underline cursor-pointer'
+            >
               Forgot Password?
             </Link>
           </div>

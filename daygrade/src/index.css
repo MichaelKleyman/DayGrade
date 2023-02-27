@@ -5,7 +5,86 @@
 body {
   /* background-color: #faf9f6; */
   /* background-color: #e6e6e3; */
+  /* background-image: url('https://images.unsplash.com/photo-1560780552-ba54683cb263?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80'); */
+  /* background-image: url('https://images.unsplash.com/photo-1533134486753-c833f0ed4866?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80'); */
+}
+
+#dark #login {
+  background-image: url('https://images.unsplash.com/flagged/photo-1574512468809-d05a4fd197fd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80');
+  background-blend-mode: darken;
+}
+
+#dark #signin {
+  background-image: url('https://images.unsplash.com/flagged/photo-1574512468809-d05a4fd197fd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80');
+  background-blend-mode: darken;
+}
+
+#dark #welcome {
+  background-image: url('https://images.unsplash.com/flagged/photo-1574512468809-d05a4fd197fd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80');
+  background-blend-mode: darken;
+}
+
+#dark #credit {
+  color: white;
+}
+
+#dark #home {
+  color: white;
+}
+
+#light body {
   background-image: url('https://images.unsplash.com/photo-1560780552-ba54683cb263?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80');
+}
+
+#dark body {
+  background-image: url('https://images.unsplash.com/photo-1547127796-06bb04e4b315?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1674&q=80');
+}
+
+#navbar {
+  background-color: white;
+}
+
+#dark #num {
+  color: white;
+}
+
+#dark #outlined-search {
+  color: white;
+}
+
+#dark #dashboard-greeting {
+  color: white;
+}
+
+#dark #no-logs {
+  color: white;
+}
+
+#dark #date {
+  color: white;
+}
+
+#dark #time {
+  background-color: #666362;
+  padding: 1rem;
+  margin: 13px;
+  border-radius: 20px;
+}
+
+#light #navbar {
+  background-color: white;
+}
+
+#dark #navbar {
+  background-color: #282c35;
+}
+
+#light {
+  background-image: url('https://images.unsplash.com/photo-1560780552-ba54683cb263?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80');
+}
+
+#dark {
+  background-image: url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80');
 }
 
 .ais-SearchBox-input {
