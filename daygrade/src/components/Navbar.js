@@ -6,10 +6,13 @@ import Profile from './Profile';
 import Button from '@mui/material/Button';
 import { SlHome } from 'react-icons/sl';
 import { useNavigate } from 'react-router-dom';
+import { reactSwitch } from '../App';
+import { BsSun, BsFillMoonFill } from 'react-icons/bs';
 
 const Navbar = () => {
   const [openNav, setOpenNav] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [mode, setMode] = useState(false);
   const navigate = useNavigate();
   const open = Boolean(anchorEl);
 
@@ -33,6 +36,10 @@ const Navbar = () => {
     }
   };
 
+  const switchMode = () => {
+    setMode(!mode);
+  };
+
   return (
     <div className=' bg-white shadow-xl w-full' id='navbar'>
       <div className='text-black flex justify-between items-center h-20 max-w-[1240px] mx-auto px-4 w-full'>
@@ -52,7 +59,7 @@ const Navbar = () => {
           </div>
         ) : (
           <div>
-            <div>
+            <div className='flex items-center'>
               <ul className='hidden md:flex'>
                 <li className='ml-10 uppercase duration-200 hover:scale-110 cursor-pointer text-2sm'>
                   {/* Home */}
@@ -74,6 +81,18 @@ const Navbar = () => {
               </ul>
               <div className='md:hidden' onClick={showNav}>
                 <AiOutlineMenu size={35} />
+              </div>
+              <div onClick={switchMode} className='flex items-center pl-6'>
+                {reactSwitch()}
+                {mode ? (
+                  <div>
+                    <BsSun size={45} className='p-3' />
+                  </div>
+                ) : (
+                  <div>
+                    <BsFillMoonFill size={45} className='p-3' />
+                  </div>
+                )}
               </div>
             </div>
             <div

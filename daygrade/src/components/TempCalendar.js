@@ -105,6 +105,7 @@ export default function Temp() {
           width: tileSize,
           height: tileSize,
         }}
+        id='calendar-dates'
       />
     );
   };
@@ -123,7 +124,10 @@ export default function Temp() {
         />
       </div>
       <div className='grid md:grid-cols-2 gap-8 mx-auto py-2 px-4 m-6'>
-        <div className='bg-white rounded-xl shadow-lg shadow-gray-400 h-full md:h-[70%]'>
+        <div
+          className='bg-white rounded-xl shadow-lg shadow-gray-400 h-full md:h-[70%]'
+          id='calendar-background'
+        >
           <Box textAlign='center'>
             <Box>
               <h1 className='text-4xl p-3 flex items-center justify-center'>

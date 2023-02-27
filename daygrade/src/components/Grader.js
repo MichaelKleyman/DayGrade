@@ -121,10 +121,11 @@ const Grader = ({
         {date.format('dddd, MMMM D YYYY')}
       </h1>
       <div className='grid grid-cols-2 gap-8'>
-        <div className='py-5'>
+        <div className='py-5' id='time-setter'>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <Stack spacing={3}>
               <TimePicker
+                id='time'
                 label='Time'
                 value={time}
                 onChange={handleTime}
@@ -252,11 +253,16 @@ const Grader = ({
           </div>
         </div>
       </div>
-      <div className='grid grid-cols-1 lg:grid-cols-2 sm:grid-cols-1 gap-4'>
+      <div
+        className='grid grid-cols-1 lg:grid-cols-2 sm:grid-cols-1 gap-4 h-[570px] overflow-y-auto'
+        id='logs'
+      >
         {arrayFirstHalf.map((usersLogInfo, i) => (
           <div
             key={usersLogInfo.id}
-            className='w-full bg-gradient-to-r from-cyan-200 to-blue-400 shadow-lg shadow-gray-400 rounded-xl'
+            // bg-gradient-to-r from-cyan-200 to-blue-400
+            className='w-full shadow-lg shadow-gray-400 rounded-xl'
+            id='log1'
           >
             <h1 className='font-bold mx-2 my-3 py-4 flex justify-between'>
               <p>{usersLogInfo.log}</p>
@@ -291,7 +297,9 @@ const Grader = ({
         {arraySecondHalf.map((usersLogInfo, i) => (
           <div
             key={usersLogInfo.id}
-            className='bg-gradient-to-r from-cyan-200 to-blue-400 shadow-lg shadow-gray-400 rounded-xl'
+            // bg-gradient-to-r from-cyan-200 to-blue-400
+            className=' shadow-lg shadow-gray-400 rounded-xl'
+            id='log2'
           >
             <h1 className='font-bold mx-4 my-3 py-4 flex justify-between '>
               <p>{usersLogInfo.log}</p>
@@ -325,7 +333,10 @@ const Grader = ({
         ))}
       </div>
       {!usersLog.length && (
-        <div className='flex items-center justify-center uppercase tracking-widest shadow-lg shadow-gray-400 rounded-xl p-5'>
+        <div
+          className='flex items-center justify-center uppercase tracking-widest shadow-lg shadow-gray-400 rounded-xl p-5'
+          id='no-logs'
+        >
           <h1>No Logs</h1>
         </div>
       )}

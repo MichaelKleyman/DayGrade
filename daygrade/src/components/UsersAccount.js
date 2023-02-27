@@ -80,7 +80,7 @@ const UsersAccount = () => {
           Settings
         </Button>
       </div>
-      <div className='w-[85%] bg-stone-100 shadow-lg shadow-gray-400 rounded-lg m-6 p-3'>
+      <div className='w-[85%] bg-stone-100 shadow-md shadow-slate-400 rounded-lg m-6 p-3' id='user-account'>
         <div>{pageDisplay()}</div>
       </div>
     </div>

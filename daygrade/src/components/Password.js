@@ -63,7 +63,7 @@ const Password = () => {
 
   return (
     <div>
-      <label className='p-2 font-bold'>Reset Password</label>
+      <label className='p-2 font-bold' id='reset-password'>Reset Password</label>
       <div className='p-3'>
         <h1 className='text-sm text-gray-500 flex items-center'>
           <BsDot size={35} /> New password must by at least 6 characters long

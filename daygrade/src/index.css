@@ -2,11 +2,183 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  /* background-color: #faf9f6; */
-  /* background-color: #e6e6e3; */
-  /* background-image: url('https://images.unsplash.com/photo-1560780552-ba54683cb263?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80'); */
-  /* background-image: url('https://images.unsplash.com/photo-1533134486753-c833f0ed4866?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80'); */
+/* body { */
+/* background-color: #faf9f6; */
+/* background-color: #e6e6e3; */
+/* background-image: url('https://images.unsplash.com/photo-1560780552-ba54683cb263?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80'); */
+/* background-image: url('https://images.unsplash.com/photo-1533134486753-c833f0ed4866?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80'); */
+/* } */
+
+#dark #log1 {
+  background-color: #41024d;
+  color: white;
+}
+
+#dark #log2 {
+  background-color: #41024d;
+  color: white;
+}
+
+#light #log1 {
+  background-image: linear-gradient(
+    to right,
+    #087ee1,
+    #009ff2,
+    #00bbed,
+    #00d3d7,
+    #05e8ba
+  );
+  background-image: linear-gradient(
+    to right,
+    #68aee8,
+    #1bbff1,
+    #00cfec,
+    #00ddd9,
+    #05e8ba
+  );
+  color: black;
+}
+
+#light #log2 {
+  background-image: linear-gradient(
+    to right,
+    #087ee1,
+    #009ff2,
+    #00bbed,
+    #00d3d7,
+    #05e8ba
+  );
+  background-image: linear-gradient(
+    to right,
+    #68aee8,
+    #1bbff1,
+    #00cfec,
+    #00ddd9,
+    #05e8ba
+  );
+  color: black;
+}
+
+#dark .MuiFormLabel-root {
+  color: white;
+}
+
+#dark #reset-password {
+  color: white;
+}
+
+#dark #setting-text {
+  color: white;
+}
+
+#dark .MuiOutlinedInput-input {
+  border: solid blueviolet 1px;
+  border-radius: 10px;
+}
+
+#dark #user-account {
+  background-color: #282c35;
+}
+
+#light #user-account {
+  background-color: white;
+}
+
+#dark #calendar-dates {
+  background-color: #282c35;
+}
+
+#light #calendar-background {
+  background-color: white;
+}
+
+#dark #calendar-background {
+  background-color: #282c35;
+}
+
+#light #log-text {
+  color: black;
+}
+
+#dark #log-text {
+  color: white;
+}
+
+#light #log {
+  background-color: white;
+}
+
+#dark #log {
+  background-color: #282c35;
+}
+
+#light #search-div {
+  background-color: white;
+}
+
+#light #log-div {
+  background-color: white;
+}
+
+#light #goal-div {
+  background-color: white;
+}
+
+#light #chart-div {
+  background-color: white;
+}
+
+#light #activity-div {
+  background-color: white;
+}
+
+#dark #search-div {
+  background-color: #282c35;
+}
+
+#dark #log-div {
+  background-color: #282c35;
+}
+
+#dark #goal-div {
+  background-color: #282c35;
+}
+
+#dark #chart-div {
+  background-color: #282c35;
+}
+
+#dark #activity-div {
+  background-color: #282c35;
+}
+
+#dark #time-setter {
+  background-color: #41024d;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 20px;
+  color: white;
+}
+
+#dark .MuiInputBase-input {
+  color: white;
+}
+
+#light #no-logs {
+  color: black;
+}
+
+#dark #no-logs {
+  color: white;
+}
+
+#light #not-found {
+  background-image: url('https://images.unsplash.com/photo-1535025075092-5a1cf795130b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2073&q=80');
+  color: black;
+}
+
+#dark #not-found {
+  background-image: url('https://images.unsplash.com/photo-1544365558-35aa4afcf11f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1036&q=80');
 }
 
 #dark #login {

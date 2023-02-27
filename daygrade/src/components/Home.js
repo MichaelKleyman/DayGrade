@@ -7,7 +7,7 @@ const Home = () => {
   const { currentUser } = useAuth();
 
   return (
-    <div>
+    <div className='h-[1500px] md:h-[1100px]'>
       {!currentUser ? (
         <div>
           <div className='w-full flex items-center py-16 px-4 h-[760px] md:h-[640px]'>
@@ -30,7 +30,10 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <div className='w-full flex items-center justify-center pb-6 sm:mt-[9rem] md:mt-[12rem] mt-[2rem] tracking-widest font-thin' id='credit'>
+          <div
+            className='w-full flex items-center justify-center pb-6 sm:mt-[9rem] md:mt-[7rem] mt-[2rem] tracking-widest font-thin'
+            id='credit'
+          >
             <footer>Inspired by Rob Dyrdek</footer>
           </div>
         </div>
