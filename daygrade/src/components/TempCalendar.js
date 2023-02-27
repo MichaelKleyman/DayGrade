@@ -16,9 +16,8 @@ import SendIcon from '@mui/icons-material/Send';
 import { useNavigate } from 'react-router-dom';
 import { FcCalendar, FcAbout } from 'react-icons/fc';
 import Grader from './Grader';
-import { fetchLog } from '../store';
 import ScoreProcess from './ScoreProcess';
-import { fetchScoreInfo } from '../store';
+import { fetchScoreInfo, fetchWaterInfo, fetchLog } from '../store';
 import PreviousGrade from './PreviousGrade';
 
 export default function Temp() {
@@ -30,11 +29,12 @@ export default function Temp() {
   const dispatch = useDispatch();
   const tileSize = '70px';
 
+  let waterCountArr = useSelector((state) => state.waterReducer);
+  let curWaterCount = waterCountArr[0];
   let usersLog = useSelector((state) => state.logReducer);
   let usersScoreArr = useSelector((state) => state.scoreReducer);
   let usersScoreObj = usersScoreArr[0];
 
-  const [type, setType] = useState('Cup');
   const [waterCount, setWaterCount] = useState([
     { drank: false },
     { drank: false },
@@ -43,6 +43,8 @@ export default function Temp() {
     { drank: false },
     { drank: false },
   ]);
+
+  // const saveWaterCount = () => {};
 
   const changeDate = (curDate) => {
     return dispatch(fetchLog(user?.uid, curDate));
@@ -68,6 +70,15 @@ export default function Temp() {
       unsubscribeScore();
     };
   }, [date]);
+
+  useEffect(() => {
+    const unsubscribeWater = dispatch(
+      fetchWaterInfo(user.uid, date.format('dddd, MMMM D YYYY'))
+    );
+    return () => {
+      unsubscribeWater();
+    };
+  }, [waterCount, date]);
 
   const CustomPicker = styled(CalendarPicker)(({ theme }) => ({
     '&.MuiCalendarPicker-root': {
@@ -180,8 +191,8 @@ export default function Temp() {
             waterCount={waterCount}
             usersScoreObj={usersScoreObj}
             usersScoreArr={usersScoreArr}
-            type={type}
-            setType={setType}
+            curWaterCount={curWaterCount}
+            waterCountArr={waterCountArr}
           />
         </div>
       </div>

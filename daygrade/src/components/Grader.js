@@ -15,8 +15,8 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../firebase';
 import { AiFillDelete } from 'react-icons/ai';
 import EditLog from './EditLog';
-import { MdOutlineLocalDrink, MdLocalDrink } from 'react-icons/md';
-import { TbBottle } from 'react-icons/tb';
+import Water from './Water';
+import { editWaterCount, createWaterCount } from '../store';
 
 const Grader = ({
   date,
@@ -25,15 +25,28 @@ const Grader = ({
   waterCount,
   usersScoreObj,
   usersScoreArr,
-  type,
-  setType,
+  curWaterCount,
+  waterCountArr,
 }) => {
   const [open, setOpen] = useState(false);
+  const [update, setUpdate] = useState(false);
   const [time, setTime] = useState(dayjs(new Date()));
   const [curLog, setLog] = useState('');
   const [error, setError] = useState(null);
   const [user, loading] = useAuthState(auth);
   const [id, setId] = useState(null);
+
+  console.log('watercountarr', waterCountArr.length);
+
+  let waterType;
+
+  if (waterCountArr.length > 0) {
+    waterType = curWaterCount.type;
+  } else {
+    waterType = 'Cup';
+  }
+
+  const [type, setType] = useState(waterType);
 
   const dispatch = useDispatch();
 
@@ -51,7 +64,15 @@ const Grader = ({
   };
 
   const handleType = (clickedType) => {
-    setType(clickedType);
+    if (waterCountArr.length > 0) {
+      if (type === 'Bottle') {
+        setType('Cup');
+      } else {
+        setType('Bottle');
+      }
+    } else {
+      setType(clickedType);
+    }
   };
 
   const handleTime = (newValue) => {
@@ -83,33 +104,83 @@ const Grader = ({
     }
   };
 
-  // useEffect(() => {
-  //   setType('Cup');
-  // }, [date]);
+  // const drankWater = (i) => {
+  //   if (update) {
+  //     if (usersScoreArr.length) {
+  //       let clickedCups = usersScoreObj.waterCount.map((cup, index) => {
+  //         if (i === index) {
+  //           cup.drank = !cup.drank;
+  //           return cup;
+  //         } else {
+  //           return cup;
+  //         }
+  //       });
+  //       setWaterCount(clickedCups);
+  //     } else {
+  //       let clickedCups = waterCount.map((cup, index) => {
+  //         if (i === index) {
+  //           cup.drank = !cup.drank;
+  //           return cup;
+  //         } else {
+  //           return cup;
+  //         }
+  //       });
+  //       setWaterCount(clickedCups);
+  //     }
+  //   }
+  // };
 
   const drankWater = (i) => {
-    if (usersScoreArr.length) {
-      let clickedCups = usersScoreObj.waterCount.map((cup, index) => {
-        if (i === index) {
-          cup.drank = !cup.drank;
-          return cup;
-        } else {
-          return cup;
-        }
-      });
-      setWaterCount(clickedCups);
-    } else {
-      let clickedCups = waterCount.map((cup, index) => {
-        if (i === index) {
-          cup.drank = !cup.drank;
-          return cup;
-        } else {
-          return cup;
-        }
-      });
-      setWaterCount(clickedCups);
+    if (update) {
+      if (waterCountArr.length) {
+        let clickedCups = curWaterCount.drank.map((cup, index) => {
+          if (i === index) {
+            cup.drank = !cup.drank;
+            return cup;
+          } else {
+            return cup;
+          }
+        });
+        setWaterCount(clickedCups);
+      } else {
+        let clickedCups = waterCount.map((cup, index) => {
+          if (i === index) {
+            cup.drank = !cup.drank;
+            return cup;
+          } else {
+            return cup;
+          }
+        });
+        setWaterCount(clickedCups);
+      }
     }
   };
+
+  const saveWaterCount = () => {
+    if (waterCountArr.length !== 0) {
+      dispatch(
+        editWaterCount(
+          user.uid,
+          waterCount,
+          type,
+          date.format('dddd, MMMM D YYYY')
+        )
+      );
+    } else {
+      dispatch(
+        createWaterCount(
+          user.uid,
+          date.format('dddd, MMMM D YYYY'),
+          type,
+          waterCount
+        )
+      );
+    }
+  };
+
+  useEffect(() => {
+    setUpdate(false);
+  }, [date]);
 
   const halfwayPoint = Math.ceil(usersLog.length / 2);
   let arrayFirstHalf = usersLog.slice(0, halfwayPoint);
@@ -133,97 +204,19 @@ const Grader = ({
               />
             </Stack>
           </LocalizationProvider>
-          <div className='mt-9'>
-            <h1 className='uppercase tracking-widest pb-2 text-blue-500 font-bold'>
-              water
-            </h1>
-            <h1 className='pb-3 text-sm'>
-              <span
-                onClick={() => handleType('Cup')}
-                className={`hover:text-blue-700 duration-300 hover:scale-110 cursor-pointer hover:font-bold ${
-                  type === 'Cup' ? 'text-blue-600 italic' : ''
-                }`}
-              >
-                Cup
-              </span>{' '}
-              or{' '}
-              <span
-                onClick={() => handleType('Bottle')}
-                className={`hover:text-blue-700 duration-300 hover:scale-110 cursor-pointer hover:font-bold ${
-                  type === 'Bottle' ? 'text-blue-600 italic' : ''
-                }`}
-              >
-                Bottle
-              </span>
-            </h1>
-            <div>
-              {usersScoreArr.length ? (
-                <div className='flex justify-between'>
-                  {usersScoreObj.waterCount.map((obj, i) => (
-                    <div key={i} onClick={() => drankWater(i)}>
-                      {obj.drank ? (
-                        type === 'Cup' ? (
-                          <MdLocalDrink
-                            color='blue'
-                            size={33}
-                            className='cursor-pointer duration-300 hover:scale-110'
-                          />
-                        ) : (
-                          <TbBottle
-                            color='blue'
-                            size={33}
-                            className='cursor-pointer duration-300 hover:scale-110'
-                          />
-                        )
-                      ) : type === 'Cup' ? (
-                        <MdOutlineLocalDrink
-                          size={33}
-                          className='cursor-pointer duration-300 hover:scale-110'
-                        />
-                      ) : (
-                        <TbBottle
-                          size={33}
-                          className='cursor-pointer duration-300 hover:scale-110'
-                        />
-                      )}
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <div className='flex justify-between'>
-                  {waterCount.map((obj, i) => (
-                    <div key={i} onClick={() => drankWater(i)}>
-                      {obj.drank ? (
-                        type === 'Cup' ? (
-                          <MdLocalDrink
-                            color='blue'
-                            size={33}
-                            className='cursor-pointer duration-300 hover:scale-110'
-                          />
-                        ) : (
-                          <TbBottle
-                            color='blue'
-                            size={33}
-                            className='cursor-pointer duration-300 hover:scale-110'
-                          />
-                        )
-                      ) : type === 'Cup' ? (
-                        <MdOutlineLocalDrink
-                          size={33}
-                          className='cursor-pointer duration-300 hover:scale-110'
-                        />
-                      ) : (
-                        <TbBottle
-                          size={33}
-                          className='cursor-pointer duration-300 hover:scale-110'
-                        />
-                      )}
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
+          {/* <Water
+            update={update}
+            type={type}
+            handleType={handleType}
+            setUpdate={setUpdate}
+            usersScoreArr={usersScoreArr}
+            usersScoreObj={usersScoreObj}
+            waterCount={waterCount}
+            drankWater={drankWater}
+            curWaterCount={curWaterCount}
+            waterCountArr={waterCountArr}
+            saveWaterCount={saveWaterCount}
+          /> */}
         </div>
         <div className='py-5'>
           <textarea
