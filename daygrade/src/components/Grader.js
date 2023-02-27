@@ -117,7 +117,9 @@ const Grader = ({
 
   return (
     <div className='w-full'>
-      <h1 className='text-lg font-bold'>{date.format('dddd, MMMM D YYYY')}</h1>
+      <h1 className='text-lg font-bold' id='date'>
+        {date.format('dddd, MMMM D YYYY')}
+      </h1>
       <div className='grid grid-cols-2 gap-8'>
         <div className='py-5'>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
