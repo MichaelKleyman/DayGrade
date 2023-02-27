@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from '@mui/material';
-import Switch from '@mui/material/Switch';
 import { BsSun, BsFillMoonFill } from 'react-icons/bs';
+import { reactSwitch } from '../App';
 
 const Settings = () => {
-  const [checked, setChecked] = React.useState(true);
+  const [checked, setChecked] = useState(false);
 
-  const handleChange = (event) => {
-    setChecked(event.target.checked);
+  const handleChange = () => {
+    setChecked(!checked);
   };
 
   return (
@@ -25,11 +25,9 @@ const Settings = () => {
         <div className='font-bold pb-2'>
           <div>Dark mode/Light mode</div>
           <div className='flex items-center'>
-            <Switch
-              checked={checked}
-              onChange={handleChange}
-              inputProps={{ 'aria-label': 'controlled' }}
-            />
+            <div role='button' onClick={handleChange}>
+              {reactSwitch()}
+            </div>
             {checked ? (
               <BsSun size={50} className='p-3' />
             ) : (

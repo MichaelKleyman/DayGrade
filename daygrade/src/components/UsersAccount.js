@@ -38,7 +38,7 @@ const UsersAccount = () => {
   };
 
   return (
-    <div className='w-full'>
+    <div className='w-full h-screen'>
       <div className='flex items-center justify-start py-6 ml-3'>
         <Button
           onClick={() => {
