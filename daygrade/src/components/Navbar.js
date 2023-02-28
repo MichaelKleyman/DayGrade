@@ -84,16 +84,16 @@ const Navbar = () => {
               </div>
               <div onClick={switchMode} className='flex items-center pl-6'>
                 {reactSwitch()}
-                {mode ? (
-                  <div>
-                    <BsSun size={45} className='p-3' />
-                  </div>
-                ) : (
-                  <div>
-                    <BsFillMoonFill size={45} className='p-3' />
-                  </div>
-                )}
               </div>
+              {mode ? (
+                <div>
+                  <BsSun size={45} className='p-3' />
+                </div>
+              ) : (
+                <div>
+                  <BsFillMoonFill size={45} className='p-3' />
+                </div>
+              )}
             </div>
             <div
               className={
