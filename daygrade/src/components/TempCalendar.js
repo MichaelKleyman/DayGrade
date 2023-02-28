@@ -29,26 +29,30 @@ export default function Temp() {
   const dispatch = useDispatch();
   const tileSize = '70px';
 
-  let waterCountArr = useSelector((state) => state.waterReducer);
-  let curWaterCount = waterCountArr[0];
+  // let waterCountArr = useSelector((state) => state.waterReducer);
+  // let curWaterCount = waterCountArr[0];
   let usersLog = useSelector((state) => state.logReducer);
   let usersScoreArr = useSelector((state) => state.scoreReducer);
   let usersScoreObj = usersScoreArr[0];
 
-  const [waterCount, setWaterCount] = useState([
-    { drank: false },
-    { drank: false },
-    { drank: false },
-    { drank: false },
-    { drank: false },
-    { drank: false },
-  ]);
+  // const [waterCount, setWaterCount] = useState([
+  //   { drank: false },
+  //   { drank: false },
+  //   { drank: false },
+  //   { drank: false },
+  //   { drank: false },
+  //   { drank: false },
+  // ]);
 
   // const saveWaterCount = () => {};
 
   const changeDate = (curDate) => {
     return dispatch(fetchLog(user?.uid, curDate));
   };
+
+  // const changeWaterCount = (curDate) => {
+  //   return dispatch(fetchWaterInfo(user.uid, curDate));
+  // };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -70,15 +74,6 @@ export default function Temp() {
       unsubscribeScore();
     };
   }, [date]);
-
-  useEffect(() => {
-    const unsubscribeWater = dispatch(
-      fetchWaterInfo(user.uid, date.format('dddd, MMMM D YYYY'))
-    );
-    return () => {
-      unsubscribeWater();
-    };
-  }, [waterCount, date]);
 
   const CustomPicker = styled(CalendarPicker)(({ theme }) => ({
     '&.MuiCalendarPicker-root': {
@@ -151,6 +146,7 @@ export default function Temp() {
                   onChange={(newDate) => {
                     setDate(newDate);
                     changeDate(newDate.format('dddd, MMMM D YYYY'));
+                    // changeWaterCount(newDate.format('dddd, MMMM D YYYY'));
                   }}
                   renderDay={renderWeekPickerDay}
                   showDaysOutsideCurrentMonth
@@ -180,19 +176,12 @@ export default function Temp() {
             open={open}
             handleClose={handleClose}
             date={date.format('dddd, MMMM D YYYY')}
-            waterCount={waterCount}
           />
         </div>
         <div className='h-screen'>
           <Grader
             date={date}
             usersLog={usersLog}
-            setWaterCount={setWaterCount}
-            waterCount={waterCount}
-            usersScoreObj={usersScoreObj}
-            usersScoreArr={usersScoreArr}
-            curWaterCount={curWaterCount}
-            waterCountArr={waterCountArr}
           />
         </div>
       </div>

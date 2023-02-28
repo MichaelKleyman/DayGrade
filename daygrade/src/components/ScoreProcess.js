@@ -77,8 +77,7 @@ const ScoreProcess = ({ open, handleClose, date, waterCount }) => {
           finalScore.emoji,
           reasons,
           notes,
-          date,
-          waterCount
+          date
         )
       );
     } catch (e) {

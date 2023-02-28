@@ -16,18 +16,8 @@ import { auth } from '../firebase';
 import { AiFillDelete } from 'react-icons/ai';
 import EditLog from './EditLog';
 import Water from './Water';
-import { editWaterCount, createWaterCount } from '../store';
 
-const Grader = ({
-  date,
-  usersLog,
-  setWaterCount,
-  waterCount,
-  usersScoreObj,
-  usersScoreArr,
-  curWaterCount,
-  waterCountArr,
-}) => {
+const Grader = ({ date, usersLog }) => {
   const [open, setOpen] = useState(false);
   const [update, setUpdate] = useState(false);
   const [time, setTime] = useState(dayjs(new Date()));
@@ -35,18 +25,6 @@ const Grader = ({
   const [error, setError] = useState(null);
   const [user, loading] = useAuthState(auth);
   const [id, setId] = useState(null);
-
-  console.log('watercountarr', waterCountArr.length);
-
-  let waterType;
-
-  if (waterCountArr.length > 0) {
-    waterType = curWaterCount.type;
-  } else {
-    waterType = 'Cup';
-  }
-
-  const [type, setType] = useState(waterType);
 
   const dispatch = useDispatch();
 
@@ -61,18 +39,6 @@ const Grader = ({
 
   const handleClose = () => {
     setOpen(false);
-  };
-
-  const handleType = (clickedType) => {
-    if (waterCountArr.length > 0) {
-      if (type === 'Bottle') {
-        setType('Cup');
-      } else {
-        setType('Bottle');
-      }
-    } else {
-      setType(clickedType);
-    }
   };
 
   const handleTime = (newValue) => {
@@ -104,84 +70,6 @@ const Grader = ({
     }
   };
 
-  // const drankWater = (i) => {
-  //   if (update) {
-  //     if (usersScoreArr.length) {
-  //       let clickedCups = usersScoreObj.waterCount.map((cup, index) => {
-  //         if (i === index) {
-  //           cup.drank = !cup.drank;
-  //           return cup;
-  //         } else {
-  //           return cup;
-  //         }
-  //       });
-  //       setWaterCount(clickedCups);
-  //     } else {
-  //       let clickedCups = waterCount.map((cup, index) => {
-  //         if (i === index) {
-  //           cup.drank = !cup.drank;
-  //           return cup;
-  //         } else {
-  //           return cup;
-  //         }
-  //       });
-  //       setWaterCount(clickedCups);
-  //     }
-  //   }
-  // };
-
-  const drankWater = (i) => {
-    if (update) {
-      if (waterCountArr.length) {
-        let clickedCups = curWaterCount.drank.map((cup, index) => {
-          if (i === index) {
-            cup.drank = !cup.drank;
-            return cup;
-          } else {
-            return cup;
-          }
-        });
-        setWaterCount(clickedCups);
-      } else {
-        let clickedCups = waterCount.map((cup, index) => {
-          if (i === index) {
-            cup.drank = !cup.drank;
-            return cup;
-          } else {
-            return cup;
-          }
-        });
-        setWaterCount(clickedCups);
-      }
-    }
-  };
-
-  const saveWaterCount = () => {
-    if (waterCountArr.length !== 0) {
-      dispatch(
-        editWaterCount(
-          user.uid,
-          waterCount,
-          type,
-          date.format('dddd, MMMM D YYYY')
-        )
-      );
-    } else {
-      dispatch(
-        createWaterCount(
-          user.uid,
-          date.format('dddd, MMMM D YYYY'),
-          type,
-          waterCount
-        )
-      );
-    }
-  };
-
-  useEffect(() => {
-    setUpdate(false);
-  }, [date]);
-
   const halfwayPoint = Math.ceil(usersLog.length / 2);
   let arrayFirstHalf = usersLog.slice(0, halfwayPoint);
   let arraySecondHalf = usersLog.slice(halfwayPoint, usersLog.length);
@@ -204,19 +92,7 @@ const Grader = ({
               />
             </Stack>
           </LocalizationProvider>
-          {/* <Water
-            update={update}
-            type={type}
-            handleType={handleType}
-            setUpdate={setUpdate}
-            usersScoreArr={usersScoreArr}
-            usersScoreObj={usersScoreObj}
-            waterCount={waterCount}
-            drankWater={drankWater}
-            curWaterCount={curWaterCount}
-            waterCountArr={waterCountArr}
-            saveWaterCount={saveWaterCount}
-          /> */}
+          <Water />
         </div>
         <div className='py-5'>
           <textarea
