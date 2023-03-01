@@ -1,6 +1,6 @@
 /* eslint-disable no-fallthrough */
 import {
-  getDoc,
+  getDocs,
   addDoc,
   updateDoc,
   doc,
@@ -10,6 +10,7 @@ import {
   where,
 } from 'firebase/firestore';
 import { db } from '../firebase';
+import { createReducer } from '@reduxjs/toolkit';
 
 const FETCH_WATER = 'FETCH_WATER';
 const FETCH_WATER_ERROR = 'FETCH_WATER_ERROR';
@@ -26,15 +27,13 @@ export const fetchWaterInfo = (userId, date) => async (dispatch) => {
       where('userId', '==', userId),
       where('date', '==', date)
     );
-    const subscriber = onSnapshot(ref, (querySnapshot) => {
-      const info = querySnapshot.docs.map((cur) => ({
-        ...cur.data(),
-        id: cur.id,
-      }));
-      let obj = info[0];
-      dispatch(_getWaterInfo(obj));
-    });
-    return subscriber;
+    const querySnapshot = await getDocs(ref);
+    const info = querySnapshot.docs.map((cur) => ({
+      ...cur.data(),
+      id: cur.id,
+    }));
+    const obj = info[0];
+    dispatch(_getWaterInfo(obj));
   } catch (error) {
     dispatch(fetchWaterInfoError(error));
   }
@@ -69,7 +68,7 @@ export default function waterReducer(state = initialState, action) {
         return null;
       } else {
         state = action.info;
-        return state;
+        return { ...state };
       }
     }
     case FETCH_WATER_ERROR: {
@@ -84,16 +83,32 @@ export default function waterReducer(state = initialState, action) {
       return state;
   }
 }
+// export const waterReducer = createReducer(initialState, {
+//   FETCH_WATER: (state, action) => {
+//     if (action.info === undefined) {
+//       return null;
+//     } else {
+//       state = action.info;
+//       return { ...state };
+//     }
+//   },
+//   FETCH_WATER_ERROR: (state, action) => {
+//     state = { error: action.error };
+//     return { ...state };
+//   },
+// });
 
 // const ref = query(
 //   collection(db, 'WaterCount'),
 //   where('userId', '==', userId),
 //   where('date', '==', date)
 // );
-// const querySnapshot = await getDocs(ref);
-// const info = querySnapshot.docs.map((cur) => ({
-//   ...cur.data(),
-//   id: cur.id,
-// }));
-// const obj = info[0];
-// dispatch(_getWaterInfo(obj));
+// const subscriber = onSnapshot(ref, (querySnapshot) => {
+//   const info = querySnapshot.docs.map((cur) => ({
+//     ...cur.data(),
+//     id: cur.id,
+//   }));
+//   let obj = info[0];
+//   dispatch(_getWaterInfo(obj));
+// });
+// return subscriber;

@@ -17,7 +17,7 @@ import { useNavigate } from 'react-router-dom';
 import { FcCalendar, FcAbout } from 'react-icons/fc';
 import Grader from './Grader';
 import ScoreProcess from './ScoreProcess';
-import { fetchScoreInfo, fetchWaterInfo, fetchLog } from '../store';
+import { fetchScoreInfo, fetchLog } from '../store';
 import PreviousGrade from './PreviousGrade';
 
 export default function Temp() {
@@ -128,7 +128,7 @@ export default function Temp() {
                   date={date}
                   onChange={(newDate) => {
                     setDate(newDate);
-                    changeDate(newDate.format('dddd, MMMM D YYYY'));
+                    // changeDate(newDate.format('dddd, MMMM D YYYY'));
                     // changeWaterCount(newDate.format('dddd, MMMM D YYYY'));
                   }}
                   renderDay={renderWeekPickerDay}

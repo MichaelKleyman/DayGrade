@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { MdOutlineLocalDrink, MdLocalDrink } from 'react-icons/md';
@@ -5,22 +6,29 @@ import { TbBottle } from 'react-icons/tb';
 import { Button } from '@mui/material';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../firebase';
-import { addDoc, collection, doc, updateDoc } from 'firebase/firestore';
+import {
+  addDoc,
+  collection,
+  doc,
+  updateDoc,
+  query,
+  where,
+  getDocs,
+} from 'firebase/firestore';
 import { db } from '../firebase';
 import { fetchWaterInfo, updateWaterInfo, addWaterInfo } from '../store';
 
 const Water = ({ date }) => {
-  const waterInfo = useSelector((state) => state.waterReducer);
+  //   const waterInfo = useSelector((state) => state.waterReducer);
   //   if (waterInfo) {
   //     console.log(waterInfo);
   //   } else {
   //     console.log('Doesnt exist');
   //   }
 
-  let drankArr = waterInfo?.drank || [];
-
   const dispatch = useDispatch();
   const [update, setUpdate] = useState(true);
+  const [waterInfo, setWaterInfo] = useState({});
   const [bottleDrankObj, setBottleDrankObj] = useState([
     { drank: false },
     { drank: false },
@@ -39,11 +47,14 @@ const Water = ({ date }) => {
   ]);
   const [type, setType] = useState('Cup');
 
+  let drankArr = waterInfo?.drank || [];
+
   const [user, loading] = useAuthState(auth);
 
   const saveWaterCount = async () => {
     if (type === 'Cup') {
       if (!waterInfo) {
+        console.log('added');
         await addDoc(collection(db, 'WaterCount'), {
           type,
           drank: cupDrankObj,
@@ -52,6 +63,7 @@ const Water = ({ date }) => {
         });
         // dispatch(addWaterInfo(user.uid, cupDrankObj, type, date));
       } else {
+        console.log('updated');
         const docRef = doc(db, 'WaterCount', waterInfo.id);
         await updateDoc(docRef, {
           drank: cupDrankObj,
@@ -60,6 +72,7 @@ const Water = ({ date }) => {
       }
     } else if (type === 'Bottle') {
       if (!waterInfo) {
+        console.log('added');
         await addDoc(collection(db, 'WaterCount'), {
           type,
           drank: bottleDrankObj,
@@ -68,6 +81,7 @@ const Water = ({ date }) => {
         });
         // dispatch(addWaterInfo(user.uid, bottleDrankObj, type, date));
       } else {
+        console.log('updated');
         const docRef = doc(db, 'WaterCount', waterInfo.id);
         await updateDoc(docRef, {
           drank: bottleDrankObj,
@@ -143,10 +157,30 @@ const Water = ({ date }) => {
 
   useEffect(() => {
     setUpdate(true);
-    const unsubscribeWater = dispatch(fetchWaterInfo(user.uid, date));
-    return () => {
-      unsubscribeWater();
-    };
+    // dispatch(fetchWaterInfo(user.uid, date));
+    async function fetchWater() {
+      try {
+        const docRef = collection(db, 'WaterCount');
+        const q = query(
+          docRef,
+          where('userId', '==', user.uid),
+          where('date', '==', date)
+        );
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+          // doc.data() is never undefined for query doc snapshots
+          if (doc.data()) {
+            console.log(doc.id, ' => ', doc.data());
+            setWaterInfo(doc.data());
+          } else {
+            console.log('doesnt exist');
+          }
+        });
+      } catch (error) {
+        console.log('>>>>', error);
+      }
+    }
+    fetchWater();
   }, [date]);
 
   return (
@@ -185,9 +219,9 @@ const Water = ({ date }) => {
         ) : (
           <Button
             className={`${!update ? 'animate-bounce' : ''}`}
-            onClick={() => {
+            onClick={async () => {
               setUpdate(true);
-              saveWaterCount();
+              await saveWaterCount();
             }}
           >
             Save
