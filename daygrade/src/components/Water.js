@@ -19,7 +19,7 @@ import { db } from '../firebase';
 import { fetchWaterInfo, updateWaterInfo, addWaterInfo } from '../store';
 
 const Water = ({ date }) => {
-  //   const waterInfo = useSelector((state) => state.waterReducer);
+    const waterInfo = useSelector((state) => state.waterReducer);
   //   if (waterInfo) {
   //     console.log(waterInfo);
   //   } else {
@@ -28,7 +28,7 @@ const Water = ({ date }) => {
 
   const dispatch = useDispatch();
   const [update, setUpdate] = useState(true);
-  const [waterInfo, setWaterInfo] = useState({});
+//   const [waterInfo, setWaterInfo] = useState({});
   const [bottleDrankObj, setBottleDrankObj] = useState([
     { drank: false },
     { drank: false },
@@ -157,30 +157,30 @@ const Water = ({ date }) => {
 
   useEffect(() => {
     setUpdate(true);
-    // dispatch(fetchWaterInfo(user.uid, date));
-    async function fetchWater() {
-      try {
-        const docRef = collection(db, 'WaterCount');
-        const q = query(
-          docRef,
-          where('userId', '==', user.uid),
-          where('date', '==', date)
-        );
-        const querySnapshot = await getDocs(q);
-        querySnapshot.forEach((doc) => {
-          // doc.data() is never undefined for query doc snapshots
-          if (doc.data()) {
-            console.log(doc.id, ' => ', doc.data());
-            setWaterInfo(doc.data());
-          } else {
-            console.log('doesnt exist');
-          }
-        });
-      } catch (error) {
-        console.log('>>>>', error);
-      }
-    }
-    fetchWater();
+    dispatch(fetchWaterInfo(user.uid, date));
+    // async function fetchWater() {
+    //   try {
+    //     const docRef = collection(db, 'WaterCount');
+    //     const q = query(
+    //       docRef,
+    //       where('userId', '==', user.uid),
+    //       where('date', '==', date)
+    //     );
+    //     const querySnapshot = await getDocs(q);
+    //     querySnapshot.forEach((doc) => {
+    //       // doc.data() is never undefined for query doc snapshots
+    //       if (doc.data()) {
+    //         console.log(doc.id, ' => ', doc.data());
+    //         setWaterInfo(doc.data());
+    //       } else {
+    //         console.log('doesnt exist');
+    //       }
+    //     });
+    //   } catch (error) {
+    //     console.log('>>>>', error);
+    //   }
+    // }
+    // fetchWater();
   }, [date]);
 
   return (
