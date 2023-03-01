@@ -29,30 +29,13 @@ export default function Temp() {
   const dispatch = useDispatch();
   const tileSize = '70px';
 
-  // let waterCountArr = useSelector((state) => state.waterReducer);
-  // let curWaterCount = waterCountArr[0];
   let usersLog = useSelector((state) => state.logReducer);
   let usersScoreArr = useSelector((state) => state.scoreReducer);
   let usersScoreObj = usersScoreArr[0];
 
-  // const [waterCount, setWaterCount] = useState([
-  //   { drank: false },
-  //   { drank: false },
-  //   { drank: false },
-  //   { drank: false },
-  //   { drank: false },
-  //   { drank: false },
-  // ]);
-
-  // const saveWaterCount = () => {};
-
   const changeDate = (curDate) => {
     return dispatch(fetchLog(user?.uid, curDate));
   };
-
-  // const changeWaterCount = (curDate) => {
-  //   return dispatch(fetchWaterInfo(user.uid, curDate));
-  // };
 
   const handleClickOpen = () => {
     setOpen(true);

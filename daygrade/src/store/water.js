@@ -1,6 +1,8 @@
 /* eslint-disable no-fallthrough */
 import {
-  getDocs,
+  getDoc,
+  addDoc,
+  updateDoc,
   doc,
   query,
   collection,
@@ -33,22 +35,30 @@ export const fetchWaterInfo = (userId, date) => async (dispatch) => {
       dispatch(_getWaterInfo(obj));
     });
     return subscriber;
-    // const ref = query(
-    //   collection(db, 'WaterCount'),
-    //   where('userId', '==', userId),
-    //   where('date', '==', date)
-    // );
-    // const querySnapshot = await getDocs(ref);
-    // const info = querySnapshot.docs.map((cur) => ({
-    //   ...cur.data(),
-    //   id: cur.id,
-    // }));
-    // const obj = info[0];
-    // dispatch(_getWaterInfo(obj));
   } catch (error) {
     dispatch(fetchWaterInfoError(error));
   }
 };
+
+// export const updateWaterInfo = (id, drank, type) => async (dispatch) => {
+//   const docRef = doc(db, 'WaterCount', id);
+//   await updateDoc(docRef, {
+//     drank,
+//     type,
+//   });
+//   const currentDoc = await getDoc(doc(db, 'WaterCount', id));
+//   const obj = currentDoc.data();
+//   dispatch(_getWaterInfo(obj));
+// };
+
+// export const addWaterInfo = (userId, drank, type, date) => async (dispatch) => {
+//   await addDoc(collection(db, 'WaterCount'), {
+//     type,
+//     drank,
+//     userId,
+//     date,
+//   });
+// };
 
 let initialState = {};
 
@@ -74,3 +84,16 @@ export default function waterReducer(state = initialState, action) {
       return state;
   }
 }
+
+// const ref = query(
+//   collection(db, 'WaterCount'),
+//   where('userId', '==', userId),
+//   where('date', '==', date)
+// );
+// const querySnapshot = await getDocs(ref);
+// const info = querySnapshot.docs.map((cur) => ({
+//   ...cur.data(),
+//   id: cur.id,
+// }));
+// const obj = info[0];
+// dispatch(_getWaterInfo(obj));
