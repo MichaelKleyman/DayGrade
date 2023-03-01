@@ -5,6 +5,7 @@ import userGoals from './goals';
 import logReducer from './logger';
 import scoreReducer from './dailyScore';
 import specificScoreReducer from './chartDateFilter';
+import waterReducer from './water';
 
 const store = configureStore({
   reducer: {
@@ -13,11 +14,12 @@ const store = configureStore({
     logReducer,
     scoreReducer,
     specificScoreReducer,
+    waterReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
-      // immutableCheck: false,
+      immutableCheck: true,
       //fixed the bug about
     }).concat(logger),
 });
@@ -28,3 +30,4 @@ export * from './goals';
 export * from './logger';
 export * from './dailyScore';
 export * from './chartDateFilter';
+export * from './water';

@@ -92,7 +92,7 @@ const Grader = ({ date, usersLog }) => {
               />
             </Stack>
           </LocalizationProvider>
-          <Water />
+          <Water date={date.format('dddd, MMMM D YYYY')} />
         </div>
         <div className='py-5'>
           <textarea

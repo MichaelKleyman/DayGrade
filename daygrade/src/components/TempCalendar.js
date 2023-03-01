@@ -179,10 +179,7 @@ export default function Temp() {
           />
         </div>
         <div className='h-screen'>
-          <Grader
-            date={date}
-            usersLog={usersLog}
-          />
+          <Grader date={date} usersLog={usersLog} />
         </div>
       </div>
     </div>
