@@ -19,7 +19,7 @@ import { db } from '../firebase';
 import { fetchWaterInfo, updateWaterInfo, addWaterInfo } from '../store';
 
 const Water = ({ date }) => {
-    const waterInfo = useSelector((state) => state.waterReducer);
+  const waterInfo = useSelector((state) => state.waterReducer);
   //   if (waterInfo) {
   //     console.log(waterInfo);
   //   } else {
@@ -28,7 +28,7 @@ const Water = ({ date }) => {
 
   const dispatch = useDispatch();
   const [update, setUpdate] = useState(true);
-//   const [waterInfo, setWaterInfo] = useState({});
+  //   const [waterInfo, setWaterInfo] = useState({});
   const [bottleDrankObj, setBottleDrankObj] = useState([
     { drank: false },
     { drank: false },
@@ -156,6 +156,7 @@ const Water = ({ date }) => {
   };
 
   useEffect(() => {
+    console.log(date);
     setUpdate(true);
     dispatch(fetchWaterInfo(user.uid, date));
     // async function fetchWater() {

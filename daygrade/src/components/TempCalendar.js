@@ -17,7 +17,7 @@ import { useNavigate } from 'react-router-dom';
 import { FcCalendar, FcAbout } from 'react-icons/fc';
 import Grader from './Grader';
 import ScoreProcess from './ScoreProcess';
-import { fetchScoreInfo, fetchLog } from '../store';
+import { fetchScoreInfo, fetchLog, fetchWaterInfo } from '../store';
 import PreviousGrade from './PreviousGrade';
 
 export default function Temp() {
@@ -34,7 +34,8 @@ export default function Temp() {
   let usersScoreObj = usersScoreArr[0];
 
   const changeDate = (curDate) => {
-    return dispatch(fetchLog(user?.uid, curDate));
+    // return dispatch(fetchLog(user?.uid, curDate));
+    return dispatch(fetchWaterInfo(user?.uid, curDate));
   };
 
   const handleClickOpen = () => {

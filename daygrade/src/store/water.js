@@ -65,10 +65,12 @@ export default function waterReducer(state = initialState, action) {
   switch (action.type) {
     case FETCH_WATER: {
       if (action.info === undefined) {
+        console.log('>>>', action.info);
         return null;
       } else {
-        state = action.info;
-        return { ...state };
+        console.log('>>>', action.info);
+        console.log('>>>', state);
+        return { ...state, ...action.info };
       }
     }
     case FETCH_WATER_ERROR: {
