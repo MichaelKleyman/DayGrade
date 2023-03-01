@@ -204,7 +204,7 @@ const Grader = ({
               />
             </Stack>
           </LocalizationProvider>
-          {/* <Water
+          <Water
             update={update}
             type={type}
             handleType={handleType}
@@ -216,7 +216,7 @@ const Grader = ({
             curWaterCount={curWaterCount}
             waterCountArr={waterCountArr}
             saveWaterCount={saveWaterCount}
-          /> */}
+          />
         </div>
         <div className='py-5'>
           <textarea
