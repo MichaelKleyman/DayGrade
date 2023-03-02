@@ -1,4 +1,14 @@
-import { doc, onSnapshot, updateDoc } from 'firebase/firestore';
+import {
+  doc,
+  onSnapshot,
+  updateDoc,
+  query,
+  where,
+  collection,
+  deleteDoc,
+  getDoc,
+  getDocs,
+} from 'firebase/firestore';
 import { db } from '../firebase';
 
 //ACTIONS
@@ -30,6 +40,39 @@ export const editUser = (userId, editedInfo) => async (dispatch) => {
     age,
     userName,
   });
+};
+
+export const deleteUserAccount = (userId, id) => async () => {
+  //delete user
+  try {
+    // const user = query(collection(db, 'Users'), where('userId', '==', userId));
+    // const docSnap = await getDoc(user);
+    // await deleteDoc(doc(docSnap));
+    deleteDoc(doc(db, 'Users', id));
+
+    //delete all users logs
+    const logs = query(collection(db, 'Logger'), where('userId', '==', userId));
+    const logDocs = await getDocs(logs);
+    await Promise.all(logDocs.docs.map((log) => deleteDoc(log.ref)));
+
+    //delete all users scores
+    const scores = query(
+      collection(db, 'FinalScore'),
+      where('userId', '==', userId)
+    );
+    const scoreDocs = await getDocs(scores);
+    await Promise.all(scoreDocs.docs.map((score) => deleteDoc(score.ref)));
+
+    //delete all users water count
+    const waterCount = query(
+      collection(db, 'WaterCount'),
+      where('userId', '==', userId)
+    );
+    const waterDocs = await getDocs(waterCount);
+    await Promise.all(waterDocs.docs.map((count) => deleteDoc(count.ref)));
+  } catch (error) {
+    console.log('ERROR', error);
+  }
 };
 
 //REDUCER

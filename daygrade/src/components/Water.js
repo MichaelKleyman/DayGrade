@@ -16,7 +16,7 @@ import {
   getDocs,
 } from 'firebase/firestore';
 import { db } from '../firebase';
-import { fetchWaterInfo, updateWaterInfo, addWaterInfo } from '../store';
+import { fetchWaterInfo, fetchNewWaterInfo } from '../store';
 
 const Water = ({ date }) => {
   const waterInfo = useSelector((state) => state.waterReducer);
@@ -57,35 +57,40 @@ const Water = ({ date }) => {
         console.log('added');
         await addDoc(collection(db, 'WaterCount'), {
           type,
-          drank: cupDrankObj,
+          drank: [...cupDrankObj],
           userId: user.uid,
           date,
         });
+        dispatch(fetchNewWaterInfo(user.uid));
         // dispatch(addWaterInfo(user.uid, cupDrankObj, type, date));
       } else {
         console.log('updated');
         const docRef = doc(db, 'WaterCount', waterInfo.id);
         await updateDoc(docRef, {
-          drank: cupDrankObj,
+          drank: [...cupDrankObj],
         });
+        dispatch(fetchNewWaterInfo(user.uid));
         // dispatch(updateWaterInfo(waterInfo.id, cupDrankObj, type));
       }
     } else if (type === 'Bottle') {
       if (!waterInfo) {
         console.log('added');
-        await addDoc(collection(db, 'WaterCount'), {
+        let newObj = {
           type,
-          drank: bottleDrankObj,
+          drank: [...bottleDrankObj],
           userId: user.uid,
           date: date,
-        });
+        };
+        await addDoc(collection(db, 'WaterCount'), newObj);
+        dispatch(fetchNewWaterInfo(user.uid));
         // dispatch(addWaterInfo(user.uid, bottleDrankObj, type, date));
       } else {
         console.log('updated');
         const docRef = doc(db, 'WaterCount', waterInfo.id);
         await updateDoc(docRef, {
-          drank: bottleDrankObj,
+          drank: [...bottleDrankObj],
         });
+        dispatch(fetchNewWaterInfo(user.uid));
         // dispatch(updateWaterInfo(waterInfo.id, bottleDrankObj, type));
       }
     }

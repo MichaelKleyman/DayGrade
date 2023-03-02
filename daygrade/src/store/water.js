@@ -13,10 +13,12 @@ import { db } from '../firebase';
 import { createReducer } from '@reduxjs/toolkit';
 
 const FETCH_WATER = 'FETCH_WATER';
+const FETCH_NEW_WATER = 'FETCH_NEW_WATER';
 const FETCH_WATER_ERROR = 'FETCH_WATER_ERROR';
 // const UPDATE_WATER = 'UPDATE_WATER';
 
 const _getWaterInfo = (info) => ({ type: FETCH_WATER, info });
+const _getNewWaterInfo = (info) => ({ type: FETCH_NEW_WATER, info });
 const fetchWaterInfoError = (error) => ({ type: FETCH_WATER_ERROR, error });
 // export const _updateWater = (info) => ({ type: UPDATE_WATER, info });
 
@@ -34,6 +36,24 @@ export const fetchWaterInfo = (userId, date) => async (dispatch) => {
     }));
     const obj = info[0];
     dispatch(_getWaterInfo(obj));
+  } catch (error) {
+    dispatch(fetchWaterInfoError(error));
+  }
+};
+
+export const fetchNewWaterInfo = (userId) => async (dispatch) => {
+  try {
+    const ref = query(
+      collection(db, 'WaterCount'),
+      where('userId', '==', userId)
+    );
+    const querySnapshot = await getDocs(ref);
+    const info = querySnapshot.docs.map((cur) => ({
+      ...cur.data(),
+      id: cur.id,
+    }));
+    const obj = info[0];
+    dispatch(_getNewWaterInfo(obj));
   } catch (error) {
     dispatch(fetchWaterInfoError(error));
   }
@@ -70,17 +90,16 @@ export default function waterReducer(state = initialState, action) {
       } else {
         console.log('>>>', action.info);
         console.log('>>>', state);
-        return { ...state, ...action.info };
+        // return { ...state, ...action.info };
+        return action.info;
       }
     }
     case FETCH_WATER_ERROR: {
       return { error: action.error };
     }
-    // case UPDATE_WATER: {
-    //   if (state.id === action.info.id) {
-    //     return { ...action.info };
-    //   }
-    // }
+    case FETCH_NEW_WATER: {
+      return { ...action.info };
+    }
     default:
       return state;
   }
