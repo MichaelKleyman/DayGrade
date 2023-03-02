@@ -9,6 +9,48 @@
 /* background-image: url('https://images.unsplash.com/photo-1533134486753-c833f0ed4866?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80'); */
 /* } */
 
+@media screen and (min-width: 600px) {
+  #todo-search {
+    width: 220px;
+  }
+}
+
+@media screen and (min-width: 670px) {
+  #todo-search {
+    width: 280px;
+  }
+}
+
+@media screen and (min-width: 780px) {
+  #todo-search {
+    width: 320px;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  #todo-search {
+    width: 280px;
+  }
+}
+
+@media screen and (min-width: 1025px) {
+  #todo-search {
+    width: 100px;
+  }
+}
+
+@media screen and (min-width: 1160px) {
+  #todo-search {
+    width: 140px;
+  }
+}
+
+@media screen and (min-width: 1330px) {
+  #todo-search {
+    width: 280px;
+  }
+}
+
 #dark #log1 {
   background-color: #2e2252;
   color: white;

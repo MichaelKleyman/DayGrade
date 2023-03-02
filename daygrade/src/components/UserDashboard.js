@@ -210,7 +210,7 @@ const UserDashboard = () => {
             </div>
           </div>
         </div>
-        <Activity usersScores={usersScores} />
+        <Activity usersScores={usersScores} date={date} userId={user?.uid}/>
       </div>
     </div>
   );
