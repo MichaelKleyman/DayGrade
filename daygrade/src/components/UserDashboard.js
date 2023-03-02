@@ -210,7 +210,7 @@ const UserDashboard = () => {
             </div>
           </div>
         </div>
-        <Activity />
+        <Activity usersScores={usersScores} />
       </div>
     </div>
   );
