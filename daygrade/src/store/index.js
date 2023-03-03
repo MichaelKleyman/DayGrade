@@ -5,7 +5,7 @@ import userGoals from './goals';
 import logReducer from './logger';
 import scoreReducer from './dailyScore';
 import specificScoreReducer from './chartDateFilter';
-import waterReducer from './tempWater';
+import waterReducer from './water';
 import todosReducer from './todo';
 
 const store = configureStore({
@@ -32,5 +32,5 @@ export * from './goals';
 export * from './logger';
 export * from './dailyScore';
 export * from './chartDateFilter';
-export * from './tempWater';
+export * from './water';
 export * from './todo';

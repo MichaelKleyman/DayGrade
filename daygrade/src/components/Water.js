@@ -6,11 +6,11 @@ import { TbBottle } from 'react-icons/tb';
 import { Button } from '@mui/material';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../firebase';
-import { fetchWaterInfo } from '../store/tempWater';
+import { fetchWaterInfo } from '../store/water';
 import { addDoc, collection, doc, updateDoc } from 'firebase/firestore';
 import { db } from '../firebase';
 
-const TempWater = ({ date }) => {
+const Water = ({ date }) => {
   let waterInfo = useSelector((state) => state.waterReducer);
   let waterInfoObj = waterInfo[0] || {};
 
@@ -459,4 +459,4 @@ const TempWater = ({ date }) => {
   );
 };
 
-export default TempWater;
+export default Water;
