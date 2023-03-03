@@ -8,17 +8,35 @@ import { SlHome } from 'react-icons/sl';
 import { useNavigate } from 'react-router-dom';
 import { reactSwitch } from '../App';
 import { BsSun, BsFillMoonFill } from 'react-icons/bs';
+import { CgProfile } from 'react-icons/cg';
+import Box from '@mui/material/Box';
+import Drawer from '@mui/material/Drawer';
+import List from '@mui/material/List';
+import Divider from '@mui/material/Divider';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
 
-const Navbar = () => {
-  const [openNav, setOpenNav] = useState(false);
+const Navbar = ({ theme }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [mode, setMode] = useState(true);
   const navigate = useNavigate();
   const open = Boolean(anchorEl);
+  const { currentUser, logout } = useAuth();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
     navigate('/');
+  };
+
+  const handleClickMenu = (text, anchor) => {
+    if (text === 'Home') {
+      navigate('/');
+      // toggleDrawer(anchor, false);
+    } else if (text === 'Profile') {
+      navigate(`users/account/${currentUser.uid}`);
+    }
   };
 
   useEffect(() => {
@@ -30,12 +48,6 @@ const Navbar = () => {
       setMode(false);
     }
   }, []);
-
-  const { currentUser, logout } = useAuth();
-
-  const showNav = () => {
-    setOpenNav(!openNav);
-  };
 
   const handleLogout = async () => {
     try {
@@ -50,8 +62,73 @@ const Navbar = () => {
     setMode(!mode);
   };
 
+  const [state, setState] = useState({
+    left: false,
+  });
+
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (
+      event.type === 'keydown' &&
+      (event.key === 'Tab' || event.key === 'Shift')
+    ) {
+      return;
+    }
+
+    setState({ ...state, [anchor]: open });
+  };
+
+  const list = (anchor) => (
+    <Box
+      id='navbar-popup'
+      sx={{
+        height: 920,
+        width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250,
+        paddingTop: '1rem',
+        backgroundColor: `${theme === 'dark' ? '#282c35' : 'white'}`,
+        color: `${theme === 'dark' ? 'white' : 'black'}`,
+      }}
+      role='presentation'
+      // onKeyDown={toggleDrawer(anchor, false)}
+      onClick={toggleDrawer(anchor, false)}
+    >
+      <Link
+        to='/'
+        className='m-4 font-[Montserrat] uppercase tracking-widest text-2xl md:text-xl text-blue-600 py-3 w-full'
+      >
+        D a y g r a d e
+      </Link>
+      <List>
+        {['Home', 'Profile'].map((text, index) => (
+          <ListItem key={text} disablePadding>
+            <ListItemButton
+              onClick={() => {
+                handleClickMenu(text, anchor);
+              }}
+            >
+              <ListItemIcon>
+                {index % 2 === 0 ? (
+                  <SlHome className='p-2' size={35} color={'blue'} />
+                ) : (
+                  <CgProfile className='p-2' size={35} color={'blue'} />
+                )}
+              </ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+      <List></List>
+      <Divider />
+    </Box>
+  );
+
   return (
-    <div className=' bg-white shadow-xl w-full' id='navbar'>
+    <div
+      className={`bg-white shadow-xl w-full h-20 fixed top-0 ${
+        theme === 'dark' ? 'shadow-gray-900' : 'shadow-gray-400'
+      }`}
+      id='navbar'
+    >
       <div className='text-black flex justify-between items-center h-20 max-w-[1240px] mx-auto px-4 w-full'>
         <Link
           to='/'
@@ -89,8 +166,21 @@ const Navbar = () => {
                   <Profile logout={handleLogout} />
                 </li>
               </ul>
-              <div className='md:hidden' onClick={showNav}>
-                <AiOutlineMenu size={35} />
+              <div className='md:hidden duration-300 hover:scale-110'>
+                {['left'].map((anchor) => (
+                  <React.Fragment key={anchor}>
+                    <Button onClick={toggleDrawer(anchor, true)}>
+                      <AiOutlineMenu size={35} />
+                    </Button>
+                    <Drawer
+                      anchor={anchor}
+                      open={state[anchor]}
+                      onClose={toggleDrawer(anchor, false)}
+                    >
+                      {list(anchor)}
+                    </Drawer>
+                  </React.Fragment>
+                ))}
               </div>
               <div onClick={switchMode} className='flex items-center pl-6'>
                 {reactSwitch()}
@@ -104,40 +194,6 @@ const Navbar = () => {
                   <BsFillMoonFill size={45} className='p-3' />
                 </div>
               )}
-            </div>
-            <div
-              className={
-                openNav
-                  ? 'md:hidden fixed left-0 top-0 w-full h-screen bg-black/70'
-                  : ''
-              }
-            >
-              <div
-                className={
-                  openNav
-                    ? 'md:hidden fixed left-0 top-0 w-[55%] sm:w-[55%] md:w-[45%] h-screen bg-[#FAF9F6] p-10 ease-in duration-500'
-                    : 'fixed left-[-100%] top-0 p-10 ease-in duration-500'
-                }
-              >
-                {/*Opening and closing of the nav bar on mobile screen */}
-                <div className='flex'>
-                  <Link
-                    to='/home'
-                    className='font-[Montserrat] uppercase tracking-widest md:text-xl text-blue-600 py-3 w-full'
-                  >
-                    D a y g r a d e
-                  </Link>
-                  <div
-                    className='cursor-pointer rounded-full shadow-lg shadow-gray-400 p-3 pb-0'
-                    onClick={showNav}
-                  >
-                    <AiOutlineClose size={20} color='black' />
-                  </div>
-                </div>
-                <div className='my-4 uppercase'>
-                  <p>Menu</p>
-                </div>
-              </div>
             </div>
           </div>
         )}

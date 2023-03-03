@@ -30,7 +30,7 @@ function App() {
   return (
     <ThemeContext.Provider value={{ theme, toggledTheme }}>
       <div id={theme}>
-        <Navbar />
+        <Navbar theme={theme} />
         <MyRoutes />
       </div>
     </ThemeContext.Provider>
