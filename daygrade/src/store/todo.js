@@ -4,7 +4,11 @@ import {
   where,
   onSnapshot,
   addDoc,
+  serverTimestamp,
+  orderBy,
   doc,
+  updateDoc,
+  deleteDoc,
 } from 'firebase/firestore';
 import { db } from '../firebase';
 
@@ -16,7 +20,11 @@ const _fetchTodos = (todos) => ({ type: FETCH_TODOS, todos });
 
 //THUNKS
 export const fetchTodos = (userId) => (dispatch) => {
-  const ref = query(collection(db, 'To-Do'), where('userId', '==', userId));
+  const ref = query(
+    collection(db, 'To-Do'),
+    where('userId', '==', userId),
+    orderBy('createdAt')
+  );
   const subscriber = onSnapshot(ref, async (querySnapshot) => {
     const log = querySnapshot.docs.map((curLog) => ({
       ...curLog.data(),
@@ -27,18 +35,45 @@ export const fetchTodos = (userId) => (dispatch) => {
   return subscriber;
 };
 
-export const addTodo = (todo, date, userId) => async () => {
+export const deleteOldTodos = (todos) => async () => {
+  todos.forEach((todo) => {
+    let todaysDate = new Date().toString().split(' ').splice(1, 3).join(' ');
+    let objDate = new Date(todo.date)
+      .toString()
+      .split(' ')
+      .splice(1, 3)
+      .join(' ');
+    if (objDate !== todaysDate) {
+      deleteDoc(doc(db, 'To-Do', todo.id));
+    }
+  });
+};
+
+export const addTodo = (todo, date, userId, check) => async () => {
   //   console.log({ todo, date, userId });
   try {
     await addDoc(collection(db, 'To-Do'), {
       todo,
       date,
       userId,
+      completed: check,
+      createdAt: serverTimestamp(),
     });
     console.log('added');
   } catch (error) {
     console.error(error);
   }
+};
+
+export const toggleCheck = (id, bool) => async () => {
+  const docRef = doc(db, 'To-Do', id);
+  await updateDoc(docRef, {
+    completed: bool,
+  });
+};
+
+export const deleteToDo = (id) => () => {
+  deleteDoc(doc(db, 'To-Do', id));
 };
 
 //REDUCER

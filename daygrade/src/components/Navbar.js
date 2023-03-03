@@ -26,7 +26,7 @@ const Navbar = () => {
     let curHr = curDate.getHours();
     if (curHr < 18) {
       setMode(true);
-    } else if (curHr > 18) {
+    } else if (curHr > 16) {
       setMode(false);
     }
   }, []);

@@ -3,14 +3,22 @@ import { useDispatch, useSelector } from 'react-redux';
 import { DiCodeigniter } from 'react-icons/di';
 import { TfiThought } from 'react-icons/tfi';
 import TextField from '@mui/material/TextField';
-import Box from '@mui/material/Box';
 import { Button } from '@mui/material';
-import { addTodo, fetchTodos } from '../store';
+import {
+  addTodo,
+  fetchTodos,
+  toggleCheck,
+  deleteToDo,
+  deleteOldTodos,
+} from '../store';
+import { ImCheckboxUnchecked, ImCheckboxChecked } from 'react-icons/im';
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 
 const Activity = ({ usersScores, date, userId }) => {
   const [streak, setStreak] = useState(0);
-  //   const [latestStreak, setLatestStreak] = useState(0);
+  const [checked, setChecked] = useState(false);
   const [todo, setTodo] = useState('');
+  //   const [id, setId] = useState(0);
 
   const usersTodos = useSelector((state) => state.todosReducer);
 
@@ -20,9 +28,25 @@ const Activity = ({ usersScores, date, userId }) => {
     setTodo(e.target.value);
   };
 
+  const handleCheck = (id, bool) => {
+    dispatch(toggleCheck(id, bool));
+  };
+
+  const handleDelete = (id) => {
+    dispatch(deleteToDo(id));
+  };
+
+  const toggle = () => {
+    setChecked(true);
+    setTimeout(() => {
+      setChecked(false);
+    }, 400);
+  };
+
   const handleSubmit = () => {
     // console.log(todo);
-    dispatch(addTodo(todo, date, userId));
+    const check = false;
+    dispatch(addTodo(todo, date, userId, check));
     setTodo('');
   };
 
@@ -103,6 +127,10 @@ const Activity = ({ usersScores, date, userId }) => {
     }
   }, [usersScores]);
 
+  useEffect(() => {
+    dispatch(deleteOldTodos(usersTodos));
+  }, [date]);
+
   return (
     <div
       className='bg-white shadow-xl rounded-lg h-full md:h-full lg:h-full'
@@ -110,19 +138,23 @@ const Activity = ({ usersScores, date, userId }) => {
     >
       <h1 className='font-bold md:text-xl flex items-center p-3'>Activity</h1>
       <div className='mb-2'>
-        {/* <button onClick={temp}>click me</button> */}
-        {/* <button onClick={() => console.log(streak)}>click me</button> */}
-        <div className='flex items-center justify-between px-5 m-4 bg-[#F8F8FF] rounded-lg border border-gray-300 shadow-lg shadow-gray-600 '>
+        <div
+          id='top-activity'
+          className='flex items-center justify-between px-5 m-4 rounded-lg border border-gray-300 shadow-lg shadow-gray-600 '
+        >
           <div>
             <DiCodeigniter size={35} color='red' />
           </div>
           <div className='m-4 p-3 font-sans'>
-            <h1 className='uppercase tracking-wide text-gray-500 col-span-2'>
+            <h1
+              id='current-streak'
+              className='uppercase tracking-wide text-gray-500 col-span-2'
+            >
               Current Streak
             </h1>
             <h1 className='font-bold text-lg'>{streak} days</h1>
           </div>
-          <div className='bg-gray-200 rounded-xl'>
+          <div id='latest' className='bg-gray-200 rounded-xl'>
             <div className='uppercase tracking-wide text-black text-sm p-2'>
               Latest
             </div>
@@ -132,7 +164,10 @@ const Activity = ({ usersScores, date, userId }) => {
           </div>
         </div>
       </div>
-      <div className='px-5 m-4 bg-[#F8F8FF] rounded-lg border border-gray-300 shadow-lg shadow-gray-600 h-[420px]'>
+      <div
+        id={`${checked ? 'checked-activity' : 'bottom-activity'}`}
+        className={`px-5 m-4 rounded-lg border border-gray-300 shadow-lg shadow-gray-600 h-[420px] overflow-y-scroll`}
+      >
         <div className='sm:ml-3 md:ml-10 grid grid-cols-3 place-items-center pt-4'>
           {/* <div>1</div> */}
           <div className='col-span-2 flex'>
@@ -155,39 +190,51 @@ const Activity = ({ usersScores, date, userId }) => {
           {usersTodos.length ? (
             <div>
               {usersTodos.map((obj, i) => (
-                <div key={i} className='pt-2'>
-                  <h1>{obj.todo}</h1>
+                <div key={i} className='flex items-center justify-between pt-3'>
+                  <div className='flex items-center'>
+                    {obj.completed ? (
+                      <ImCheckboxChecked
+                        color='blue'
+                        className='p-3 duration-300 hover:scale-110 cursor-pointer'
+                        size={45}
+                        onClick={() => {
+                          handleCheck(obj.id, !obj.completed);
+                          toggle();
+                        }}
+                      />
+                    ) : (
+                      <ImCheckboxUnchecked
+                        className='p-3 duration-300 hover:scale-110 cursor-pointer'
+                        size={45}
+                        onClick={() => {
+                          handleCheck(obj.id, !obj.completed);
+                          toggle();
+                        }}
+                      />
+                    )}
+
+                    <h1>{obj.todo}</h1>
+                  </div>
+
+                  <div className='float-right hover:text-blue-600'>
+                    <DeleteOutlineOutlinedIcon
+                      className={`duration-300 hover:scale-110`}
+                      onClick={() => handleDelete(obj.id)}
+                    />
+                  </div>
                 </div>
               ))}
             </div>
           ) : (
-            <div>None</div>
+            <div
+              id='empty'
+              className='flex items-center justify-center mt-[60px] tracking-widest text-gray-500'
+            >
+              Nothing for today
+            </div>
           )}
         </div>
       </div>
-      {/* <div className='pt-4 flex items-start justify-between px-5 m-4 bg-[#F8F8FF] rounded-lg border border-gray-300 shadow-lg shadow-gray-600 h-[400px]'>
-        <input className='w-[70%] border border-blue-600' autoFocus />
-        <TfiThought size={25} color='blue' />
-        <Box
-          component='form'
-          sx={{
-            '& .MuiTextField-root': { m: 1, width: '30ch' },
-          }}
-          noValidate
-          autoComplete='off'
-        >
-          <div>
-            <TextField
-              label='To do list'
-              id='outlined-size-small'
-              size='small'
-            />
-          </div>
-        </Box>
-        <div className='pt-2'>
-          <Button>Submit</Button>
-        </div>
-      </div> */}
     </div>
   );
 };

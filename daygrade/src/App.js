@@ -16,7 +16,7 @@ function App() {
     let curHr = curDate.getHours();
     if (curHr < 18) {
       setTheme('light');
-    } else if (curHr > 18) {
+    } else if (curHr > 16) {
       setTheme('dark');
     }
   }, []);

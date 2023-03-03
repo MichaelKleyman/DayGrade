@@ -51,6 +51,58 @@
   }
 }
 
+#light #empty {
+  color: grey;
+}
+
+#dark #empty {
+  color: black;
+}
+
+#light #latest {
+  background-color: #c7c6c1;
+}
+
+#dark #latest {
+  background-color: #c7c6c1;
+}
+
+#light #current-streak {
+  color: #48494b;
+}
+
+#dark #current-streak {
+  color: #48494b;
+}
+
+#light #bottom-activity {
+  background-color: #f8f8ff;
+}
+
+#dark #bottom-activity {
+  background-color: #808080;
+}
+
+#light #checked-activity {
+  background-color: #f5f5f5;
+}
+
+#dark #checked-activity {
+  background-color: #97978f;
+}
+
+#light #top-activity {
+  background-color: #f8f8ff;
+}
+
+#dark #top-activity {
+  background-color: #808080;
+}
+
+#dark #top-activity {
+  background-color: #808080;
+}
+
 #dark #log1 {
   background-color: #2e2252;
   color: white;
