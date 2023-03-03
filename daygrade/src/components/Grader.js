@@ -93,7 +93,6 @@ const Grader = ({ date, usersLog }) => {
               />
             </Stack>
           </LocalizationProvider>
-          {/* <Water date={date.format('dddd, MMMM D YYYY')} /> */}
           <TempWater date={date.format('dddd, MMMM D YYYY')}/>
         </div>
         <div className='py-5'>
