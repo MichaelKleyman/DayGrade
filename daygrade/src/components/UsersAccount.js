@@ -31,7 +31,7 @@ const UsersAccount = () => {
     if (page === 'Password') {
       return <Password />;
     } else if (page === 'Settings') {
-      return <Settings />;
+      return <Settings userObject={userObject} />;
     } else {
       return <Account userObject={userObject} />;
     }
@@ -80,7 +80,10 @@ const UsersAccount = () => {
           Settings
         </Button>
       </div>
-      <div className='w-[85%] bg-stone-100 shadow-md shadow-slate-400 rounded-lg m-6 p-3' id='user-account'>
+      <div
+        className='w-[85%] bg-stone-100 shadow-md shadow-slate-400 rounded-lg m-6 p-3'
+        id='user-account'
+      >
         <div>{pageDisplay()}</div>
       </div>
     </div>

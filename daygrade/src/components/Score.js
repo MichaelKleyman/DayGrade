@@ -27,7 +27,7 @@ const Score = ({ scoreArr, handleScoreChange, finalScore, error }) => {
               !finalScore.clicked && 'shadow-lg shadow-gray-400'
             } pt-2 duration-300 hover:scale-110 cursor-pointer border hover:border-blue-600 ${
               finalScore.clicked && finalScore.id === scoreObj.description
-                ? 'border-blue-700 shadow-lg shadow-gray-900 font-bold text-blue-600'
+                ? 'border border-double border-blue-800 shadow-lg shadow-gray-900 font-bold text-blue-600'
                 : 'border-gray-300'
             }`}
           >

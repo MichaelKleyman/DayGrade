@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/Authcontext';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
@@ -12,7 +12,7 @@ import { BsSun, BsFillMoonFill } from 'react-icons/bs';
 const Navbar = () => {
   const [openNav, setOpenNav] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
-  const [mode, setMode] = useState(false);
+  const [mode, setMode] = useState(true);
   const navigate = useNavigate();
   const open = Boolean(anchorEl);
 
@@ -20,6 +20,16 @@ const Navbar = () => {
     setAnchorEl(event.currentTarget);
     navigate('/');
   };
+
+  useEffect(() => {
+    let curDate = new Date();
+    let curHr = curDate.getHours();
+    if (curHr < 18) {
+      setMode(true);
+    } else if (curHr > 16) {
+      setMode(false);
+    }
+  }, []);
 
   const { currentUser, logout } = useAuth();
 

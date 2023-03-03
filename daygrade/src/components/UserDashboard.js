@@ -20,6 +20,7 @@ import EditGoals from './EditGoals';
 import TempChart from './TempChart';
 import LineChart from './LineChart';
 import Search from './Search';
+import Activity from './Activity';
 
 const UserDashboard = () => {
   const [user, loading] = useAuthState(auth);
@@ -78,7 +79,10 @@ const UserDashboard = () => {
         {userObject.userName}'s Dashboard
       </div>
       <div className='grid lg:grid-cols-3 gap-8 p-6 items-center'>
-        <div className='p-6 shadow-xl rounded-xl bg-white h-[100%] md:h-[80%] lg:h-[90%] grid grid-cols-1 gap-8' id='search-div'>
+        <div
+          className='p-6 shadow-xl rounded-xl bg-white h-[100%] md:h-[80%] lg:h-[90%] grid grid-cols-1 gap-8'
+          id='search-div'
+        >
           <h1 className='font-extrabold md:text-xl flex items-center justify-between'>
             <div className='flex text-center'>
               <FcTimeline className='p-2' size={38} />
@@ -95,7 +99,10 @@ const UserDashboard = () => {
             Take a look at your previous logs by searching a key word.
           </h1>
         </div>
-        <div className='p-6 shadow-xl rounded-xl bg-white grid grid-cols-2 h-[100%] md:h-[80%] lg:h-[90%]' id='log-div'>
+        <div
+          className='p-6 shadow-xl rounded-xl bg-white grid grid-cols-2 h-[100%] md:h-[80%] lg:h-[90%]'
+          id='log-div'
+        >
           <div className='w-[90%]'>
             <p className='text-sm md:text-sm text-gray-500'>{date}</p>
             <h1 className='font-extrabold md:text-xl flex items-center'>
@@ -141,7 +148,10 @@ const UserDashboard = () => {
           </div>
         </div>
 
-        <div className='p-6 shadow-xl rounded-xl bg-white h-[100%] md:h-[80%] lg:h-[90%]' id='goal-div'>
+        <div
+          className='p-6 shadow-xl rounded-xl bg-white h-[100%] md:h-[80%] lg:h-[90%]'
+          id='goal-div'
+        >
           <div className='grid grid-cols-2'>
             <h1 className='font-extrabold md:text-xl flex items-center'>
               <FcTodoList className='p-2' size={45} />
@@ -182,7 +192,10 @@ const UserDashboard = () => {
         </div>
       </div>
       <div className='grid grid-cols-1 lg:grid-cols-3 gap-8 p-6 items-center'>
-        <div className='bg-white shadow-xl rounded-lg col-span-2' id='chart-div'>
+        <div
+          className='bg-white shadow-xl rounded-lg col-span-2'
+          id='chart-div'
+        >
           <div>
             <div>
               <h1 className='font-bold md:text-xl flex items-center p-2'>
@@ -197,19 +210,7 @@ const UserDashboard = () => {
             </div>
           </div>
         </div>
-        <div className='bg-white shadow-xl rounded-lg h-full md:h-full lg:h-full' id='activity-div'>
-          <h1 className='font-bold md:text-xl flex items-center p-3'>
-            Activity
-          </h1>
-          {/* <div>-</div>
-          <div>-</div>
-          <div>-</div>
-          <div>-</div>
-          <div>-</div>
-          <div>-</div>
-          <div>-</div>
-          <div>-</div> */}
-        </div>
+        <Activity usersScores={usersScores} date={date} userId={user?.uid}/>
       </div>
     </div>
   );

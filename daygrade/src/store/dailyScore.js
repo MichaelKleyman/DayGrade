@@ -65,7 +65,7 @@ export const fetchAllScores = (userId) => (dispatch) => {
 };
 
 export const submitCheckIn =
-  (userId, score, description, emoji, reasons, finalNotes, date, waterCount) =>
+  (userId, score, description, emoji, reasons, finalNotes, date) =>
   async () => {
     await addDoc(collection(db, 'FinalScore'), {
       userId,
@@ -74,7 +74,6 @@ export const submitCheckIn =
       emoji,
       reasons,
       finalNotes,
-      waterCount,
       createdAt: serverTimestamp(),
       date,
     });
