@@ -15,7 +15,8 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../firebase';
 import { AiFillDelete } from 'react-icons/ai';
 import EditLog from './EditLog';
-import Water from './Water';
+// import Water from './Water';
+import TempWater from './TempWater';
 
 const Grader = ({ date, usersLog }) => {
   const [open, setOpen] = useState(false);
@@ -92,7 +93,8 @@ const Grader = ({ date, usersLog }) => {
               />
             </Stack>
           </LocalizationProvider>
-          <Water date={date.format('dddd, MMMM D YYYY')} />
+          {/* <Water date={date.format('dddd, MMMM D YYYY')} /> */}
+          <TempWater date={date.format('dddd, MMMM D YYYY')}/>
         </div>
         <div className='py-5'>
           <textarea

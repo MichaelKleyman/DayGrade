@@ -33,10 +33,10 @@ export default function Temp() {
   let usersScoreArr = useSelector((state) => state.scoreReducer);
   let usersScoreObj = usersScoreArr[0];
 
-  const changeDate = (curDate) => {
-    // return dispatch(fetchLog(user?.uid, curDate));
-    return dispatch(fetchWaterInfo(user?.uid, curDate));
-  };
+  // const changeDate = (curDate) => {
+  //   // return dispatch(fetchLog(user?.uid, curDate));
+  //   return dispatch(fetchWaterInfo(user?.uid, curDate));
+  // };
 
   const handleClickOpen = () => {
     setOpen(true);
