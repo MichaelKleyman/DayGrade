@@ -9,6 +9,7 @@ import { auth } from '../firebase';
 import { fetchWaterInfo } from '../store/water';
 import { addDoc, collection, doc, updateDoc } from 'firebase/firestore';
 import { db } from '../firebase';
+import ToolTip from './ToolTip';
 
 const Water = ({ date }) => {
   let waterInfo = useSelector((state) => state.waterReducer);
@@ -261,7 +262,10 @@ const Water = ({ date }) => {
 
   return (
     <div className='mt-5'>
-      <h1 className='uppercase text-blue-600 tracking-widest'>Water</h1>
+      <h1 className='flex items-center uppercase text-blue-600 tracking-widest font-bold'>
+        Water
+        <ToolTip />
+      </h1>
       <div className='flex justify-between items-center pb-3'>
         <h1 className='text-sm'>
           {!waterInfo.length ? (
@@ -311,25 +315,6 @@ const Water = ({ date }) => {
               </button>
             </div>
           )}
-          {/* <button
-            disabled={update}
-            onClick={() => {
-              handleType('Cup');
-            }}
-            className={`${type === 'Cup' ? 'text-blue-600' : ''}`}
-          >
-            Cup
-          </button>{' '}
-          or{' '}
-          <button
-            disabled={update}
-            onClick={() => {
-              handleType('Bottle');
-            }}
-            className={`${type === 'Bottle' ? 'text-blue-600' : ''}`}
-          >
-            Bottle
-          </button> */}
         </h1>
         {update ? (
           <Button
