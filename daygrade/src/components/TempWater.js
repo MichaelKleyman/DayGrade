@@ -6,12 +6,12 @@ import { TbBottle } from 'react-icons/tb';
 import { Button } from '@mui/material';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../firebase';
-import { fetchWaterInfo2 } from '../store/tempWater';
+import { fetchWaterInfo } from '../store/tempWater';
 import { addDoc, collection, doc, updateDoc } from 'firebase/firestore';
 import { db } from '../firebase';
 
 const TempWater = ({ date }) => {
-  let waterInfo = useSelector((state) => state.waterReducer2);
+  let waterInfo = useSelector((state) => state.waterReducer);
   let waterInfoObj = waterInfo[0] || {};
 
   const [update, setUpdate] = useState(true);
@@ -36,83 +36,144 @@ const TempWater = ({ date }) => {
   const dispatch = useDispatch();
 
   let drankArr = waterInfoObj.drank || [];
-  console.log('>>>', drankArr);
+  let waterInfoType = waterInfoObj.type || '';
+  //   console.log('>>>', drankArr);
 
   const saveWaterCount = async () => {
-    if (type === 'Cup') {
-      if (!drankArr.length) {
-        console.log('added');
-        await addDoc(collection(db, 'WaterCount'), {
-          type,
-          drank: [...cupDrankObj],
-          userId: user.uid,
-          date,
-        });
-        setCupDrankObj([
-          { drank: false },
-          { drank: false },
-          { drank: false },
-          { drank: false },
-          { drank: false },
-          { drank: false },
-        ]);
-        // dispatch(fetchWaterInfo2(user.uid, date));
-        // dispatch(addWaterInfo(user.uid, cupDrankObj, type, date));
-      } else {
-        console.log('updated');
-        const docRef = doc(db, 'WaterCount', waterInfoObj.id);
-        await updateDoc(docRef, {
-          drank: [...cupDrankObj],
-          type,
-        });
-        setCupDrankObj([
-          { drank: false },
-          { drank: false },
-          { drank: false },
-          { drank: false },
-          { drank: false },
-          { drank: false },
-        ]);
-        // dispatch(fetchWaterInfo2(user.uid, date));
-        // dispatch(updateWaterInfo(waterInfo.id, cupDrankObj, type));
+    // console.log(type);
+    if (!waterInfoType.length) {
+      if (type === 'Cup') {
+        if (!drankArr.length) {
+          console.log('added');
+          await addDoc(collection(db, 'WaterCount'), {
+            type,
+            drank: [...cupDrankObj],
+            userId: user.uid,
+            date,
+          });
+          setCupDrankObj([
+            { drank: false },
+            { drank: false },
+            { drank: false },
+            { drank: false },
+            { drank: false },
+            { drank: false },
+          ]);
+        } else {
+          console.log('updated');
+          const docRef = doc(db, 'WaterCount', waterInfoObj.id);
+          await updateDoc(docRef, {
+            drank: [...cupDrankObj],
+          });
+          setCupDrankObj([
+            { drank: false },
+            { drank: false },
+            { drank: false },
+            { drank: false },
+            { drank: false },
+            { drank: false },
+          ]);
+        }
+      } else if (type === 'Bottle') {
+        if (!drankArr.length) {
+          console.log('added');
+          let newObj = {
+            type,
+            drank: [...bottleDrankObj],
+            userId: user.uid,
+            date: date,
+          };
+          await addDoc(collection(db, 'WaterCount'), newObj);
+          setBottleDrankObj([
+            { drank: false },
+            { drank: false },
+            { drank: false },
+            { drank: false },
+            { drank: false },
+            { drank: false },
+          ]);
+        } else {
+          console.log('updated');
+          const docRef = doc(db, 'WaterCount', waterInfoObj.id);
+          await updateDoc(docRef, {
+            drank: [...bottleDrankObj],
+          });
+          setBottleDrankObj([
+            { drank: false },
+            { drank: false },
+            { drank: false },
+            { drank: false },
+            { drank: false },
+            { drank: false },
+          ]);
+        }
       }
-    } else if (type === 'Bottle') {
-      if (!drankArr.length) {
-        console.log('added');
-        let newObj = {
-          type,
-          drank: [...bottleDrankObj],
-          userId: user.uid,
-          date: date,
-        };
-        await addDoc(collection(db, 'WaterCount'), newObj);
-        setBottleDrankObj([
-          { drank: false },
-          { drank: false },
-          { drank: false },
-          { drank: false },
-          { drank: false },
-          { drank: false },
-        ]);
-        // dispatch(fetchWaterInfo2(user.uid, date));
-        // dispatch(addWaterInfo(user.uid, bottleDrankObj, type, date));
-      } else {
-        console.log('updated');
-        const docRef = doc(db, 'WaterCount', waterInfoObj.id);
-        await updateDoc(docRef, {
-          drank: [...bottleDrankObj],
-          type,
-        });
-        setBottleDrankObj([
-          { drank: false },
-          { drank: false },
-          { drank: false },
-          { drank: false },
-          { drank: false },
-          { drank: false },
-        ]);
-        // dispatch(fetchWaterInfo2(user.uid, date));
-        // dispatch(updateWaterInfo(waterInfo.id, bottleDrankObj, type));
+    } else {
+      if (waterInfoType === 'Cup') {
+        if (!drankArr.length) {
+          console.log('added');
+          await addDoc(collection(db, 'WaterCount'), {
+            type,
+            drank: [...cupDrankObj],
+            userId: user.uid,
+            date,
+          });
+          setCupDrankObj([
+            { drank: false },
+            { drank: false },
+            { drank: false },
+            { drank: false },
+            { drank: false },
+            { drank: false },
+          ]);
+        } else {
+          console.log('updated');
+          const docRef = doc(db, 'WaterCount', waterInfoObj.id);
+          await updateDoc(docRef, {
+            drank: [...cupDrankObj],
+          });
+          setCupDrankObj([
+            { drank: false },
+            { drank: false },
+            { drank: false },
+            { drank: false },
+            { drank: false },
+            { drank: false },
+          ]);
+        }
+      } else if (waterInfoType === 'Bottle') {
+        if (!drankArr.length) {
+          console.log('added');
+          let newObj = {
+            type,
+            drank: [...bottleDrankObj],
+            userId: user.uid,
+            date: date,
+          };
+          await addDoc(collection(db, 'WaterCount'), newObj);
+          setBottleDrankObj([
+            { drank: false },
+            { drank: false },
+            { drank: false },
+            { drank: false },
+            { drank: false },
+            { drank: false },
+          ]);
+        } else {
+          console.log('updated');
+          const docRef = doc(db, 'WaterCount', waterInfoObj.id);
+          await updateDoc(docRef, {
+            drank: [...bottleDrankObj],
+          });
+          setBottleDrankObj([
+            { drank: false },
+            { drank: false },
+            { drank: false },
+            { drank: false },
+            { drank: false },
+            { drank: false },
+          ]);
+        }
       }
     }
   };
@@ -182,22 +243,78 @@ const TempWater = ({ date }) => {
   };
 
   useEffect(() => {
-    const unSubWater = dispatch(fetchWaterInfo2(user.uid, date));
+    setType('Cup');
+    const unSubWater = dispatch(fetchWaterInfo(user.uid, date));
     return () => {
       unSubWater();
     };
   }, [date]);
 
+  const handleType = async (newType) => {
+    setType(newType);
+    const docRef = doc(db, 'WaterCount', waterInfoObj.id);
+    await updateDoc(docRef, {
+      type: newType,
+    });
+    dispatch(fetchWaterInfo(user.uid, date));
+  };
+
   return (
     <div className='mt-5'>
-      <div>{date}</div>
       <h1 className='uppercase text-blue-600 tracking-widest'>Water</h1>
       <div className='flex justify-between items-center pb-3'>
         <h1 className='text-sm'>
-          <button
+          {!waterInfo.length ? (
+            <div>
+              <button
+                disabled={update}
+                onClick={() => {
+                  handleType('Cup');
+                }}
+                className={`${type === 'Cup' ? 'text-blue-600' : ''}`}
+              >
+                Cup
+              </button>{' '}
+              or{' '}
+              <button
+                disabled={update}
+                onClick={() => {
+                  handleType('Bottle');
+                }}
+                className={`${type === 'Bottle' ? 'text-blue-800' : ''}`}
+              >
+                Bottle
+              </button>
+            </div>
+          ) : (
+            <div>
+              <button
+                disabled={update}
+                onClick={() => {
+                  handleType('Cup');
+                }}
+                className={`${waterInfoType === 'Cup' ? 'text-blue-600' : ''}`}
+              >
+                Cup
+              </button>{' '}
+              or{' '}
+              <button
+                disabled={update}
+                onClick={() => {
+                  handleType('Bottle');
+                }}
+                className={`${
+                  waterInfoType === 'Bottle' ? 'text-blue-800' : ''
+                }`}
+              >
+                Bottle
+              </button>
+            </div>
+          )}
+          {/* <button
             disabled={update}
             onClick={() => {
-              setType('Cup');
+              handleType('Cup');
             }}
             className={`${type === 'Cup' ? 'text-blue-600' : ''}`}
           >
@@ -207,13 +324,12 @@ const TempWater = ({ date }) => {
           <button
             disabled={update}
             onClick={() => {
-              setType('Bottle');
+              handleType('Bottle');
             }}
             className={`${type === 'Bottle' ? 'text-blue-600' : ''}`}
           >
             Bottle
-          </button>
-          {/* <button onClick={() => console.log(type)}>LL</button> */}
+          </button> */}
         </h1>
         {update ? (
           <Button
@@ -288,7 +404,7 @@ const TempWater = ({ date }) => {
         </div>
       ) : (
         <div className='flex justify-between'>
-          {waterInfoObj.type === 'Cup'
+          {waterInfoType === 'Cup'
             ? drankArr.map((obj, i) =>
                 !obj.drank ? (
                   <button key={i}>

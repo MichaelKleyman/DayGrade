@@ -17,7 +17,7 @@ const _getWaterInfo = (info) => {
   return { type: FETCH_WATER, info };
 };
 
-export const fetchWaterInfo2 = (userId, date) => (dispatch) => {
+export const fetchWaterInfo = (userId, date) => (dispatch) => {
   try {
     const ref = query(
       collection(db, 'WaterCount'),
@@ -43,7 +43,7 @@ export const fetchWaterInfo2 = (userId, date) => (dispatch) => {
 
 let initialState = [];
 
-export default function waterReducer2(state = initialState, action) {
+export default function waterReducer(state = initialState, action) {
   switch (action.type) {
     case FETCH_WATER: {
       return action.info;

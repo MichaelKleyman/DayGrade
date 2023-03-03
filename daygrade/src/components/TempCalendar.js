@@ -17,7 +17,7 @@ import { useNavigate } from 'react-router-dom';
 import { FcCalendar, FcAbout } from 'react-icons/fc';
 import Grader from './Grader';
 import ScoreProcess from './ScoreProcess';
-import { fetchScoreInfo, fetchLog, fetchWaterInfo } from '../store';
+import { fetchScoreInfo, fetchLog } from '../store';
 import PreviousGrade from './PreviousGrade';
 
 export default function Temp() {
@@ -32,11 +32,6 @@ export default function Temp() {
   let usersLog = useSelector((state) => state.logReducer);
   let usersScoreArr = useSelector((state) => state.scoreReducer);
   let usersScoreObj = usersScoreArr[0];
-
-  // const changeDate = (curDate) => {
-  //   // return dispatch(fetchLog(user?.uid, curDate));
-  //   return dispatch(fetchWaterInfo(user?.uid, curDate));
-  // };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -129,8 +124,6 @@ export default function Temp() {
                   date={date}
                   onChange={(newDate) => {
                     setDate(newDate);
-                    // changeDate(newDate.format('dddd, MMMM D YYYY'));
-                    // changeWaterCount(newDate.format('dddd, MMMM D YYYY'));
                   }}
                   renderDay={renderWeekPickerDay}
                   showDaysOutsideCurrentMonth
