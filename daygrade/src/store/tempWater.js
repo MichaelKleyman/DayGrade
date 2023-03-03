@@ -41,12 +41,12 @@ export const fetchWaterInfo2 = (userId, date) => (dispatch) => {
   }
 };
 
-const initialState = [];
+let initialState = [];
 
 export default function waterReducer2(state = initialState, action) {
   switch (action.type) {
     case FETCH_WATER: {
-      return [...action.info];
+      return action.info;
     }
     default:
       return state;

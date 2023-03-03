@@ -48,7 +48,15 @@ const TempWater = ({ date }) => {
           userId: user.uid,
           date,
         });
-        dispatch(fetchWaterInfo2(user.uid, date));
+        setCupDrankObj([
+          { drank: false },
+          { drank: false },
+          { drank: false },
+          { drank: false },
+          { drank: false },
+          { drank: false },
+        ]);
+        // dispatch(fetchWaterInfo2(user.uid, date));
         // dispatch(addWaterInfo(user.uid, cupDrankObj, type, date));
       } else {
         console.log('updated');
@@ -57,7 +65,15 @@ const TempWater = ({ date }) => {
           drank: [...cupDrankObj],
           type,
         });
-        dispatch(fetchWaterInfo2(user.uid, date));
+        setCupDrankObj([
+          { drank: false },
+          { drank: false },
+          { drank: false },
+          { drank: false },
+          { drank: false },
+          { drank: false },
+        ]);
+        // dispatch(fetchWaterInfo2(user.uid, date));
         // dispatch(updateWaterInfo(waterInfo.id, cupDrankObj, type));
       }
     } else if (type === 'Bottle') {
@@ -70,7 +86,15 @@ const TempWater = ({ date }) => {
           date: date,
         };
         await addDoc(collection(db, 'WaterCount'), newObj);
-        dispatch(fetchWaterInfo2(user.uid, date));
+        setBottleDrankObj([
+          { drank: false },
+          { drank: false },
+          { drank: false },
+          { drank: false },
+          { drank: false },
+          { drank: false },
+        ]);
+        // dispatch(fetchWaterInfo2(user.uid, date));
         // dispatch(addWaterInfo(user.uid, bottleDrankObj, type, date));
       } else {
         console.log('updated');
@@ -79,7 +103,15 @@ const TempWater = ({ date }) => {
           drank: [...bottleDrankObj],
           type,
         });
-        dispatch(fetchWaterInfo2(user.uid, date));
+        setBottleDrankObj([
+          { drank: false },
+          { drank: false },
+          { drank: false },
+          { drank: false },
+          { drank: false },
+          { drank: false },
+        ]);
+        // dispatch(fetchWaterInfo2(user.uid, date));
         // dispatch(updateWaterInfo(waterInfo.id, bottleDrankObj, type));
       }
     }

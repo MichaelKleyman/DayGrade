@@ -22,7 +22,7 @@ const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
-      immutableCheck: true,
+      immutableCheck: false,
       //fixed the bug about
     }).concat(logger),
 });
