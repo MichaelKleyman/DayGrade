@@ -239,7 +239,7 @@ const Signup = () => {
         alt='background'
       /> */}
       <div className='flex flex-col justify-center z-[2]'>
-        <form className='max-w-[400px] w-full mx-auto bg-white rounded-xl shadow-xl p-5'>
+        <form id='signup' className='max-w-[400px] w-full mx-auto bg-white rounded-xl shadow-xl p-5'>
           <div>
             <div>{pageDisplay()}</div>
             <div className='flex justify-center w-full py-7'>

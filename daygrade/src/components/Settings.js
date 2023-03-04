@@ -15,6 +15,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import { MdDelete, MdLogout } from 'react-icons/md';
 
 const Settings = ({ userObject }) => {
   const dispatch = useDispatch();
@@ -24,8 +25,6 @@ const Settings = ({ userObject }) => {
   const [check, setCheck] = useState(false);
   const [error, setError] = useState(null);
   const [user, loading] = useAuthState(auth);
-  const Auth = getAuth();
-  const User = auth.currentUser;
   const { logout } = useAuth();
 
   const handleClickOpen = () => {
@@ -55,20 +54,41 @@ const Settings = ({ userObject }) => {
 
   return (
     <div className='m-2'>
-      <label className='uppercase tracking-widest text-lg' id='setting-text'>
-        Daygrade settings page
-      </label>
-      <div className='pt-5 grid grid-cols-3 gap-5'>
-        <div>
-          <div className='font-bold pb-2'>Erase Your Account</div>
-          <Button
-            onClick={handleClickOpen}
-            sx={{ backgroundColor: 'green', color: 'white' }}
-          >
-            Delete
-          </Button>
+      <div>
+        <label className='uppercase tracking-widest text-lg' id='setting-text'>
+          Daygrade settings page
+        </label>
+        <div className='flex'>
+          <div className='pt-5 grid grid-cols-3 gap-5'>
+            <div>
+              <div className='font-bold pb-2 text-3sm flex w-[180px]'>Erase Your Account</div>
+              <Button
+                onClick={handleClickOpen}
+                sx={{ backgroundColor: 'green', color: 'white' }}
+              >
+                <MdDelete color='white' className='p-1' size={30} />
+                Delete
+              </Button>
+            </div>
+          </div>
+          <div className='pt-5 grid grid-cols-3 gap-5'>
+            <div>
+              <div className='font-bold pb-2 text-3sm flex w-[110px]'>Log Out</div>
+              <Button
+                onClick={async () => {
+                  await logout();
+                  navigate('/');
+                }}
+                sx={{ backgroundColor: 'green', color: 'white' }}
+              >
+                <MdLogout color='white' className='p-1' size={30} />
+                Logout
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
+
       <Dialog
         open={open}
         onClose={handleClose}

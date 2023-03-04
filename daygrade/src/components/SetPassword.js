@@ -14,7 +14,7 @@ const SetPassword = ({
 
   return (
     <div>
-      <h2 className='text-3xl font-bold text-center py-4'>
+      <h2 id='signup-password' className='text-3xl font-bold text-center py-4'>
         Final step! Set your password.
       </h2>
       <p className='text-sm text-gray-400 text-center'>

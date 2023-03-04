@@ -34,15 +34,18 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className='grid grid-cols-1 h-screen w-full bg-black/80'>
+    <div className='grid grid-cols-1 h-screen w-full bg-black/80' id='forgot'>
       <img
         className='absolute w-full h-full object-cover mix-blend-overlay'
         src={Backgroundpic}
         alt='background'
       />
       <div className='flex flex-col justify-center z-[2]'>
-        <form className='max-w-[400px] w-full mx-auto bg-white rounded-xl shadow-xl p-5'>
-          <h2 className='text-3xl font-bold text-center py-4'>
+        <form
+          id='forgot-password-form'
+          className='max-w-[400px] w-full mx-auto bg-white rounded-xl shadow-xl p-5'
+        >
+          <h2 id='fp-text' className='text-3xl font-bold text-center py-4'>
             Forgot Password
           </h2>
 

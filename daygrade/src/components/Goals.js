@@ -28,7 +28,7 @@ const Goals = ({
 
   return (
     <div>
-      <h2 className='text-3xl font-bold text-center py-4'>
+      <h2 id='signup-goals' className='text-3xl font-bold text-center py-4'>
         Thanks {firstName}! Now tell me your goals.
       </h2>
       <p className='text-center pb-4 text-gray-400'>
@@ -51,7 +51,7 @@ const Goals = ({
               : ''
           }`}
         >
-          <button>Commit fully to a routine</button>
+          <button className='goal'>Commit fully to a routine</button>
         </div>
         <div
           onClick={(e) => {
@@ -69,7 +69,7 @@ const Goals = ({
               : ''
           }`}
         >
-          <button>Develop consistency</button>
+          <button className='goal'>Develop consistency</button>
         </div>
         <div
           onClick={(e) => {
@@ -87,7 +87,7 @@ const Goals = ({
               : ''
           }`}
         >
-          <button>Get more disciplined</button>
+          <button className='goal'>Get more disciplined</button>
         </div>
         <div
           onClick={(e) => {
@@ -105,7 +105,7 @@ const Goals = ({
               : ''
           }`}
         >
-          <button>Maintain discipline</button>
+          <button className='goal'>Maintain discipline</button>
         </div>
         <div
           onClick={(e) => {
@@ -123,7 +123,7 @@ const Goals = ({
               : ''
           }`}
         >
-          <button>Create a new healthy habit</button>
+          <button className='goal'>Create a new healthy habit</button>
         </div>
         <div
           onClick={(e) => {
@@ -141,7 +141,7 @@ const Goals = ({
               : ''
           }`}
         >
-          <button>Achieve a personal goal</button>
+          <button className='goal'>Achieve a personal goal</button>
         </div>
         <div
           onClick={(e) => {
@@ -159,7 +159,7 @@ const Goals = ({
               : ''
           }`}
         >
-          <button>Force self accountability</button>
+          <button className='goal'>Force self accountability</button>
         </div>
         {goalsError && (
           <div className='w-full text-rose-500 flex items-center justify-center'>

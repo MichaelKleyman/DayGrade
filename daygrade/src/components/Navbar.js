@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { reactSwitch } from '../App';
 import { BsSun, BsFillMoonFill } from 'react-icons/bs';
 import { CgProfile } from 'react-icons/cg';
+
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
@@ -118,13 +119,15 @@ const Navbar = ({ theme }) => {
         ))}
       </List>
       <List></List>
-      <Divider />
+      <Divider
+        sx={{ backgroundColor: `${theme === 'dark' ? 'white' : 'blue'}` }}
+      />
     </Box>
   );
 
   return (
     <div
-      className={`bg-white shadow-xl w-full h-20 fixed top-0 ${
+      className={`bg-white shadow-xl w-full ${
         theme === 'dark' ? 'shadow-gray-900' : 'shadow-gray-400'
       }`}
       id='navbar'
@@ -132,7 +135,9 @@ const Navbar = ({ theme }) => {
       <div className='text-black flex justify-between items-center h-20 max-w-[1240px] mx-auto px-4 w-full'>
         <Link
           to='/'
-          className='font-[Montserrat] uppercase tracking-widest text-xl md:text-4xl sm:text-2xl text-blue-600 px-3 py-3 w-full ml-10'
+          id='daygrade'
+          //text-xl sm:text-2xl md:text-3xl
+          className='font-[Montserrat] uppercase tracking-widest  text-blue-600 px-3 py-3 w-full ml-10'
         >
           D a y g r a d e
         </Link>
