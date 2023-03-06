@@ -10,7 +10,7 @@ const Home = () => {
     <div className='h-[100px] md:h-[10px]'>
       {!currentUser ? (
         <div>
-          <div className='w-full flex items-center py-16 px-4 h-[260px] md:h-[640px]'>
+          <div className='w-full flex items-center py-16 px-4 h-[760px] md:h-[640px]'>
             <div className='p-8 max-w-[1240px] sm:mt-[5px] md:mt-[30px] mt-[10px] mx-auto md:grid grid-cols-3 gap-8'>
               <div className='md:w-[400px] sm:w-[200px] m-auto p-4 flex items-center justify-center ease-in duration-300 hover:scale-110'>
                 <img
