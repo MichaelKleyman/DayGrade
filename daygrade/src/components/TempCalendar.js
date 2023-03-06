@@ -96,7 +96,7 @@ export default function Temp() {
   };
 
   return (
-    <div className='w-full'>
+    <div className='w-full' id='checkin'>
       <div className='py-2 px-4 text-blue-500 tracking-wide flex justify-between'>
         <h1 className='flex items-center'>
           <FcAbout className='p-1' size={38} />

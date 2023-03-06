@@ -75,7 +75,7 @@ const Search = () => {
   };
 
   return (
-    <div className='w-full h-[1100px]'>
+    <div className='w-full h-[1100px]' id='search'>
       <div className='text-center mt-8'>
         <TextField
           id='outlined-search'

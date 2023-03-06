@@ -71,7 +71,7 @@ const UserDashboard = () => {
   const Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
 
   return (
-    <div className='w-full'>
+    <div className='w-full' id='dash'>
       <div
         className='m-6 p-2 text-3xl font-bold tracking-widest'
         id='dashboard-greeting'

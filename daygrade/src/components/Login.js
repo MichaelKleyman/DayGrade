@@ -52,7 +52,10 @@ const Login = () => {
         alt='background'
       />
       <div className='flex flex-col justify-center z-[2]'>
-        <form id='login-form' className='max-w-[400px] w-full mx-auto bg-white rounded-xl shadow-xl p-5'>
+        <form
+          id='login-form'
+          className='max-w-[400px] w-full mx-auto bg-white rounded-xl shadow-xl p-5'
+        >
           <h2 className='text-3xl font-bold text-center py-4'>User Login</h2>
 
           <div className='flex flex-col py-4'>
