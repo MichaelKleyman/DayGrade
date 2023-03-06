@@ -73,12 +73,12 @@ const UserDashboard = () => {
   return (
     <div className='w-full'>
       <div
-        className='m-6 p-6 text-3xl font-bold tracking-widest'
+        className='m-6 p-2 text-3xl font-bold tracking-widest'
         id='dashboard-greeting'
       >
         {userObject.userName}'s Dashboard
       </div>
-      <div className='grid lg:grid-cols-3 gap-8 p-6 items-center'>
+      <div className='grid lg:grid-cols-3 gap-8 p-4 items-center'>
         <div
           className='p-6 shadow-xl rounded-xl bg-white h-[100%] md:h-[80%] lg:h-[90%] grid grid-cols-1 gap-8'
           id='search-div'
@@ -95,7 +95,7 @@ const UserDashboard = () => {
               Search
             </button>
           </h1>
-          <h1 className='text-blue-400'>
+          <h1 className='text-blue-400 text-sm'>
             Take a look at your previous logs by searching a key word.
           </h1>
         </div>
@@ -121,12 +121,12 @@ const UserDashboard = () => {
 
           <div className='grid grid-cols-3 gap-4 place-items-center text-blue-400 w-[440px] md:w-[340px]'>
             <div className='w-full'>
-              <p>Last check in</p>
+              <p className='text-sm'>Last check in</p>
             </div>
-            <div className='w-full ml-6'>
+            <div className='ml-6'>
               <FcAdvance className='p-2 mx-2' size={38} />
             </div>
-            <div className='w-full ml-4'>
+            <div className='w-full ml-4 text-sm'>
               <div>
                 {usersScores.length !== 0 ? (
                   <div>
@@ -174,7 +174,7 @@ const UserDashboard = () => {
           <div className='grid grid-cols-2 text-blue-400'>
             <ul>
               {arrayFirstHalf.map((goal) => (
-                <li key={goal} className='py-auto flex items-center'>
+                <li key={goal} className='py-auto flex items-center text-sm'>
                   <FcApproval className='p-2' size={35} />
                   {goal}
                 </li>
@@ -182,7 +182,7 @@ const UserDashboard = () => {
             </ul>
             <ul>
               {arraySecondHalf.map((goal) => (
-                <li key={goal} className='py-auto flex items-center'>
+                <li key={goal} className='py-auto flex items-center text-sm'>
                   <FcApproval className='p-2' size={35} />
                   {goal}
                 </li>
@@ -193,7 +193,7 @@ const UserDashboard = () => {
       </div>
       <div className='grid grid-cols-1 lg:grid-cols-3 gap-8 p-6 items-center'>
         <div
-          className='bg-white shadow-xl rounded-lg col-span-2'
+          className='bg-white shadow-xl rounded-lg col-span-2 h-full'
           id='chart-div'
         >
           <div>
@@ -210,7 +210,7 @@ const UserDashboard = () => {
             </div>
           </div>
         </div>
-        <Activity usersScores={usersScores} date={date} userId={user?.uid}/>
+        <Activity usersScores={usersScores} date={date} userId={user?.uid} />
       </div>
     </div>
   );

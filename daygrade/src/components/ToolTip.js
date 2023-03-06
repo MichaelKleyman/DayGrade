@@ -27,7 +27,7 @@ const ToolTip = () => {
   return (
     <div>
       <Button
-        className='duration-300 hover:scale-110'
+        className='duration-300 hover:scale-110 animate-bounce'
         onClick={handleClickOpen}
       >
         <FcInfo size={20} />

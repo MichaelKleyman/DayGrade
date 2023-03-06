@@ -145,16 +145,16 @@ const Activity = ({ usersScores, date, userId }) => {
           <div>
             <DiCodeigniter size={35} color='red' />
           </div>
-          <div className='m-4 p-3 font-sans'>
+          <div className='m-4 p-3 font-sans w-full'>
             <h1
               id='current-streak'
-              className='uppercase tracking-wide text-gray-500 col-span-2'
+              className='uppercase tracking-wide text-gray-500 col-span-2 text-sm'
             >
               Current Streak
             </h1>
             <h1 className='font-bold text-lg'>{streak} days</h1>
           </div>
-          <div id='latest' className='bg-gray-200 rounded-xl'>
+          <div id='latest' className='bg-gray-200 rounded-xl w-full'>
             <div className='uppercase tracking-wide text-black text-sm p-2'>
               Latest
             </div>
@@ -171,7 +171,7 @@ const Activity = ({ usersScores, date, userId }) => {
         <div className='sm:ml-3 md:ml-10 grid grid-cols-3 place-items-center pt-4'>
           {/* <div>1</div> */}
           <div className='col-span-2 flex'>
-            <div className='mr-6'>
+            <div className='mr-6 animate-bounce'>
               <TfiThought size={25} color='blue' />
             </div>
             <TextField

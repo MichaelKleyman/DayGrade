@@ -97,7 +97,7 @@ const Grader = ({ date, usersLog }) => {
         </div>
         <div className='py-5'>
           <textarea
-            className='p-2 rounded-lg'
+            className='p-2 rounded-lg w-[100%]'
             autoFocus
             placeholder='What have you done...'
             rows='4'
@@ -124,17 +124,16 @@ const Grader = ({ date, usersLog }) => {
         </div>
       </div>
       <div
-        className='grid grid-cols-1 lg:grid-cols-2 sm:grid-cols-1 gap-4 h-[570px] overflow-y-auto'
+        className='border border-gray-200 rounded-lg shadow-lg shadow-gray-800 p-3 grid grid-cols-1 lg:grid-cols-2 sm:grid-cols-1 gap-4 h-[570px] overflow-y-auto'
         id='logs'
       >
         {arrayFirstHalf.map((usersLogInfo, i) => (
           <div
             key={usersLogInfo.id}
-            // bg-gradient-to-r from-cyan-200 to-blue-400
-            className='w-full shadow-lg shadow-gray-400 rounded-xl'
+            className='w-full shadow-lg shadow-gray-400 rounded-xl h-[210px] overflow-y-auto'
             id='log1'
           >
-            <h1 className='font-bold mx-2 my-3 py-4 flex justify-between'>
+            <h1 className='font-bold mx-2 my-3 py-2 flex justify-between'>
               <p>{usersLogInfo.log}</p>
               <div className='p-2 m-1'>
                 <EditLog
@@ -167,11 +166,10 @@ const Grader = ({ date, usersLog }) => {
         {arraySecondHalf.map((usersLogInfo, i) => (
           <div
             key={usersLogInfo.id}
-            // bg-gradient-to-r from-cyan-200 to-blue-400
-            className=' shadow-lg shadow-gray-400 rounded-xl'
+            className=' shadow-lg shadow-gray-400 rounded-xl h-[210px] overflow-y-auto'
             id='log2'
           >
-            <h1 className='font-bold mx-4 my-3 py-4 flex justify-between '>
+            <h1 className='font-bold mx-4 my-2 py-2 flex justify-between '>
               <p>{usersLogInfo.log}</p>
               <div className='p-2 m-1'>
                 <EditLog
