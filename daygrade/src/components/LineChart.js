@@ -128,7 +128,7 @@ const LineChart = () => {
       let curDate = new Date().getTime();
       let d = new Date();
       let endDate = new Date(obj.date).getTime();
-      let daysAway = d.setDate(d.getDate() - 5);
+      let daysAway = d.setDate(d.getDate() - 4);
       if (endDate >= daysAway && endDate <= curDate) {
         return obj;
       }

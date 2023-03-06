@@ -101,7 +101,7 @@ const Search = () => {
               onClick={() => paginate(num)}
               className={`${
                 num === curPage ? 'bg-blue-600 text-white' : ''
-              } cursor-pointer border border-blue-500 rounded-lg ml-2 p-4 hover:bg-blue-600 hover:text-white hover:rounded-lg hover:shadow-gray-600 hover:scale-110 duration-300`}
+              } cursor-pointer border border-blue-500 rounded-lg ml-2 p-2 sm:p-2 md:p-4 hover:bg-blue-600 hover:text-white hover:rounded-lg hover:shadow-gray-600 hover:scale-110 duration-300`}
             >
               <a href='!#' id='num'>
                 {num}
@@ -118,7 +118,9 @@ const Search = () => {
               className='bg-white rounded-lg shadow-lg shadow-gray-500 p-4 m-5'
               id='log'
             >
-              <div className='font-bold pb-4' id='log-text'>{obj.log}</div>
+              <div className='font-bold pb-4' id='log-text'>
+                {obj.log}
+              </div>
               {/* <div className='text-sm text-gray-500'>{obj.Date}</div> */}
               <div className='text-sm text-gray-500 pb-2 flex items-center '>
                 <FcOk size={35} className='p-2' />

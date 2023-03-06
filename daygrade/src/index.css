@@ -9,6 +9,32 @@
 /* background-image: url('https://images.unsplash.com/photo-1533134486753-c833f0ed4866?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80'); */
 /* } */
 
+/*Media query for the last check in status on user dashboard*/
+
+@media screen and (min-width: 288px) {
+  #last-checkin {
+    width: 220px;
+  }
+}
+
+@media screen and (min-width: 310px) {
+  #last-checkin {
+    width: 230px;
+  }
+}
+
+@media screen and (min-width: 330px) {
+  #last-checkin {
+    width: 260px;
+  }
+}
+
+@media screen and (min-width: 360px) {
+  #last-checkin {
+    width: 290px;
+  }
+}
+
 #dark #forgot {
   background-image: url('https://images.unsplash.com/flagged/photo-1574512468809-d05a4fd197fd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80');
   background-blend-mode: darken;
@@ -150,7 +176,8 @@
 
 @media screen and (min-width: 300px) {
   #daygrade {
-    font-size: 9px;
+    font-size: 14px;
+    margin-left: 0;
   }
 }
 
@@ -355,7 +382,12 @@
 
 #dark #calendar-dates {
   background-color: #282c35;
+  /* color: white; */
 }
+
+/* #dark .MuiButtonBase-root {
+  background-color: white;
+} */
 
 #light #calendar-background {
   background-color: white;

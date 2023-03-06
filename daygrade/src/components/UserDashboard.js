@@ -95,7 +95,7 @@ const UserDashboard = () => {
               Search
             </button>
           </h1>
-          <h1 className='text-blue-400 text-sm'>
+          <h1 className='text-blue-400 text-sm mb-2'>
             Take a look at your previous logs by searching a key word.
           </h1>
         </div>
@@ -118,16 +118,13 @@ const UserDashboard = () => {
               Start
             </button>
           </div>
-
-          <div className='grid grid-cols-3 gap-4 place-items-center text-blue-400 w-[440px] md:w-[340px]'>
-            <div className='w-full'>
-              <p className='text-sm'>Last check in</p>
-            </div>
+          <div id='last-checkin' className='grid grid-cols-3 gap-4 place-items-center text-blue-400'>
+            <p className='text-sm'>Last check in</p>
             <div className='ml-6'>
               <FcAdvance className='p-2 mx-2' size={38} />
             </div>
-            <div className='w-full ml-4 text-sm'>
-              <div>
+            <div>
+              <div className='text-sm'>
                 {usersScores.length !== 0 ? (
                   <div>
                     {Math.floor(Difference_In_Days) >= 1 &&
