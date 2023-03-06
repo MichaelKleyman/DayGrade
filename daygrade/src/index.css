@@ -607,27 +607,27 @@
 }
 
 #light #search-div {
-  background-color: white;
-}
-
-#light #log-div {
-  background-color: white;
-}
-
-#light #goal-div {
-  background-color: white;
-}
-
-#light #chart-div {
-  background-color: white;
-}
-
-#light #activity-div {
-  background-color: white;
+  background-color: #f4f5f0;
 }
 
 #dark #search-div {
   background-color: #282c35;
+}
+
+#light #log-div {
+  background-color: #f4f5f0;
+}
+
+#light #goal-div {
+  background-color: #f4f5f0;
+}
+
+#light #chart-div {
+  background-color: #f4f5f0;
+}
+
+#light #activity-div {
+  background-color: #f4f5f0;
 }
 
 #dark #log-div {
@@ -738,7 +738,7 @@
 }
 
 #light #navbar {
-  background-color: white;
+  background-color: #f4f5f0;
 }
 
 #dark #navbar {

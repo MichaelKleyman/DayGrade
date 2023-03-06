@@ -123,84 +123,85 @@ const Grader = ({ date, usersLog }) => {
           </div>
         </div>
       </div>
-      <div
-        className='border border-gray-200 rounded-lg shadow-lg shadow-gray-800 p-3 grid grid-cols-1 lg:grid-cols-2 sm:grid-cols-1 gap-4 h-[570px] overflow-y-auto'
-        id='logs'
-      >
-        {arrayFirstHalf.map((usersLogInfo, i) => (
-          <div
-            key={usersLogInfo.id}
-            className='w-full shadow-lg shadow-gray-400 rounded-xl h-[210px] overflow-y-auto'
-            id='log1'
-          >
-            <h1 className='font-bold mx-2 my-3 py-2 flex justify-between'>
-              <p>{usersLogInfo.log}</p>
-              <div className='p-2 m-1'>
-                <EditLog
-                  usersLogInfo={usersLogInfo}
-                  open={open}
-                  handleClickOpen={handleClickOpen}
-                  handleClose={handleClose}
-                  handleIdCheck={handleIdCheck}
-                  id={id}
-                />
-
-                <div
-                  className='grid grid-cols-2'
-                  onClick={() => {
-                    handleDelete(usersLogInfo.id);
-                  }}
-                >
-                  <AiFillDelete
-                    size={25}
-                    className='duration-300 hover:scale-110 hover:text-white cursor-pointer'
+      {usersLog.length ? (
+        <div
+          className='border border-gray-200 rounded-lg shadow-lg shadow-gray-800 p-3 grid grid-cols-1 lg:grid-cols-2 sm:grid-cols-1 gap-4 h-[570px] overflow-y-auto'
+          id='logs'
+        >
+          {arrayFirstHalf.map((usersLogInfo, i) => (
+            <div
+              key={usersLogInfo.id}
+              className='w-full shadow-lg shadow-gray-400 rounded-xl h-[210px] overflow-y-auto'
+              id='log1'
+            >
+              <h1 className='font-bold mx-2 my-3 py-2 flex justify-between'>
+                <p>{usersLogInfo.log}</p>
+                <div className='p-2 m-1'>
+                  <EditLog
+                    usersLogInfo={usersLogInfo}
+                    open={open}
+                    handleClickOpen={handleClickOpen}
+                    handleClose={handleClose}
+                    handleIdCheck={handleIdCheck}
+                    id={id}
                   />
-                </div>
-              </div>
-            </h1>
-            <h1 className='mx-4 py-2 text-sm text-gray-600'>
-              {usersLogInfo.Time}
-            </h1>
-          </div>
-        ))}
-        {arraySecondHalf.map((usersLogInfo, i) => (
-          <div
-            key={usersLogInfo.id}
-            className=' shadow-lg shadow-gray-400 rounded-xl h-[210px] overflow-y-auto'
-            id='log2'
-          >
-            <h1 className='font-bold mx-4 my-2 py-2 flex justify-between '>
-              <p>{usersLogInfo.log}</p>
-              <div className='p-2 m-1'>
-                <EditLog
-                  usersLogInfo={usersLogInfo}
-                  open={open}
-                  handleClickOpen={handleClickOpen}
-                  handleClose={handleClose}
-                  handleIdCheck={handleIdCheck}
-                  id={id}
-                />
 
-                <div
-                  className='grid grid-cols-2'
-                  onClick={() => {
-                    handleDelete(usersLogInfo.id);
-                  }}
-                >
-                  <AiFillDelete
-                    size={25}
-                    className='duration-300 hover:scale-110 hover:text-white cursor-pointer'
-                  />
+                  <div
+                    className='grid grid-cols-2'
+                    onClick={() => {
+                      handleDelete(usersLogInfo.id);
+                    }}
+                  >
+                    <AiFillDelete
+                      size={25}
+                      className='duration-300 hover:scale-110 hover:text-white cursor-pointer'
+                    />
+                  </div>
                 </div>
-              </div>
-            </h1>
-            <h1 className='mx-4 py-2 text-sm text-gray-600'>
-              {usersLogInfo.Time}
-            </h1>
-          </div>
-        ))}
-      </div>
-      {!usersLog.length && (
+              </h1>
+              <h1 className='mx-4 py-2 text-sm text-gray-600'>
+                {usersLogInfo.Time}
+              </h1>
+            </div>
+          ))}
+          {arraySecondHalf.map((usersLogInfo, i) => (
+            <div
+              key={usersLogInfo.id}
+              className=' shadow-lg shadow-gray-400 rounded-xl h-[210px] overflow-y-auto'
+              id='log2'
+            >
+              <h1 className='font-bold mx-4 my-2 py-2 flex justify-between '>
+                <p>{usersLogInfo.log}</p>
+                <div className='p-2 m-1'>
+                  <EditLog
+                    usersLogInfo={usersLogInfo}
+                    open={open}
+                    handleClickOpen={handleClickOpen}
+                    handleClose={handleClose}
+                    handleIdCheck={handleIdCheck}
+                    id={id}
+                  />
+
+                  <div
+                    className='grid grid-cols-2'
+                    onClick={() => {
+                      handleDelete(usersLogInfo.id);
+                    }}
+                  >
+                    <AiFillDelete
+                      size={25}
+                      className='duration-300 hover:scale-110 hover:text-white cursor-pointer'
+                    />
+                  </div>
+                </div>
+              </h1>
+              <h1 className='mx-4 py-2 text-sm text-gray-600'>
+                {usersLogInfo.Time}
+              </h1>
+            </div>
+          ))}
+        </div>
+      ) : (
         <div
           className='flex items-center justify-center uppercase tracking-widest shadow-lg shadow-gray-400 rounded-xl p-5'
           id='no-logs'

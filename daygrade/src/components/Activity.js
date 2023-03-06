@@ -13,6 +13,8 @@ import {
 } from '../store';
 import { ImCheckboxUnchecked, ImCheckboxChecked } from 'react-icons/im';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import ActivityTooltip from './ActivityTooltip';
+import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
 
 const Activity = ({ usersScores, date, userId }) => {
   const [streak, setStreak] = useState(0);
@@ -133,10 +135,13 @@ const Activity = ({ usersScores, date, userId }) => {
 
   return (
     <div
-      className='bg-white shadow-xl rounded-lg h-full md:h-full lg:h-full'
+      className='shadow-xl rounded-lg h-full md:h-full lg:h-full'
       id='activity-div'
     >
-      <h1 className='font-bold md:text-xl flex items-center p-3'>Activity</h1>
+      <h1 className='font-bold md:text-xl flex items-center p-3'>
+        <ActivityTooltip />
+        Activity
+      </h1>
       <div className='mb-2'>
         <div
           id='top-activity'
@@ -159,7 +164,13 @@ const Activity = ({ usersScores, date, userId }) => {
               Latest
             </div>
             <div className='text-sm p-2 text-gray-500'>
-              {usersScores[usersScores.length - 1]?.date}
+              {usersScores.length ? (
+                usersScores[usersScores.length - 1]?.date
+              ) : (
+                <div className='text-center relative bottom-3 animate-spin'>
+                  <HourglassEmptyIcon />
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -171,7 +182,7 @@ const Activity = ({ usersScores, date, userId }) => {
         <div className='sm:ml-3 md:ml-10 grid grid-cols-3 place-items-center pt-4'>
           {/* <div>1</div> */}
           <div className='col-span-2 flex'>
-            <div className='mr-6 animate-bounce'>
+            <div className='mr-6 animate-pulse'>
               <TfiThought size={25} color='blue' />
             </div>
             <TextField

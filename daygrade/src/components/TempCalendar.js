@@ -70,7 +70,8 @@ export default function Temp() {
         '& .css-raiqh1-MuiTypography-root-MuiDayPicker-weekDayLabel': {
           height: '70px',
           width: tileSize,
-          color: '#000',
+          color: 'blue',
+          fontWeight: 'bolder',
         },
       },
     },
@@ -89,6 +90,8 @@ export default function Temp() {
         sx={{
           width: tileSize,
           height: tileSize,
+          color: 'black',
+          fontWeight: 'bolder',
         }}
         id='calendar-dates'
       />

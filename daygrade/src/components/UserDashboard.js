@@ -14,13 +14,10 @@ import {
   FcComboChart,
   FcAdvance,
 } from 'react-icons/fc';
-import { AiOutlineSmallDash } from 'react-icons/ai';
-import BarChart from './BarChart';
 import EditGoals from './EditGoals';
-import TempChart from './TempChart';
 import LineChart from './LineChart';
-import Search from './Search';
 import Activity from './Activity';
+import ChartTooltip from './ChartTooltip';
 
 const UserDashboard = () => {
   const [user, loading] = useAuthState(auth);
@@ -80,7 +77,7 @@ const UserDashboard = () => {
       </div>
       <div className='grid lg:grid-cols-3 gap-8 p-4 items-center'>
         <div
-          className='p-6 shadow-xl rounded-xl bg-white h-[100%] md:h-[80%] lg:h-[90%] grid grid-cols-1 gap-8'
+          className='p-6 shadow-xl rounded-xl h-[100%] md:h-[80%] lg:h-[90%] grid grid-cols-1 gap-8'
           id='search-div'
         >
           <h1 className='font-extrabold md:text-xl flex items-center justify-between'>
@@ -100,7 +97,7 @@ const UserDashboard = () => {
           </h1>
         </div>
         <div
-          className='p-6 shadow-xl rounded-xl bg-white grid grid-cols-2 h-[100%] md:h-[80%] lg:h-[90%]'
+          className='p-6 shadow-xl rounded-xl  grid grid-cols-2 h-[100%] md:h-[80%] lg:h-[90%]'
           id='log-div'
         >
           <div className='w-[90%]'>
@@ -118,7 +115,10 @@ const UserDashboard = () => {
               Start
             </button>
           </div>
-          <div id='last-checkin' className='grid grid-cols-3 gap-4 place-items-center text-blue-400'>
+          <div
+            id='last-checkin'
+            className='grid grid-cols-3 gap-4 place-items-center text-blue-400'
+          >
             <p className='text-sm'>Last check in</p>
             <div className='ml-6'>
               <FcAdvance className='p-2 mx-2' size={38} />
@@ -146,7 +146,7 @@ const UserDashboard = () => {
         </div>
 
         <div
-          className='p-6 shadow-xl rounded-xl bg-white h-[100%] md:h-[80%] lg:h-[90%]'
+          className='p-6 shadow-xl rounded-xl  h-[100%] md:h-[80%] lg:h-[90%]'
           id='goal-div'
         >
           <div className='grid grid-cols-2'>
@@ -189,15 +189,13 @@ const UserDashboard = () => {
         </div>
       </div>
       <div className='grid grid-cols-1 lg:grid-cols-3 gap-8 p-6 items-center'>
-        <div
-          className='bg-white shadow-xl rounded-lg col-span-2 h-full'
-          id='chart-div'
-        >
+        <div className='shadow-xl rounded-lg col-span-2 h-full' id='chart-div'>
           <div>
             <div>
               <h1 className='font-bold md:text-xl flex items-center p-2'>
                 <FcComboChart className='p-2' size={39} />
                 Grading Progress
+                <ChartTooltip />
               </h1>
             </div>
             <div className='p-6 sm:w-[90%] md:w-[100%]'>
