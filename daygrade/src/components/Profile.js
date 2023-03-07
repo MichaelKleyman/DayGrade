@@ -9,6 +9,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import Avatar from '@mui/material/Avatar';
 import { deepOrange, deepPurple } from '@mui/material/colors';
 import { auth } from '../firebase';
+import { useAuth } from '../context/Authcontext';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { fetchUser } from '../store';
 import { useSelector, useDispatch } from 'react-redux';
@@ -60,11 +61,21 @@ const StyledMenu = styled((props) => (
 export default function Profile({ logout }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [user, loading] = useAuthState(auth);
+  const [photoURL, setPhotoURL] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { currentUser } = useAuth();
+  console.log(currentUser);
 
   const userObject = useSelector((state) => state.loggedInUser);
   const userName = userObject.userName || '';
+
+  useEffect(() => {
+    //photoURL is initially null
+    if (currentUser?.photoURL) {
+      setPhotoURL(currentUser.photoURL);
+    }
+  }, [currentUser]);
 
   useEffect(() => {
     const unsubscribeUser = dispatch(fetchUser(user.uid));
@@ -110,18 +121,26 @@ export default function Profile({ logout }) {
             navigate(`users/account/${user.uid}`);
           }}
         >
-          <Avatar
-            sx={{
-              bgcolor: deepPurple[500],
-              width: 24,
-              height: 24,
-              fontSize: 10,
-              margin: '4px',
-            }}
-          >
-            {userName[0]}
-          </Avatar>
-          My account
+          {!photoURL.length ? (
+            <Avatar
+              sx={{
+                bgcolor: deepPurple[500],
+                width: 24,
+                height: 24,
+                fontSize: 10,
+                margin: '4px',
+              }}
+            >
+              {userName[0]}
+            </Avatar>
+          ) : (
+            <img
+              src={photoURL}
+              alt='Avatar'
+              className='w-[32px] h-[32px] rounded-lg'
+            />
+          )}
+          <span className='ml-2'>My account</span>
         </MenuItem>
         <MenuItem onClick={logout}>
           <FiLogOut className='p-2' size={35} />

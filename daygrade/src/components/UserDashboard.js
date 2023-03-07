@@ -18,18 +18,29 @@ import EditGoals from './EditGoals';
 import LineChart from './LineChart';
 import Activity from './Activity';
 import ChartTooltip from './ChartTooltip';
+import Avatar from '@mui/material/Avatar';
+import { deepOrange, deepPurple } from '@mui/material/colors';
 
 const UserDashboard = () => {
   const [user, loading] = useAuthState(auth);
   const { currentUser, logout } = useAuth();
   const [date, setDate] = useState('');
   const [open, setOpen] = useState(false);
+  const [photoURL, setPhotoURL] = useState('');
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const userObject = useSelector((state) => state.loggedInUser);
   const usersScores = useSelector((state) => state.scoreReducer);
+  const userName = userObject.userName || '';
+
+  useEffect(() => {
+    //photoURL is initially null
+    if (currentUser?.photoURL) {
+      setPhotoURL(currentUser.photoURL);
+    }
+  }, [currentUser]);
 
   useEffect(() => {
     setDate(new Date().toString().split(' ').splice(1, 3).join(' '));
@@ -70,10 +81,29 @@ const UserDashboard = () => {
   return (
     <div className='w-full' id='dash'>
       <div
-        className='m-6 p-2 text-3xl font-bold tracking-widest'
+        className='m-6 p-2 text-3xl font-bold tracking-widest flex items-center'
         id='dashboard-greeting'
       >
-        {userObject.userName}'s Dashboard
+        {!photoURL.length ? (
+          <Avatar
+            sx={{
+              bgcolor: deepPurple[500],
+              width: 24,
+              height: 24,
+              fontSize: 10,
+              margin: '4px',
+            }}
+          >
+            {userName[0]}
+          </Avatar>
+        ) : (
+          <img
+            src={photoURL}
+            alt='Avatar'
+            className='w-[62px] h-[62px] rounded-lg'
+          />
+        )}
+        <div className='ml-4'>{userObject.userName}'s Dashboard</div>
       </div>
       <div className='grid lg:grid-cols-3 gap-8 p-4 items-center'>
         <div

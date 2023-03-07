@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@mui/material';
 import { deleteUserAccount } from '../store';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -15,17 +15,29 @@ import DialogTitle from '@mui/material/DialogTitle';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import { MdDelete, MdLogout } from 'react-icons/md';
+import { MdDelete, MdLogout, MdLocalSee } from 'react-icons/md';
+import Avatar from '@mui/material/Avatar';
+import { deepPurple } from '@mui/material/colors';
 
 const Settings = ({ userObject }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const userName = userObject.userName || '';
+  const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [check, setCheck] = useState(false);
   const [error, setError] = useState(null);
-  const [user, loading] = useAuthState(auth);
-  const { logout } = useAuth();
+  const [user] = useAuthState(auth);
+  const [image, setImage] = useState(null);
+  const { currentUser, logout, upload } = useAuth();
+  const [photoURL, setPhotoURL] = useState('');
+
+  useEffect(() => {
+    //photoURL is initially null
+    if (currentUser?.photoURL) {
+      setPhotoURL(currentUser.photoURL);
+    }
+  }, [currentUser]);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -33,6 +45,16 @@ const Settings = ({ userObject }) => {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleChange = (e) => {
+    if (e.target.files[0]) {
+      setImage(e.target.files[0]);
+    }
+  };
+
+  const handleClick = () => {
+    upload(image, currentUser, setLoading);
   };
 
   const deleteAccount = async () => {
@@ -58,10 +80,12 @@ const Settings = ({ userObject }) => {
         <label className='uppercase tracking-widest text-lg' id='setting-text'>
           Daygrade settings page
         </label>
-        <div className='flex'>
+        <div id='settings' className='flex'>
           <div className='pt-5 grid grid-cols-3 gap-5'>
             <div>
-              <div className='font-bold pb-2 text-3sm flex w-[180px]'>Erase Your Account</div>
+              <div className='font-bold pb-2 text-3sm flex w-[180px]'>
+                Erase Your Account
+              </div>
               <Button
                 onClick={handleClickOpen}
                 sx={{ backgroundColor: 'green', color: 'white' }}
@@ -73,7 +97,9 @@ const Settings = ({ userObject }) => {
           </div>
           <div className='pt-5 grid grid-cols-3 gap-5'>
             <div>
-              <div className='font-bold pb-2 text-3sm flex w-[110px]'>Log Out</div>
+              <div className='font-bold pb-2 text-3sm flex w-[110px]'>
+                Log Out
+              </div>
               <Button
                 onClick={async () => {
                   await logout();
@@ -84,6 +110,47 @@ const Settings = ({ userObject }) => {
                 <MdLogout color='white' className='p-1' size={30} />
                 Logout
               </Button>
+            </div>
+          </div>
+          <div className='pt-5 grid grid-cols-3 gap-5'>
+            <div>
+              <div className='font-bold pb-2 text-3sm flex w-[120px]'>
+                Profile Picture
+              </div>
+              <div className='flex items-center'>
+                {!photoURL.length ? (
+                  <Avatar
+                    sx={{
+                      bgcolor: deepPurple[500],
+                      width: 30,
+                      height: 30,
+                      fontSize: 13,
+                      margin: '4px',
+                    }}
+                  >
+                    {userName[0]}
+                  </Avatar>
+                ) : (
+                  <img
+                    src={photoURL}
+                    alt='Avatar'
+                    className='w-[93px] h-[93px] rounded-sm'
+                  />
+                )}
+                <div>
+                  <input
+                    type='file'
+                    id='avatar'
+                    name='avatar'
+                    className='pl-2'
+                    onChange={handleChange}
+                  />
+                  <Button disabled={loading || !image} onClick={handleClick}>
+                    <MdLocalSee color='blue' className='p-1' size={30} />
+                    Upload
+                  </Button>
+                </div>
+              </div>
             </div>
           </div>
         </div>

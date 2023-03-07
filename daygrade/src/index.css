@@ -9,6 +9,48 @@
 /* background-image: url('https://images.unsplash.com/photo-1533134486753-c833f0ed4866?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80'); */
 /* } */
 
+@media screen and (min-width: 200px) {
+  #avatar {
+    width: 113px;
+  }
+}
+
+@media screen and (min-width: 362px) {
+  #avatar {
+    width: 265px;
+  }
+}
+
+@media screen and (min-width: 540px) {
+  #avatar {
+    width: 113px;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  #avatar {
+    width: 113px;
+  }
+}
+
+@media screen and (min-width: 778px) {
+  #avatar {
+    width: 263px;
+  }
+}
+
+@media screen and (min-width: 100px) {
+  #settings {
+    display: block;
+  }
+}
+
+@media screen and (min-width: 540px) {
+  #settings {
+    display: flex;
+  }
+}
+
 /*Media query for the last check in status on user dashboard*/
 
 @media screen and (min-width: 288px) {
