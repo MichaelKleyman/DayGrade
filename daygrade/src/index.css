@@ -792,6 +792,11 @@
   background-blend-mode: darken;
 }
 
+#light #signin {
+  background-image: url('https://images.unsplash.com/flagged/photo-1574512468809-d05a4fd197fd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80');
+  background-blend-mode: darken;
+}
+
 #dark #signin {
   background-image: url('https://images.unsplash.com/flagged/photo-1574512468809-d05a4fd197fd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80');
   background-blend-mode: darken;
@@ -816,10 +821,6 @@
 
 #dark body {
   background-image: url('https://images.unsplash.com/photo-1547127796-06bb04e4b315?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1674&q=80');
-}
-
-#navbar {
-  background-color: white;
 }
 
 #dark #num {

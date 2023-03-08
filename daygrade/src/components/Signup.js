@@ -241,7 +241,7 @@ const Signup = () => {
       <div className='flex flex-col justify-center z-[2]'>
         <form id='signup' className='max-w-[400px] w-full mx-auto bg-white rounded-xl shadow-xl p-5'>
           <div>
-            <div>{pageDisplay()}</div>
+            <div id='signin-pages'>{pageDisplay()}</div>
             <div className='flex justify-center w-full py-7'>
               {page === 0 ? (
                 <Link to='/welcome' className='w-full mr-3'>
