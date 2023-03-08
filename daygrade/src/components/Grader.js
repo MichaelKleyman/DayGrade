@@ -125,7 +125,7 @@ const Grader = ({ date, usersLog }) => {
       </div>
       {usersLog.length ? (
         <div
-          className='border border-gray-200 rounded-lg shadow-lg shadow-gray-800 p-3 grid grid-cols-1 lg:grid-cols-2 sm:grid-cols-1 gap-4 h-[570px] overflow-y-auto'
+          className='border border-gray-200 bg-[#F3F0E8] rounded-lg shadow-lg shadow-gray-800 p-3 grid grid-cols-1 lg:grid-cols-2 sm:grid-cols-1 gap-4 h-[570px] overflow-y-auto'
           id='logs'
         >
           {arrayFirstHalf.map((usersLogInfo, i) => (

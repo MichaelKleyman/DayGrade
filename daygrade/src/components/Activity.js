@@ -186,7 +186,7 @@ const Activity = ({ usersScores, date, userId }) => {
               <TfiThought size={25} color='blue' />
             </div>
             <TextField
-              label='To do list'
+              label='Todays agenda'
               size='small'
               id='todo-search'
               value={todo}

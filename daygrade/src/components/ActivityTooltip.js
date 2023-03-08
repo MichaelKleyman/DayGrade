@@ -53,7 +53,7 @@ const ToolTip = () => {
             </span>{' '}
             If you miss a day, the{' '}
             <span className='text-blue-600'>streak resets to zero</span>.
-            <span className='text-blue-600'> The to-do list</span> is a
+            <span className='text-blue-600'> Todays agenda down below</span> is a
             scratchpad for any task you need to get done for the day.{' '}
             <span className='text-blue-600'>Once the next day comes</span>,
             everything in the current list gets deleted.

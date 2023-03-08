@@ -81,16 +81,16 @@ const UserDashboard = () => {
   return (
     <div className='w-full' id='dash'>
       <div
-        className='m-6 p-2 text-3xl font-bold tracking-widest flex items-center'
+        className='p-7 text-3xl font-bold tracking-widest flex items-center'
         id='dashboard-greeting'
       >
         {!photoURL.length ? (
           <Avatar
             sx={{
               bgcolor: deepPurple[500],
-              width: 24,
-              height: 24,
-              fontSize: 10,
+              width: 34,
+              height: 34,
+              fontSize: 20,
               margin: '4px',
             }}
           >

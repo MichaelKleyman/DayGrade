@@ -127,7 +127,7 @@ const Navbar = ({ theme }) => {
 
   return (
     <div
-      className={`h-15 shadow-xl w-full ${
+      className={`h-15 sticky shadow-xl w-full ${
         theme === 'dark' ? 'shadow-gray-900' : 'shadow-gray-400'
       }`}
       id='navbar'

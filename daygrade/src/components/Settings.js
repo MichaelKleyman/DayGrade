@@ -37,7 +37,7 @@ const Settings = ({ userObject }) => {
     if (currentUser?.photoURL) {
       setPhotoURL(currentUser.photoURL);
     }
-  }, [currentUser]);
+  }, [currentUser, photoURL]);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -138,6 +138,7 @@ const Settings = ({ userObject }) => {
                   />
                 )}
                 <div>
+                  <p className='text-[13px] text-gray-500 ml-2'>(File has to be JPEG or PNG)</p>
                   <input
                     type='file'
                     id='avatar'
