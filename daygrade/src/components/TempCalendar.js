@@ -67,6 +67,7 @@ export default function Temp() {
         {
           minHeight: '350px !important',
           height: 'auto !important',
+          border: 'solid 1px black', //inner calendar
         },
       '& .css-qklzlb-MuiDayPicker-header': {
         '& .css-raiqh1-MuiTypography-root-MuiDayPicker-weekDayLabel': {
