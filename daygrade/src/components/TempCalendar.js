@@ -56,24 +56,22 @@ export default function Temp() {
 
   const CustomPicker = styled(CalendarPicker)(({ theme }) => ({
     '&.MuiCalendarPicker-root': {
-      width: '70%',
-      maxHeight: '600px',
-      height: '470px',
+      width: '70% !important',
+      maxHeight: '600px !important',
+      height: '470px !important',
     },
     '& .MuiCalendarPicker-viewTransitionContainer': {
       '& .css-sf5t6v-PrivatePickersSlideTransition-root-MuiDayPicker-slideTransition':
         {
-          minHeight: '350px',
-          height: 'auto',
+          minHeight: '350px !important',
+          height: 'auto !important',
         },
       '& .css-qklzlb-MuiDayPicker-header': {
         '& .css-raiqh1-MuiTypography-root-MuiDayPicker-weekDayLabel': {
-          height: '70px',
-          width: tileSize,
-          color: 'blue',
-          fontWeight: 'bolder',
-          paddingLeft: '8rem',
-          paddingRight: '8rem',
+          height: '70px !important',
+          width: '70px !important',
+          color: 'blue !important',
+          fontWeight: 'bolder !important',
         },
       },
     },
@@ -90,10 +88,10 @@ export default function Temp() {
         disableMargin
         disableRipple
         sx={{
-          width: tileSize,
-          height: tileSize,
+          width: '70px !important',
+          height: '70px !important',
           color: 'black',
-          fontWeight: 'bolder',
+          fontWeight: 'bolder !important',
         }}
         id='calendar-dates'
       />
