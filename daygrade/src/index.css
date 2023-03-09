@@ -22,11 +22,11 @@
   height: 470px !important;
 } */
 
-/* .MuiCalendarPicker-viewTransitionContainer,
-.css-sf5t6v-PrivatePickersSlideTransition-root-MuiDayPicker-slideTransition {
+.MuiDayPicker-slideTransition {
   min-height: 350px !important;
   height: auto !important;
-} */
+  border: solid 1px black;
+}
 
 /* .MuiTypography-caption {
   color: blue !important;
@@ -35,7 +35,7 @@
 .MuiDayPicker-weekDayLabel {
   height: 70px !important;
   width: 460px !important;
-  color: yellow !important;
+  color: blue !important;
   font-weight: bold !important;
 }
 
