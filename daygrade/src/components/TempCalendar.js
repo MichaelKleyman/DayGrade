@@ -62,22 +62,19 @@ export default function Temp() {
       height: '470px !important',
       // border: 'solid 1px black', //calendar itself
     },
-    '& .MuiCalendarPicker-viewTransitionContainer': {
-      '& .css-sf5t6v-PrivatePickersSlideTransition-root-MuiDayPicker-slideTransition':
-        {
-          minHeight: '350px !important',
-          height: 'auto !important',
-          // border: 'solid 1px black', //inner calendar...styles didnt get applied
-        },
-      '& .css-qklzlb-MuiDayPicker-header': {
-        '& .css-raiqh1-MuiTypography-root-MuiDayPicker-weekDayLabel': {
-          height: '70px !important',
-          width: '70px !important',
-          color: 'blue !important',
-          fontWeight: 'bolder !important',
-          // border: 'solid 1px black', //days of the week...styles didnt get applied
-        },
-      },
+
+    '& .MuiDayPicker-slideTransition': {
+      minHeight: '350px !important',
+      height: 'auto !important',
+      // border: 'solid 1px black', //inner calendar...styles didnt get applied
+    },
+
+    '& .MuiDayPicker-weekDayLabel': {
+      height: '70px !important',
+      width: '70px !important',
+      color: 'blue !important',
+      fontWeight: 'bolder !important',
+      // border: 'solid 1px black', //days of the week...styles didnt get applied
     },
   }));
 
