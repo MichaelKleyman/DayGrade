@@ -67,7 +67,7 @@ export default function Temp() {
         {
           minHeight: '350px !important',
           height: 'auto !important',
-          border: 'solid 1px black', //inner calendar
+          border: 'solid 1px black', //inner calendar...styles didnt get applied
         },
       '& .css-qklzlb-MuiDayPicker-header': {
         '& .css-raiqh1-MuiTypography-root-MuiDayPicker-weekDayLabel': {
@@ -75,7 +75,7 @@ export default function Temp() {
           width: '70px !important',
           color: 'blue !important',
           fontWeight: 'bolder !important',
-          border: 'solid 1px black', //days of the week
+          border: 'solid 1px black', //days of the week...styles didnt get applied
         },
       },
     },

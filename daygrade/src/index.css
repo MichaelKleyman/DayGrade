@@ -32,13 +32,12 @@
   color: blue !important;
 } */
 
-/* .css-qklzlb-MuiDayPicker-header,
-.css-raiqh1-MuiTypography-root-MuiDayPicker-weekDayLabel {
+.MuiDayPicker-weekDayLabel {
   height: 70px !important;
   width: 460px !important;
-  color: blue !important;
+  color: yellow !important;
   font-weight: bold !important;
-} */
+}
 
 @media screen and (min-width: 200px) {
   #avatar {
