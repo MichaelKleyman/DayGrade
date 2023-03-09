@@ -27,14 +27,17 @@
   min-height: 350px !important;
   height: auto !important;
 } */
+.MuiTypography-caption {
+  color: blue !important;
+}
 
-.css-qklzlb-MuiDayPicker-header,
+/* .css-qklzlb-MuiDayPicker-header,
 .css-raiqh1-MuiTypography-root-MuiDayPicker-weekDayLabel {
   height: 70px !important;
   width: 460px !important;
   color: blue !important;
   font-weight: bold !important;
-}
+} */
 
 @media screen and (min-width: 200px) {
   #avatar {
