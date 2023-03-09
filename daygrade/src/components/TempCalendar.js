@@ -69,7 +69,7 @@ export default function Temp() {
       '& .css-qklzlb-MuiDayPicker-header': {
         '& .css-raiqh1-MuiTypography-root-MuiDayPicker-weekDayLabel': {
           height: '70px',
-          width: tileSize,
+          width: '70%',
           color: 'blue',
           fontWeight: 'bolder',
         },
