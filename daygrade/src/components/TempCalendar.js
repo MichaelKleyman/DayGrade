@@ -56,9 +56,9 @@ export default function Temp() {
 
   const CustomPicker = styled(CalendarPicker)(({ theme }) => ({
     '&.MuiCalendarPicker-root': {
-      width: '80%',
-      maxHeight: '500px',
-      height: '470px',
+      width: '70%',
+      maxHeight: '600px',
+      height: '570px',
     },
     '& .MuiCalendarPicker-viewTransitionContainer': {
       '& .css-sf5t6v-PrivatePickersSlideTransition-root-MuiDayPicker-slideTransition':
