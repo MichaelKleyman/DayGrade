@@ -10,7 +10,6 @@
 /* background-image: url('https://images.unsplash.com/photo-1533134486753-c833f0ed4866?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80'); */
 /* } */
 
-
 @media screen and (min-width: 200px) {
   #avatar {
     width: 113px;
@@ -671,8 +670,83 @@
   /* color: white; */
 }
 
-/* #dark .MuiButtonBase-root {
-  background-color: white;
+@media screen and (min-width: 280px) {
+  #calendar-background {
+    width: 240px;
+  }
+}
+
+@media screen and (min-width: 320px) {
+  #calendar-background {
+    width: 300px;
+  }
+  .css-1ju50wb-MuiCalendarPicker-root {
+    height: 70px;
+  }
+}
+
+@media screen and (min-width: 350px) {
+  #calendar-background {
+    width: 340px;
+  }
+}
+
+@media screen and (min-width: 425px) {
+  #calendar-background {
+    width: 400px;
+  }
+}
+
+@media screen and (min-width: 488px) {
+  #calendar-background {
+    width: 463px;
+  }
+}
+
+@media screen and (min-width: 580px) {
+  #calendar-background {
+    width: 550px;
+  }
+}
+
+@media screen and (min-width: 710px) {
+  #calendar-background {
+    width: 680px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  #calendar-background {
+    width: 380px;
+  }
+}
+
+@media screen and (min-width: 980px) {
+  #calendar-background {
+    width: 480px;
+  }
+}
+
+@media screen and (min-width: 1150px) {
+  #calendar-background {
+    width: 560px;
+  }
+}
+
+@media screen and (min-width: 1180px) {
+  #calendar-background {
+    width: 580px;
+  }
+}
+
+@media screen and (min-width: 1190px) {
+  #calendar-background {
+    width: 700px;
+  }
+}
+
+/* #calendar-background {
+  width: 100%;
 } */
 
 #light #calendar-background {

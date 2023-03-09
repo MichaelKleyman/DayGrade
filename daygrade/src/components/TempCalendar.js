@@ -57,16 +57,22 @@ export default function Temp() {
   //
   const CustomPicker = styled(CalendarPicker)(({ theme }) => ({
     '&.MuiCalendarPicker-root': {
-      width: '70% !important',
+      width: '80%',
       maxHeight: '600px !important',
-      height: '470px !important',
+      height: '470px',
+      '@media (min-width: 280px)': {
+        height: '270px',
+      },
+      '@media (min-width: 585px)': {
+        height: '470px',
+      }
       // border: 'solid 1px black', //calendar itself
     },
 
     '& .MuiDayPicker-slideTransition': {
       minHeight: '350px !important',
       height: 'auto !important',
-      // border: 'solid 1px black', //inner calendar...styles didnt get applied
+      // border: 'solid 1px black', //inner calendar
     },
 
     '& .MuiDayPicker-weekDayLabel': {
@@ -74,7 +80,7 @@ export default function Temp() {
       width: '70px !important',
       color: 'blue !important',
       fontWeight: 'bolder !important',
-      // border: 'solid 1px black', //days of the week...styles didnt get applied
+      // border: 'solid 1px black', //days of the week
     },
   }));
 
