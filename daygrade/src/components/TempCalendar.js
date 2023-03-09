@@ -65,6 +65,7 @@ export default function Temp() {
         {
           minHeight: '350px',
           height: 'auto',
+          border: 'solid 1px black'
         },
       '& .css-qklzlb-MuiDayPicker-header': {
         '& .css-raiqh1-MuiTypography-root-MuiDayPicker-weekDayLabel': {
