@@ -58,7 +58,7 @@ export default function Temp() {
     '&.MuiCalendarPicker-root': {
       width: '70%',
       maxHeight: '600px',
-      height: '570px',
+      height: '470px',
     },
     '& .MuiCalendarPicker-viewTransitionContainer': {
       '& .css-sf5t6v-PrivatePickersSlideTransition-root-MuiDayPicker-slideTransition':
