@@ -10,9 +10,9 @@
 /* background-image: url('https://images.unsplash.com/photo-1533134486753-c833f0ed4866?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80'); */
 /* } */
 
-/* .MuiDayPicker-monthContainer {
-  width: 80% !important;
-  max-height: 600px !important;
+.MuiDayPicker-monthContainer {
+  width: 95% !important;
+  max-height: 350px !important;
   height: 470px !important;
 }
 
@@ -31,10 +31,10 @@
 .css-qklzlb-MuiDayPicker-header,
 .css-raiqh1-MuiTypography-root-MuiDayPicker-weekDayLabel {
   height: 70px !important;
-  width: 70px !important;
+  width: 460px !important;
   color: blue !important;
   font-weight: bold !important;
-} */
+}
 
 @media screen and (min-width: 200px) {
   #avatar {
