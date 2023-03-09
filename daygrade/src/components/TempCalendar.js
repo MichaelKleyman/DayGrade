@@ -54,11 +54,13 @@ export default function Temp() {
     };
   }, [date]);
 
+  //
   const CustomPicker = styled(CalendarPicker)(({ theme }) => ({
     '&.MuiCalendarPicker-root': {
       width: '70% !important',
       maxHeight: '600px !important',
       height: '470px !important',
+      border: 'solid 1px black', //calendar itself
     },
     '& .MuiCalendarPicker-viewTransitionContainer': {
       '& .css-sf5t6v-PrivatePickersSlideTransition-root-MuiDayPicker-slideTransition':
@@ -72,6 +74,7 @@ export default function Temp() {
           width: '70px !important',
           color: 'blue !important',
           fontWeight: 'bolder !important',
+          border: 'solid 1px black', //days of the week
         },
       },
     },
@@ -88,10 +91,10 @@ export default function Temp() {
         disableMargin
         disableRipple
         sx={{
-          width: '70px !important',
-          height: '70px !important',
+          width: '70px',
+          height: '70px',
           color: 'black',
-          fontWeight: 'bolder !important',
+          fontWeight: 'bolder', //day numbers
         }}
         id='calendar-dates'
       />
