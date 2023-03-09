@@ -10,23 +10,23 @@
 /* background-image: url('https://images.unsplash.com/photo-1533134486753-c833f0ed4866?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80'); */
 /* } */
 
-.MuiDayPicker-monthContainer {
+/* .MuiDayPicker-monthContainer {
   width: 95% !important;
   max-height: 350px !important;
   height: 470px !important;
-}
+} */
 
-.MuiCalendarPicker-root {
+/* .MuiCalendarPicker-root {
   width: 70% !important;
   max-height: 600px !important;
   height: 470px !important;
-}
+} */
 
-.MuiCalendarPicker-viewTransitionContainer,
+/* .MuiCalendarPicker-viewTransitionContainer,
 .css-sf5t6v-PrivatePickersSlideTransition-root-MuiDayPicker-slideTransition {
   min-height: 350px !important;
   height: auto !important;
-}
+} */
 
 .css-qklzlb-MuiDayPicker-header,
 .css-raiqh1-MuiTypography-root-MuiDayPicker-weekDayLabel {
