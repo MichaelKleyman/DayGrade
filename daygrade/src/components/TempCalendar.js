@@ -60,14 +60,14 @@ export default function Temp() {
       width: '70% !important',
       maxHeight: '600px !important',
       height: '470px !important',
-      border: 'solid 1px black', //calendar itself
+      // border: 'solid 1px black', //calendar itself
     },
     '& .MuiCalendarPicker-viewTransitionContainer': {
       '& .css-sf5t6v-PrivatePickersSlideTransition-root-MuiDayPicker-slideTransition':
         {
           minHeight: '350px !important',
           height: 'auto !important',
-          border: 'solid 1px black', //inner calendar...styles didnt get applied
+          // border: 'solid 1px black', //inner calendar...styles didnt get applied
         },
       '& .css-qklzlb-MuiDayPicker-header': {
         '& .css-raiqh1-MuiTypography-root-MuiDayPicker-weekDayLabel': {
@@ -75,7 +75,7 @@ export default function Temp() {
           width: '70px !important',
           color: 'blue !important',
           fontWeight: 'bolder !important',
-          border: 'solid 1px black', //days of the week...styles didnt get applied
+          // border: 'solid 1px black', //days of the week...styles didnt get applied
         },
       },
     },
