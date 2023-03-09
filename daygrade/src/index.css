@@ -10,11 +10,17 @@
 /* background-image: url('https://images.unsplash.com/photo-1533134486753-c833f0ed4866?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80'); */
 /* } */
 
-.MuiCalendarPicker-root {
-  width: '70%';
+.MuiDayPicker-monthContainer {
+  width: '80%';
   max-height: '600px';
   height: '470px';
 }
+
+/* .MuiCalendarPicker-root {
+  width: '70%';
+  max-height: '600px';
+  height: '470px';
+} */
 
 .MuiCalendarPicker-viewTransitionContainer,
 .css-sf5t6v-PrivatePickersSlideTransition-root-MuiDayPicker-slideTransition {
@@ -799,7 +805,7 @@
 }
 
 #light #logs {
- background-color: #F3F0E8;
+  background-color: #f3f0e8;
 }
 
 #light #not-found {
