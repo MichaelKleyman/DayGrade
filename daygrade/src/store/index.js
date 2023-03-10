@@ -18,11 +18,12 @@ const store = configureStore({
     waterReducer,
     todosReducer,
   },
+  devTools: process.env.NODE_ENV !== 'production',
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
       immutableCheck: false,
-      devTools: process.env.NODE_ENV !== 'production',
+      devTools: true,
       //fixed the bug about
     }).concat(logger),
 });
