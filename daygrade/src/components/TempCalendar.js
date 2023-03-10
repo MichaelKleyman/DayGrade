@@ -61,7 +61,7 @@ export default function Temp() {
       maxHeight: '600px !important',
       height: '470px',
       '@media (min-width: 280px)': {
-        height: '270px',
+        height: '390px',
       },
       '@media (min-width: 350px)': {
         height: '390px',
