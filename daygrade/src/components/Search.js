@@ -112,35 +112,37 @@ const Search = () => {
         </ul>
       </div>
       {currentLogs.length ? (
-        <div className='grid sm:grid-cols-1 md:grid-cols-2 md:p-8'>
-          {currentLogs.map((obj, index) => (
-            <div
-              key={index}
-              className='bg-white rounded-lg shadow-lg shadow-gray-500 p-4 m-5'
-              id='log'
-            >
-              <div className='font-bold pb-4' id='log-text'>
-                {obj.log}
+        <div>
+          <div className='grid sm:grid-cols-1 md:grid-cols-2 md:p-8'>
+            {currentLogs.map((obj, index) => (
+              <div
+                key={index}
+                className='bg-white rounded-lg shadow-lg shadow-gray-500 p-4 m-5'
+                id='log'
+              >
+                <div className='font-bold pb-4' id='log-text'>
+                  {obj.log}
+                </div>
+                {/* <div className='text-sm text-gray-500'>{obj.Date}</div> */}
+                <div className='text-sm text-gray-500 pb-2 flex items-center '>
+                  <FcOk size={35} className='p-2' />
+                  {obj.Date}
+                </div>
+                <div className='flex justify-end'>
+                  <Button
+                    variant='contained'
+                    color='success'
+                    sx={{ padding: '3px', fontSize: '12px' }}
+                    onClick={() => {
+                      handleClickOpen(obj.userId, obj.Date);
+                    }}
+                  >
+                    View
+                  </Button>
+                </div>
               </div>
-              {/* <div className='text-sm text-gray-500'>{obj.Date}</div> */}
-              <div className='text-sm text-gray-500 pb-2 flex items-center '>
-                <FcOk size={35} className='p-2' />
-                {obj.Date}
-              </div>
-              <div className='flex justify-end'>
-                <Button
-                  variant='contained'
-                  color='success'
-                  sx={{ padding: '3px', fontSize: '12px' }}
-                  onClick={() => {
-                    handleClickOpen(obj.userId, obj.Date);
-                  }}
-                >
-                  View
-                </Button>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
           <Footer />
         </div>
       ) : (
