@@ -63,8 +63,11 @@ export default function Temp() {
       '@media (min-width: 280px)': {
         height: '270px',
       },
+      '@media (min-width: 350px)': {
+        height: '390px',
+      },
       '@media (min-width: 585px)': {
-        height: '470px',
+        height: '420px',
       },
       '@media (min-width: 767px)': {
         height: '415px',
