@@ -39,6 +39,11 @@ export const fetchSpecificScores =
           return obj;
         }
       });
+
+      dates.sort(
+        (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+      );
+
       dispatch(_getScores(dates));
     });
     return subscriber;
