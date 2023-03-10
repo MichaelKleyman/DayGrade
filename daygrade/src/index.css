@@ -722,66 +722,11 @@
   }
 }
 
-/* @media screen and (min-width: 710px) {
+@media screen and (min-height: 650px) {
   #calendar-background {
-    width: 680px;
+    height: 560px;
   }
 }
-
-@media screen and (min-width: 768px) {
-  #calendar-background {
-    width: 370px;
-  }
-}
-
-@media screen and (min-width: 800px) {
-  #calendar-background {
-    width: 395px;
-  }
-}
-
-@media screen and (min-width: 855px) {
-  #calendar-background {
-    width: 420px;
-  }
-}
-
-@media screen and (min-width: 930px) {
-  #calendar-background {
-    width: 460px;
-  }
-}
-
-@media screen and (min-width: 980px) {
-  #calendar-background {
-    width: 480px;
-  }
-}
-
-@media screen and (min-width: 1070px) {
-  #calendar-background {
-    width: 520px;
-  }
-}
-
-@media screen and (min-width: 1150px) {
-  #calendar-background {
-    width: 560px;
-  }
-}
-
-@media screen and (min-width: 1180px) {
-  #calendar-background {
-    width: 580px;
-  }
-}
-
-@media screen and (min-width: 1190px) {
-  #calendar-background {
-    width: 700px;
-  }
-} */
-
 
 
 /* #calendar-background {

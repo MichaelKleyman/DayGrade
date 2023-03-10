@@ -145,6 +145,7 @@ const Settings = ({ userObject }) => {
                     type='file'
                     id='avatar'
                     name='avatar'
+                    accept='image/png, image/jpeg'
                     className='pl-2 cursor-pointer'
                     onChange={handleChange}
                   />
