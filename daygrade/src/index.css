@@ -722,12 +722,11 @@
   }
 }
 
-@media screen and (min-height: 650px) {
+@media screen and (max-height: 730px) {
   #calendar-background {
     height: 560px;
   }
 }
-
 
 /* #calendar-background {
   width: 100%;

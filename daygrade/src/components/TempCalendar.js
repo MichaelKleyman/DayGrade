@@ -78,6 +78,9 @@ export default function Temp() {
       '@media (min-width: 1020px)': {
         height: '410px',
       },
+      '@media (min-width: 1155px)': {
+        height: '450px',
+      },
       // border: 'solid 1px black', //calendar itself
     },
 
