@@ -48,7 +48,7 @@ const ToolTip = () => {
             id='alert-dialog-slide-description'
           >
             <div className='flex'>
-              <p className='ml-[5rem] flex items-center justify-center'>
+              <p className='ml-[5rem] hidden sm:flex items-center justify-center'>
                 <GiWaterDrop color='blue' size={40} />
               </p>
               <p className='ml-[6rem] '>

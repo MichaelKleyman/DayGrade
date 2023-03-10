@@ -15,6 +15,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import SendIcon from '@mui/icons-material/Send';
 import { useNavigate } from 'react-router-dom';
 import { FcCalendar, FcAbout } from 'react-icons/fc';
+import { MdArrowBack } from 'react-icons/md';
 import Grader from './Grader';
 import ScoreProcess from './ScoreProcess';
 import { fetchScoreInfo, fetchLog } from '../store';
@@ -64,7 +65,7 @@ export default function Temp() {
         height: '390px',
       },
       '@media (min-width: 350px)': {
-        height: '390px',
+        height: '250px',
       },
       '@media (min-width: 585px)': {
         height: '420px',
@@ -122,7 +123,7 @@ export default function Temp() {
 
   return (
     <div className='w-full' id='checkin'>
-      <div className='py-2 px-4 text-blue-500 tracking-wide flex justify-between'>
+      <div className='px-4 text-blue-500 tracking-wide flex justify-between'>
         <h1 className='flex items-center'>
           <FcAbout className='p-1' size={38} />
           Log throughout your day, and record the time. At the end of the day,
@@ -161,9 +162,9 @@ export default function Temp() {
             <Button
               onClick={() => navigate('/')}
               variant='outlined'
-              startIcon={<DeleteIcon />}
+              startIcon={<MdArrowBack />}
             >
-              Cancel
+              Go Back
             </Button>
             <Button
               disabled={usersScoreArr.length !== 0}

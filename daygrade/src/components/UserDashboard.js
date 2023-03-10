@@ -20,6 +20,7 @@ import Activity from './Activity';
 import ChartTooltip from './ChartTooltip';
 import Avatar from '@mui/material/Avatar';
 import { deepOrange, deepPurple } from '@mui/material/colors';
+import Footer from './Footer';
 
 const UserDashboard = () => {
   const [user, loading] = useAuthState(auth);
@@ -237,6 +238,7 @@ const UserDashboard = () => {
         </div>
         <Activity usersScores={usersScores} date={date} userId={user?.uid} />
       </div>
+      <Footer />
     </div>
   );
 };

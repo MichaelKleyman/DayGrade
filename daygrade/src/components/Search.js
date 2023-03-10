@@ -16,6 +16,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Paper from '@mui/material/Paper';
 import Draggable from 'react-draggable';
 import { fetchScoreInfo } from '../store';
+import Footer from './Footer';
 
 function PaperComponent(props) {
   return (
@@ -140,6 +141,7 @@ const Search = () => {
               </div>
             </div>
           ))}
+          <Footer />
         </div>
       ) : (
         <div
