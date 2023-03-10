@@ -18,14 +18,13 @@ const store = configureStore({
     waterReducer,
     todosReducer,
   },
-  devTools: process.env.NODE_ENV !== 'production',
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
       immutableCheck: false,
       devTools: true,
       //fixed the bug about
-    }).concat(logger),
+    }), //can do .concat(logger) if you want to see redux-logs
 });
 
 export default store;
