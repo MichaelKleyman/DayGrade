@@ -65,7 +65,7 @@ export default function Profile({ logout }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { currentUser } = useAuth();
-  console.log(currentUser);
+  // console.log(currentUser);
 
   const userObject = useSelector((state) => state.loggedInUser);
   const userName = userObject.userName || '';

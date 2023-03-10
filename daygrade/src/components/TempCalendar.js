@@ -65,7 +65,16 @@ export default function Temp() {
       },
       '@media (min-width: 585px)': {
         height: '470px',
-      }
+      },
+      '@media (min-width: 767px)': {
+        height: '415px',
+      },
+      '@media (min-width: 867px)': {
+        height: '415px',
+      },
+      '@media (min-width: 1020px)': {
+        height: '410px',
+      },
       // border: 'solid 1px black', //calendar itself
     },
 
@@ -76,7 +85,7 @@ export default function Temp() {
     },
 
     '& .MuiDayPicker-weekDayLabel': {
-      height: '70px !important',
+      height: '30px !important',
       width: '70px !important',
       color: 'blue !important',
       fontWeight: 'bolder !important',

@@ -138,12 +138,14 @@ const Settings = ({ userObject }) => {
                   />
                 )}
                 <div>
-                  <p className='text-[13px] text-gray-500 ml-2'>(File has to be JPEG or PNG)</p>
+                  <p className='text-[13px] text-gray-500 ml-2'>
+                    (File has to be JPEG or PNG)
+                  </p>
                   <input
                     type='file'
                     id='avatar'
                     name='avatar'
-                    className='pl-2'
+                    className='pl-2 cursor-pointer'
                     onChange={handleChange}
                   />
                   <Button disabled={loading || !image} onClick={handleClick}>

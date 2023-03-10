@@ -691,9 +691,15 @@
   }
 }
 
+@media screen and (min-width: 400px) {
+  #calendar-background {
+    width: 370px;
+  }
+}
+
 @media screen and (min-width: 425px) {
   #calendar-background {
-    width: 400px;
+    width: 408px;
   }
 }
 
@@ -703,13 +709,20 @@
   }
 }
 
-@media screen and (min-width: 580px) {
+@media screen and (min-width: 527px) {
   #calendar-background {
-    width: 550px;
+    width: 493px;
   }
 }
 
-@media screen and (min-width: 710px) {
+@media screen and (min-width: 580px) {
+  #calendar-background {
+    /* width: 550px; */
+    width: 100%;
+  }
+}
+
+/* @media screen and (min-width: 710px) {
   #calendar-background {
     width: 680px;
   }
@@ -717,13 +730,37 @@
 
 @media screen and (min-width: 768px) {
   #calendar-background {
-    width: 380px;
+    width: 370px;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  #calendar-background {
+    width: 395px;
+  }
+}
+
+@media screen and (min-width: 855px) {
+  #calendar-background {
+    width: 420px;
+  }
+}
+
+@media screen and (min-width: 930px) {
+  #calendar-background {
+    width: 460px;
   }
 }
 
 @media screen and (min-width: 980px) {
   #calendar-background {
     width: 480px;
+  }
+}
+
+@media screen and (min-width: 1070px) {
+  #calendar-background {
+    width: 520px;
   }
 }
 
@@ -743,7 +780,9 @@
   #calendar-background {
     width: 700px;
   }
-}
+} */
+
+
 
 /* #calendar-background {
   width: 100%;

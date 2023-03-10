@@ -336,7 +336,7 @@ const Water = ({ date }) => {
         )}
       </div>
       {!drankArr.length ? (
-        <div className='flex justify-between'>
+        <div className='flex justify-between overflow-x-scroll'>
           {type === 'Cup'
             ? cupDrankObj.map((obj, i) =>
                 !obj.drank ? (
@@ -388,13 +388,13 @@ const Water = ({ date }) => {
               )}
         </div>
       ) : (
-        <div className='flex justify-between'>
+        <div className='flex justify-between overflow-x-scroll'>
           {waterInfoType === 'Cup'
             ? drankArr.map((obj, i) =>
                 !obj.drank ? (
                   <button key={i}>
                     <MdOutlineLocalDrink
-                      className='cursor-pointer duration-300 hover:scale-110'
+                      className='flex cursor-pointer duration-300 hover:scale-110'
                       size={30}
                       onClick={() => {
                         if (!update) clickCup(i);
@@ -404,7 +404,7 @@ const Water = ({ date }) => {
                 ) : (
                   <button key={i}>
                     <MdLocalDrink
-                      className='cursor-pointer duration-300 hover:scale-110'
+                      className='flex cursor-pointer duration-300 hover:scale-110'
                       color='blue'
                       size={30}
                       onClick={() => {
@@ -418,7 +418,7 @@ const Water = ({ date }) => {
                 !obj.drank ? (
                   <button key={i}>
                     <TbBottle
-                      className='cursor-pointer duration-300 hover:scale-110'
+                      className='flex cursor-pointer duration-300 hover:scale-110'
                       size={30}
                       onClick={() => {
                         if (!update) clickBottle(i);
@@ -428,7 +428,7 @@ const Water = ({ date }) => {
                 ) : (
                   <button key={i}>
                     <TbBottle
-                      className='cursor-pointer duration-300 hover:scale-110'
+                      className='flex cursor-pointer duration-300 hover:scale-110'
                       color='blue'
                       size={30}
                       onClick={() => {
