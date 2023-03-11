@@ -224,7 +224,7 @@ const Activity = ({ usersScores, date, userId }) => {
                       />
                     )}
 
-                    <h1 className='p-2 h-[70px] w-[90%] overflow-y-scroll'>
+                    <h1 className='p-2 h-[50px] w-[90%] overflow-y-scroll'>
                       {obj.todo}
                     </h1>
                   </div>
