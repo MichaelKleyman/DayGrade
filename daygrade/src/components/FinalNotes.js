@@ -37,6 +37,7 @@ const FinalNotes = ({ reasons, finalScore, notes, handleNotes }) => {
             border: '1px solid blue',
             padding: '10px',
             borderRadius: '10px',
+            width: '100%'
           }}
           value={notes}
           onChange={handleNotes}
