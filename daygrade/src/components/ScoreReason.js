@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 const ScoreReason = ({ description, setReasons, reasonsError, reasons }) => {
-
   const newReasonsArr = (newReason) => {
     let newReasonsArr = [];
     for (let i = 0; i < reasons.length; i++) {
@@ -25,7 +24,7 @@ const ScoreReason = ({ description, setReasons, reasonsError, reasons }) => {
           Select any of the following
         </p>
       </h1>
-      <div className='grid grid-cols-2 gap-4 place-items-center min-h-full'>
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-4 place-items-center min-h-full'>
         {reasons.map((reasonObj) => (
           <div
             key={reasonObj.id}

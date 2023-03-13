@@ -20,7 +20,6 @@ const Activity = ({ usersScores, date, userId }) => {
   const [streak, setStreak] = useState(0);
   const [checked, setChecked] = useState(false);
   const [todo, setTodo] = useState('');
-  //   const [id, setId] = useState(0);
 
   const usersTodos = useSelector((state) => state.todosReducer);
 
@@ -46,7 +45,6 @@ const Activity = ({ usersScores, date, userId }) => {
   };
 
   const handleSubmit = () => {
-    // console.log(todo);
     const check = false;
     dispatch(addTodo(todo, date, userId, check));
     setTodo('');
@@ -103,7 +101,7 @@ const Activity = ({ usersScores, date, userId }) => {
     let daysSinceLastCheckin = differenceInTime / (1000 * 3600 * 24);
     let differenceInDays = 0;
     if (daysSinceLastCheckin < 2) {
-      //   console.log('there is a streak');
+      //This means there is a streak;
       setStreak(Math.floor(daysSinceLastCheckin));
       let counter = 0;
       for (let i = usersScores.length - 1; i >= 0; i--) {
@@ -116,8 +114,7 @@ const Activity = ({ usersScores, date, userId }) => {
           new Date(latestDate).getTime() - new Date(scoreDate).getTime();
         differenceInDays = timeDifference / (1000 * 3600 * 24); //difference between the the current date and the date before it
         if (differenceInDays <= 1) {
-          //if that difference is less than or greater than 1, then there is a streak
-          //   console.log(differenceInDays);
+          //if that difference is less than or equal to than 1, then there is a streak
           counter++;
           setStreak(counter);
         } else {

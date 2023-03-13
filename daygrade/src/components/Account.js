@@ -5,14 +5,13 @@ import { editUser } from '../store';
 import { useDispatch } from 'react-redux';
 
 const Account = ({ userObject }) => {
-  const { firstName, lastName, email, age, userName } = userObject;
+  const { firstName, lastName, age, userName } = userObject;
   const dispatch = useDispatch();
 
   const [edit, setEdit] = useState(false);
   const [accountInfo, setAccountInfo] = useState({
     firstName,
     lastName,
-    email,
     age,
     userName,
   });
@@ -22,9 +21,8 @@ const Account = ({ userObject }) => {
     try {
       setEdit(false);
       dispatch(editUser(userObject.id, accountInfo));
-      // console.log(accountInfo);
     } catch (error) {
-      console.log('>>>', error);
+      console.log('Edit user error', error);
     }
   };
 
