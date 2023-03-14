@@ -95,7 +95,7 @@ const Activity = ({ usersScores, date, userId }) => {
   useEffect(() => {
     //usersScores is all the final check-ins of the user, coming from the database, in ascending order by date
     const lastIndex = usersScores.length - 1; //index of the most recent check in, which is the last index
-    let today = new Date(); //todays date
+    const today = new Date(); //todays date
     let latestDate = usersScores[usersScores.length - 1]?.date; //latest date out of all the users checked in scores which is the lastIndex because firebase sorted it in ascending order.
     latestDate = new Date(latestDate); //set latest date to the same format as todays date
     let differenceInTime = today.getTime() - latestDate.getTime(); //get both those variables in milliseconds and track the difference
