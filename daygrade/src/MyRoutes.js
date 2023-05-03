@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Home from './components/Home';
@@ -10,6 +11,7 @@ import UsersAccount from './components/UsersAccount';
 import Search from './components/Search';
 import NotFound from './components/NotFound';
 import ForgotPassword from './components/ForgotPassword';
+import PreviousAgendas from './components/PreviousAgendas';
 
 const MyRoutes = () => {
   return (
@@ -23,6 +25,7 @@ const MyRoutes = () => {
       <Route path='search/logs/:id' element={<Search />} />
       <Route path='*' element={<NotFound />} />
       <Route path='/forgot-password' element={<ForgotPassword />} />
+      <Route path='/prev-agendas/:id' element={<PreviousAgendas />} />
       {/* <Route path='temp' element={<Temp />} /> */}
     </Routes>
   );

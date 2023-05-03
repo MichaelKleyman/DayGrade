@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { DiCodeigniter } from 'react-icons/di';
@@ -15,11 +16,13 @@ import { ImCheckboxUnchecked, ImCheckboxChecked } from 'react-icons/im';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import ActivityTooltip from './ActivityTooltip';
 import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
+import { useNavigate } from 'react-router-dom';
 
 const Activity = ({ usersScores, date, userId }) => {
   const [streak, setStreak] = useState(0);
   const [checked, setChecked] = useState(false);
   const [todo, setTodo] = useState('');
+  const navigate = useNavigate();
 
   const usersTodos = useSelector((state) => state.todosReducer);
 
@@ -35,6 +38,10 @@ const Activity = ({ usersScores, date, userId }) => {
 
   const handleDelete = (id) => {
     dispatch(deleteToDo(id));
+  };
+
+  const handleRouting = () => {
+    navigate(`/prev-agendas/${userId}`);
   };
 
   const toggle = () => {
@@ -136,10 +143,22 @@ const Activity = ({ usersScores, date, userId }) => {
       className='shadow-xl rounded-lg h-full md:h-full lg:h-full'
       id='activity-div'
     >
-      <h1 className='font-bold md:text-xl flex items-center p-3'>
-        <ActivityTooltip />
-        Activity
-      </h1>
+      <div className='font-bold md:text-xl grid grid-cols-2 place-content-center p-3'>
+        <div className='flex'>
+          <div>
+            <ActivityTooltip />
+          </div>
+          <p>Activity</p>
+        </div>
+        <div className='flex justify-end'>
+          <button
+            onClick={handleRouting}
+            className='font-normal text-sm cursor-pointer text-gray-400 underline hover:text-gray-600'
+          >
+            Previous Agendas
+          </button>
+        </div>
+      </div>
       <div className='mb-2'>
         <div
           id='top-activity'
