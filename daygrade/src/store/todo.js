@@ -14,9 +14,11 @@ import { db } from '../firebase';
 
 //ACTIONS
 const FETCH_TODOS = 'FETCH_TODOS';
+const FETCH_SPECIFIC_TODOS = 'FETCH_SPECIFIC_TODOS';
 
 //ACTION CREATORS
 const _fetchTodos = (todos) => ({ type: FETCH_TODOS, todos });
+const _fetchSpecificTodos = (todos) => ({ type: FETCH_SPECIFIC_TODOS, todos });
 
 //THUNKS
 export const fetchTodos = (userId) => (dispatch) => {
@@ -31,6 +33,23 @@ export const fetchTodos = (userId) => (dispatch) => {
       id: curLog.id,
     }));
     dispatch(_fetchTodos(log));
+  });
+  return subscriber;
+};
+
+export const fetchSpecificTodos = (userId, date) => (dispatch) => {
+  const ref = query(
+    collection(db, 'To-Do'),
+    where('userId', '==', userId),
+    where('date', '==', date),
+    orderBy('createdAt')
+  );
+  const subscriber = onSnapshot(ref, async (querySnapshot) => {
+    const log = querySnapshot.docs.map((curLog) => ({
+      ...curLog.data(),
+      id: curLog.id,
+    }));
+    dispatch(_fetchSpecificTodos(log));
   });
   return subscriber;
 };
@@ -82,6 +101,9 @@ const initialState = [];
 export default function todosReducer(state = initialState, action) {
   switch (action.type) {
     case FETCH_TODOS: {
+      return action.todos;
+    }
+    case FETCH_SPECIFIC_TODOS: {
       return action.todos;
     }
     default:

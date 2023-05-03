@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchTodos } from '../store';
+import { fetchTodos, fetchSpecificTodos } from '../store';
 import { useParams } from 'react-router-dom';
 import { CalendarPicker } from '@mui/x-date-pickers/CalendarPicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -21,14 +21,31 @@ const filterOptions = [
 
 export default function PreviousAgendas() {
   const [date, setDate] = useState(dayjs());
-
+  const [filterOption, setFilterOption] = useState('');
   const usersTodos = useSelector((state) => state.todosReducer);
   const { id } = useParams();
   const dispatch = useDispatch();
 
   const handleSelectChange = (option) => {
     console.log(option);
+    setFilterOption(option.value);
   };
+
+  useEffect(() => {
+    if (filterOption === 'Today') {
+      setDate(dayjs());
+    }
+    // console.log(new Date(date).toString().split(' ').splice(1, 3).join(' '));
+    const unsubscribeSpecificTodos = dispatch(
+      fetchSpecificTodos(
+        id,
+        new Date(date).toString().split(' ').splice(1, 3).join(' ')
+      )
+    );
+    return () => {
+      unsubscribeSpecificTodos();
+    };
+  }, [filterOption]);
 
   useEffect(() => {
     const unsubscribeTodos = dispatch(fetchTodos(id));
@@ -102,7 +119,7 @@ export default function PreviousAgendas() {
     );
   };
 
-  console.log(usersTodos);
+  //   console.log(usersTodos);
   return (
     <div>
       <div className='grid md:grid-cols-2 gap-8 mx-auto py-2 px-4 m-6 md:h-screen'>
@@ -132,8 +149,13 @@ export default function PreviousAgendas() {
         </div>
         <div className='md:border-l-2 md:border-gray-300 md:h-screen'>
           <div className='p-4'>
-            <Select options={filterOptions} onChange={handleSelectChange} />
+            <Select
+              options={filterOptions}
+              onChange={handleSelectChange}
+              defaultValue={filterOptions[0]}
+            />
           </div>
+          <div></div>
         </div>
       </div>
     </div>
