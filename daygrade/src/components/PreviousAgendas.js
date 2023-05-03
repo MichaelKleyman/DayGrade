@@ -27,7 +27,7 @@ export default function PreviousAgendas() {
   const dispatch = useDispatch();
 
   const handleSelectChange = (option) => {
-    console.log(option);
+    // console.log(option);
     setFilterOption(option.value);
   };
 
@@ -45,7 +45,7 @@ export default function PreviousAgendas() {
     return () => {
       unsubscribeSpecificTodos();
     };
-  }, [filterOption]);
+  }, [filterOption, date]);
 
   useEffect(() => {
     const unsubscribeTodos = dispatch(fetchTodos(id));
@@ -148,6 +148,9 @@ export default function PreviousAgendas() {
           </Box>
         </div>
         <div className='md:border-l-2 md:border-gray-300 md:h-screen'>
+          <p className='pl-4 text-lg font-bold'>
+            {date.format('dddd, MMMM D YYYY')}
+          </p>
           <div className='p-4'>
             <Select
               options={filterOptions}
@@ -155,7 +158,10 @@ export default function PreviousAgendas() {
               defaultValue={filterOptions[0]}
             />
           </div>
-          <div></div>
+          <div className='p-4'>
+            {usersTodos.length &&
+              usersTodos.map((obj, i) => <div key={i}>{obj.todo}</div>)}
+          </div>
         </div>
       </div>
     </div>
