@@ -11,6 +11,13 @@ import { PickersDay } from '@mui/x-date-pickers/PickersDay';
 import { Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import dayjs from 'dayjs';
+import Select from 'react-select';
+
+const filterOptions = [
+  { value: 'Today', label: 'Today' },
+  { value: 'This Week', label: 'This Week' },
+  { value: 'This Month', label: 'This Month' },
+];
 
 export default function PreviousAgendas() {
   const [date, setDate] = useState(dayjs());
@@ -18,6 +25,10 @@ export default function PreviousAgendas() {
   const usersTodos = useSelector((state) => state.todosReducer);
   const { id } = useParams();
   const dispatch = useDispatch();
+
+  const handleSelectChange = (option) => {
+    console.log(option);
+  };
 
   useEffect(() => {
     const unsubscribeTodos = dispatch(fetchTodos(id));
@@ -120,7 +131,9 @@ export default function PreviousAgendas() {
           </Box>
         </div>
         <div className='md:border-l-2 md:border-gray-300 md:h-screen'>
-          <div className='p-4'>fwenoiwe</div>
+          <div className='p-4'>
+            <Select options={filterOptions} onChange={handleSelectChange} />
+          </div>
         </div>
       </div>
     </div>
