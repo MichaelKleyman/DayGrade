@@ -161,11 +161,40 @@ export default function PreviousAgendas() {
               options={filterOptions}
               onChange={handleSelectChange}
               defaultValue={filterOptions[0]}
+              className='w-[50%]'
             />
+          </div>
+          <h1
+            className='text-2xl pl-4 uppercase tracking-widest'
+            id='agenda-header'
+          >
+            Previous Agendas
+          </h1>
+          <div className='sm:w-[20%] md:w-[60%]'>
+            <div className='pl-4 flex justify-between'>
+              <span className='text-[13px] text-gray-400'>Completed</span>
+              <span className='text-[13px] text-gray-400'>Not Completed</span>
+            </div>
+            <div className='pl-4 flex'>
+              <div className='w-[70%] bg-yellow-300 p-2'></div>
+              <div className='w-[70%] bg-green-900 p-2'></div>
+            </div>
           </div>
           <div className='p-4' id='specific-todos'>
             {usersTodos.length &&
-              usersTodos.map((obj, i) => <div key={i}>{obj.todo}</div>)}
+              usersTodos.map((obj, i) => (
+                <div
+                  key={i}
+                  className='p-5 flex items-center border border-gray-300'
+                >
+                  <div
+                    className={`${
+                      obj.completed ? 'bg-yellow-300' : 'bg-green-900'
+                    } w-[10px] h-[10px] rounded-sm`}
+                  ></div>
+                  <h1 className='ml-2'>{obj.todo}</h1>
+                </div>
+              ))}
           </div>
         </div>
       </div>

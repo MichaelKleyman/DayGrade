@@ -642,6 +642,11 @@
   background-color: #808080;
 }
 
+#dark #agenda-header {
+  /* background-color: #2e2252; */
+  color: #49328e;
+}
+
 #dark #specific-todos {
   /* background-color: #2e2252; */
   color: white;
