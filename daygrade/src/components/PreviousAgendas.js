@@ -15,6 +15,7 @@ import Select from 'react-select';
 
 const filterOptions = [
   { value: 'Today', label: 'Today' },
+  { value: 'Yesterday', label: 'Yesterday' },
   { value: 'This Week', label: 'This Week' },
   { value: 'This Month', label: 'This Month' },
 ];
@@ -34,6 +35,10 @@ export default function PreviousAgendas() {
   useEffect(() => {
     if (filterOption === 'Today') {
       setDate(dayjs());
+    }
+    if (filterOption === 'Yesterday') {
+      const yesterdaysDate = dayjs().subtract(1, 'day');
+      setDate(yesterdaysDate);
     }
     // console.log(new Date(date).toString().split(' ').splice(1, 3).join(' '));
     const unsubscribeSpecificTodos = dispatch(
