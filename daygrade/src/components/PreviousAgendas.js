@@ -147,8 +147,8 @@ export default function PreviousAgendas() {
             </Box>
           </Box>
         </div>
-        <div className='md:border-l-2 md:border-gray-300 md:h-screen'>
-          <p className='pl-4 text-lg font-bold'>
+        <div className='md:border-l-2 md:border-gray-300 md:h-full'>
+          <p className='pl-4 text-lg font-bold' id='date'>
             {date.format('dddd, MMMM D YYYY')}
           </p>
           <div className='p-4'>
@@ -158,7 +158,7 @@ export default function PreviousAgendas() {
               defaultValue={filterOptions[0]}
             />
           </div>
-          <div className='p-4'>
+          <div className='p-4' id='specific-todos'>
             {usersTodos.length &&
               usersTodos.map((obj, i) => <div key={i}>{obj.todo}</div>)}
           </div>

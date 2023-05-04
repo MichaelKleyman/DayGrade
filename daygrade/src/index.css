@@ -642,6 +642,11 @@
   background-color: #808080;
 }
 
+#dark #specific-todos {
+  /* background-color: #2e2252; */
+  color: white;
+}
+
 #dark #log1 {
   background-color: #2e2252;
   color: white;
