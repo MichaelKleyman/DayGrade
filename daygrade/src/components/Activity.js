@@ -134,32 +134,21 @@ const Activity = ({ usersScores, date, userId }) => {
     }
   }, [usersScores]);
 
-  // useEffect(() => {
-  //   dispatch(deleteOldTodos(usersTodos));
-  // }, [date]);
-
-  const tempButton = () => {};
+  useEffect(() => {
+    dispatch(deleteOldTodos(usersTodos));
+  }, [date]);
 
   return (
     <div
       className='shadow-xl rounded-lg h-full md:h-full lg:h-full'
       id='activity-div'
     >
-      <button onClick={tempButton}>temp button</button>
       <div className='font-bold md:text-xl grid grid-cols-2 place-content-center p-3'>
         <div className='flex'>
           <div>
             <ActivityTooltip />
           </div>
           <p>Activity</p>
-        </div>
-        <div className='flex justify-end'>
-          <button
-            onClick={handleRouting}
-            className='font-normal text-sm cursor-pointer text-gray-400 underline hover:text-gray-600'
-          >
-            Previous Agendas
-          </button>
         </div>
       </div>
       <div className='mb-2'>
