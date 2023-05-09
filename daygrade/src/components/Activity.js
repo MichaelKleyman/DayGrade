@@ -11,6 +11,7 @@ import {
   toggleCheck,
   deleteToDo,
   deleteOldTodos,
+  fetchSpecificTodos,
 } from '../store';
 import { ImCheckboxUnchecked, ImCheckboxChecked } from 'react-icons/im';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
@@ -93,7 +94,11 @@ const Activity = ({ usersScores, date, userId }) => {
   //   };
 
   useEffect(() => {
-    const unsubscribeTodos = dispatch(fetchTodos(userId));
+    // const unsubscribeTodos = dispatch(fetchTodos(userId));
+    // return () => {
+    //   unsubscribeTodos();
+    // };
+    const unsubscribeTodos = dispatch(fetchSpecificTodos(userId, date));
     return () => {
       unsubscribeTodos();
     };
