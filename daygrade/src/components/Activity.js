@@ -98,7 +98,7 @@ const Activity = ({ usersScores, date, userId }) => {
     return () => {
       unsubscribeTodos();
     };
-  }, []);
+  }, [date]);
 
   useEffect(() => {
     //usersScores is all the final check-ins of the user, coming from the database, in ascending order by date
