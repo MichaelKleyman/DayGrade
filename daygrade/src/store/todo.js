@@ -49,6 +49,7 @@ export const fetchSpecificTodos = (userId, date) => (dispatch) => {
       ...curLog.data(),
       id: curLog.id,
     }));
+    console.log(log);
     dispatch(_fetchSpecificTodos(log));
   });
   return subscriber;

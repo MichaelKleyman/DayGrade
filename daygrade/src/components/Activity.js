@@ -26,6 +26,7 @@ const Activity = ({ usersScores, date, userId }) => {
   const navigate = useNavigate();
 
   const usersTodos = useSelector((state) => state.todosReducer);
+  console.log(usersTodos);
 
   const dispatch = useDispatch();
 
@@ -58,51 +59,16 @@ const Activity = ({ usersScores, date, userId }) => {
     setTodo('');
   };
 
-  //   const currentStreak = () => {
-  //     let lastIndex = usersScores.length - 1;
-  //     let today = new Date();
-  //     let latestDate = usersScores[usersScores.length - 1].date;
-  //     latestDate = new Date(latestDate);
-  //     let differenceInTime = today.getTime() - latestDate.getTime();
-  //     let daysSinceLastCheckin = differenceInTime / (1000 * 3600 * 24);
-  //     let differenceInDays = 0;
-  //     if (daysSinceLastCheckin < 2) {
-  //       console.log('there is a streak');
-  //       setStreak(Math.floor(daysSinceLastCheckin));
-  //       let counter = 0;
-  //       for (let i = usersScores.length - 1; i >= 0; i--) {
-  //         latestDate =
-  //           i === index
-  //             ? usersScores[usersScores.length - 1].date
-  //             : usersScores[i + 1].date;
-  //         let scoreDate = usersScores[i].date; //current date in the score obj
-  //         let timeDifference =
-  //           new Date(latestDate).getTime() - new Date(scoreDate).getTime();
-  //         differenceInDays = timeDifference / (1000 * 3600 * 24); //difference between the the current date and the date before it
-  //         if (differenceInDays <= 1) {
-  //           //if that difference is less than or greater than 1, then there is a streak
-  //           //   console.log(differenceInDays);
-  //           counter++;
-  //           setStreak(counter);
-  //         } else {
-  //           //   console.log(differenceInDays);
-  //           //   setStreak(0);
-  //           break;
-  //         }
-  //       }
-  //     }
-  //   };
-
   useEffect(() => {
     // const unsubscribeTodos = dispatch(fetchTodos(userId));
     // return () => {
     //   unsubscribeTodos();
     // };
-    const unsubscribeTodos = dispatch(fetchSpecificTodos(userId, date));
+    const unsubscribeSpecificTodos = dispatch(fetchSpecificTodos(userId, date));
     return () => {
-      unsubscribeTodos();
+      unsubscribeSpecificTodos();
     };
-  }, []);
+  }, [date]);
 
   useEffect(() => {
     //usersScores is all the final check-ins of the user, coming from the database, in ascending order by date
@@ -225,7 +191,7 @@ const Activity = ({ usersScores, date, userId }) => {
         <div>
           {usersTodos.length ? (
             <div>
-              {usersTodos.map((obj, i) => (
+              {usersTodos?.map((obj, i) => (
                 <div key={i} className='flex items-center justify-between pt-3'>
                   <div className='flex items-center'>
                     {obj.completed ? (
@@ -278,3 +244,38 @@ const Activity = ({ usersScores, date, userId }) => {
 };
 
 export default Activity;
+
+//   const currentStreak = () => {
+//     let lastIndex = usersScores.length - 1;
+//     let today = new Date();
+//     let latestDate = usersScores[usersScores.length - 1].date;
+//     latestDate = new Date(latestDate);
+//     let differenceInTime = today.getTime() - latestDate.getTime();
+//     let daysSinceLastCheckin = differenceInTime / (1000 * 3600 * 24);
+//     let differenceInDays = 0;
+//     if (daysSinceLastCheckin < 2) {
+//       console.log('there is a streak');
+//       setStreak(Math.floor(daysSinceLastCheckin));
+//       let counter = 0;
+//       for (let i = usersScores.length - 1; i >= 0; i--) {
+//         latestDate =
+//           i === index
+//             ? usersScores[usersScores.length - 1].date
+//             : usersScores[i + 1].date;
+//         let scoreDate = usersScores[i].date; //current date in the score obj
+//         let timeDifference =
+//           new Date(latestDate).getTime() - new Date(scoreDate).getTime();
+//         differenceInDays = timeDifference / (1000 * 3600 * 24); //difference between the the current date and the date before it
+//         if (differenceInDays <= 1) {
+//           //if that difference is less than or greater than 1, then there is a streak
+//           //   console.log(differenceInDays);
+//           counter++;
+//           setStreak(counter);
+//         } else {
+//           //   console.log(differenceInDays);
+//           //   setStreak(0);
+//           break;
+//         }
+//       }
+//     }
+//   };
