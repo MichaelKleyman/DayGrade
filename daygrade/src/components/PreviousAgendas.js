@@ -28,15 +28,14 @@ export default function PreviousAgendas() {
   const dispatch = useDispatch();
 
   const handleSelectChange = (option) => {
-    // console.log(option);
+    console.log(option.value);
     setFilterOption(option.value);
   };
 
   useEffect(() => {
     if (filterOption === 'Today') {
       setDate(dayjs());
-    }
-    if (filterOption === 'Yesterday') {
+    } else if (filterOption === 'Yesterday') {
       const yesterdaysDate = dayjs().subtract(1, 'day');
       setDate(yesterdaysDate);
     }
@@ -50,7 +49,19 @@ export default function PreviousAgendas() {
     return () => {
       unsubscribeSpecificTodos();
     };
-  }, [filterOption, date]);
+  }, [filterOption]);
+
+  useEffect(() => {
+    const unsubscribeSpecificTodos = dispatch(
+      fetchSpecificTodos(
+        id,
+        new Date(date).toString().split(' ').splice(1, 3).join(' ')
+      )
+    );
+    return () => {
+      unsubscribeSpecificTodos();
+    };
+  }, [date]);
 
   useEffect(() => {
     const unsubscribeTodos = dispatch(fetchTodos(id));
