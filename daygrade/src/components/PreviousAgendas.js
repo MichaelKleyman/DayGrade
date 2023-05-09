@@ -12,6 +12,7 @@ import { Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import dayjs from 'dayjs';
 import Select from 'react-select';
+import Percentage from './Percentage';
 
 const filterOptions = [
   { value: 'Today', label: 'Today' },
@@ -135,7 +136,6 @@ export default function PreviousAgendas() {
     );
   };
 
-  //   console.log(usersTodos);
   return (
     <div>
       <div className='grid md:grid-cols-2 gap-8 mx-auto py-2 px-4 m-6 md:h-screen'>
@@ -167,13 +167,16 @@ export default function PreviousAgendas() {
           <p className='pl-4 text-lg font-bold' id='date'>
             {date.format('dddd, MMMM D YYYY')}
           </p>
-          <div className='p-4'>
+          <div className='p-4 grid grid-cols-2 gap-5'>
             <Select
               options={filterOptions}
               onChange={handleSelectChange}
               defaultValue={filterOptions[0]}
               className='w-[50%]'
             />
+            <div className='flex items-center justify-center'>
+              <Percentage todos={usersTodos} />
+            </div>
           </div>
           <h1
             className='text-2xl pl-4 uppercase tracking-widest'

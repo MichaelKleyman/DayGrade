@@ -26,7 +26,6 @@ const Activity = ({ usersScores, date, userId }) => {
   const navigate = useNavigate();
 
   const usersTodos = useSelector((state) => state.todosReducer);
-  console.log(usersTodos);
 
   const dispatch = useDispatch();
 
