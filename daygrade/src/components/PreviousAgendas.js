@@ -65,13 +65,6 @@ export default function PreviousAgendas() {
     };
   }, [date]);
 
-  useEffect(() => {
-    const unsubscribeTodos = dispatch(fetchTodos(id));
-    return () => {
-      unsubscribeTodos();
-    };
-  }, []);
-
   const CustomPicker = styled(CalendarPicker)(({ theme }) => ({
     '&.MuiCalendarPicker-root': {
       width: '80%',
