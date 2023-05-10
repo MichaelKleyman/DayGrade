@@ -44,6 +44,7 @@ const EditLog = ({
       >
         <MdModeEditOutline
           size={25}
+          color='black'
           className='duration-300 hover:scale-110 hover:text-white cursor-pointer'
         />
       </div>
