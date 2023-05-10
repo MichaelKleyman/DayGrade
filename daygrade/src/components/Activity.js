@@ -59,10 +59,6 @@ const Activity = ({ usersScores, date, userId }) => {
   };
 
   useEffect(() => {
-    // const unsubscribeTodos = dispatch(fetchTodos(userId));
-    // return () => {
-    //   unsubscribeTodos();
-    // };
     const unsubscribeSpecificTodos = dispatch(fetchSpecificTodos(userId, date));
     return () => {
       unsubscribeSpecificTodos();
@@ -108,8 +104,6 @@ const Activity = ({ usersScores, date, userId }) => {
   //   dispatch(deleteOldTodos(usersTodos));
   // }, [date]);
 
-  const tempButton = () => {};
-
   return (
     <div
       className='shadow-xl rounded-lg h-full md:h-full lg:h-full'
@@ -121,14 +115,6 @@ const Activity = ({ usersScores, date, userId }) => {
             <ActivityTooltip />
           </div>
           <p>Activity</p>
-        </div>
-        <div className='flex justify-end'>
-          <button
-            onClick={handleRouting}
-            className='font-normal text-sm cursor-pointer text-gray-400 underline hover:text-gray-600'
-          >
-            Previous Agendas
-          </button>
         </div>
       </div>
       <div className='mb-2'>
