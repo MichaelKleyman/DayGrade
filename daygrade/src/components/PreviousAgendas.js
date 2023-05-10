@@ -205,7 +205,7 @@ export default function PreviousAgendas() {
               ))
             ) : (
               <div className='grid grid-cols-1 place-items-center'>
-                <p className='p-8 uppercase tracking-widest'>No Todos</p>
+                <p className='p-8 uppercase tracking-widest'>No Agendas</p>
                 <img
                   src={NothingFoundImg}
                   alt='img'
