@@ -115,7 +115,6 @@ const Activity = ({ usersScores, date, userId }) => {
       className='shadow-xl rounded-lg h-full md:h-full lg:h-full'
       id='activity-div'
     >
-      <button onClick={tempButton}>temp button</button>
       <div className='font-bold md:text-xl grid grid-cols-2 place-content-center p-3'>
         <div className='flex'>
           <div>

@@ -13,12 +13,13 @@ import { styled } from '@mui/material/styles';
 import dayjs from 'dayjs';
 import Select from 'react-select';
 import Percentage from './Percentage';
+import NothingFoundImg from '../images/nothingHere.png';
 
 const filterOptions = [
   { value: 'Today', label: 'Today' },
   { value: 'Yesterday', label: 'Yesterday' },
-  { value: 'This Week', label: 'This Week' },
-  { value: 'This Month', label: 'This Month' },
+  // { value: 'This Week', label: 'This Week' },
+  // { value: 'This Month', label: 'This Month' },
 ];
 
 export default function PreviousAgendas() {
@@ -172,7 +173,7 @@ export default function PreviousAgendas() {
               options={filterOptions}
               onChange={handleSelectChange}
               defaultValue={filterOptions[0]}
-              className='w-[50%]'
+              className='w-[80%]'
             />
             <div className='flex items-center justify-center'>
               <Percentage todos={usersTodos} />
@@ -195,11 +196,11 @@ export default function PreviousAgendas() {
             </div>
           </div>
           <div className='p-4' id='specific-todos'>
-            {usersTodos.length &&
+            {usersTodos.length > 0 ? (
               usersTodos.map((obj, i) => (
                 <div
                   key={i}
-                  className='p-5 flex items-center border border-gray-300'
+                  className='p-5 flex items-center border border-gray-300 rounded-lg'
                 >
                   <div
                     className={`${
@@ -208,7 +209,19 @@ export default function PreviousAgendas() {
                   ></div>
                   <h1 className='ml-2'>{obj.todo}</h1>
                 </div>
-              ))}
+              ))
+            ) : (
+              <div className='grid grid-cols-1 place-items-center'>
+                <p className='p-8 uppercase tracking-widest'>No Todos</p>
+                <img
+                  src={NothingFoundImg}
+                  alt='img'
+                  width={400}
+                  height={400}
+                  className='shadow-lg shadow-gray-400 rounded-lg'
+                />
+              </div>
+            )}
           </div>
         </div>
       </div>

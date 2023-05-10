@@ -10,6 +10,15 @@
 /* background-image: url('https://images.unsplash.com/photo-1533134486753-c833f0ed4866?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80'); */
 /* } */
 
+#percent {
+  font-size: 20px;
+}
+
+#dark #percent {
+  color: white;
+  font-size: 20px;
+}
+
 @media screen and (min-width: 300px) {
   #final-grade {
     width: 80%;
