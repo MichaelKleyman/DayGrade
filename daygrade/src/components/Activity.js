@@ -42,7 +42,7 @@ const Activity = ({ usersScores, date, userId }) => {
   };
 
   const handleRouting = () => {
-    navigate(`/prev-agendas/${userId}`);
+    navigate(`/previous-agendas/${userId}`);
   };
 
   const toggle = () => {
@@ -115,6 +115,14 @@ const Activity = ({ usersScores, date, userId }) => {
             <ActivityTooltip />
           </div>
           <p>Activity</p>
+        </div>
+        <div className='flex justify-end'>
+          <button
+            onClick={handleRouting}
+            className='font-normal text-sm cursor-pointer text-gray-400 underline hover:text-gray-600'
+          >
+            Previous Agendas
+          </button>
         </div>
       </div>
       <div className='mb-2'>
