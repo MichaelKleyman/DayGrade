@@ -10,6 +10,7 @@ import { fetchWaterInfo } from '../store/water';
 import { addDoc, collection, doc, updateDoc } from 'firebase/firestore';
 import { db } from '../firebase';
 import ToolTip from './ToolTip';
+import AverageWater from './AverageWater';
 
 const Water = ({ date }) => {
   let waterInfo = useSelector((state) => state.waterReducer);
@@ -38,10 +39,8 @@ const Water = ({ date }) => {
 
   let drankArr = waterInfoObj.drank || [];
   let waterInfoType = waterInfoObj.type || '';
-  //   console.log('>>>', drankArr);
 
   const saveWaterCount = async () => {
-    // console.log(type);
     if (!waterInfoType.length) {
       if (type === 'Cup') {
         if (!drankArr.length) {
@@ -263,9 +262,10 @@ const Water = ({ date }) => {
   return (
     <div className='mt-5'>
       <h1 className='flex items-center uppercase text-blue-600 tracking-widest font-bold'>
-        Water
+        <p>Water</p>
         <ToolTip />
       </h1>
+      <AverageWater id={user.uid} />
       <div className='flex justify-between items-center pb-3'>
         <h1 className='text-sm'>
           {!waterInfo.length ? (
