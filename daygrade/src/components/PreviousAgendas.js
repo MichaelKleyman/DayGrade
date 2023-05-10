@@ -65,13 +65,6 @@ export default function PreviousAgendas() {
     };
   }, [date]);
 
-  useEffect(() => {
-    const unsubscribeTodos = dispatch(fetchTodos(id));
-    return () => {
-      unsubscribeTodos();
-    };
-  }, []);
-
   const CustomPicker = styled(CalendarPicker)(({ theme }) => ({
     '&.MuiCalendarPicker-root': {
       width: '80%',
@@ -212,7 +205,7 @@ export default function PreviousAgendas() {
               ))
             ) : (
               <div className='grid grid-cols-1 place-items-center'>
-                <p className='p-8 uppercase tracking-widest'>No Todos</p>
+                <p className='p-8 uppercase tracking-widest'>No Agendas</p>
                 <img
                   src={NothingFoundImg}
                   alt='img'
