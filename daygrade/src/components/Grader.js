@@ -14,8 +14,13 @@ import { createLog, deleteLog } from '../store';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../firebase';
 import { AiFillDelete } from 'react-icons/ai';
+import { FcApproval } from 'react-icons/fc';
 import EditLog from './EditLog';
-// import Water from './Water';
+import {
+  VerticalTimeline,
+  VerticalTimelineElement,
+} from 'react-vertical-timeline-component';
+import 'react-vertical-timeline-component/style.min.css';
 import Water from './Water';
 
 const Grader = ({ date, usersLog }) => {
@@ -123,20 +128,36 @@ const Grader = ({ date, usersLog }) => {
           </div>
         </div>
       </div>
+      {/* grid grid-cols-1 lg:grid-cols-2 sm:grid-cols-1 gap-4 border border-gray-200 rounded-lg shadow-lg shadow-gray-800 */}
       {usersLog.length ? (
         <div
-          className='border border-gray-200 rounded-lg shadow-lg shadow-gray-800 p-3 grid grid-cols-1 lg:grid-cols-2 sm:grid-cols-1 gap-4 h-[570px] overflow-y-auto'
           id='logs'
+          className='p-3 h-[570px] overflow-y-auto rounded-lg shadow-lg shadow-gray-800'
         >
-          {arrayFirstHalf.map((usersLogInfo, i) => (
-            <div
-              key={usersLogInfo.id}
-              className='w-full shadow-lg shadow-gray-400 rounded-xl h-[210px] overflow-y-auto'
-              id='log1'
-            >
-              <h1 className='font-bold mx-2 my-3 py-2 flex justify-between'>
-                <p>{usersLogInfo.log}</p>
-                <div className='p-2 m-1'>
+          <VerticalTimeline lineColor='blue'>
+            {arrayFirstHalf.map((usersLogInfo) => (
+              <VerticalTimelineElement
+                key={usersLogInfo.id}
+                className='vertical-timeline-element--work'
+                contentStyle={{
+                  background: 'rgb(33, 150, 243)',
+                  color: '#fff',
+                }}
+                contentArrowStyle={{
+                  borderRight: '7px solid  rgb(33, 150, 243)',
+                }}
+                iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
+                icon={<FcApproval />}
+              >
+                <h3 className='vertical-timeline-element-title'>
+                  {usersLogInfo.log}
+                </h3>
+                <div className='vertical-timeline-element-subtitle'>
+                  <h1 className='mx-4 py-2 text-sm text-gray-600'>
+                    {usersLogInfo.Time}
+                  </h1>
+                </div>
+                <div className='p-2 m-1 flex'>
                   <EditLog
                     usersLogInfo={usersLogInfo}
                     open={open}
@@ -154,25 +175,33 @@ const Grader = ({ date, usersLog }) => {
                   >
                     <AiFillDelete
                       size={25}
+                      color='black'
                       className='duration-300 hover:scale-110 hover:text-white cursor-pointer'
                     />
                   </div>
                 </div>
-              </h1>
-              <h1 className='mx-4 py-2 text-sm text-gray-600'>
-                {usersLogInfo.Time}
-              </h1>
-            </div>
-          ))}
-          {arraySecondHalf.map((usersLogInfo, i) => (
-            <div
-              key={usersLogInfo.id}
-              className=' shadow-lg shadow-gray-400 rounded-xl h-[210px] overflow-y-auto'
-              id='log2'
-            >
-              <h1 className='font-bold mx-4 my-2 py-2 flex justify-between '>
-                <p>{usersLogInfo.log}</p>
-                <div className='p-2 m-1'>
+              </VerticalTimelineElement>
+            ))}
+            {arraySecondHalf.map((usersLogInfo, i) => (
+              <VerticalTimelineElement
+                key={usersLogInfo.id}
+                className='vertical-timeline-element--work'
+                contentStyle={{
+                  background: 'rgb(33, 150, 243)',
+                  color: '#fff',
+                }}
+                iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
+                icon={<FcApproval />}
+              >
+                <h3 className='vertical-timeline-element-title'>
+                  {usersLogInfo.log}
+                </h3>
+                <div className='vertical-timeline-element-subtitle'>
+                  <h1 className='mx-4 py-2 text-sm text-gray-600'>
+                    {usersLogInfo.Time}
+                  </h1>
+                </div>
+                <div className='p-2 m-1 flex'>
                   <EditLog
                     usersLogInfo={usersLogInfo}
                     open={open}
@@ -190,16 +219,14 @@ const Grader = ({ date, usersLog }) => {
                   >
                     <AiFillDelete
                       size={25}
+                      color='black'
                       className='duration-300 hover:scale-110 hover:text-white cursor-pointer'
                     />
                   </div>
                 </div>
-              </h1>
-              <h1 className='mx-4 py-2 text-sm text-gray-600'>
-                {usersLogInfo.Time}
-              </h1>
-            </div>
-          ))}
+              </VerticalTimelineElement>
+            ))}
+          </VerticalTimeline>
         </div>
       ) : (
         <div
