@@ -15,10 +15,15 @@ import { db } from '../firebase';
 //ACTIONS
 const FETCH_TODOS = 'FETCH_TODOS';
 const FETCH_SPECIFIC_TODOS = 'FETCH_SPECIFIC_TODOS';
+const RESTORE_YESTERDAYS_TODOS = 'RESTORE_YESTERDAYS_TODOS';
 
 //ACTION CREATORS
 const _fetchTodos = (todos) => ({ type: FETCH_TODOS, todos });
 const _fetchSpecificTodos = (todos) => ({ type: FETCH_SPECIFIC_TODOS, todos });
+const _restoreYesterdaysTodos = (todos) => ({
+  type: RESTORE_YESTERDAYS_TODOS,
+  todos,
+});
 
 //THUNKS
 export const fetchTodos = (userId) => (dispatch) => {
@@ -49,11 +54,47 @@ export const fetchSpecificTodos = (userId, date) => (dispatch) => {
       ...curLog.data(),
       id: curLog.id,
     }));
-    console.log(log);
     dispatch(_fetchSpecificTodos(log));
   });
   return subscriber;
 };
+
+export const restoreYesterdaysTodos =
+  (userId, yesterdaysDate, todaysDate) => (dispatch) => {
+    let oldTodos = [];
+    const ref = query(
+      collection(db, 'To-Do'),
+      where('userId', '==', userId),
+      where('date', '==', yesterdaysDate),
+      orderBy('createdAt')
+    );
+    const subscriber = onSnapshot(ref, async (querySnapshot) => {
+      const log = querySnapshot.docs.map((curLog) => ({
+        ...curLog.data(),
+        id: curLog.id,
+      }));
+      oldTodos = log;
+      const newDataArray = oldTodos.map((doc) => {
+        const currentDate = todaysDate;
+
+        // Modify the date and completed key in each element
+        const updatedData = {
+          ...doc,
+          date: currentDate,
+          completed: false,
+          createdAt: serverTimestamp(),
+        };
+
+        return updatedData;
+      });
+      console.log(newDataArray);
+      newDataArray.forEach(async (data) => {
+        await addDoc(collection(db, 'To-Do'), data);
+      });
+      console.log('added');
+    });
+    return subscriber;
+  };
 
 export const deleteOldTodos = (todos) => async () => {
   todos.forEach((todo) => {
@@ -105,6 +146,9 @@ export default function todosReducer(state = initialState, action) {
       return action.todos;
     }
     case FETCH_SPECIFIC_TODOS: {
+      return action.todos;
+    }
+    case RESTORE_YESTERDAYS_TODOS: {
       return action.todos;
     }
     default:
