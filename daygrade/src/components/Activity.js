@@ -12,22 +12,48 @@ import {
   deleteToDo,
   deleteOldTodos,
   fetchSpecificTodos,
+  restoreYesterdaysTodos,
 } from '../store';
 import { ImCheckboxUnchecked, ImCheckboxChecked } from 'react-icons/im';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import ActivityTooltip from './ActivityTooltip';
 import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
 import { useNavigate } from 'react-router-dom';
+import dayjs from 'dayjs';
 
 const Activity = ({ usersScores, date, userId }) => {
   const [streak, setStreak] = useState(0);
   const [checked, setChecked] = useState(false);
   const [todo, setTodo] = useState('');
+  const [restore, setRestore] = useState('');
+  const [restoreClicked, setRestoreClicked] = useState(false);
   const navigate = useNavigate();
 
   const usersTodos = useSelector((state) => state.todosReducer);
 
   const dispatch = useDispatch();
+
+  const handleRestore = (restoreOption) => {
+    console.log(restoreOption);
+    if (restoreOption === 'Yes') {
+      setRestore(restoreOption);
+      setRestoreClicked(true);
+      const yesterdaysDate = dayjs().subtract(1, 'day');
+      const unsubscribeSpecificTodos = dispatch(
+        restoreYesterdaysTodos(
+          userId,
+          new Date(yesterdaysDate).toString().split(' ').splice(1, 3).join(' '),
+          date
+        )
+      );
+      return () => {
+        unsubscribeSpecificTodos();
+      };
+    } else {
+      setRestore(restoreOption);
+      setRestoreClicked(true);
+    }
+  };
 
   const handleChange = (e) => {
     setTodo(e.target.value);
@@ -224,9 +250,29 @@ const Activity = ({ usersScores, date, userId }) => {
           ) : (
             <div
               id='empty'
-              className='flex items-center justify-center mt-[60px] tracking-widest text-gray-500'
+              className='flex items-center justify-center mt-[60px] tracking-widest'
             >
-              Nothing for today
+              {!restoreClicked && (
+                <div className='text-blue-500'>
+                  <p>Restore yesterdays agenda?</p>
+                  <div className='flex items-center justify-center'>
+                    <button
+                      onClick={() => handleRestore('Yes')}
+                      className='uppercase tracking-wide px-2 text-sm my-2 bg-gray-200 p-1 mx-2 rounded-sm hover:bg-blue-500 hover:text-white hover:scale-110 duration-300'
+                    >
+                      Yes
+                    </button>
+                    <button
+                      onClick={() => handleRestore('No')}
+                      className='uppercase tracking-wide px-2 text-sm my-2 bg-gray-200 p-1 mx-2 rounded-sm hover:bg-blue-500 hover:text-white hover:scale-110 duration-300'
+                    >
+                      No
+                    </button>
+                  </div>
+                </div>
+              )}
+              {restore === 'Yes' && <div>Previous ones</div>}
+              {restore === 'No' && <div>Nothing for today.</div>}
             </div>
           )}
         </div>
