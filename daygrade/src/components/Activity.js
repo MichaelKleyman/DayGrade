@@ -271,7 +271,11 @@ const Activity = ({ usersScores, date, userId }) => {
                   </div>
                 </div>
               )}
-              {restore === 'Yes' && <div>Previous ones</div>}
+              {restore === 'Yes' && (
+                <div className='text-center'>
+                  No agenda found from yesterday. Make an agenda today!
+                </div>
+              )}
               {restore === 'No' && <div>Nothing for today.</div>}
             </div>
           )}
