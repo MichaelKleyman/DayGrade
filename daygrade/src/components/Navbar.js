@@ -24,7 +24,7 @@ const Navbar = ({ theme }) => {
   const [mode, setMode] = useState(true);
   const navigate = useNavigate();
   const open = Boolean(anchorEl);
-  const { currentUser, logout } = useAuth();
+  const { currentUser, logout, login } = useAuth();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -76,6 +76,10 @@ const Navbar = ({ theme }) => {
     }
 
     setState({ ...state, [anchor]: open });
+  };
+
+  const quickLogin = async () => {
+    await login('michaelkleyman0725@gmail.com', '123456');
   };
 
   const list = (anchor) => (
@@ -142,9 +146,14 @@ const Navbar = ({ theme }) => {
           D a y g r a d e
         </Link>
         {!currentUser ? (
-          <div className='w-[50%] md:w-[15%] sm:w-[55%] hover:border hover:border-blue-600 hover:rounded-xl flex items-center justify-center'>
+          <div className='w-[50%] md:w-[45%] sm:w-[55%] flex items-center justify-between'>
             <ul className='flex'>
-              <li className='text-2sm sm:text-lg p-4 tracking-widest uppercase hover:text-blue-600 duration-200 hover:scale-110'>
+              <li className='text-[10px] md:text-lg sm:text-sm p-4 tracking-widest uppercase hover:text-blue-600 duration-200 hover:scale-110 hover:border hover:border-blue-600 hover:rounded-xl cursor-pointer'>
+                <div type='button' onClick={quickLogin}>
+                  Recruiter or Guest?
+                </div>
+              </li>
+              <li className='text-[10px] md:text-lg sm:text-sm p-4 tracking-widest uppercase hover:text-blue-600 duration-200 hover:scale-110 hover:border hover:border-blue-600 hover:rounded-xl'>
                 <Link to='/login'>Log in</Link>
               </li>
             </ul>
