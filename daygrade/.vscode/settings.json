@@ -1,3 +1,4 @@
 {
-  "cSpell.words": ["accum", "Checkin", "Todos"]
+  "cSpell.words": ["accum", "Checkin", "Todos"],
+  "git.ignoreLimitWarning": true
 }

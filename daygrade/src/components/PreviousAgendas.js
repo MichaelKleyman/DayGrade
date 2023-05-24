@@ -131,7 +131,7 @@ export default function PreviousAgendas() {
   };
 
   return (
-    <div>
+    <div id='previous-agendas'>
       <div className='grid md:grid-cols-2 gap-8 mx-auto py-2 px-4 m-6 md:h-screen'>
         <div
           className='bg-white rounded-xl shadow-lg shadow-gray-400 h-full md:h-[75%]'
