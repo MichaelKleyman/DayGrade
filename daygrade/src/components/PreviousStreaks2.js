@@ -1,0 +1,100 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import '../styles.css';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { fetchAllScores } from '../store';
+import Tooltip from '@mui/material/Tooltip';
+
+export default function PreviousStreaks2() {
+  const [heatMapValues, setHeatMap] = useState({});
+  const [hover] = useState(true);
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const usersScores = useSelector((state) => state.scoreReducer);
+
+  useEffect(() => {
+    const unsubscribeUserScores = dispatch(fetchAllScores(id));
+    return () => {
+      unsubscribeUserScores();
+    };
+  }, []);
+
+  useEffect(() => {
+    const obj = {};
+    usersScores.forEach((scoreObj, i) => {
+      const createdAtDate = scoreObj?.createdAt;
+      const lastCheckinCreatedAt = new Date(
+        createdAtDate.seconds * 1000 //converting seconds to milliseconds
+      );
+      const options = { year: 'numeric', month: 'long', day: 'numeric' };
+      const formattedDate = lastCheckinCreatedAt
+        .toLocaleDateString('en-US', options)
+        .replace(',', '');
+
+      if (formattedDate === scoreObj?.date.split(', ')[1]) {
+        obj[formattedDate] = 1;
+      }
+    });
+    // setHeatMap(obj);
+    const startYear = 2023;
+    const startDate = new Date(startYear, 0, 1); // January 1st of the start year
+    const result = {};
+
+    for (let i = 0; i < 365; i++) {
+      const currentDate = new Date(startDate.getFullYear(), 0, i + 1);
+      const options = { month: 'long', day: 'numeric', year: 'numeric' };
+      const formattedDate = currentDate
+        .toLocaleDateString('en-US', options)
+        .replace(',', '');
+      let streakDates = Object.keys(obj);
+      //   console.log(streakDates);
+      if (streakDates.includes(formattedDate)) {
+        result[formattedDate] = 1;
+      } else result[formattedDate] = 0; // or any initial value you want
+    }
+
+    setHeatMap(result);
+  }, []);
+
+  //   console.log('Users scores length: ', usersScores.length);
+  //   console.log('Heat map length', Object.keys(heatMapValues).length || 0);
+
+  return (
+    <div className='graph'>
+      <ul className='months'>
+        <li>Jan</li>
+        <li>Feb</li>
+        <li>Mar</li>
+        <li>Apr</li>
+        <li>May</li>
+        <li>Jun</li>
+        <li>Jul</li>
+        <li>Aug</li>
+        <li>Sep</li>
+        <li>Oct</li>
+        <li>Nov</li>
+        <li>Dec</li>
+      </ul>
+      <ul className='days'>
+        <li>Sun</li>
+        <li>Mon</li>
+        <li>Tue</li>
+        <li>Wed</li>
+        <li>Thu</li>
+        <li>Fri</li>
+        <li>Sat</li>
+      </ul>
+      <ul className='squares'>
+        {Object.keys(heatMapValues).map((elem, i) => (
+          <Tooltip title={`${hover ? elem : ''}`} key={i}>
+            <li
+              data-level={`${heatMapValues[elem]}`}
+              className='cursor-pointer hover:scale-110 duration-300'
+            ></li>
+          </Tooltip>
+        ))}
+      </ul>
+    </div>
+  );
+}

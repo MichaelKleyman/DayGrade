@@ -67,7 +67,11 @@ const Activity = ({ usersScores, date, userId }) => {
     dispatch(deleteToDo(id));
   };
 
-  const handleRouting = () => {
+  const handlePreviousStreaksRouting = () => {
+    navigate(`/previous-streaks/${userId}`);
+  };
+
+  const handlePreviousAgendaRouting = () => {
     navigate(`/previous-agendas/${userId}`);
   };
 
@@ -157,12 +161,12 @@ const Activity = ({ usersScores, date, userId }) => {
         </div>
       </div>
       <div className='flex items-center justify-evenly m-2 gap-2'>
-        <button className='p-2 w-[40%] hover:scale-110 duration-300 rounded-lg hover:text-white tracking-widest font-normal text-[13px] cursor-pointer uppercase bg-blue-600 text-white hover:bg-blue-200'>
+        <button onClick={handlePreviousStreaksRouting} className='p-2 w-[40%] hover:scale-110 duration-300 rounded-lg hover:text-white tracking-widest font-normal text-[12px] cursor-pointer uppercase bg-blue-600 text-white hover:bg-blue-200'>
           Previous Streaks
         </button>
         <button
-          onClick={handleRouting}
-          className='p-2 w-[40%] hover:scale-110 duration-300 rounded-lg hover:text-white tracking-widest font-normal text-[13px] cursor-pointer uppercase  bg-blue-600 text-white hover:bg-blue-200'
+          onClick={handlePreviousAgendaRouting}
+          className='p-2 w-[40%] hover:scale-110 duration-300 rounded-lg hover:text-white tracking-widest font-normal text-[12px] cursor-pointer uppercase  bg-blue-600 text-white hover:bg-blue-200'
         >
           Previous Agendas
         </button>
