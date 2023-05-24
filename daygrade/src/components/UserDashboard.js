@@ -118,7 +118,7 @@ const UserDashboard = () => {
             </div>
             <button
               onClick={() => navigate(`search/logs/${currentUser.uid}`)}
-              className='font-normal h-9 ml-10 border bg-blue-600 text-white rounded-full uppercase text-sm tracking-widest w-[40%] duration-200 hover:scale-110 ease-in'
+              className='font-normal h-9 ml-10 border bg-blue-600 hover:bg-blue-300 text-white rounded-lg uppercase text-sm tracking-widest w-[40%] duration-200 hover:scale-110 ease-in'
             >
               Search
             </button>
@@ -141,7 +141,7 @@ const UserDashboard = () => {
           <div className='flex justify-end'>
             <button
               onClick={() => navigate('/checkin')}
-              className='h-9 px-4 m-1 border bg-blue-600 text-white rounded-full uppercase text-sm tracking-widest w-[60%] duration-200 hover:scale-110 ease-in'
+              className='h-9 px-4 m-1 border bg-blue-600 hover:bg-blue-300 text-white rounded-lg uppercase text-sm tracking-widest w-[60%] duration-200 hover:scale-110 ease-in'
             >
               Start
             </button>
@@ -188,7 +188,7 @@ const UserDashboard = () => {
             <div className='flex justify-end'>
               <button
                 onClick={handleClickOpen}
-                className='h-9 px-4 m-1 border bg-blue-600 text-white rounded-full uppercase text-sm tracking-widest w-[60%] duration-200 hover:scale-110 ease-in'
+                className='h-9 px-4 m-1 border bg-blue-600 hover:bg-blue-300 text-white rounded-lg uppercase text-sm tracking-widest w-[60%] duration-200 hover:scale-110 ease-in'
               >
                 Edit
               </button>

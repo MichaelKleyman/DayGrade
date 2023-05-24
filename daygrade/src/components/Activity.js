@@ -67,7 +67,11 @@ const Activity = ({ usersScores, date, userId }) => {
     dispatch(deleteToDo(id));
   };
 
-  const handleRouting = () => {
+  const handlePreviousStreaksRouting = () => {
+    navigate(`/previous-streaks/${userId}/${streak}`);
+  };
+
+  const handlePreviousAgendaRouting = () => {
     navigate(`/previous-agendas/${userId}`);
   };
 
@@ -94,33 +98,45 @@ const Activity = ({ usersScores, date, userId }) => {
   useEffect(() => {
     //usersScores is all the final check-ins of the user, coming from the database, in ascending order by date
     const lastIndex = usersScores.length - 1; //index of the most recent check in, which is the last index
-    const today = new Date(); //todays date
-    let latestDate = usersScores[usersScores.length - 1]?.date; //latest date out of all the users checked in scores which is the lastIndex because firebase sorted it in ascending order.
-    latestDate = new Date(latestDate); //set latest date to the same format as todays date
-    let differenceInTime = today.getTime() - latestDate.getTime(); //get both those variables in milliseconds and track the difference
-    let daysSinceLastCheckin = differenceInTime / (1000 * 3600 * 24); //how many days since the last check in, should be at most one day since the last checkin to maintain a streak
-    let differenceInDays = 0;
-    if (daysSinceLastCheckin < 2) {
-      //This means there is a streak;
-      setStreak(Math.floor(daysSinceLastCheckin)); //state keeping track of the streak
-      let counter = 0;
-      for (let i = usersScores.length - 1; i >= 0; i--) {
-        //looping through all the scores, with the last index being the latest check in due to firebase sorting it in ascending order (from oldest to newest)
-        latestDate =
-          i === lastIndex
-            ? usersScores[usersScores.length - 1].date //if the current index is equal to the last index in the array, we look at that date
-            : usersScores[i + 1].date; //else look at the date in front of the current date were looking at, so the following index
-        let currentScoreDate = usersScores[i].date; //current date in the score obj
-        let timeDifference =
-          new Date(latestDate).getTime() - new Date(currentScoreDate).getTime();
-        differenceInDays = timeDifference / (1000 * 3600 * 24); //difference between the the current date and the date before it (reassigning the original differenceInDays variable)
-        if (differenceInDays <= 1) {
-          //checking if the check-ins were looking at are consecutive, if so this if condition gets hit
-          //if that difference is less than or equal to 1, then there is a streak
-          counter++;
-          setStreak(counter); //sets the state keeping track of the streak
-        } else {
-          break; //break out of the loop as soon as the difference in days between each checkin is greater than 1
+    // const lastCheckinCreatedAt = usersScores[lastIndex]?.createdAt;
+    const lastCheckinCreatedAt = new Date(
+      usersScores[lastIndex]?.createdAt?.seconds * 1000 //converting seconds to milliseconds
+    );
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const formattedDate = lastCheckinCreatedAt
+      .toLocaleDateString('en-US', options)
+      .replace(',', '');
+    if (formattedDate === usersScores[lastIndex]?.date.split(', ')[1]) {
+      //makes sure the current date matches the date the checkin was created, so the streak is accurate.
+      const today = new Date(); //todays date
+      let latestDate = usersScores[usersScores.length - 1]?.date; //latest date out of all the users checked in scores which is the lastIndex because firebase sorted it in ascending order.
+      latestDate = new Date(latestDate); //set latest date to the same format as todays date
+      let differenceInTime = today.getTime() - latestDate.getTime(); //get both those variables in milliseconds and track the difference
+      let daysSinceLastCheckin = differenceInTime / (1000 * 3600 * 24); //how many days since the last check in, should be at most one day since the last checkin to maintain a streak
+      let differenceInDays = 0;
+      if (daysSinceLastCheckin < 2) {
+        //This means there is a streak;
+        setStreak(Math.floor(daysSinceLastCheckin)); //state keeping track of the streak
+        let counter = 0;
+        for (let i = usersScores.length - 1; i >= 0; i--) {
+          //looping through all the scores, with the last index being the latest check in due to firebase sorting it in ascending order (from oldest to newest)
+          latestDate =
+            i === lastIndex
+              ? usersScores[usersScores.length - 1].date //if the current index is equal to the last index in the array, we look at that date
+              : usersScores[i + 1].date; //else look at the date in front of the current date were looking at, so the following index
+          let currentScoreDate = usersScores[i].date; //current date in the score obj
+          let timeDifference =
+            new Date(latestDate).getTime() -
+            new Date(currentScoreDate).getTime();
+          differenceInDays = timeDifference / (1000 * 3600 * 24); //difference between the the current date and the date before it (reassigning the original differenceInDays variable)
+          if (differenceInDays <= 1) {
+            //checking if the check-ins were looking at are consecutive, if so this if condition gets hit
+            //if that difference is less than or equal to 1, then there is a streak
+            counter++;
+            setStreak(counter); //sets the state keeping track of the streak
+          } else {
+            break; //break out of the loop as soon as the difference in days between each checkin is greater than 1
+          }
         }
       }
     }
@@ -142,14 +158,20 @@ const Activity = ({ usersScores, date, userId }) => {
           </div>
           <p>Activity</p>
         </div>
-        <div className='flex justify-end'>
-          <button
-            onClick={handleRouting}
-            className='font-normal text-sm cursor-pointer text-gray-400 underline hover:text-gray-600'
-          >
-            Previous Agendas
-          </button>
-        </div>
+      </div>
+      <div className='flex items-center justify-evenly m-2 gap-2'>
+        <button
+          onClick={handlePreviousStreaksRouting}
+          className='p-2 w-[40%] hover:scale-110 duration-300 rounded-lg hover:text-white tracking-widest font-normal text-[12px] cursor-pointer uppercase bg-blue-600 text-white hover:bg-blue-200'
+        >
+          Previous Streaks
+        </button>
+        <button
+          onClick={handlePreviousAgendaRouting}
+          className='p-2 w-[40%] hover:scale-110 duration-300 rounded-lg hover:text-white tracking-widest font-normal text-[12px] cursor-pointer uppercase  bg-blue-600 text-white hover:bg-blue-200'
+        >
+          Previous Agendas
+        </button>
       </div>
       <div className='mb-2'>
         <div
@@ -233,7 +255,7 @@ const Activity = ({ usersScores, date, userId }) => {
                       />
                     )}
 
-                    <h1 className='p-2 h-[50px] w-[90%] overflow-y-scroll'>
+                    <h1 className='p-2 h-[50px] w-[90%] overflow-y-scroll text-[15px]'>
                       {obj.todo}
                     </h1>
                   </div>

@@ -28,6 +28,7 @@
     "react-dom": "^18.2.0",
     "react-draggable": "^4.4.5",
     "react-firebase-hooks": "^5.1.1",
+    "react-github-contribution-calendar": "^2.2.0",
     "react-icons": "^4.7.1",
     "react-instantsearch-dom": "^6.39.0",
     "react-redux": "^8.0.5",
