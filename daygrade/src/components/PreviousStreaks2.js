@@ -8,8 +8,9 @@ import Tooltip from '@mui/material/Tooltip';
 
 export default function PreviousStreaks2() {
   const [heatMapValues, setHeatMap] = useState({});
+  const [longestStreak, setLongestStreak] = useState(0);
   const [hover] = useState(true);
-  const { id } = useParams();
+  const { id, streak } = useParams();
   const dispatch = useDispatch();
   const usersScores = useSelector((state) => state.scoreReducer);
 
@@ -36,7 +37,7 @@ export default function PreviousStreaks2() {
         obj[formattedDate] = 1;
       }
     });
-    // setHeatMap(obj);
+
     const startYear = 2023;
     const startDate = new Date(startYear, 0, 1); // January 1st of the start year
     const result = {};
@@ -48,53 +49,100 @@ export default function PreviousStreaks2() {
         .toLocaleDateString('en-US', options)
         .replace(',', '');
       let streakDates = Object.keys(obj);
-      //   console.log(streakDates);
+      console.log(streakDates);
       if (streakDates.includes(formattedDate)) {
         result[formattedDate] = 1;
-      } else result[formattedDate] = 0; // or any initial value you want
+      } else {
+        let todaysDate = new Date();
+        let otherDate = new Date(formattedDate);
+        if (otherDate > todaysDate) {
+          result[formattedDate] = -1;
+        } else {
+          result[formattedDate] = 0;
+        }
+      }
+      let currentStreak = 1;
+      let longestStreak = 1;
+
+      for (let i = 1; i < streakDates.length; i++) {
+        const currentDate = new Date(streakDates[i]);
+        const previousDate = new Date(streakDates[i - 1]);
+
+        const timeDifference = currentDate.getTime() - previousDate.getTime();
+        const oneDay = 24 * 60 * 60 * 1000; // Number of milliseconds in a day
+
+        if (timeDifference === oneDay) {
+          currentStreak++;
+        } else {
+          currentStreak = 1;
+        }
+
+        if (currentStreak > longestStreak) {
+          longestStreak = currentStreak;
+        }
+      }
+
+      setLongestStreak(longestStreak);
     }
 
     setHeatMap(result);
   }, []);
 
-  //   console.log('Users scores length: ', usersScores.length);
-  //   console.log('Heat map length', Object.keys(heatMapValues).length || 0);
-
   return (
-    <div className='graph'>
-      <ul className='months'>
-        <li>Jan</li>
-        <li>Feb</li>
-        <li>Mar</li>
-        <li>Apr</li>
-        <li>May</li>
-        <li>Jun</li>
-        <li>Jul</li>
-        <li>Aug</li>
-        <li>Sep</li>
-        <li>Oct</li>
-        <li>Nov</li>
-        <li>Dec</li>
-      </ul>
-      <ul className='days'>
-        <li>Sun</li>
-        <li>Mon</li>
-        <li>Tue</li>
-        <li>Wed</li>
-        <li>Thu</li>
-        <li>Fri</li>
-        <li>Sat</li>
-      </ul>
-      <ul className='squares'>
-        {Object.keys(heatMapValues).map((elem, i) => (
-          <Tooltip title={`${hover ? elem : ''}`} key={i}>
-            <li
-              data-level={`${heatMapValues[elem]}`}
-              className='cursor-pointer hover:scale-110 duration-300'
-            ></li>
-          </Tooltip>
-        ))}
-      </ul>
+    <div>
+      <h1
+        className='m-10 text-[2rem] text-blue-600 tracking-widest'
+        id='streak-title'
+      >
+        Check-in Streak History
+      </h1>
+      <div className='flex items-start gap-7 ml-11'>
+        <div id='current-streak-box' className='flex items-center justify-between text-white tracking-wide text-[15px] bg-gray-300 p-2 rounded-lg'>
+          <p>Current streak: </p>
+          <p className='text-blue-600 text-xl ml-2'> {streak} days</p>
+        </div>
+        <div id='longest-streak-box' className='flex items-center justify-between text-white tracking-wide text-[15px] bg-gray-300 p-2 rounded-lg'>
+          <p>Longest streak: </p>
+          <span className='text-blue-600 text-xl ml-2'>
+            {longestStreak} days
+          </span>
+        </div>
+      </div>
+      <div className='graph shadow-lg shadow-gray-400 rounded-lg'>
+        <ul className='months'>
+          <li>Jan</li>
+          <li>Feb</li>
+          <li>Mar</li>
+          <li>Apr</li>
+          <li>May</li>
+          <li>Jun</li>
+          <li>Jul</li>
+          <li>Aug</li>
+          <li>Sep</li>
+          <li>Oct</li>
+          <li>Nov</li>
+          <li>Dec</li>
+        </ul>
+        <ul className='days'>
+          <li>Sun</li>
+          <li>Mon</li>
+          <li>Tue</li>
+          <li>Wed</li>
+          <li>Thu</li>
+          <li>Fri</li>
+          <li>Sat</li>
+        </ul>
+        <ul className='squares'>
+          {Object.keys(heatMapValues).map((elem, i) => (
+            <Tooltip title={`${hover ? elem : ''}`} key={i}>
+              <li
+                data-level={`${heatMapValues[elem]}`}
+                className='cursor-pointer hover:scale-110 duration-300'
+              ></li>
+            </Tooltip>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }

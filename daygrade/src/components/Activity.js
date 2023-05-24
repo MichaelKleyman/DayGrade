@@ -68,7 +68,7 @@ const Activity = ({ usersScores, date, userId }) => {
   };
 
   const handlePreviousStreaksRouting = () => {
-    navigate(`/previous-streaks/${userId}`);
+    navigate(`/previous-streaks/${userId}/${streak}`);
   };
 
   const handlePreviousAgendaRouting = () => {
@@ -100,13 +100,12 @@ const Activity = ({ usersScores, date, userId }) => {
     const lastIndex = usersScores.length - 1; //index of the most recent check in, which is the last index
     // const lastCheckinCreatedAt = usersScores[lastIndex]?.createdAt;
     const lastCheckinCreatedAt = new Date(
-      usersScores[lastIndex]?.createdAt.seconds * 1000 //converting seconds to milliseconds
+      usersScores[lastIndex]?.createdAt?.seconds * 1000 //converting seconds to milliseconds
     );
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     const formattedDate = lastCheckinCreatedAt
       .toLocaleDateString('en-US', options)
       .replace(',', '');
-
     if (formattedDate === usersScores[lastIndex]?.date.split(', ')[1]) {
       //makes sure the current date matches the date the checkin was created, so the streak is accurate.
       const today = new Date(); //todays date
@@ -161,7 +160,10 @@ const Activity = ({ usersScores, date, userId }) => {
         </div>
       </div>
       <div className='flex items-center justify-evenly m-2 gap-2'>
-        <button onClick={handlePreviousStreaksRouting} className='p-2 w-[40%] hover:scale-110 duration-300 rounded-lg hover:text-white tracking-widest font-normal text-[12px] cursor-pointer uppercase bg-blue-600 text-white hover:bg-blue-200'>
+        <button
+          onClick={handlePreviousStreaksRouting}
+          className='p-2 w-[40%] hover:scale-110 duration-300 rounded-lg hover:text-white tracking-widest font-normal text-[12px] cursor-pointer uppercase bg-blue-600 text-white hover:bg-blue-200'
+        >
           Previous Streaks
         </button>
         <button
@@ -253,7 +255,7 @@ const Activity = ({ usersScores, date, userId }) => {
                       />
                     )}
 
-                    <h1 className='p-2 h-[50px] w-[90%] overflow-y-scroll'>
+                    <h1 className='p-2 h-[50px] w-[90%] overflow-y-scroll text-[15px]'>
                       {obj.todo}
                     </h1>
                   </div>

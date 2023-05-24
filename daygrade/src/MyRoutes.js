@@ -28,7 +28,7 @@ const MyRoutes = () => {
       <Route path='*' element={<NotFound />} />
       <Route path='/forgot-password' element={<ForgotPassword />} />
       <Route path='/previous-agendas/:id' element={<PreviousAgendas />} />
-      <Route path='/previous-streaks/:id' element={<PreviousStreaks2 />} />
+      <Route path='/previous-streaks/:id/:streak' element={<PreviousStreaks2 />} />
       {/* <Route path='temp' element={<Temp />} /> */}
     </Routes>
   );
