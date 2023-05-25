@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchAllScores } from '../store';
 import Tooltip from '@mui/material/Tooltip';
+import { DiCodeigniter } from 'react-icons/di';
+import { IoIosTrendingUp } from 'react-icons/io';
 
 export default function PreviousStreaks2() {
   const [heatMapValues, setHeatMap] = useState({});
@@ -118,18 +120,30 @@ export default function PreviousStreaks2() {
       <div className='flex items-start gap-7 ml-11'>
         <div
           id='current-streak-box'
-          className='flex items-center justify-between text-white tracking-wide text-[15px] bg-gray-300 p-2 rounded-lg'
+          className='flex items-center justify-between text-white tracking-wide text-[15px] bg-gray-300 p-1 rounded-lg'
         >
+          <DiCodeigniter size={55} color='red' className='p-3' />
           <p>Current streak: </p>
           <p className='text-blue-600 text-xl ml-2'> {streak} days</p>
         </div>
         <div
           id='longest-streak-box'
-          className='flex items-center justify-between text-white tracking-wide text-[15px] bg-gray-300 p-2 rounded-lg'
+          className='flex items-center justify-between text-white tracking-wide text-[15px] bg-gray-300 p-1 rounded-lg'
         >
+          <DiCodeigniter size={55} color='blue' className='p-3' />
           <p>Longest streak: </p>
           <span className='text-blue-600 text-xl ml-2'>
             {longestStreak} days
+          </span>
+        </div>
+        <div
+          id='longest-streak-box'
+          className='flex items-center justify-between text-white tracking-wide text-[15px] bg-gray-300 p-1 rounded-lg'
+        >
+          <IoIosTrendingUp size={55} color='#518449' className='p-3' />
+          <p>Total Check-ins: </p>
+          <span className='text-blue-600 text-xl ml-2'>
+            {usersScores.length}
           </span>
         </div>
       </div>
