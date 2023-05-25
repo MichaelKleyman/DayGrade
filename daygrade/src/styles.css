@@ -95,7 +95,7 @@
 }
 
 #dark .squares li[data-level='-1'] {
-  background-color: rgb(55, 55, 55);
+  background-color: rgb(36, 33, 33);
 }
 
 #dark .squares li[data-level='1'] {

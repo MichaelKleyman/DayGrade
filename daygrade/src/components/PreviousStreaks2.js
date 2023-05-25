@@ -98,6 +98,7 @@ export default function PreviousStreaks2() {
           longestStreak = currentStreak;
         }
       }
+      // console.log(currentStreak);
 
       setLongestStreak(longestStreak);
     }
