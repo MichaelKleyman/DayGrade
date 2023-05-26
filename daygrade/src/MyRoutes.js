@@ -13,7 +13,6 @@ import NotFound from './components/NotFound';
 import ForgotPassword from './components/ForgotPassword';
 import PreviousAgendas from './components/PreviousAgendas';
 import PreviousStreaks2 from './components/PreviousStreaks2';
-import PreviousStreaks from './components/PreviousStreaks';
 
 const MyRoutes = () => {
   return (

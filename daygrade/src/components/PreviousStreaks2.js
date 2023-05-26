@@ -110,39 +110,39 @@ export default function PreviousStreaks2() {
   }, []);
 
   return (
-    <div>
+    <div id='previous-streaks'>
       <h1
         className='m-10 text-[2rem] text-blue-600 tracking-widest'
         id='streak-title'
       >
         Check-in Streak History
       </h1>
-      <div className='flex items-start gap-7 ml-11'>
+      <div className='md:flex items-start gap-7 ml-11 mr-5'>
         <div
           id='current-streak-box'
-          className='flex items-center justify-between text-white tracking-wide text-[15px] bg-gray-300 p-1 rounded-lg'
+          className='my-2 flex items-center justify-between text-white tracking-wide text-[15px] bg-gray-300 p-1 rounded-lg'
         >
           <DiCodeigniter size={55} color='red' className='p-3' />
           <p>Current streak: </p>
-          <p className='text-blue-600 text-xl ml-2'> {streak} days</p>
+          <p className='text-blue-600 text-xl ml-2 mr-3'> {streak} days</p>
         </div>
         <div
           id='longest-streak-box'
-          className='flex items-center justify-between text-white tracking-wide text-[15px] bg-gray-300 p-1 rounded-lg'
+          className='my-2 flex items-center justify-between text-white tracking-wide text-[15px] bg-gray-300 p-1 rounded-lg'
         >
           <DiCodeigniter size={55} color='blue' className='p-3' />
           <p>Longest streak: </p>
-          <span className='text-blue-600 text-xl ml-2'>
+          <span className='text-blue-600 text-xl ml-2 mr-3'>
             {longestStreak} days
           </span>
         </div>
         <div
           id='longest-streak-box'
-          className='flex items-center justify-between text-white tracking-wide text-[15px] bg-gray-300 p-1 rounded-lg'
+          className='my-2 flex items-center justify-between text-white tracking-wide text-[15px] bg-gray-300 p-1 rounded-lg'
         >
           <IoIosTrendingUp size={55} color='#518449' className='p-3' />
           <p>Total Check-ins: </p>
-          <span className='text-blue-600 text-xl ml-2'>
+          <span className='text-blue-600 text-xl ml-2 mr-3'>
             {usersScores.length}
           </span>
         </div>
