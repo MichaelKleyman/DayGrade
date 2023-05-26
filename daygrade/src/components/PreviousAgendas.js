@@ -198,7 +198,7 @@ export default function PreviousAgendas() {
                   <div
                     className={`${
                       obj.completed ? 'bg-yellow-300' : 'bg-green-900'
-                    } w-[10px] h-[10px] rounded-sm`}
+                    } w-[10px] h-[10px] rounded-lg`}
                   ></div>
                   <h1 className='ml-2'>{obj.todo}</h1>
                 </div>
