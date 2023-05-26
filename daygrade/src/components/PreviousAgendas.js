@@ -188,12 +188,12 @@ export default function PreviousAgendas() {
               <div className='w-[70%] bg-green-900 p-2'></div>
             </div>
           </div>
-          <div className='p-4' id='specific-todos'>
+          <div className='p-4 grid md:grid-cols-2' id='specific-todos'>
             {usersTodos.length > 0 ? (
               usersTodos.map((obj, i) => (
                 <div
                   key={i}
-                  className='p-5 flex items-center border border-gray-300 rounded-lg'
+                  className='p-5 flex items-center shadow-lg shadow-gray-400 m-2 rounded-lg'
                 >
                   <div
                     className={`${
