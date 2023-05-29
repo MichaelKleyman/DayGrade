@@ -14,6 +14,10 @@ import dayjs from 'dayjs';
 import Select from 'react-select';
 import Percentage from './Percentage';
 import NothingFoundImg from '../images/nothingHere.png';
+import { Button } from '@mui/material';
+import SendIcon from '@mui/icons-material/Send';
+import { MdArrowBack } from 'react-icons/md';
+import { useNavigate } from 'react-router-dom';
 
 const filterOptions = [
   { value: 'Today', label: 'Today' },
@@ -28,6 +32,7 @@ export default function PreviousAgendas() {
   const usersTodos = useSelector((state) => state.todosReducer);
   const { id } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSelectChange = (option) => {
     console.log(option.value);
@@ -155,6 +160,15 @@ export default function PreviousAgendas() {
                 />
               </LocalizationProvider>
             </Box>
+            <div className='flex justify-between p-3'>
+              <Button
+                onClick={() => navigate('/')}
+                variant='outlined'
+                startIcon={<MdArrowBack />}
+              >
+                Go Back
+              </Button>
+            </div>
           </Box>
         </div>
         <div className='md:border-l-2 md:border-gray-300 md:h-full'>

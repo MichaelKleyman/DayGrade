@@ -95,68 +95,6 @@ const Activity = ({ usersScores, date, userId }) => {
     };
   }, [date]);
 
-  // useEffect(() => {
-  //   //usersScores is all the final check-ins of the user, coming from the database, in ascending order by date
-  //   const lastIndex = usersScores.length - 1; //index of the most recent check in, which is the last index
-  //   // const lastCheckinCreatedAt = usersScores[lastIndex]?.createdAt;
-  //   const lastCheckinCreatedAt = new Date(
-  //     usersScores[lastIndex]?.createdAt?.seconds * 1000 //converting seconds to milliseconds
-  //   );
-  //   const options = { year: 'numeric', month: 'long', day: 'numeric' };
-  //   const formattedCreatedAtdDate = lastCheckinCreatedAt
-  //     .toLocaleDateString('en-US', options)
-  //     .replace(',', '');
-  //   if (
-  //     formattedCreatedAtdDate === usersScores[lastIndex]?.date.split(', ')[1]
-  //   ) {
-  //     //makes sure the current date matches the date the checkin was created, so the streak is accurate.
-  //     const today = new Date(); //todays date
-  //     let latestDate = usersScores[usersScores.length - 1]?.date; //latest date out of all the users checked in scores which is the lastIndex because firebase sorted it in ascending order.
-  //     // let latestDate = usersScores[usersScores.length - 1]?.createdAt;
-  //     // const milliseconds =
-  //     //   latestDate.seconds * 1000 + Math.floor(latestDate.nanoseconds / 1e6);
-  //     // const dateObj = new Date(milliseconds);
-  //     // const options = {
-  //     //   weekday: 'long',
-  //     //   month: 'long',
-  //     //   day: 'numeric',
-  //     //   year: 'numeric',
-  //     // };
-  //     // const formattedDate = dateObj.toLocaleDateString('en-US', options);
-  //     // console.log(formattedDate);
-  //     latestDate = new Date(latestDate); //set latest date to the same format as todays date
-  //     let differenceInTime = today.getTime() - latestDate.getTime(); //get both those variables in milliseconds and track the difference
-  //     let daysSinceLastCheckin = differenceInTime / (1000 * 3600 * 24); //how many days since the last check in, should be at most one day since the last checkin to maintain a streak
-  //     let differenceInDays = 0;
-
-  //     if (daysSinceLastCheckin < 2) {
-  //       //This means there is a streak;
-  //       setStreak(Math.floor(daysSinceLastCheckin)); //state keeping track of the streak
-  //       let counter = 0;
-  //       for (let i = usersScores.length - 1; i >= 0; i--) {
-  //         //looping through all the scores, with the last index being the latest check in due to firebase sorting it in ascending order (from oldest to newest)
-  //         latestDate =
-  //           i === lastIndex
-  //             ? usersScores[usersScores.length - 1].date //if the current index is equal to the last index in the array, we look at that date
-  //             : usersScores[i + 1].date; //else look at the date in front of the current date were looking at, so the following index
-  //         let currentScoreDate = usersScores[i].date; //current date in the score obj
-  //         let timeDifference =
-  //           new Date(latestDate).getTime() -
-  //           new Date(currentScoreDate).getTime();
-  //         differenceInDays = timeDifference / (1000 * 3600 * 24); //difference between the the current date and the date before it (reassigning the original differenceInDays variable)
-  //         if (differenceInDays <= 1) {
-  //           //checking if the check-ins were looking at are consecutive, if so this if condition gets hit
-  //           //if that difference is less than or equal to 1, then there is a streak
-  //           counter++;
-  //           setStreak(counter); //sets the state keeping track of the streak
-  //         } else {
-  //           break; //break out of the loop as soon as the difference in days between each checkin is greater than 1
-  //         }
-  //       }
-  //     }
-  //   }
-  // }, [usersScores]);
-
   useEffect(() => {
     const specificCheckIns = {};
     usersScores.forEach((scoreObj, i) => {
@@ -173,22 +111,29 @@ const Activity = ({ usersScores, date, userId }) => {
       }
     });
     let streakDates = Object.keys(specificCheckIns);
-
     let currentStreak = 1;
-    for (let i = 1; i < streakDates.length; i++) {
-      const currentDate = new Date(streakDates[i]);
-      const previousDate = new Date(streakDates[i - 1]);
 
-      const timeDifference = currentDate.getTime() - previousDate.getTime();
-      const oneDay = 24 * 60 * 60 * 1000; // Number of milliseconds in a day
+    const targetDate = new Date(streakDates[streakDates.length - 1]);
+    const timeDiff = targetDate.getTime() - new Date().getTime();
+    const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+    console.log(Math.abs(daysDiff));
+    if (Math.abs(daysDiff) > 1) {
+      currentStreak = 0;
+    } else {
+      for (let i = 1; i < streakDates.length; i++) {
+        const currentDate = new Date(streakDates[i]);
+        const previousDate = new Date(streakDates[i - 1]);
 
-      if (timeDifference === oneDay) {
-        currentStreak++;
-      } else {
-        currentStreak = 1;
+        const timeDifference = currentDate.getTime() - previousDate.getTime();
+        const oneDay = 24 * 60 * 60 * 1000; // Number of milliseconds in a day
+
+        if (timeDifference === oneDay) {
+          currentStreak++;
+        } else {
+          currentStreak = 1;
+        }
       }
     }
-    console.log(currentStreak);
     setStreak(currentStreak);
   }, [usersScores]);
 
