@@ -8,6 +8,7 @@ import Tooltip from '@mui/material/Tooltip';
 import { DiCodeigniter } from 'react-icons/di';
 import { IoIosTrendingUp } from 'react-icons/io';
 import { MdArrowBack } from 'react-icons/md';
+import { useNavigate } from 'react-router-dom';
 
 export default function PreviousStreaks2() {
   const [heatMapValues, setHeatMap] = useState({});
@@ -16,6 +17,7 @@ export default function PreviousStreaks2() {
   const [hover] = useState(true);
   const { id, streak } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const usersScores = useSelector((state) => state.scoreReducer);
 
   useEffect(() => {
@@ -112,7 +114,10 @@ export default function PreviousStreaks2() {
 
   return (
     <div id='previous-streaks'>
-      <button className='ml-10 mt-9 uppercase text-sm border text-blue-600 border-blue-600 rounded-lg tracking-widest leading-10 w-[9%] hover:bg-blue-600 hover:text-white duration-300 hover:scale-110 flex items-center'>
+      <button
+        onClick={() => navigate('/')}
+        className='ml-10 mt-9 uppercase text-sm border text-blue-600 border-blue-600 rounded-lg tracking-widest leading-10 w-[9%] hover:bg-blue-600 hover:text-white duration-300 hover:scale-110 flex items-center'
+      >
         <MdArrowBack className='p-2' size={35} />
         Go back
       </button>
