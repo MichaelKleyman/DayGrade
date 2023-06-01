@@ -29,6 +29,7 @@ export default function AverageWater({ id }) {
       });
 
       const average = totalTrueCount / averageWater.length;
+      console.log(average);
       setAverageWater(Math.round(average));
 
       const counts = {
