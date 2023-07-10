@@ -5,7 +5,7 @@ import { editUser } from '../store';
 import { useDispatch } from 'react-redux';
 
 const Account = ({ userObject }) => {
-  const { firstName, lastName, age, userName } = userObject;
+  const { firstName, lastName, age, userName, email } = userObject;
   const dispatch = useDispatch();
 
   const [edit, setEdit] = useState(false);
@@ -14,6 +14,7 @@ const Account = ({ userObject }) => {
     lastName,
     age,
     userName,
+    email
   });
 
   const handleSave = async (e) => {

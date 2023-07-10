@@ -32,6 +32,7 @@ export const fetchUser = (userId) => (dispatch) => {
 
 export const editUser = (userId, editedInfo) => async (dispatch) => {
   const { firstName, lastName, email, age, userName } = editedInfo;
+
   const docRef = doc(db, 'Users', userId);
   await updateDoc(docRef, {
     firstName,
