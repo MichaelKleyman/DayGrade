@@ -1,4 +1,5 @@
-// cache: storage of the browser: if i load something once, dont need to reload image everytime i go online, it is taken from the cache, faster and more effective
+/* eslint-disable array-callback-return */
+// cache: storage of the browser: if i load something once, don't need to reload image everytime i go online, it is taken from the cache, faster and more effective
 const CACHENAME = 'version-1';
 const urlsToCache = ['index.html', 'offline.html'];
 //'this' is the service worker itself
@@ -22,10 +23,24 @@ self.addEventListener('install', (event) => {
 
 // Listen for requests
 self.addEventListener('fetch', (event) => {
+  event.waitUntil(
+    self.registration
+      .showNotification('Hello', {
+        body: 'Hello from daygrade',
+      })
+      .catch((error) => {
+        console.error('Failed to show notification:', error);
+      })
+  );
+
   //respond with something when we notice a fetch request
   event.respondWith(
-    caches.match(event.request).then(() => {
-      return fetch(event.request).catch(() => caches.match('offline.html'));
+    caches.match(event.request).then(async () => {
+      try {
+        return await fetch(event.request);
+      } catch {
+        return await caches.match('offline.html');
+      }
     })
   );
 });
@@ -47,23 +62,3 @@ self.addEventListener('activate', (event) => {
     )
   );
 });
-
-// function urlBase64ToUint8Array(base64String) {
-//   const padding = '='.repeat((4 - (base64String.length % 4)) % 4);
-//   const base64 = (base64String + padding)
-//     .replace(/\-/g, '+')
-//     .replace(/_/g, '/');
-
-//   const rawData = window.atob(base64);
-//   const outputArray = new Uint16Array(rawData.length);
-
-//   for (let i = 0; i < rawData.length; i++) {
-//     outputArray[i] = rawData.charCodeAt(i);
-//   }
-//   return outputArray;
-// }
-
-// function determineAppServerKey() {
-//   const vapidPublicKey = '';
-//   return urlBase64ToUint8Array(vapidPublicKey);
-// }

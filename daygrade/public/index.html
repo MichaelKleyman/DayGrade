@@ -45,7 +45,7 @@
                 .replace(/_/g, '/');
 
               const rawData = window.atob(base64);
-              const outputArray = new Uint16Array(rawData.length);
+              const outputArray = new Uint8Array(rawData.length);
 
               for (let i = 0; i < rawData.length; i++) {
                 outputArray[i] = rawData.charCodeAt(i);
@@ -59,20 +59,21 @@
               return urlBase64ToUint8Array(vapidPublicKey);
             }
             //lets me create my own service worker
-            const registered = await navigator.serviceWorker
-              .register('./serviceworker.js')
-              .then((response) => {
-                console.warn('response: ', response);
-                return response.pushManager
-                  .getSubscription()
-                  .then((subscription) => {
-                    return response.pushManager.subscribe({
-                      userVisibleOnly: true,
-                      applicationServerKey: determineAppServerKey,
-                    });
-                  });
+            const registration = await navigator.serviceWorker.register(
+              './serviceworker.js'
+            );
+            const subscription =
+              await registration.pushManager.getSubscription();
+
+            if (!subscription) {
+              const appServerKey = determineAppServerKey();
+              await registration.pushManager.subscribe({
+                userVisibleOnly: true,
+                applicationServerKey: appServerKey,
               });
-            console.log('Service Worker Made: ', registered.scope);
+            }
+
+            console.log('Service Worker Made: ', registration.scope);
           } catch (error) {
             console.error('Failed: ', error);
           }
